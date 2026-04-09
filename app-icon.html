@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>如期 App Icon</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #18181B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 60px;
+  min-height: 100vh;
+  flex-wrap: wrap;
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-label {
+  color: #71717A;
+  font-size: 13px;
+  font-family: -apple-system, sans-serif;
+  font-weight: 500;
+}
+
+/* iOS App Icon 圆角 */
+.icon {
+  border-radius: 22.5%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.icon-1024 { width: 1024px; height: 1024px; border-radius: 230px; }
+.icon-180  { width: 180px;  height: 180px;  border-radius: 40px; }
+.icon-120  { width: 120px;  height: 120px;  border-radius: 27px; }
+.icon-60   { width: 60px;   height: 60px;   border-radius: 13px; }
+
+/* 背景渐变 */
+.bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #2A1F1A 0%, #1C1410 40%, #120D0A 100%);
+}
+
+/* 光晕 */
+.glow-top {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: -20%;
+  left: 15%;
+  background: radial-gradient(circle, rgba(201,160,132,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.glow-bottom {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(221,184,168,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* SVG 花朵容器 */
+.flower-svg {
+  position: relative;
+  z-index: 2;
+}
+</style>
+</head>
+<body>
+
+<!-- 1024px 主图 -->
+<div class="icon-wrapper">
+  <div class="icon icon-1024">
+    <div class="bg"></div>
+    <div class="glow-top"></div>
+    <div class="glow-bottom"></div>
+    <svg class="flower-svg" width="620" height="620" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- 花瓣渐变 -->
+        <linearGradient id="petal1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8C4A8"/>
+          <stop offset="100%" stop-color="#C9A084"/>
+        </linearGradient>
+        <linearGradient id="petal2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#DDB8A8"/>
+          <stop offset="100%" stop-color="#B5846C"/>
+        </linearGradient>
+        <linearGradient id="petal3" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#C9A084"/>
+          <stop offset="100%" stop-color="#A06848"/>
+        </linearGradient>
+        <!-- 内层花瓣渐变 -->
+        <linearGradient id="inner" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F0DDD3"/>
+          <stop offset="100%" stop-color="#DDB8A8"/>
+        </linearGradient>
+        <!-- 花蕊渐变 -->
+        <radialGradient id="center" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#F5EAE0"/>
+          <stop offset="100%" stop-color="#C9A084"/>
+        </radialGradient>
+        <!-- 光泽 -->
+        <radialGradient id="shine" cx="35%" cy="30%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+      </defs>
+
+      <!-- 外层 6 片花瓣（含苞待放，稍微展开） -->
+      <!-- 花瓣 1 - 正上 -->
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#petal1)" opacity="0.9" transform="rotate(0, 310, 310)"/>
+      <!-- 花瓣 2 - 右上60° -->
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#petal2)" opacity="0.85" transform="rotate(60, 310, 310)"/>
+      <!-- 花瓣 3 - 右下120° -->
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#petal3)" opacity="0.9" transform="rotate(120, 310, 310)"/>
+      <!-- 花瓣 4 - 正下180° -->
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#petal1)" opacity="0.85" transform="rotate(180, 310, 310)"/>
+      <!-- 花瓣 5 - 左下240° -->
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#petal2)" opacity="0.9" transform="rotate(240, 310, 310)"/>
+      <!-- 花瓣 6 - 左上300° -->
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#petal3)" opacity="0.85" transform="rotate(300, 310, 310)"/>
+
+      <!-- 内层 6 片花瓣（更小，更亮） -->
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#inner)" opacity="0.95" transform="rotate(30, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#inner)" opacity="0.9" transform="rotate(90, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#inner)" opacity="0.95" transform="rotate(150, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#inner)" opacity="0.9" transform="rotate(210, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#inner)" opacity="0.95" transform="rotate(270, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#inner)" opacity="0.9" transform="rotate(330, 310, 310)"/>
+
+      <!-- 花蕊圆心 -->
+      <circle cx="310" cy="310" r="72" fill="url(#center)"/>
+      <circle cx="310" cy="310" r="72" fill="url(#shine)"/>
+
+      <!-- 花蕊细节点 -->
+      <circle cx="310" cy="290" r="6" fill="rgba(255,255,255,0.6)"/>
+      <circle cx="327" cy="300" r="4.5" fill="rgba(255,255,255,0.45)"/>
+      <circle cx="320" cy="318" r="4" fill="rgba(255,255,255,0.4)"/>
+      <circle cx="300" cy="322" r="4.5" fill="rgba(255,255,255,0.45)"/>
+      <circle cx="293" cy="305" r="4" fill="rgba(255,255,255,0.4)"/>
+
+    </svg>
+  </div>
+  <span class="icon-label">1024 × 1024</span>
+</div>
+
+<!-- 180px -->
+<div class="icon-wrapper">
+  <div class="icon icon-180">
+    <div class="bg"></div>
+    <div class="glow-top"></div>
+    <svg class="flower-svg" width="108" height="108" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="p1b" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8C4A8"/><stop offset="100%" stop-color="#C9A084"/>
+        </linearGradient>
+        <linearGradient id="p2b" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#DDB8A8"/><stop offset="100%" stop-color="#B5846C"/>
+        </linearGradient>
+        <linearGradient id="p3b" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#C9A084"/><stop offset="100%" stop-color="#A06848"/>
+        </linearGradient>
+        <linearGradient id="innerb" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F0DDD3"/><stop offset="100%" stop-color="#DDB8A8"/>
+        </linearGradient>
+        <radialGradient id="centerb" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#F5EAE0"/><stop offset="100%" stop-color="#C9A084"/>
+        </radialGradient>
+        <radialGradient id="shineb" cx="35%" cy="30%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1b)" opacity="0.9" transform="rotate(0, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p2b)" opacity="0.85" transform="rotate(60, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p3b)" opacity="0.9" transform="rotate(120, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1b)" opacity="0.85" transform="rotate(180, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p2b)" opacity="0.9" transform="rotate(240, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p3b)" opacity="0.85" transform="rotate(300, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerb)" opacity="0.95" transform="rotate(30, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerb)" opacity="0.9" transform="rotate(90, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerb)" opacity="0.95" transform="rotate(150, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerb)" opacity="0.9" transform="rotate(210, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerb)" opacity="0.95" transform="rotate(270, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerb)" opacity="0.9" transform="rotate(330, 310, 310)"/>
+      <circle cx="310" cy="310" r="72" fill="url(#centerb)"/>
+      <circle cx="310" cy="310" r="72" fill="url(#shineb)"/>
+    </svg>
+  </div>
+  <span class="icon-label">180 × 180</span>
+</div>
+
+<!-- 120px -->
+<div class="icon-wrapper">
+  <div class="icon icon-120">
+    <div class="bg"></div>
+    <div class="glow-top"></div>
+    <svg class="flower-svg" width="72" height="72" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="p1c" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8C4A8"/><stop offset="100%" stop-color="#C9A084"/></linearGradient>
+        <linearGradient id="p2c" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#DDB8A8"/><stop offset="100%" stop-color="#B5846C"/></linearGradient>
+        <linearGradient id="p3c" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C9A084"/><stop offset="100%" stop-color="#A06848"/></linearGradient>
+        <linearGradient id="innerc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0DDD3"/><stop offset="100%" stop-color="#DDB8A8"/></linearGradient>
+        <radialGradient id="centerc" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#F5EAE0"/><stop offset="100%" stop-color="#C9A084"/></radialGradient>
+      </defs>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1c)" opacity="0.9" transform="rotate(0, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p2c)" opacity="0.85" transform="rotate(60, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p3c)" opacity="0.9" transform="rotate(120, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1c)" opacity="0.85" transform="rotate(180, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p2c)" opacity="0.9" transform="rotate(240, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p3c)" opacity="0.85" transform="rotate(300, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerc)" opacity="0.95" transform="rotate(30, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerc)" opacity="0.9" transform="rotate(90, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerc)" opacity="0.95" transform="rotate(150, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerc)" opacity="0.9" transform="rotate(210, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerc)" opacity="0.95" transform="rotate(270, 310, 310)"/>
+      <ellipse cx="310" cy="212" rx="34" ry="82" fill="url(#innerc)" opacity="0.9" transform="rotate(330, 310, 310)"/>
+      <circle cx="310" cy="310" r="72" fill="url(#centerc)"/>
+    </svg>
+  </div>
+  <span class="icon-label">120 × 120</span>
+</div>
+
+<!-- 60px -->
+<div class="icon-wrapper">
+  <div class="icon icon-60">
+    <div class="bg"></div>
+    <svg class="flower-svg" width="36" height="36" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="p1d" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8C4A8"/><stop offset="100%" stop-color="#C9A084"/></linearGradient>
+        <linearGradient id="innerd" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0DDD3"/><stop offset="100%" stop-color="#DDB8A8"/></linearGradient>
+        <radialGradient id="centerd" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#F5EAE0"/><stop offset="100%" stop-color="#C9A084"/></radialGradient>
+      </defs>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1d)" opacity="0.9" transform="rotate(0, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1d)" opacity="0.8" transform="rotate(60, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1d)" opacity="0.9" transform="rotate(120, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1d)" opacity="0.8" transform="rotate(180, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1d)" opacity="0.9" transform="rotate(240, 310, 310)"/>
+      <ellipse cx="310" cy="175" rx="52" ry="118" fill="url(#p1d)" opacity="0.8" transform="rotate(300, 310, 310)"/>
+      <circle cx="310" cy="310" r="72" fill="url(#centerd)"/>
+    </svg>
+  </div>
+  <span class="icon-label">60 × 60</span>
+</div>
+
+</body>
+</html>
