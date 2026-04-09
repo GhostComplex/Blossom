@@ -62,10 +62,10 @@ struct TasksView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showKegelExercise) {
+            .fullScreenCover(isPresented: $showKegelExercise) {
                 KegelExerciseView()
             }
-            .sheet(isPresented: $showLamazeExercise) {
+            .fullScreenCover(isPresented: $showLamazeExercise) {
                 LamazeExerciseView()
             }
             .sheet(isPresented: $showFetalMovementCounter) {
@@ -227,58 +227,6 @@ struct TasksView: View {
             .glassCard()
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Placeholder Views (to be implemented)
-struct KegelExerciseView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        NavigationStack {
-            Text("凯格尔运动计时器")
-                .navigationTitle("凯格尔运动")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button("返回") { dismiss() }
-                    }
-                }
-        }
-    }
-}
-
-struct LamazeExerciseView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        NavigationStack {
-            Text("拉玛泽呼吸练习")
-                .navigationTitle("拉玛泽呼吸练习")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button("返回") { dismiss() }
-                    }
-                }
-        }
-    }
-}
-
-struct FetalMovementCounterView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        NavigationStack {
-            Text("胎动计数器")
-                .navigationTitle("记录胎动")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button("取消") { dismiss() }
-                    }
-                }
-        }
     }
 }
 
