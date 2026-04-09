@@ -606,5 +606,461 @@ body {
   </div>
 </div>
 
+<!-- ─── 分隔 ─── -->
+<div class="section-divider">—— 弹窗 / 状态 / 分支流程 ——</div>
+
+<!-- ⑫ 首次使用 · 预产期设置 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑫ 首次使用 · 预产期设置</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+      <!-- 花朵装饰 -->
+      <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));margin-bottom:28px;display:flex;align-items:center;justify-content:center;font-size:36px;">🌸</div>
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--n900);margin-bottom:12px;">欢迎来到如期</div>
+      <div style="font-size:14px;color:var(--n500);margin-bottom:36px;line-height:1.6;">请告诉我们你的预产期<br>我们会为你安排每日任务</div>
+
+      <!-- 日期选择器 -->
+      <div style="width:100%;background:var(--card-bg);backdrop-filter:blur(16px);border:1px solid var(--card-border);border-radius:22px;padding:24px;margin-bottom:24px;box-shadow:var(--sh-sm);">
+        <div style="font-size:13px;font-weight:600;color:var(--n500);margin-bottom:12px;">预产期</div>
+        <div style="display:flex;justify-content:center;gap:16px;align-items:baseline;">
+          <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--n900);">2026</div>
+          <div style="font-size:14px;color:var(--n300);">年</div>
+          <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--primary);">05</div>
+          <div style="font-size:14px;color:var(--n300);">月</div>
+          <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--primary);">03</div>
+          <div style="font-size:14px;color:var(--n300);">日</div>
+        </div>
+        <div style="font-size:12px;color:var(--n500);margin-top:10px;">上下滑动选择日期</div>
+      </div>
+
+      <button class="btn-pri" style="width:100%;padding:16px;font-size:16px;">开始使用 →</button>
+    </div>
+    <div class="bottom-nav" style="opacity:0.3;pointer-events:none;">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑬ 预产期修改弹窗 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑬ 预产期修改弹窗</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content" style="position:relative;">
+      <!-- 背景模糊（模拟首页） -->
+      <div style="opacity:0.3;pointer-events:none;">
+        <div class="greeting"><div class="greeting-sub">April 9, 2026</div><div class="greeting-main">早上好 ☀️</div></div>
+        <div class="countdown-card" style="margin-bottom:24px;padding:24px 20px 18px;">
+          <div class="week-badge"><div class="week-dot"></div><span class="week-text">孕 37 周 + 4 天</span></div>
+          <div style="text-align:center;font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:var(--primary);">24</div>
+        </div>
+      </div>
+
+      <!-- 半屏弹窗 -->
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,250,245,0.98);backdrop-filter:blur(20px);border-top-left-radius:28px;border-top-right-radius:28px;border:1px solid var(--card-border);border-bottom:none;padding:28px 22px 40px;box-shadow:0 -8px 32px rgba(100,50,20,0.15);">
+        <!-- 拖拽指示条 -->
+        <div style="width:36px;height:4px;background:var(--n300);border-radius:100px;margin:0 auto 20px;"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--n900);margin-bottom:20px;">修改预产期</div>
+
+        <div style="display:flex;justify-content:center;gap:16px;align-items:baseline;margin-bottom:24px;">
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--n900);">2026</div>
+          <div style="font-size:13px;color:var(--n300);">年</div>
+          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--primary);">05</div>
+          <div style="font-size:13px;color:var(--n300);">月</div>
+          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--primary);">03</div>
+          <div style="font-size:13px;color:var(--n300);">日</div>
+        </div>
+
+        <div style="display:flex;gap:12px;">
+          <button class="btn-sec" style="flex:1;padding:14px;">取消</button>
+          <button class="btn-pri" style="flex:1;padding:14px;">确认修改</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item active"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑭ 凯格尔 · 暂停状态 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑭ 凯格尔 · 暂停</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">凯格尔运动</span><div class="nav-spacer"></div></div>
+      <div class="timer-container">
+        <div class="phase-badge"><span class="level-tag">🌱 初级</span><span class="phase-name" style="color:var(--n300);">已暂停</span></div>
+        <div class="timer-circle relax" style="opacity:0.5;">
+          <div class="timer-number muted">3</div>
+        </div>
+        <div class="sets-info" style="color:var(--n300);">已暂停 · 还剩 6 组</div>
+        <div class="progress-dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="timer-hint">收缩 5s · 放松 10s</div>
+        <div class="btn-group"><button class="btn-pri">继续</button><button class="btn-sec">结束</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑮ 凯格尔 · 结束确认弹窗 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑮ 凯格尔 · 结束确认</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content" style="position:relative;">
+      <!-- 背景半透明（模拟计时器页面） -->
+      <div style="opacity:0.2;pointer-events:none;">
+        <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">凯格尔运动</span><div class="nav-spacer"></div></div>
+        <div class="timer-container">
+          <div class="timer-circle"><div class="timer-number">3</div></div>
+        </div>
+      </div>
+
+      <!-- 居中弹窗 -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;background:rgba(255,250,245,0.98);backdrop-filter:blur(20px);border:1px solid var(--card-border);border-radius:22px;padding:28px 24px;box-shadow:var(--sh-lg);text-align:center;">
+        <div style="font-size:32px;margin-bottom:12px;">🤔</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--n900);margin-bottom:8px;">确定要结束吗？</div>
+        <div style="font-size:13px;color:var(--n500);margin-bottom:24px;line-height:1.5;">当前进度不会保存<br>已完成 4 / 10 组</div>
+        <div style="display:flex;gap:12px;">
+          <button class="btn-sec" style="flex:1;padding:12px;">取消</button>
+          <button class="btn-pri" style="flex:1;padding:12px;background:#C75B4A;">结束练习</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑯ 凯格尔 · 完成 Toast -->
+<div class="screen-wrap">
+  <div class="screen-label">⑯ 凯格尔 · 完成</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="page-header"><h1 class="page-title">任务</h1><div class="hdr-icon hdr-cal"></div></div>
+      <div class="prog-text">今天完成 2 / 3 个任务</div>
+
+      <!-- Toast -->
+      <div style="background:rgba(92,158,122,0.12);border:1px solid rgba(92,158,122,0.3);border-radius:14px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--success);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <div style="width:14px;height:14px;background:white;mask-size:contain;-webkit-mask-size:contain;-webkit-mask-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 24 24%27 stroke=%27currentColor%27%3E%3Cpath stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27M5 13l4 4L19 7%27/%3E%3C/svg%3E')"></div>
+        </div>
+        <div style="font-size:14px;font-weight:600;color:#3D7A5A;">今日凯格尔运动已完成 🎉</div>
+      </div>
+
+      <div class="task-item card">
+        <div class="task-item-head"><div class="task-item-left"><div class="task-icon-wrap" style="width:36px;height:36px;border-radius:10px;margin:0"><div class="ti ti-kegel"></div></div><span class="task-item-name">凯格尔运动</span></div><div class="check-circle"></div></div>
+        <div class="task-desc">🌱 初级 · 收缩 5s · 放松 10s · 10 次</div>
+        <div class="task-meta"><span class="meta-time">今天 09:41 完成</span></div>
+      </div>
+
+      <div class="task-item card">
+        <div class="task-item-head"><div class="task-item-left"><div class="task-icon-wrap" style="width:36px;height:36px;border-radius:10px;margin:0"><div class="ti ti-breath"></div></div><span class="task-item-name">拉玛泽练习</span></div><div class="check-circle"></div></div>
+        <div class="task-desc">6 阶段呼吸法，跟练模式</div>
+        <div class="task-meta"><span class="meta-time">今天 10:15 完成</span></div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑰ 拉玛泽 · 学习模式（6 阶段列表） -->
+<div class="screen-wrap">
+  <div class="screen-label">⑰ 拉玛泽 · 6 阶段列表</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">学习模式</span><div class="nav-spacer"></div></div>
+      <div class="prog-text">拉玛泽 6 阶段呼吸法</div>
+
+      <div class="task-item card" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--primary-dark);flex-shrink:0;">1</div>
+          <div><div class="task-item-name" style="font-size:15px;">清洁呼吸</div><div class="task-desc" style="margin-top:2px;">宫缩前后 · 深呼吸放松</div></div>
+        </div>
+      </div>
+      <div class="task-item card" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--primary-dark);flex-shrink:0;">2</div>
+          <div><div class="task-item-name" style="font-size:15px;">胸式呼吸</div><div class="task-desc" style="margin-top:2px;">0–3cm · 缓慢深呼吸</div></div>
+        </div>
+      </div>
+      <div class="task-item card" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--primary-dark);flex-shrink:0;">3</div>
+          <div><div class="task-item-name" style="font-size:15px;">节律呼吸</div><div class="task-desc" style="margin-top:2px;">3–8cm · 随宫缩加速</div></div>
+        </div>
+      </div>
+      <div class="task-item card" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--primary-dark);flex-shrink:0;">4</div>
+          <div><div class="task-item-name" style="font-size:15px;">喘息呼吸</div><div class="task-desc" style="margin-top:2px;">7–10cm · 嘻嘻呼</div></div>
+        </div>
+      </div>
+      <div class="task-item card" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--primary-dark);flex-shrink:0;">5</div>
+          <div><div class="task-item-name" style="font-size:15px;">吹气呼吸</div><div class="task-desc" style="margin-top:2px;">想用力但不能 · 吹蜡烛</div></div>
+        </div>
+      </div>
+      <div class="task-item card" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--primary-dark);flex-shrink:0;">6</div>
+          <div><div class="task-item-name" style="font-size:15px;">用力呼吸</div><div class="task-desc" style="margin-top:2px;">全开 · 深吸气憋住用力</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑱ 待产包 · 添加物品弹窗 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑱ 待产包 · 添加物品</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content" style="position:relative;">
+      <div style="opacity:0.2;pointer-events:none;">
+        <div class="page-header"><h1 class="page-title">待产包</h1></div>
+      </div>
+
+      <!-- 半屏弹窗 -->
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,250,245,0.98);backdrop-filter:blur(20px);border-top-left-radius:28px;border-top-right-radius:28px;border:1px solid var(--card-border);border-bottom:none;padding:28px 22px 40px;box-shadow:0 -8px 32px rgba(100,50,20,0.15);">
+        <div style="width:36px;height:4px;background:var(--n300);border-radius:100px;margin:0 auto 20px;"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--n900);margin-bottom:20px;">添加物品</div>
+
+        <!-- 分类选择 -->
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:600;color:var(--n500);margin-bottom:8px;">分类</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="background:rgba(196,133,90,0.12);border:1px solid rgba(196,133,90,0.3);border-radius:100px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--primary-dark);">👩 妈妈用品</div>
+            <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:6px 14px;font-size:13px;color:var(--n500);">👶 宝宝用品</div>
+            <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:6px 14px;font-size:13px;color:var(--n500);">📋 证件类</div>
+            <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:6px 14px;font-size:13px;color:var(--n500);">🏥 住院用品</div>
+          </div>
+        </div>
+
+        <!-- 物品名称 -->
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;font-weight:600;color:var(--n500);margin-bottom:8px;">物品名称</div>
+          <div style="background:var(--n100);border:1px solid var(--n200);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--n900);">收腹带</div>
+        </div>
+
+        <!-- 数量 -->
+        <div style="margin-bottom:24px;">
+          <div style="font-size:12px;font-weight:600;color:var(--n500);margin-bottom:8px;">数量（可选）</div>
+          <div style="background:var(--n100);border:1px solid var(--n200);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--n300);">如 ×2</div>
+        </div>
+
+        <button class="btn-pri" style="width:100%;padding:14px;font-size:15px;">添加</button>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item active"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑲ 待产包 · 批量选择模式 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑲ 待产包 · 批量选择</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="page-header">
+        <h1 class="page-title" style="font-size:28px;">批量选择</h1>
+        <span style="font-size:14px;font-weight:600;color:var(--primary);cursor:pointer;">取消</span>
+      </div>
+      <div style="font-size:13px;color:var(--n500);margin-bottom:16px;">已选 3 项</div>
+
+      <div class="cat-card card">
+        <div class="cat-head"><div class="cat-left"><span class="cat-emoji">👩</span><span class="cat-name">妈妈用品</span></div></div>
+        <div class="item-list">
+          <div class="chk-item checked"><div class="checkbox" style="background:var(--primary);border-color:var(--primary);"><div class="chk-tick"></div></div><span class="chk-name" style="color:var(--n900);text-decoration:none;">产褥垫 ×1 包</span></div>
+          <div class="chk-item checked"><div class="checkbox" style="background:var(--primary);border-color:var(--primary);"><div class="chk-tick"></div></div><span class="chk-name" style="color:var(--n900);text-decoration:none;">吸奶器</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">防溢乳垫</span></div>
+        </div>
+      </div>
+
+      <div class="cat-card card" style="margin-top:12px;">
+        <div class="cat-head"><div class="cat-left"><span class="cat-emoji">👶</span><span class="cat-name">宝宝用品</span></div></div>
+        <div class="item-list">
+          <div class="chk-item checked"><div class="checkbox" style="background:var(--primary);border-color:var(--primary);"><div class="chk-tick"></div></div><span class="chk-name" style="color:var(--n900);text-decoration:none;">奶瓶 ×2</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">奶粉（备用）</span></div>
+        </div>
+      </div>
+
+      <!-- 底部操作条 -->
+      <div style="position:fixed;bottom:88px;left:0;right:0;background:rgba(255,250,245,0.95);backdrop-filter:blur(16px);border-top:1px solid var(--card-border);padding:14px 22px;display:flex;gap:12px;max-width:390px;margin:0 auto;">
+        <button class="btn-pri" style="flex:1;padding:14px;font-size:14px;">✓ 批量标记为已准备</button>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item active"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑳ 知识 · 分类详情（拉玛泽文章列表） -->
+<div class="screen-wrap">
+  <div class="screen-label">⑳ 知识 · 分类详情</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">拉玛泽呼吸</span><div class="nav-spacer"></div></div>
+      <div class="prog-text">6 篇图文教程</div>
+
+      <div class="article-card card"><div class="art-title">第 1 阶段：清洁呼吸</div><div class="art-desc">宫缩前后的深呼吸放松</div><div class="art-foot"><span class="art-time">阅读 2 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">第 2 阶段：胸式呼吸</div><div class="art-desc">宫口 0–3cm，缓慢深呼吸</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">第 3 阶段：节律呼吸</div><div class="art-desc">宫口 3–8cm，随宫缩加速</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">第 4 阶段：喘息呼吸</div><div class="art-desc">宫口 7–10cm，嘻嘻呼（hee-hee-hoo）</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">第 5 阶段：吹气呼吸</div><div class="art-desc">想用力但不能用力时，像吹蜡烛</div><div class="art-foot"><span class="art-time">阅读 2 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">第 6 阶段：用力呼吸</div><div class="art-desc">宫口全开，深吸气憋住用力</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item active"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ㉑ 知识 · 搜索 -->
+<div class="screen-wrap">
+  <div class="screen-label">㉑ 知识 · 搜索</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <!-- 搜索框 -->
+      <div style="display:flex;align-items:center;gap:10px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:12px 16px;margin-bottom:20px;box-shadow:var(--sh-sm);">
+        <div class="hdr-icon hdr-search" style="width:18px;height:18px;background:var(--n300);flex-shrink:0;"></div>
+        <div style="font-size:15px;color:var(--n900);font-weight:500;">宫缩</div>
+        <div style="margin-left:auto;font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;">取消</div>
+      </div>
+
+      <div style="font-size:12px;color:var(--n500);margin-bottom:12px;">找到 3 篇相关文章</div>
+
+      <div class="article-card card"><div class="art-title">见红、破水、<b style="color:var(--primary)">宫缩</b>怎么区分？</div><div class="art-desc">3 分钟读懂分娩信号</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">真<b style="color:var(--primary)">宫缩</b> vs 假<b style="color:var(--primary)">宫缩</b>：如何判断？</div><div class="art-desc">Braxton Hicks 和真宫缩的区别</div><div class="art-foot"><span class="art-time">阅读 4 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">什么时候该去医院？</div><div class="art-desc"><b style="color:var(--primary)">宫缩</b>间隔 5 分钟、持续 1 分钟…</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item active"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ㉒ 推送通知样式 -->
+<div class="screen-wrap">
+  <div class="screen-label">㉒ 推送通知</div>
+  <div class="phone" style="background:#000;">
+    <div class="status-bar" style="padding-top:18px;">
+      <div class="time" style="color:white;">9:00</div>
+      <div class="status-icons">
+        <div class="sig" style="filter:invert(1);"></div>
+        <div class="bat" style="border-color:white;"><div style="position:absolute;left:2px;top:2px;width:10px;height:5px;background:white;border-radius:1px;"></div></div>
+      </div>
+    </div>
+
+    <!-- 锁屏壁纸模拟 -->
+    <div style="height:calc(844px - 54px);background:linear-gradient(175deg,#1a1520 0%,#2a1f2d 50%,#1a1520 100%);padding:40px 16px;display:flex;flex-direction:column;align-items:center;">
+      <!-- 时间 -->
+      <div style="font-family:'Playfair Display',serif;font-size:72px;font-weight:700;color:white;letter-spacing:-2px;margin-bottom:4px;">9:00</div>
+      <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:48px;">4 月 9 日 星期四</div>
+
+      <!-- 通知卡片 1 -->
+      <div style="width:100%;background:rgba(255,248,242,0.92);backdrop-filter:blur(20px);border-radius:18px;padding:14px 16px;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:11px;">🌸</div>
+          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期 · 今日任务</div>
+          <div style="margin-left:auto;font-size:11px;color:var(--n300);">刚刚</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">🫁 今日任务提醒</div>
+        <div style="font-size:13px;color:var(--n500);line-height:1.4;">凯格尔运动和拉玛泽练习还未完成，点击开始 →</div>
+      </div>
+
+      <!-- 通知卡片 2 -->
+      <div style="width:100%;background:rgba(255,248,242,0.92);backdrop-filter:blur(20px);border-radius:18px;padding:14px 16px;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:11px;">🌸</div>
+          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期 · 待产包</div>
+          <div style="margin-left:auto;font-size:11px;color:var(--n300);">昨天</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">🎒 待产包准备提醒</div>
+        <div style="font-size:13px;color:var(--n500);line-height:1.4;">还有 38 项未准备，距离预产期还有 24 天</div>
+      </div>
+
+      <!-- 通知卡片 3 -->
+      <div style="width:100%;background:rgba(255,248,242,0.92);backdrop-filter:blur(20px);border-radius:18px;padding:14px 16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:11px;">🌸</div>
+          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期 · 倒计时</div>
+          <div style="margin-left:auto;font-size:11px;color:var(--n300);">昨天</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">👶 距离宝宝降临还有 24 天</div>
+        <div style="font-size:13px;color:var(--n500);line-height:1.4;">加油！每一天都在靠近那个美好的时刻 ✨</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ㉓ 文章收藏 Toast -->
+<div class="screen-wrap">
+  <div class="screen-label">㉓ 文章收藏 Toast</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">拉玛泽第 2 阶段</span><div class="nav-spacer"></div></div>
+
+      <!-- Toast（顶部浮动） -->
+      <div style="background:rgba(92,158,122,0.12);border:1px solid rgba(92,158,122,0.3);border-radius:14px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--success);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <div style="width:12px;height:12px;background:white;mask-size:contain;-webkit-mask-size:contain;-webkit-mask-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 24 24%27 stroke=%27currentColor%27%3E%3Cpath stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%273%27 d=%27M5 13l4 4L19 7%27/%3E%3C/svg%3E')"></div>
+        </div>
+        <span style="font-size:13px;font-weight:600;color:#3D7A5A;">已添加到收藏</span>
+      </div>
+
+      <div class="article-detail card">
+        <div class="art-cover">🫁</div>
+        <div class="art-section">适用时机</div>
+        <div class="art-body">宫口开 0–3cm</div>
+        <div class="art-section">方法</div>
+        <div class="art-bullet">用鼻子缓慢深吸气</div>
+        <div class="art-bullet">感受胸腔扩张</div>
+      </div>
+      <div class="btn-group" style="margin-top:4px">
+        <button class="btn-sec" style="border-color:var(--success);color:var(--success);">已收藏 ✓</button>
+        <button class="btn-pri">跟练动画</button>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div></div>
+  </div>
+</div>
+
 </body>
 </html>
