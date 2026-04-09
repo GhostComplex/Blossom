@@ -1,0 +1,288 @@
+//
+//  TasksView.swift
+//  Blossom (如期)
+//
+//  Tab 2 - 任务：凯格尔 + 拉玛泽 + 胎动记录
+//
+
+import SwiftUI
+import SwiftData
+
+struct TasksView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var profiles: [UserProfile]
+    @Query(filter: #Predicate<DailyTask> { task in
+        Calendar.current.isDateInToday(task.date)
+    }) private var todayTasks: [DailyTask]
+    @Query(filter: #Predicate<FetalMovementRecord> { record in
+        Calendar.current.isDateInToday(record.timestamp)
+    }, sort: \FetalMovementRecord.timestamp, order: .descending) 
+    private var todayMovements: [FetalMovementRecord]
+    
+    @State private var showKegelExercise = false
+    @State private var showLamazeExercise = false
+    @State private var showFetalMovementCounter = false
+    
+    private var profile: UserProfile? { profiles.first }
+    private var todayTask: DailyTask? { todayTasks.first }
+    
+    private var completedTaskCount: Int {
+        var count = 0
+        if todayTask?.kegelCompleted == true { count += 1 }
+        if todayTask?.lamazeCompleted == true { count += 1 }
+        if !todayMovements.isEmpty { count += 1 }
+        return count
+    }
+    
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: AppSpacing.xxl) {
+                    // 顶部统计
+                    headerSection
+                    
+                    // 任务列表
+                    VStack(spacing: AppSpacing.md) {
+                        kegelTaskCard
+                        lamazeTaskCard
+                        fetalMovementCard
+                    }
+                }
+                .padding(.horizontal, AppSpacing.pageHorizontal)
+                .padding(.vertical, AppSpacing.pageVertical)
+            }
+            .pageBackground()
+            .navigationTitle("任务")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {}) {
+                        Image(systemName: "calendar")
+                            .foregroundStyle(Color.n700)
+                    }
+                }
+            }
+            .sheet(isPresented: $showKegelExercise) {
+                KegelExerciseView()
+            }
+            .sheet(isPresented: $showLamazeExercise) {
+                LamazeExerciseView()
+            }
+            .sheet(isPresented: $showFetalMovementCounter) {
+                FetalMovementCounterView()
+            }
+        }
+    }
+    
+    // MARK: - Header Section
+    private var headerSection: some View {
+        HStack {
+            Text("今天完成 \(completedTaskCount) / 3 个任务")
+                .font(AppFonts.caption)
+                .foregroundStyle(Color.n500)
+            Spacer()
+        }
+    }
+    
+    // MARK: - Kegel Task Card
+    private var kegelTaskCard: some View {
+        Button(action: { showKegelExercise = true }) {
+            HStack(spacing: AppSpacing.lg) {
+                // Icon
+                Image(systemName: "figure.strengthtraining.traditional")
+                    .font(.system(size: 22))
+                    .foregroundStyle(todayTask?.kegelCompleted == true ? Color.success : Color.primaryDark)
+                    .frame(width: 44, height: 44)
+                    .background(todayTask?.kegelCompleted == true ? Color.success.opacity(0.15) : Color.accentLight)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("凯格尔运动")
+                            .font(AppFonts.cardTitle)
+                            .foregroundStyle(Color.n900)
+                        
+                        if todayTask?.kegelCompleted == true {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(Color.success)
+                        }
+                    }
+                    
+                    if let profile = profile {
+                        Text("\(profile.currentKegelLevel.displayName) · \(profile.currentKegelLevel.contractDuration)秒收缩 - \(profile.currentKegelLevel.relaxDuration)秒放松 × 10")
+                            .font(AppFonts.caption)
+                            .foregroundStyle(Color.n500)
+                    }
+                    
+                    if let completedAt = todayTask?.kegelCompletedAt {
+                        Text("今天 \(completedAt, format: .dateTime.hour().minute()) 完成")
+                            .font(AppFonts.smallLabel)
+                            .foregroundStyle(Color.success)
+                    }
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Color.n300)
+            }
+            .padding(AppSpacing.cardPadding)
+            .glassCard()
+        }
+        .buttonStyle(.plain)
+    }
+    
+    // MARK: - Lamaze Task Card
+    private var lamazeTaskCard: some View {
+        Button(action: { showLamazeExercise = true }) {
+            HStack(spacing: AppSpacing.lg) {
+                // Icon
+                Image(systemName: "wind")
+                    .font(.system(size: 22))
+                    .foregroundStyle(todayTask?.lamazeCompleted == true ? Color.success : Color.primaryDark)
+                    .frame(width: 44, height: 44)
+                    .background(todayTask?.lamazeCompleted == true ? Color.success.opacity(0.15) : Color.accentLight)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("拉玛泽呼吸练习")
+                            .font(AppFonts.cardTitle)
+                            .foregroundStyle(Color.n900)
+                        
+                        if todayTask?.lamazeCompleted == true {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(Color.success)
+                        }
+                    }
+                    
+                    Text("6 阶段呼吸法，跟练模式")
+                        .font(AppFonts.caption)
+                        .foregroundStyle(Color.n500)
+                    
+                    if let completedAt = todayTask?.lamazeCompletedAt {
+                        Text("今天 \(completedAt, format: .dateTime.hour().minute()) 完成")
+                            .font(AppFonts.smallLabel)
+                            .foregroundStyle(Color.success)
+                    }
+                }
+                
+                Spacer()
+                
+                if todayTask?.lamazeCompleted != true {
+                    Text("开始练习")
+                        .font(AppFonts.smallLabel)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Color.primary600)
+                        .clipShape(Capsule())
+                }
+            }
+            .padding(AppSpacing.cardPadding)
+            .glassCard()
+        }
+        .buttonStyle(.plain)
+    }
+    
+    // MARK: - Fetal Movement Card
+    private var fetalMovementCard: some View {
+        Button(action: { showFetalMovementCounter = true }) {
+            HStack(spacing: AppSpacing.lg) {
+                // Icon
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 22))
+                    .foregroundStyle(Color.primaryDark)
+                    .frame(width: 44, height: 44)
+                    .background(Color.accentLight)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("胎动记录（可选）")
+                        .font(AppFonts.cardTitle)
+                        .foregroundStyle(Color.n900)
+                    
+                    if todayMovements.isEmpty {
+                        Text("今天还没有记录")
+                            .font(AppFonts.caption)
+                            .foregroundStyle(Color.n500)
+                    } else {
+                        Text("今天记录 \(todayMovements.count) 次")
+                            .font(AppFonts.caption)
+                            .foregroundStyle(Color.n500)
+                    }
+                }
+                
+                Spacer()
+                
+                Text("记录一次")
+                    .font(AppFonts.smallLabel)
+                    .foregroundStyle(Color.primary600)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color.accentLight)
+                    .clipShape(Capsule())
+            }
+            .padding(AppSpacing.cardPadding)
+            .glassCard()
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Placeholder Views (to be implemented)
+struct KegelExerciseView: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            Text("凯格尔运动计时器")
+                .navigationTitle("凯格尔运动")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("返回") { dismiss() }
+                    }
+                }
+        }
+    }
+}
+
+struct LamazeExerciseView: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            Text("拉玛泽呼吸练习")
+                .navigationTitle("拉玛泽呼吸练习")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("返回") { dismiss() }
+                    }
+                }
+        }
+    }
+}
+
+struct FetalMovementCounterView: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            Text("胎动计数器")
+                .navigationTitle("记录胎动")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("取消") { dismiss() }
+                    }
+                }
+        }
+    }
+}
+
+#Preview {
+    TasksView()
+        .modelContainer(for: [UserProfile.self, DailyTask.self, FetalMovementRecord.self], inMemory: true)
+}
