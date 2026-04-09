@@ -4,6 +4,21 @@
 
 ---
 
+## 设计预览
+
+### 主页面（4 个 Tab）
+![主页面](./preview-1-main-tabs.png)
+
+### 交互流程（凯格尔 / 拉玛泽 / 胎动 / 文章）
+![交互流程](./preview-2-interactions.png)
+
+### 弹窗 / 状态 / 分支（首次引导 / 修改预产期 / 暂停 / Toast / 搜索 / 通知）
+![弹窗状态](./preview-3-modals.png)
+
+> 完整 23 屏交互设计稿：[design.html](./design.html)（浏览器打开即可预览）
+
+---
+
 ## 产品简介
 
 **如期 · Blossom** 是一款专为孕晚期准妈妈设计的 iOS App。
@@ -34,7 +49,7 @@
 
 | 文件 | 说明 | 预览 |
 |------|------|------|
-| [design.html](./design.html) | **主设计稿**（温暖版配色，4 个主 Tab） | [预览图](./design-preview.png) |
+| [design.html](./design.html) | **完整设计稿（23 屏）** | [预览图1](./preview-1-main-tabs.png) [预览图2](./preview-2-interactions.png) [预览图3](./preview-3-modals.png) |
 | [
 | [app-icon.html](./app-icon.html) | App Icon 设计（花朵 · 玫瑰金配色） | [预览图](./app-icon-preview.png) |
 
