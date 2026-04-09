@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>如期 Blossom · 完整设计稿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --primary:      #C4855A;
+  --primary-dark: #A86840;
+  --accent:       #E8B89A;
+  --accent-light: #F5DDD0;
+  --warm-gold:    #D4A86A;
+
+  --bg-top:    #FDF8F3;
+  --bg-bottom: #F7EFE6;
+
+  --n900: #2C1F14;
+  --n700: #5C3D2A;
+  --n500: #9B7558;
+  --n300: #D4B8A4;
+  --n200: #EAD9CE;
+  --n100: #F5EDE6;
+
+  --success: #5C9E7A;
+
+  --card-bg:     rgba(255,248,242,0.82);
+  --card-border: rgba(196,133,90,0.18);
+
+  --sh-sm: 0 2px 8px rgba(100,50,20,0.07);
+  --sh-md: 0 6px 16px rgba(100,50,20,0.1);
+  --sh-lg: 0 12px 32px rgba(100,50,20,0.13);
+
+  /* 兼容 design-all 的旧变量名 */
+  --neutral-500: #9B7558;
+  --neutral-300: #D4B8A4;
+  --neutral-200: #EAD9CE;
+  --neutral-900: #2C1F14;
+  --neutral-700: #5C3D2A;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 20px;
+  --radius-xl: 24px; --radius-2xl: 28px; --radius-full: 9999px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #EDE0D4;
+  padding: 60px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* 分隔行 */
+.section-divider {
+  width: 100%;
+  text-align: center;
+  padding: 32px 0 16px;
+  color: #A08070;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.screen-wrap { position: relative; }
+.screen-label {
+  position: absolute; top: -28px;
+  left: 0; right: 0; text-align: center;
+  font-size: 12px; font-weight: 600;
+  color: #A08070; letter-spacing: 0.6px;
+}
+/* 旧 class 兼容 */
+.screen-wrapper { position: relative; }
+.screen-wrapper .screen-label { position: absolute; top: -28px; left:0; right:0; text-align:center; font-size:12px; font-weight:600; color:#A08070; }
+
+.phone {
+  width: 390px; height: 844px;
+  border-radius: 50px; overflow: hidden;
+  background: linear-gradient(175deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  box-shadow:
+    0 40px 80px rgba(80,40,10,0.35),
+    0 0 0 1px rgba(255,255,255,0.6) inset,
+    0 0 0 8px #D4B090,
+    0 0 0 9px rgba(255,255,255,0.3);
+  position: relative;
+}
+
+.status-bar {
+  height: 54px; display: flex;
+  align-items: flex-end; justify-content: space-between;
+  padding: 0 28px 10px;
+}
+.time { font-size: 15px; font-weight: 600; color: var(--n700); letter-spacing: -0.3px; }
+.status-icons { display: flex; gap: 6px; align-items: center; }
+.sig { width:16px; height:11px; position:relative; }
+.sig::before,.sig::after { content:''; position:absolute; background:var(--n700); border-radius:1px; }
+.sig::before { width:3px; height:8px; left:0; bottom:0; }
+.sig::after  { width:3px; height:11px; left:5px; bottom:0; }
+.bat { width:18px; height:11px; border:1.5px solid var(--n700); border-radius:2.5px; position:relative; }
+.bat::before { content:''; position:absolute; left:2px; top:2px; width:10px; height:5px; background:var(--n700); border-radius:1px; }
+.bat::after  { content:''; position:absolute; right:-3px; top:3px; width:2px; height:3px; background:var(--n700); border-radius:1px; }
+/* 旧 signal/battery 兼容 */
+.signal { width:16px; height:11px; position:relative; }
+.signal::before,.signal::after { content:''; position:absolute; background:var(--n700); border-radius:1px; }
+.signal::before { width:3px; height:8px; left:0; bottom:0; }
+.signal::after  { width:3px; height:11px; left:5px; bottom:0; }
+.battery { width:18px; height:11px; border:1.5px solid var(--n700); border-radius:2.5px; position:relative; }
+.battery::before { content:''; position:absolute; left:2px; top:2px; width:10px; height:5px; background:var(--n700); border-radius:1px; }
+.battery::after  { content:''; position:absolute; right:-3px; top:3px; width:2px; height:3px; background:var(--n700); border-radius:1px; }
+
+.content {
+  height: calc(844px - 54px - 88px);
+  overflow-y: auto; padding: 20px 22px 48px;
+}
+.content::-webkit-scrollbar { display: none; }
+
+/* 卡片 */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  box-shadow: var(--sh-sm);
+}
+
+/* ── 首页 ── */
+.greeting { margin-bottom: 28px; }
+.greeting-sub { font-size:13px; font-weight:500; color:var(--n500); letter-spacing:0.3px; margin-bottom:6px; text-transform:uppercase; }
+.greeting-main { font-family:'Playfair Display',serif; font-size:34px; font-weight:600; color:var(--n900); letter-spacing:-0.5px; line-height:1.1; }
+
+.countdown-card {
+  padding:32px 28px 26px; margin-bottom:24px; position:relative; overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,248,240,0.95) 0%,rgba(245,232,218,0.9) 100%);
+  border:1px solid rgba(196,133,90,0.22); border-radius:26px; box-shadow:var(--sh-md);
+}
+.countdown-card::before { content:''; position:absolute; top:-60px; right:-60px; width:220px; height:220px; background:radial-gradient(circle,rgba(212,168,106,0.2) 0%,transparent 65%); border-radius:50%; }
+.countdown-card::after  { content:''; position:absolute; bottom:-40px; left:-40px; width:160px; height:160px; background:radial-gradient(circle,rgba(232,184,154,0.18) 0%,transparent 65%); border-radius:50%; }
+
+.week-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(196,133,90,0.12); border:1px solid rgba(196,133,90,0.22); border-radius:100px; padding:5px 14px; margin-bottom:28px; position:relative; z-index:1; }
+.week-dot { width:6px; height:6px; border-radius:50%; background:var(--primary); }
+.week-text { font-size:13px; font-weight:600; color:var(--n700); }
+
+.cd-label { font-family:'Playfair Display',serif; font-size:15px; font-weight:500; color:var(--n500); text-align:center; margin-bottom:12px; position:relative; z-index:1; }
+.cd-number-row { display:flex; align-items:baseline; justify-content:center; gap:10px; margin-bottom:6px; position:relative; z-index:1; }
+.cd-number { font-family:'Playfair Display',serif; font-size:88px; font-weight:700; line-height:0.95; background:linear-gradient(150deg,var(--warm-gold) 0%,var(--primary) 50%,var(--primary-dark) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:-4px; }
+.cd-unit { font-family:'Playfair Display',serif; font-size:26px; font-weight:600; color:var(--n700); }
+.due-row { display:flex; align-items:center; justify-content:center; gap:8px; padding-top:20px; border-top:1px solid rgba(196,133,90,0.15); position:relative; z-index:1; }
+.due-icon { width:18px; height:18px; border:1.5px solid var(--accent); border-radius:4px; position:relative; opacity:0.7; }
+.due-icon::before,.due-icon::after { content:''; position:absolute; width:2px; height:4px; background:var(--accent); top:-4px; }
+.due-icon::before { left:3px; } .due-icon::after { right:3px; }
+.due-text { font-size:13px; font-weight:500; color:var(--n500); }
+
+.sec-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; }
+.sec-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:var(--n900); letter-spacing:-0.3px; }
+.sec-link { font-size:13px; font-weight:600; color:var(--primary); }
+
+.tasks-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.task-card { padding:20px 16px; transition:all 250ms ease; }
+.task-card:hover { transform:translateY(-3px); box-shadow:var(--sh-md); }
+.task-icon-wrap { width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent-light),rgba(255,255,255,0.6)); border:1px solid rgba(196,133,90,0.15); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+.ti { width:22px; height:22px; background:var(--primary-dark); mask-size:contain; -webkit-mask-size:contain; }
+.ti-kegel  { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'/%3E%3C/svg%3E"); }
+.ti-breath { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'/%3E%3C/svg%3E"); }
+.ti-bag    { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'/%3E%3C/svg%3E"); }
+.ti-book   { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'/%3E%3C/svg%3E"); }
+.task-name { font-size:14px; font-weight:600; color:var(--n900); margin-bottom:4px; }
+.task-status { font-size:12px; font-weight:500; color:var(--n500); }
+.task-status.done { color:var(--success); }
+
+.prog-card { padding:18px 20px; }
+.prog-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.prog-title { font-size:14px; font-weight:600; color:var(--n900); }
+.prog-count { font-size:13px; font-weight:600; color:var(--primary); }
+.prog-bar { height:6px; background:var(--n200); border-radius:100px; overflow:hidden; }
+.prog-fill { height:100%; background:linear-gradient(90deg,var(--primary-dark),var(--warm-gold)); border-radius:100px; }
+
+/* ── 通用页面头 ── */
+.page-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+.page-title { font-family:'Playfair Display',serif; font-size:34px; font-weight:600; color:var(--n900); letter-spacing:-0.5px; }
+.hdr-icon { width:22px; height:22px; background:var(--n700); mask-size:contain; -webkit-mask-size:contain; }
+.hdr-cal { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E"); }
+.hdr-add { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4v16m8-8H4'/%3E%3C/svg%3E"); }
+.hdr-search { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E"); }
+.prog-text { font-size:14px; font-weight:500; color:var(--n500); margin-bottom:20px; }
+
+/* ── 任务列表 ── */
+.task-item { padding:20px; margin-bottom:12px; }
+.task-item-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.task-item-left { display:flex; align-items:center; gap:12px; }
+.task-item-name { font-size:16px; font-weight:600; color:var(--n900); letter-spacing:-0.2px; }
+.check-circle { width:24px; height:24px; border-radius:50%; background:var(--success); display:flex; align-items:center; justify-content:center; }
+.check-circle::before { content:''; width:13px; height:13px; background:white; mask-size:contain; -webkit-mask-size:contain; -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5 13l4 4L19 7'/%3E%3C/svg%3E"); }
+.task-desc { font-size:13px; color:var(--n500); line-height:1.5; }
+.task-meta { display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding-top:12px; border-top:1px solid var(--n200); }
+.meta-time { font-size:12px; font-weight:500; color:var(--success); }
+.meta-info { font-size:12px; color:var(--n500); }
+.btn-primary { background:var(--primary); color:white; border:none; padding:8px 20px; border-radius:100px; font-size:13px; font-weight:600; cursor:pointer; }
+
+/* ── 待产包 ── */
+.cat-card { padding:18px 20px; margin-bottom:12px; }
+.cat-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.cat-left { display:flex; align-items:center; gap:10px; }
+.cat-emoji { font-size:18px; }
+.cat-name { font-size:16px; font-weight:600; color:var(--n900); }
+.cat-prog { font-size:13px; font-weight:600; color:var(--primary); }
+.item-list { display:flex; flex-direction:column; gap:10px; }
+.chk-item { display:flex; align-items:center; gap:10px; cursor:pointer; padding:4px 2px; border-radius:8px; }
+.chk-item:hover { background:rgba(196,133,90,0.05); }
+.checkbox { width:20px; height:20px; border:2px solid var(--n300); border-radius:6px; display:flex; align-items:center; justify-content:center; }
+.chk-item.checked .checkbox { background:var(--success); border-color:var(--success); }
+.chk-tick { width:11px; height:11px; background:white; mask-size:contain; -webkit-mask-size:contain; opacity:0; -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5 13l4 4L19 7'/%3E%3C/svg%3E"); }
+.chk-item.checked .chk-tick { opacity:1; }
+.chk-name { font-size:14px; font-weight:500; color:var(--n900); }
+.chk-item.checked .chk-name { color:var(--n300); text-decoration:line-through; }
+
+/* ── 知识 ── */
+.know-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+.know-card { padding:18px 16px; cursor:pointer; transition:all 250ms ease; }
+.know-card:hover { transform:translateY(-3px); box-shadow:var(--sh-md); }
+.know-icon { font-size:28px; margin-bottom:12px; }
+.know-name { font-size:14px; font-weight:600; color:var(--n900); margin-bottom:4px; }
+.know-sub  { font-size:12px; color:var(--n500); }
+.article-card { padding:18px 20px; margin-bottom:12px; cursor:pointer; transition:all 250ms ease; }
+.article-card:hover { transform:translateY(-2px); box-shadow:var(--sh-md); }
+.art-title { font-size:15px; font-weight:600; color:var(--n900); margin-bottom:4px; letter-spacing:-0.2px; line-height:1.4; }
+.art-desc  { font-size:13px; color:var(--n500); margin-bottom:10px; line-height:1.5; }
+.art-foot  { display:flex; align-items:center; justify-content:space-between; }
+.art-time  { font-size:12px; color:var(--n500); }
+.art-link  { font-size:12px; font-weight:600; color:var(--primary); }
+
+/* ── 交互页：返回导航 ── */
+.nav-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+.back-button { width:40px; height:40px; border-radius:12px; background:var(--card-bg); backdrop-filter:blur(16px); border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:var(--sh-sm); }
+.back-icon { width:20px; height:20px; background:var(--n700); mask-size:contain; -webkit-mask-size:contain; -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'/%3E%3C/svg%3E"); }
+.nav-spacer { width:40px; }
+.sub-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:var(--n900); }
+
+/* ── 凯格尔计时器 ── */
+.timer-container { display:flex; flex-direction:column; align-items:center; text-align:center; padding-top:16px; }
+.phase-badge { display:inline-flex; align-items:center; gap:8px; margin-bottom:28px; }
+.level-tag { background:rgba(196,133,90,0.12); border:1px solid rgba(196,133,90,0.25); border-radius:100px; padding:3px 12px; font-size:12px; font-weight:600; color:var(--primary-dark); }
+.phase-name { font-size:14px; font-weight:600; color:var(--n500); letter-spacing:0.3px; text-transform:uppercase; }
+
+.timer-circle {
+  width:220px; height:220px; border-radius:50%;
+  background:var(--card-bg); backdrop-filter:blur(16px);
+  border:2px solid rgba(196,133,90,0.25);
+  box-shadow:var(--sh-lg), 0 0 0 6px rgba(196,133,90,0.06);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:28px;
+}
+.timer-circle.relax { border-color:rgba(155,117,88,0.18); box-shadow:var(--sh-sm); }
+.timer-number { font-family:'Playfair Display',serif; font-size:80px; font-weight:700; line-height:1; background:linear-gradient(135deg,var(--primary-dark),var(--warm-gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.timer-number.muted { background:linear-gradient(135deg,var(--n500),var(--n300)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.sets-info { font-size:15px; font-weight:500; color:var(--n700); margin-bottom:16px; }
+.timer-hint { font-size:12px; color:var(--n500); margin-bottom:24px; letter-spacing:0.2px; }
+.progress-dots { display:flex; gap:8px; margin-bottom:28px; }
+.dot { width:8px; height:8px; border-radius:50%; background:var(--n200); }
+.dot.active { background:var(--primary); transform:scale(1.2); }
+
+/* ── 拉玛泽 ── */
+.mode-list { display:flex; flex-direction:column; gap:14px; margin-top:8px; }
+.mode-card { padding:20px; cursor:pointer; transition:all 250ms ease; }
+.mode-card:hover { transform:translateY(-3px); box-shadow:var(--sh-md); border-color:rgba(196,133,90,0.35); }
+.mode-title { font-size:17px; font-weight:600; color:var(--n900); margin-bottom:5px; }
+.mode-desc { font-size:13px; color:var(--n500); line-height:1.5; }
+
+.breath-wrap { display:flex; flex-direction:column; align-items:center; padding-top:8px; }
+.breath-circle {
+  width:180px; height:180px; border-radius:50%;
+  background:linear-gradient(135deg,var(--accent-light),var(--primary));
+  opacity:0.85; margin-bottom:28px;
+  animation:breathe 8s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{transform:scale(0.82);opacity:0.65} 50%{transform:scale(1.18);opacity:1} }
+.breath-cue { font-family:'Playfair Display',serif; font-size:28px; font-weight:600; color:var(--n900); margin-bottom:8px; }
+.breath-sub { font-size:14px; color:var(--n500); margin-bottom:24px; }
+
+/* ── 胎动计数 ── */
+.counter-wrap { display:flex; flex-direction:column; align-items:center; padding-top:20px; }
+.counter-label { font-size:14px; font-weight:500; color:var(--n500); margin-bottom:8px; }
+.counter-number { font-family:'Playfair Display',serif; font-size:100px; font-weight:700; line-height:1; background:linear-gradient(135deg,var(--primary-dark),var(--warm-gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:28px; }
+.counter-btn { width:112px; height:112px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--primary-dark)); border:none; font-size:44px; font-weight:700; color:white; cursor:pointer; box-shadow:var(--sh-lg); transition:all 200ms ease; margin-bottom:32px; }
+.counter-btn:hover { transform:scale(1.05); }
+.counter-btn:active { transform:scale(0.95); }
+
+/* ── 文章详情 ── */
+.article-detail { padding:20px; margin-bottom:16px; }
+.art-cover { width:100%; height:160px; background:linear-gradient(135deg,var(--accent-light),var(--accent)); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:56px; margin-bottom:20px; }
+.art-section { font-size:16px; font-weight:600; color:var(--n900); margin:18px 0 8px; }
+.art-body { font-size:14px; color:var(--n700); line-height:1.7; }
+.art-bullet { font-size:14px; color:var(--n700); line-height:1.7; padding-left:18px; position:relative; margin-bottom:4px; }
+.art-bullet::before { content:'·'; position:absolute; left:6px; color:var(--primary); font-weight:700; font-size:18px; line-height:1.4; }
+
+/* ── 按钮组 ── */
+.btn-group { display:flex; gap:12px; justify-content:center; }
+.btn-sec { background:var(--card-bg); backdrop-filter:blur(16px); border:1px solid var(--card-border); color:var(--n700); padding:12px 24px; border-radius:100px; font-size:15px; font-weight:600; cursor:pointer; box-shadow:var(--sh-sm); }
+.btn-pri { background:var(--primary); color:white; border:none; padding:12px 24px; border-radius:100px; font-size:15px; font-weight:600; cursor:pointer; box-shadow:0 4px 12px rgba(196,133,90,0.35); }
+
+/* ── 底部导航 ── */
+.bottom-nav {
+  height:88px; background:rgba(253,248,243,0.92); backdrop-filter:blur(20px);
+  border-top:1px solid rgba(196,133,90,0.12);
+  display:flex; align-items:center; justify-content:space-around; padding-bottom:24px;
+}
+.nav-item { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; padding:10px 14px; border-radius:12px; transition:all 180ms ease; }
+.nav-item:hover { background:rgba(196,133,90,0.08); }
+.nav-i { width:23px; height:23px; background:var(--n300); mask-size:contain; -webkit-mask-size:contain; }
+.nav-item.active .nav-i { background:var(--primary); }
+.nav-lbl { font-size:10px; font-weight:600; color:var(--n300); letter-spacing:0.2px; }
+.nav-item.active .nav-lbl { color:var(--primary-dark); }
+.ni-home  { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'/%3E%3C/svg%3E"); }
+.ni-task  { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4'/%3E%3C/svg%3E"); }
+.ni-bag   { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'/%3E%3C/svg%3E"); }
+.ni-book  { -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'/%3E%3C/svg%3E"); }
+</style>
+</head>
+<body>
+
+<!-- ① 首页 -->
+<div class="screen-wrap">
+  <div class="screen-label">① 首页</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="greeting"><div class="greeting-sub">April 9, 2026</div><div class="greeting-main">早上好 ☀️</div></div>
+      <div class="countdown-card">
+        <div class="week-badge"><div class="week-dot"></div><span class="week-text">孕 37 周 + 4 天</span></div>
+        <div class="cd-label">距离与宝宝相见</div>
+        <div class="cd-number-row"><div class="cd-number">24</div><div class="cd-unit">天</div></div>
+        <div class="due-row"><div class="due-icon"></div><span class="due-text">预产期 2026 年 5 月 3 日</span></div>
+      </div>
+      <div class="sec-header"><h2 class="sec-title">今日任务</h2><a class="sec-link">查看全部</a></div>
+      <div class="tasks-grid">
+        <div class="task-card card"><div class="task-icon-wrap"><div class="ti ti-kegel"></div></div><div class="task-name">凯格尔运动</div><div class="task-status done">已完成 ✓</div></div>
+        <div class="task-card card"><div class="task-icon-wrap"><div class="ti ti-breath"></div></div><div class="task-name">拉玛泽练习</div><div class="task-status">待完成</div></div>
+        <div class="task-card card"><div class="task-icon-wrap"><div class="ti ti-bag"></div></div><div class="task-name">待产包</div><div class="task-status">12 / 50 项</div></div>
+        <div class="task-card card"><div class="task-icon-wrap"><div class="ti ti-book"></div></div><div class="task-name">分娩知识</div><div class="task-status">6 篇待读</div></div>
+      </div>
+      <div class="prog-card card"><div class="prog-head"><span class="prog-title">待产包准备进度</span><span class="prog-count">12 / 50</span></div><div class="prog-bar"><div class="prog-fill" style="width:24%"></div></div></div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item active"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ② 任务列表 -->
+<div class="screen-wrap">
+  <div class="screen-label">② 任务列表</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="page-header"><h1 class="page-title">任务</h1><div class="hdr-icon hdr-cal"></div></div>
+      <div class="prog-text">今天完成 1 / 3 个任务</div>
+      <div class="task-item card">
+        <div class="task-item-head"><div class="task-item-left"><div class="task-icon-wrap" style="width:36px;height:36px;border-radius:10px;margin:0"><div class="ti ti-kegel"></div></div><span class="task-item-name">凯格尔运动</span></div><div class="check-circle"></div></div>
+        <div class="task-desc">🌱 初级 · 收缩 5s · 放松 10s · 10 次</div>
+        <div class="task-meta"><span class="meta-time">今天 09:30 完成</span></div>
+      </div>
+      <div class="task-item card">
+        <div class="task-item-head"><div class="task-item-left"><div class="task-icon-wrap" style="width:36px;height:36px;border-radius:10px;margin:0"><div class="ti ti-breath"></div></div><span class="task-item-name">拉玛泽练习</span></div></div>
+        <div class="task-desc">6 阶段呼吸法，跟练模式</div>
+        <div class="task-meta"><button class="btn-primary">开始练习</button></div>
+      </div>
+      <div class="task-item card">
+        <div class="task-item-head"><div class="task-item-left"><div class="task-icon-wrap" style="width:36px;height:36px;border-radius:10px;margin:0"><div class="ti" style="-webkit-mask-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 24 24%27 stroke=%27currentColor%27%3E%3Cpath stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z%27/%3E%3C/svg%3E')"></div></div><span class="task-item-name">胎动记录（可选）</span></div></div>
+        <div class="task-desc">记录宝宝的活跃时刻</div>
+        <div class="task-meta"><span class="meta-info">今天记录 3 次</span><button class="btn-primary">记录一次</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ 待产包 -->
+<div class="screen-wrap">
+  <div class="screen-label">③ 待产包</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="page-header"><h1 class="page-title">待产包</h1><div class="hdr-icon hdr-add"></div></div>
+      <div class="prog-card card" style="margin-bottom:16px"><div class="prog-head"><span class="prog-title">已准备 12 / 50 项</span><span class="prog-count">24%</span></div><div class="prog-bar"><div class="prog-fill" style="width:24%"></div></div></div>
+      <div class="cat-card card">
+        <div class="cat-head"><div class="cat-left"><span class="cat-emoji">📋</span><span class="cat-name">证件类</span></div><span class="cat-prog">3 / 5</span></div>
+        <div class="item-list">
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">身份证</span></div>
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">准生证</span></div>
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">医保卡</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">病历本</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">产检报告</span></div>
+        </div>
+      </div>
+      <div class="cat-card card" style="margin-top:12px">
+        <div class="cat-head"><div class="cat-left"><span class="cat-emoji">👩</span><span class="cat-name">妈妈用品</span></div><span class="cat-prog">5 / 20</span></div>
+        <div class="item-list">
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">月子服 ×2</span></div>
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">一次性内裤 ×10</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">产褥垫 ×1 包</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">吸奶器</span></div>
+        </div>
+      </div>
+      <div class="cat-card card" style="margin-top:12px">
+        <div class="cat-head"><div class="cat-left"><span class="cat-emoji">👶</span><span class="cat-name">宝宝用品</span></div><span class="cat-prog">4 / 18</span></div>
+        <div class="item-list">
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">纸尿裤 NB 号 ×1 包</span></div>
+          <div class="chk-item checked"><div class="checkbox"><div class="chk-tick"></div></div><span class="chk-name">湿巾 ×2 包</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">奶瓶 ×2</span></div>
+          <div class="chk-item"><div class="checkbox"></div><span class="chk-name">奶粉（备用）</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item active"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ④ 知识 -->
+<div class="screen-wrap">
+  <div class="screen-label">④ 知识</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="page-header"><h1 class="page-title">知识</h1><div class="hdr-icon hdr-search"></div></div>
+      <div class="prog-text">分娩准备 · 科学备产</div>
+      <div class="know-grid">
+        <div class="know-card card"><div class="know-icon">🫁</div><div class="know-name">拉玛泽呼吸</div><div class="know-sub">6 篇图文</div></div>
+        <div class="know-card card"><div class="know-icon">💪</div><div class="know-name">凯格尔运动</div><div class="know-sub">科学原理</div></div>
+        <div class="know-card card"><div class="know-icon">🚨</div><div class="know-name">分娩信号</div><div class="know-sub">3 个信号</div></div>
+        <div class="know-card card"><div class="know-icon">🏥</div><div class="know-name">入院时机</div><div class="know-sub">何时去医院</div></div>
+      </div>
+      <div class="sec-header" style="margin-bottom:14px"><h2 class="sec-title" style="font-size:18px">热门文章</h2></div>
+      <div class="article-card card"><div class="art-title">见红、破水、宫缩怎么区分？</div><div class="art-desc">3 分钟读懂分娩信号，让你心里有底</div><div class="art-foot"><span class="art-time">阅读 3 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">拉玛泽 6 阶段呼吸法详解</div><div class="art-desc">图文 + 动画演示，跟练更轻松</div><div class="art-foot"><span class="art-time">阅读 5 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+      <div class="article-card card"><div class="art-title">凯格尔运动的科学原理</div><div class="art-desc">为什么孕晚期一定要做？产后恢复关键</div><div class="art-foot"><span class="art-time">阅读 4 分钟</span><span class="art-link">阅读全文 →</span></div></div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div>
+      <div class="nav-item"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div>
+      <div class="nav-item"><div class="nav-i ni-bag"></div><span class="nav-lbl">待产包</span></div>
+      <div class="nav-item active"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 分隔 ─── -->
+<div class="section-divider">—— 交互流程 ——</div>
+
+<!-- ⑤ 凯格尔 · 收缩阶段 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑤ 凯格尔 · 收缩</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">凯格尔运动</span><div class="nav-spacer"></div></div>
+      <div class="timer-container">
+        <div class="phase-badge"><span class="level-tag">🌱 初级</span><span class="phase-name">收缩骨盆底肌</span></div>
+        <div class="timer-circle"><div class="timer-number">4</div></div>
+        <div class="sets-info">还剩 6 组（共 10 组）</div>
+        <div class="progress-dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="timer-hint">收缩 5s · 放松 10s</div>
+        <div class="btn-group"><button class="btn-sec">暂停</button><button class="btn-sec">结束</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑥ 凯格尔 · 放松阶段 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑥ 凯格尔 · 放松</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">凯格尔运动</span><div class="nav-spacer"></div></div>
+      <div class="timer-container">
+        <div class="phase-badge"><span class="level-tag">🌱 初级</span><span class="phase-name">放松休息</span></div>
+        <div class="timer-circle relax"><div class="timer-number muted">10</div></div>
+        <div class="sets-info">还剩 6 组（共 10 组）</div>
+        <div class="progress-dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="timer-hint">收缩 5s · 放松 10s</div>
+        <div class="btn-group"><button class="btn-sec">暂停</button><button class="btn-sec">结束</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑦ 凯格尔 · 中级（第8天） -->
+<div class="screen-wrap">
+  <div class="screen-label">⑦ 凯格尔 · 中级</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">凯格尔运动</span><div class="nav-spacer"></div></div>
+      <div class="timer-container">
+        <div class="phase-badge"><span class="level-tag">🌿 中级</span><span class="phase-name">收缩骨盆底肌</span></div>
+        <div class="timer-circle"><div class="timer-number">6</div></div>
+        <div class="sets-info">还剩 7 组（共 10 组）</div>
+        <div class="progress-dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="timer-hint">收缩 7s · 放松 14s</div>
+        <div class="btn-group"><button class="btn-sec">暂停</button><button class="btn-sec">结束</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑧ 拉玛泽 · 选择模式 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑧ 拉玛泽 · 模式选择</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">拉玛泽练习</span><div class="nav-spacer"></div></div>
+      <div class="mode-list">
+        <div class="mode-card card"><div class="mode-title">📚 学习模式</div><div class="mode-desc">查看 6 阶段呼吸法图文教程</div></div>
+        <div class="mode-card card"><div class="mode-title">🫁 跟练模式</div><div class="mode-desc">跟随动画一起练习呼吸</div></div>
+        <div class="mode-card card"><div class="mode-title">📖 知识卡片</div><div class="mode-desc">了解拉玛泽分娩法原理</div></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑨ 拉玛泽 · 跟练动画 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑨ 拉玛泽 · 跟练</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">第 2 阶段：胸式呼吸</span><div class="nav-spacer"></div></div>
+      <div class="breath-wrap">
+        <div class="breath-circle"></div>
+        <div class="breath-cue">🫁 深吸气...</div>
+        <div class="breath-sub">跟随圆圈扩大吸气</div>
+        <div class="sets-info">还剩 4 次呼吸</div>
+        <div class="btn-group"><button class="btn-sec">暂停</button><button class="btn-pri">下一阶段</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑩ 胎动记录 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑩ 胎动记录</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">记录胎动</span><div class="nav-spacer"></div></div>
+      <div class="counter-wrap">
+        <div class="counter-label">胎动次数</div>
+        <div class="counter-number">5</div>
+        <button class="counter-btn">+1</button>
+        <div class="btn-group"><button class="btn-sec">取消</button><button class="btn-pri">完成</button></div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-task"></div><span class="nav-lbl">任务</span></div></div>
+  </div>
+</div>
+
+<!-- ⑪ 知识文章详情 -->
+<div class="screen-wrap">
+  <div class="screen-label">⑪ 文章详情</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content">
+      <div class="nav-bar"><div class="back-button"><div class="back-icon"></div></div><span class="sub-title">拉玛泽第 2 阶段</span><div class="nav-spacer"></div></div>
+      <div class="article-detail card">
+        <div class="art-cover">🫁</div>
+        <div class="art-section">适用时机</div>
+        <div class="art-body">宫口开 0–3cm</div>
+        <div class="art-section">方法</div>
+        <div class="art-bullet">用鼻子缓慢深吸气</div>
+        <div class="art-bullet">感受胸腔扩张</div>
+        <div class="art-bullet">用嘴慢慢呼气</div>
+        <div class="art-bullet">节奏：4 秒吸气 · 4 秒呼气</div>
+        <div class="art-section">注意事项</div>
+        <div class="art-bullet">保持放松，不要紧张</div>
+        <div class="art-bullet">配合宫缩节奏</div>
+        <div class="art-bullet">避免过度换气</div>
+      </div>
+      <div class="btn-group" style="margin-top:4px"><button class="btn-sec">收藏文章</button><button class="btn-pri">跟练动画</button></div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-book"></div><span class="nav-lbl">知识</span></div></div>
+  </div>
+</div>
+
+</body>
+</html>

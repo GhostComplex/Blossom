@@ -34,8 +34,8 @@
 
 | 文件 | 说明 | 预览 |
 |------|------|------|
-| [design-v2.html](./design-v2.html) | **主设计稿**（温暖版配色，4 个主 Tab） | [预览图](./design-v2-preview.png) |
-| [design-all.html](./design-all.html) | 完整交互流程（11 个页面，含凯格尔/拉玛泽/胎动/文章详情） | [预览图](./design-all-preview.png) |
+| [design.html](./design.html) | **主设计稿**（温暖版配色，4 个主 Tab） | [预览图](./design-preview.png) |
+| [
 | [app-icon.html](./app-icon.html) | App Icon 设计（花朵 · 玫瑰金配色） | [预览图](./app-icon-preview.png) |
 
 ---
