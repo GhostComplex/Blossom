@@ -782,7 +782,7 @@ April 8, 2026
 ### 5.1 技术栈
 
 **前端：**
-- SwiftUI（iOS 原生）
+- SwiftUI（iOS 17+，因 SwiftData 要求最低 iOS 17）
 - Combine（数据绑定）
 - WidgetKit（桌面小组件）
 
