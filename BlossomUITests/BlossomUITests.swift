@@ -140,16 +140,21 @@ final class BlossomUITests: XCTestCase {
             sleep(1)
             snap("07-kegel")
 
-            // Try to dismiss
-            let closeButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '关闭' OR label CONTAINS[c] 'close' OR label CONTAINS[c] '返回' OR label CONTAINS[c] '完成'")).firstMatch
+            // Try to dismiss Kegel
+            let closeButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '关闭' OR label CONTAINS[c] 'close' OR label CONTAINS[c] '返回' OR label CONTAINS[c] '完成' OR label CONTAINS[c] '结束'")).firstMatch
             if closeButton.waitForExistence(timeout: 2) {
                 closeButton.tap()
+                // Handle confirmation alert
+                let confirmEnd = app.buttons["结束"]
+                if confirmEnd.waitForExistence(timeout: 2) {
+                    confirmEnd.tap()
+                }
             } else if app.navigationBars.buttons.firstMatch.exists {
                 app.navigationBars.buttons.firstMatch.tap()
             } else {
                 app.swipeDown()
             }
-            sleep(1)
+            sleep(2)
         } else {
             snap("07-kegel-not-found")
         }
@@ -163,9 +168,13 @@ final class BlossomUITests: XCTestCase {
             sleep(1)
             snap("08-lamaze")
 
-            let closeLamaze = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '关闭' OR label CONTAINS[c] 'close' OR label CONTAINS[c] '返回' OR label CONTAINS[c] '完成'")).firstMatch
+            let closeLamaze = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '关闭' OR label CONTAINS[c] 'close' OR label CONTAINS[c] '返回' OR label CONTAINS[c] '完成' OR label CONTAINS[c] '结束'")).firstMatch
             if closeLamaze.waitForExistence(timeout: 2) {
                 closeLamaze.tap()
+                let confirmEnd = app.buttons["结束"]
+                if confirmEnd.waitForExistence(timeout: 2) {
+                    confirmEnd.tap()
+                }
             } else if app.navigationBars.buttons.firstMatch.exists {
                 app.navigationBars.buttons.firstMatch.tap()
             } else {
