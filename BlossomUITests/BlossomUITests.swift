@@ -157,7 +157,7 @@ final class BlossomUITests: XCTestCase {
         // ────────────────────────────────────────────
         // Step 8: Lamaze exercise from Tasks tab
         // ────────────────────────────────────────────
-        let lamazeText = app.staticTexts["拉玛泽呼吸"]
+        let lamazeText = app.staticTexts["拉玛泽呼吸练习"]
         if lamazeText.waitForExistence(timeout: 3) {
             lamazeText.tap()
             sleep(1)
