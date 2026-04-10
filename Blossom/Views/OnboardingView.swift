@@ -115,7 +115,6 @@ struct OnboardingView: View {
         try? modelContext.save()
         
         onComplete()
-        }
     }
 }
 
