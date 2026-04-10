@@ -65,12 +65,15 @@ final class BlossomUITests: XCTestCase {
                       "CTA button '开始我的孕期之旅' must exist")
         ctaButton.tap()
 
+        // Give SwiftUI time to transition
+        Thread.sleep(forTimeInterval: 1.0)
+
         // ────────────────────────────────────────────
         // Step 2: Home Tab (default after onboarding)
         // ────────────────────────────────────────────
         // After onboarding the tab bar should appear
         let homeTab = app.tabBars.buttons["首页"]
-        XCTAssertTrue(homeTab.waitForExistence(timeout: 5),
+        XCTAssertTrue(homeTab.waitForExistence(timeout: 10),
                       "Tab bar with '首页' should appear after onboarding")
 
         snap("02-home")

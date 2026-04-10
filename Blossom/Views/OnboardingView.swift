@@ -111,8 +111,10 @@ struct OnboardingView: View {
         let todayTask = DailyTask(date: Date())
         modelContext.insert(todayTask)
         
-        withAnimation(.easeInOut(duration: 0.3)) {
-            onComplete()
+        // Ensure data is persisted before transitioning
+        try? modelContext.save()
+        
+        onComplete()
         }
     }
 }
