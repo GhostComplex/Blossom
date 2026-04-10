@@ -786,6 +786,10 @@ April 8, 2026
 
 ### 4.5.2 权限请求流程
 
+**设计稿：**
+
+![通知权限请求](https://github.com/GhostComplex/Blossom/blob/main/qa-screenshots/design-notification-permission.png?raw=true)
+
 **触发时机：** Onboarding 完成、进入首页后，弹出 iOS 系统通知权限请求。
 
 **用户同意：**
