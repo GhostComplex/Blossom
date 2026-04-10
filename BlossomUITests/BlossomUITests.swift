@@ -237,23 +237,16 @@ final class BlossomUITests: XCTestCase {
 
         snap("prerequest-01-hospital-bag")
 
-        // Tap the first unchecked item to mark it complete
-        // Hospital bag items use onTapGesture with accessibility button trait
-        let scrollView = app.scrollViews.firstMatch
-        let firstItem = scrollView.otherElements.matching(NSPredicate(format: "isHittable == YES")).firstMatch
-        if !firstItem.waitForExistence(timeout: 3) {
-            // Fallback: try buttons
-            let fallbackItem = scrollView.buttons.firstMatch
-            if fallbackItem.waitForExistence(timeout: 3) {
-                fallbackItem.tap()
-            } else {
-                snap("prerequest-02-no-items")
-                XCTFail("待产包列表为空")
-                return
-            }
-        } else {
-            firstItem.tap()
+        // Tap the first unchecked item ("身份证") to mark it complete
+        // Items use onTapGesture — can't query as buttons, use staticTexts instead
+        sleep(2) // Wait for seedDefaultItems to finish
+        let itemText = app.staticTexts["身份证"]
+        if !itemText.waitForExistence(timeout: 5) {
+            snap("prerequest-02-no-items")
+            XCTFail("待产包列表为空 — 找不到『身份证』")
+            return
         }
+        itemText.tap()
         sleep(2)
 
         snap("prerequest-02-after-check")
