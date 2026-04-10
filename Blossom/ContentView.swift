@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Main entry: shows OnboardingView on first launch, then TabView.
 //  Supports URL scheme: blossom://tab/{home|tasks|bag|knowledge}

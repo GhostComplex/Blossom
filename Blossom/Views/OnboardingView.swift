@@ -1,6 +1,6 @@
 //
 //  OnboardingView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  首次启动预产期设置页面
 //  Design spec: ⑫ 首次使用 · 预产期设置
@@ -68,7 +68,7 @@ struct OnboardingView: View {
                 .padding(.bottom, 28)
                 
                 // Title
-                Text("欢迎来到如期")
+                Text("欢迎来到拾月")
                     .font(.system(size: 28, weight: .semibold, design: .serif))
                     .foregroundStyle(Color.n900)
                     .opacity(animateIn ? 1 : 0)

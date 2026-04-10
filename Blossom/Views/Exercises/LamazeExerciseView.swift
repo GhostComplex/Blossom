@@ -1,6 +1,6 @@
 //
 //  LamazeExerciseView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  拉玛泽呼吸练习
 //  - 3 种模式：学习模式 / 跟练模式 / 知识卡片

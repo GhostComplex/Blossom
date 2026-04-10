@@ -1,6 +1,6 @@
 //
 //  FetalMovementCounterView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  胎动记录计数器
 //

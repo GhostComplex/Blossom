@@ -1,6 +1,6 @@
 //
 //  Theme.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Design System: Warm Glassmorphism
 //  Based on DESIGN-SPEC.md v2.0

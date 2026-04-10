@@ -1,6 +1,6 @@
 //
 //  NotificationPreRequestView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Custom pre-request popup for notification permission.
 //  Shown after user completes their first task.

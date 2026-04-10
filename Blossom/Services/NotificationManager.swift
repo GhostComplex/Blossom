@@ -1,6 +1,6 @@
 //
 //  NotificationManager.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Manages local push notifications:
 //  - Daily 17:00 exercise reminders (smart: only if tasks incomplete)

@@ -1,6 +1,6 @@
 //
 //  ArticleContent.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Loads article content from bundled .md files at runtime.
 //  To add a new article: drop a .md file into Resources/Articles/

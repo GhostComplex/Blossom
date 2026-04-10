@@ -1,6 +1,6 @@
 //
 //  MarkdownView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Simple markdown renderer: splits content by lines and renders
 //  headers, bullets, bold, blockquotes, and body paragraphs

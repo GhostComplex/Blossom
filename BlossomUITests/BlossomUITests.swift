@@ -3,7 +3,7 @@
 //  BlossomUITests
 //
 //  Automated UI walkthrough — simulates a real user tapping through
-//  every tab, exercise, and article in the Blossom (如期) app.
+//  every tab, exercise, and article in the Blossom (拾月) app.
 //
 //  Run with:
 //    xcodebuild test -project Blossom.xcodeproj -scheme Blossom \
@@ -50,7 +50,7 @@ final class BlossomUITests: XCTestCase {
         // ────────────────────────────────────────────
         // Step 1: Onboarding
         // ────────────────────────────────────────────
-        let welcomeTitle = app.staticTexts["欢迎来到如期"]
+        let welcomeTitle = app.staticTexts["欢迎来到拾月"]
         if welcomeTitle.waitForExistence(timeout: 10) {
             snap("01-onboarding")
 

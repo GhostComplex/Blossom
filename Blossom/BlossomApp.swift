@@ -1,6 +1,6 @@
 //
 //  BlossomApp.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  Created by SuperCrew on 2026/4/9.
 //

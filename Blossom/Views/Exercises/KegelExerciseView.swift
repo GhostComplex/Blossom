@@ -1,6 +1,6 @@
 //
 //  KegelExerciseView.swift
-//  Blossom (如期)
+//  Blossom (拾月)
 //
 //  凯格尔运动计时器
 //  - 3 级训练（初级/中级/高级）

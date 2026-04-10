@@ -1,4 +1,4 @@
-# 如期 Blossom · Design Specification v2.0
+# 拾月 Blossom · Design Specification v2.0
 
 **最后更新：** 2026-04-09  
 **设计风格：** Warm Glassmorphism · 温暖毛玻璃
