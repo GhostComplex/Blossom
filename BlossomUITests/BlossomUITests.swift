@@ -220,4 +220,61 @@ final class BlossomUITests: XCTestCase {
         sleep(1)
         snap("smoke-knowledge")
     }
+
+    // MARK: - Notification Pre-Request Popup Test
+
+    /// Verifies the pre-request notification popup appears after completing
+    /// the first task (checking a hospital bag item).
+    func testNotificationPreRequestPopup() throws {
+        app.launchArguments = ["-skip-onboarding"]
+        app.launch()
+
+        // Navigate to Hospital Bag tab
+        let bagTab = app.tabBars.buttons["待产包"]
+        XCTAssertTrue(bagTab.waitForExistence(timeout: 10))
+        bagTab.tap()
+        sleep(1)
+
+        snap("prerequest-01-hospital-bag")
+
+        // Tap the first unchecked item to mark it complete
+        // Hospital bag items are buttons with checkbox circles
+        let firstItem = app.scrollViews.firstMatch.buttons.firstMatch
+        if firstItem.waitForExistence(timeout: 3) {
+            firstItem.tap()
+            sleep(2)
+
+            snap("prerequest-02-after-check")
+
+            // Verify pre-request popup appears
+            let preRequestTitle = app.staticTexts["每天提醒你练习"]
+            let preRequestBody = app.staticTexts["每天练几分钟，和宝宝见面那天会更从容。"]
+            let acceptButton = app.buttons["好的，提醒我"]
+            let declineButton = app.buttons["不了，谢谢"]
+
+            // Check popup elements
+            if preRequestTitle.waitForExistence(timeout: 3) {
+                snap("prerequest-03-popup-visible")
+
+                XCTAssertTrue(preRequestBody.exists, "预请求弹窗正文应可见")
+                XCTAssertTrue(acceptButton.exists, "『好的，提醒我』按钮应可见")
+                XCTAssertTrue(declineButton.exists, "『不了，谢谢』按钮应可见")
+
+                // Tap decline to dismiss (don't trigger system permission dialog in test)
+                declineButton.tap()
+                sleep(1)
+
+                snap("prerequest-04-after-decline")
+
+                // Verify popup dismissed
+                XCTAssertFalse(preRequestTitle.exists, "弹窗应已关闭")
+            } else {
+                snap("prerequest-03-popup-NOT-visible")
+                XCTFail("预请求弹窗未出现 — 检查 NotificationManager 逻辑")
+            }
+        } else {
+            snap("prerequest-02-no-items")
+            XCTFail("待产包列表为空")
+        }
+    }
 }
