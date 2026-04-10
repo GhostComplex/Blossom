@@ -790,7 +790,7 @@ April 8, 2026
 
 **用户同意：**
 1. 系统弹窗「"如期"想给你发送通知」→ 用户点"允许"
-2. App 注册每日本地通知，默认 09:00
+2. App 注册每日本地通知，17:00 检查任务完成状态并推送
 3. 首页不显示任何通知相关 UI
 
 **用户拒绝：**
@@ -838,7 +838,7 @@ April 8, 2026
 
 - **框架：** iOS UserNotifications（纯本地推送，不需要后端/APNs）
 - **权限请求：** `UNUserNotificationCenter.requestAuthorization(options: [.alert, .sound])`
-- **注册通知：** `UNCalendarNotificationTrigger`，每日 09:00 触发
+- **注册通知：** `UNCalendarNotificationTrigger`，每日 17:00 触发
 - **文案轮换：** 注册时随机选一条，每次 App 启动时刷新下一天的通知
 - **通知上限：** iOS 最多 64 条待发通知，孕晚期最多 90 天，够用
 - **App 被杀掉：** 本地通知由 iOS 系统调度，App 不在前台也能触发
