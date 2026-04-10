@@ -100,13 +100,13 @@ struct MarkdownView: View {
         case .h2(let text):
             Text(inlineMarkdown(text))
                 .font(.system(size: 20, weight: .bold))
-                .foregroundStyle(Color.n800)
+                .foregroundStyle(Color.n700)
                 .padding(.top, 8)
             
         case .h3(let text):
             Text(inlineMarkdown(text))
                 .font(.system(size: 17, weight: .semibold))
-                .foregroundStyle(Color.n800)
+                .foregroundStyle(Color.n700)
                 .padding(.top, 4)
             
         case .bullet(let text):
@@ -127,7 +127,7 @@ struct MarkdownView: View {
                     .frame(width: 3)
                 Text(inlineMarkdown(text))
                     .font(AppFonts.smallLabel)
-                    .foregroundStyle(Color.n600)
+                    .foregroundStyle(Color.n500)
                     .lineSpacing(4)
             }
             .padding(.vertical, 8)
