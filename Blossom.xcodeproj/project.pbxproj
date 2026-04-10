@@ -16,6 +16,8 @@
 		007 /* HospitalBagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107; };
 		008 /* KnowledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108; };
 		009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 109; };
+		010 /* ArticleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110; };
+		011 /* Articles in Resources */ = {isa = PBXBuildFile; fileRef = 111; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		107 /* HospitalBagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalBagView.swift; sourceTree = "<group>"; };
 		108 /* KnowledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeView.swift; sourceTree = "<group>"; };
 		109 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		110 /* ArticleContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContent.swift; sourceTree = "<group>"; };
+		111 /* Articles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Articles; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -48,6 +52,8 @@
 				203 /* Theme */,
 				204 /* Models */,
 				205 /* Views */,
+				206 /* Content */,
+				207 /* Resources */,
 				109 /* Assets.xcassets */,
 			);
 			path = Blossom;
@@ -86,6 +92,22 @@
 				108 /* KnowledgeView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		206 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				110 /* ArticleContent.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		207 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				111 /* Articles */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +176,7 @@
 				006 /* TasksView.swift in Sources */,
 				007 /* HospitalBagView.swift in Sources */,
 				008 /* KnowledgeView.swift in Sources */,
+				010 /* ArticleContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				009 /* Assets.xcassets in Resources */,
+				011 /* Articles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
