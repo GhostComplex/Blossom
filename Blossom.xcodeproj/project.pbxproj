@@ -22,6 +22,7 @@
 		013 /* LamazeExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
 		014 /* FetalMovementCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114; };
 		015 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115; };
+		712 /* BlossomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		114 /* FetalMovementCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetalMovementCounterView.swift; sourceTree = "<group>"; };
 		115 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		116 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		710 /* BlossomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlossomUITests.swift; sourceTree = "<group>"; };
+		711 /* BlossomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlossomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -49,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				201 /* Blossom */,
+				720 /* BlossomUITests */,
 				202 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,8 +77,17 @@
 			isa = PBXGroup;
 			children = (
 				100 /* Blossom.app */,
+				711 /* BlossomUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		720 /* BlossomUITests */ = {
+			isa = PBXGroup;
+			children = (
+				710 /* BlossomUITests.swift */,
+			);
+			path = BlossomUITests;
 			sourceTree = "<group>";
 		};
 		203 /* Theme */ = {
@@ -151,7 +164,43 @@
 			productReference = 100 /* Blossom.app */;
 			productType = "com.apple.product-type.application";
 		};
+		700 /* BlossomUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 703;
+			buildPhases = (
+				701 /* Sources */,
+				732 /* Frameworks */,
+				702 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				730 /* PBXTargetDependency */,
+			);
+			name = BlossomUITests;
+			productName = BlossomUITests;
+			productReference = 711 /* BlossomUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		731 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 500 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 300;
+			remoteInfo = Blossom;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		730 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 300 /* Blossom */;
+			targetProxy = 731 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		500 /* Project object */ = {
@@ -163,6 +212,10 @@
 				TargetAttributes = {
 					300 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					700 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 300;
 					};
 				};
 			};
@@ -181,6 +234,7 @@
 			projectRoot = "";
 			targets = (
 				300 /* Blossom */,
+				700 /* BlossomUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -206,7 +260,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		701 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				712 /* BlossomUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		732 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXResourcesBuildPhase section */
 		302 /* Resources */ = {
@@ -215,6 +287,13 @@
 			files = (
 				009 /* Assets.xcassets in Resources */,
 				011 /* Articles in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		702 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +465,42 @@
 			};
 			name = Release;
 		};
+		704 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blossom.ruqi.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Blossom;
+			};
+			name = Debug;
+		};
+		705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blossom.ruqi.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Blossom;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -403,6 +518,15 @@
 			buildConfigurations = (
 				600 /* Debug */,
 				601 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		703 /* Build configuration list for PBXNativeTarget "BlossomUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				704 /* Debug */,
+				705 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
