@@ -648,14 +648,14 @@ body {
   </div>
 </div>
 
-<!-- ⑫.5 通知权限请求（Onboarding 完成后自动弹出） -->
+<!-- ⑫.5 通知预请求弹窗（首次完成任务后触发） -->
 <div class="screen-wrap">
-  <div class="screen-label">⑫.5 通知权限请求</div>
+  <div class="screen-label">⑫.5 通知预请求弹窗（首次完成任务后触发）</div>
   <div class="phone">
     <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
     <div class="content" style="position:relative;">
       <!-- 背景：首页模糊 -->
-      <div style="filter:blur(4px);opacity:0.5;padding:20px;">
+      <div style="filter:blur(3px);opacity:0.5;padding:20px;">
         <div style="font-size:14px;color:var(--n500);">April 10, 2026</div>
         <div style="font-size:18px;color:var(--n900);margin-top:4px;">下午好</div>
         <div style="background:var(--card-bg);border-radius:22px;padding:24px;margin-top:16px;text-align:center;">
@@ -664,14 +664,16 @@ body {
           <div style="font-size:13px;color:var(--n500);">天</div>
         </div>
       </div>
-      <!-- iOS 系统通知权限弹窗 -->
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:270px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-radius:14px;padding:20px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);">
-        <div style="font-size:17px;font-weight:600;color:#1c1c1e;margin-bottom:4px;">"如期"想给你发送通知</div>
-        <div style="font-size:13px;color:#8e8e93;margin-bottom:16px;line-height:1.4;">通知可能包括提醒、声音和图标标记。您可以在"设置"中进行配置。</div>
-        <div style="border-top:1px solid rgba(0,0,0,0.1);display:flex;">
-          <div style="flex:1;padding:12px;font-size:17px;color:#007aff;border-right:1px solid rgba(0,0,0,0.1);cursor:pointer;">不允许</div>
-          <div style="flex:1;padding:12px;font-size:17px;font-weight:600;color:#007aff;cursor:pointer;">允许</div>
+      <!-- 自定义预请求弹窗 -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:280px;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-radius:24px;padding:32px 24px 24px;text-align:center;box-shadow:0 16px 48px rgba(100,50,20,0.15);border:1px solid rgba(255,255,255,0.6);">
+        <!-- 铃铛图标（纯 CSS） -->
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent-light),var(--primary));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </div>
+        <div style="font-size:19px;font-weight:700;color:var(--n900);margin-bottom:8px;">每天提醒你练习</div>
+        <div style="font-size:14px;color:var(--n500);line-height:1.5;margin-bottom:24px;">每天练几分钟，和宝宝见面那天会更从容。</div>
+        <div style="width:100%;padding:13px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;font-size:15px;font-weight:600;text-align:center;margin-bottom:10px;box-shadow:0 4px 12px rgba(196,133,90,0.3);">好的，提醒我</div>
+        <div style="width:100%;padding:11px;font-size:13px;color:var(--n500);text-align:center;">暂时不用</div>
       </div>
     </div>
     <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div></div>
@@ -1026,37 +1028,43 @@ body {
       <div style="font-family:'Playfair Display',serif;font-size:72px;font-weight:700;color:white;letter-spacing:-2px;margin-bottom:4px;">9:00</div>
       <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:48px;">4 月 9 日 星期四</div>
 
-      <!-- 通知卡片 1 -->
+      <!-- 通知卡片 1：凯格尔+拉玛泽都未完成 -->
       <div style="width:100%;background:rgba(255,248,242,0.92);backdrop-filter:blur(20px);border-radius:18px;padding:14px 16px;margin-bottom:10px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:11px;">🌸</div>
-          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期 · 今日任务</div>
-          <div style="margin-left:auto;font-size:11px;color:var(--n300);">刚刚</div>
+          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期</div>
+          <div style="margin-left:auto;font-size:11px;color:var(--n300);">17:00</div>
         </div>
-        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">🫁 今日任务提醒</div>
-        <div style="font-size:13px;color:var(--n500);line-height:1.4;">凯格尔运动和拉玛泽练习还未完成，点击开始 →</div>
+        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">今日任务提醒</div>
+        <div style="font-size:13px;color:var(--n500);line-height:1.4;">今天的凯格尔和拉玛泽还没做哦，花几分钟练一下吧</div>
       </div>
 
-      <!-- 通知卡片 2 -->
+      <!-- 通知卡片 2：7天未打开回归提醒 -->
       <div style="width:100%;background:rgba(255,248,242,0.92);backdrop-filter:blur(20px);border-radius:18px;padding:14px 16px;margin-bottom:10px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:11px;">🌸</div>
-          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期 · 待产包</div>
-          <div style="margin-left:auto;font-size:11px;color:var(--n300);">昨天</div>
+          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期</div>
+          <div style="margin-left:auto;font-size:11px;color:var(--n300);">7 天前</div>
         </div>
-        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">🎒 待产包准备提醒</div>
-        <div style="font-size:13px;color:var(--n500);line-height:1.4;">还有 38 项未准备，距离预产期还有 24 天</div>
+        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">好久不见</div>
+        <div style="font-size:13px;color:var(--n500);line-height:1.4;">好久没来了，看看待产包还有什么没准备的？</div>
       </div>
 
-      <!-- 通知卡片 3 -->
+      <!-- 通知卡片 3：仅凯格尔未完成 -->
       <div style="width:100%;background:rgba(255,248,242,0.92);backdrop-filter:blur(20px);border-radius:18px;padding:14px 16px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;font-size:11px;">🌸</div>
-          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期 · 倒计时</div>
-          <div style="margin-left:auto;font-size:11px;color:var(--n300);">昨天</div>
+          <div style="width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--accent-light),var(--primary));display:flex;align-items:center;justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--n500);text-transform:uppercase;">如期</div>
+          <div style="margin-left:auto;font-size:11px;color:var(--n300);">17:00</div>
         </div>
-        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">👶 距离宝宝降临还有 24 天</div>
-        <div style="font-size:13px;color:var(--n500);line-height:1.4;">加油！每一天都在靠近那个美好的时刻 ✨</div>
+        <div style="font-size:14px;font-weight:600;color:var(--n900);margin-bottom:3px;">今日任务提醒</div>
+        <div style="font-size:13px;color:var(--n500);line-height:1.4;">今天的凯格尔运动还没做，3 分钟就搞定</div>
       </div>
     </div>
   </div>
