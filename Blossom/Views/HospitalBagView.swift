@@ -274,6 +274,8 @@ struct HospitalBagItemRow: View {
         .padding(.horizontal, AppSpacing.cardPadding)
         .padding(.vertical, AppSpacing.md)
         .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isButton)
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.2)) {
                 item.isCompleted.toggle()
