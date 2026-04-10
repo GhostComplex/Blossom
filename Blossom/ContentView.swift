@@ -4,7 +4,7 @@
 //
 //  Main entry: shows OnboardingView on first launch, then TabView.
 //  Supports URL scheme: blossom://tab/{home|tasks|bag|knowledge}
-//  Debug: blossom://skip-onboarding — creates default profile and skips onboarding
+//  Launch args: -skip-onboarding, -tab {home|tasks|bag|knowledge}
 //
 
 import SwiftUI
@@ -15,6 +15,7 @@ struct ContentView: View {
     @Query private var profiles: [UserProfile]
     @State private var selectedTab = 0
     @State private var hasCompletedOnboarding = false
+    @State private var didProcessLaunchArgs = false
     
     private var needsOnboarding: Bool {
         profiles.isEmpty && !hasCompletedOnboarding
@@ -58,13 +59,21 @@ struct ContentView: View {
         .onOpenURL { url in
             handleDeepLink(url)
         }
+        .onAppear {
+            if !didProcessLaunchArgs {
+                processLaunchArguments()
+                didProcessLaunchArgs = true
+            }
+        }
     }
     
-    private func handleDeepLink(_ url: URL) {
-        guard url.scheme == "blossom" else { return }
+    // MARK: - Launch Arguments
+    // Usage: xcrun simctl launch booted com.blossom.ruqi -skip-onboarding -tab tasks
+    private func processLaunchArguments() {
+        let args = ProcessInfo.processInfo.arguments
         
-        // blossom://skip-onboarding — auto-create profile for testing
-        if url.host == "skip-onboarding" {
+        // -skip-onboarding: create default profile and skip
+        if args.contains("-skip-onboarding") {
             if profiles.isEmpty {
                 let dueDate = Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15))!
                 let profile = UserProfile(dueDate: dueDate)
@@ -73,22 +82,33 @@ struct ContentView: View {
                 modelContext.insert(task)
             }
             hasCompletedOnboarding = true
+        }
+        
+        // -tab {name}: switch to specific tab
+        if let tabIndex = args.firstIndex(of: "-tab"),
+           tabIndex + 1 < args.count {
+            let tabName = args[tabIndex + 1]
+            switch tabName {
+            case "home":      selectedTab = 0
+            case "tasks":     selectedTab = 1
+            case "bag":       selectedTab = 2
+            case "knowledge": selectedTab = 3
+            default: break
+            }
+        }
+    }
+    
+    // MARK: - Deep Links
+    private func handleDeepLink(_ url: URL) {
+        guard url.scheme == "blossom" else { return }
+        
+        if url.host == "skip-onboarding" {
+            skipOnboarding()
             return
         }
         
-        // blossom://tab/{name} — auto-skip onboarding if needed
         if url.host == "tab" {
-            if needsOnboarding {
-                if profiles.isEmpty {
-                    let dueDate = Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15))!
-                    let profile = UserProfile(dueDate: dueDate)
-                    modelContext.insert(profile)
-                    let task = DailyTask(date: Date())
-                    modelContext.insert(task)
-                }
-                hasCompletedOnboarding = true
-            }
-            
+            skipOnboarding()
             let tab = url.pathComponents.dropFirst().first ?? ""
             switch tab {
             case "home":      selectedTab = 0
@@ -98,6 +118,17 @@ struct ContentView: View {
             default: break
             }
         }
+    }
+    
+    private func skipOnboarding() {
+        if profiles.isEmpty {
+            let dueDate = Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15))!
+            let profile = UserProfile(dueDate: dueDate)
+            modelContext.insert(profile)
+            let task = DailyTask(date: Date())
+            modelContext.insert(task)
+        }
+        hasCompletedOnboarding = true
     }
 }
 
