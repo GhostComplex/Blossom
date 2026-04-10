@@ -13,9 +13,11 @@ import SwiftData
 struct LamazeExerciseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @Query(filter: #Predicate<DailyTask> { task in
-        Calendar.current.isDateInToday(task.date)
-    }) private var todayTasks: [DailyTask]
+    @Query private var allTasks: [DailyTask]
+    
+    private var todayTasks: [DailyTask] {
+        allTasks.filter { Calendar.current.isDateInToday($0.date) }
+    }
     
     @State private var selectedMode: LamazeMode?
     @State private var selectedStage: LamazeStage?
