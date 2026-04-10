@@ -219,7 +219,7 @@ struct ArticleDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppSpacing.xxl) {
                 // Article content (render markdown)
-                if let attributedContent = try? AttributedString(markdown: article.content, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)) {
+                if let attributedContent = try? AttributedString(markdown: article.content, options: .init(interpretedSyntax: .full)) {
                     Text(attributedContent)
                         .font(AppFonts.bodyText)
                         .foregroundStyle(Color.n700)
