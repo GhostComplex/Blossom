@@ -218,11 +218,18 @@ struct ArticleDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppSpacing.xxl) {
-                // Article content
-                Text(article.content)
-                    .font(AppFonts.bodyText)
-                    .foregroundStyle(Color.n700)
-                    .lineSpacing(6)
+                // Article content (render markdown)
+                if let attributedContent = try? AttributedString(markdown: article.content, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)) {
+                    Text(attributedContent)
+                        .font(AppFonts.bodyText)
+                        .foregroundStyle(Color.n700)
+                        .lineSpacing(6)
+                } else {
+                    Text(article.content)
+                        .font(AppFonts.bodyText)
+                        .foregroundStyle(Color.n700)
+                        .lineSpacing(6)
+                }
                 
                 // Disclaimer
                 VStack(alignment: .leading, spacing: 8) {
