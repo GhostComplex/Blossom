@@ -39,7 +39,7 @@ struct ContentView: View {
                     }
                 } else {
                     TabView(selection: $selectedTab) {
-                        HomeView()
+                        HomeView(selectedTab: $selectedTab)
                             .tabItem {
                                 Label("首页", systemImage: "house.fill")
                             }

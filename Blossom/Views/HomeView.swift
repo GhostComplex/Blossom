@@ -12,6 +12,9 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
     @Query private var allTasks: [DailyTask]
+    @Binding var selectedTab: Int
+    @State private var showKegelExercise = false
+    @State private var showLamazeExercise = false
     
     private var todayTasks: [DailyTask] {
         allTasks.filter { Calendar.current.isDateInToday($0.date) }
@@ -42,6 +45,12 @@ struct HomeView: View {
         .onAppear {
             ensureProfileExists()
             ensureTodayTaskExists()
+        }
+        .fullScreenCover(isPresented: $showKegelExercise) {
+            KegelExerciseView()
+        }
+        .fullScreenCover(isPresented: $showLamazeExercise) {
+            LamazeExerciseView()
         }
     }
     
@@ -131,33 +140,45 @@ struct HomeView: View {
                 GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
                 GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
             ], spacing: AppSpacing.cardSpacing) {
-                TaskGridCard(
-                    icon: "figure.strengthtraining.traditional",
-                    title: "凯格尔运动",
-                    subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
-                    isCompleted: todayTask?.kegelCompleted ?? false
-                )
+                Button(action: { showKegelExercise = true }) {
+                    TaskGridCard(
+                        icon: "figure.strengthtraining.traditional",
+                        title: "凯格尔运动",
+                        subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
+                        isCompleted: todayTask?.kegelCompleted ?? false
+                    )
+                }
+                .buttonStyle(.plain)
                 
-                TaskGridCard(
-                    icon: "wind",
-                    title: "拉玛泽练习",
-                    subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
-                    isCompleted: todayTask?.lamazeCompleted ?? false
-                )
+                Button(action: { showLamazeExercise = true }) {
+                    TaskGridCard(
+                        icon: "wind",
+                        title: "拉玛泽练习",
+                        subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
+                        isCompleted: todayTask?.lamazeCompleted ?? false
+                    )
+                }
+                .buttonStyle(.plain)
                 
-                TaskGridCard(
-                    icon: "bag.fill",
-                    title: "待产包",
-                    subtitle: "12/50 项",
-                    isCompleted: false
-                )
+                Button(action: { selectedTab = 2 }) {
+                    TaskGridCard(
+                        icon: "bag.fill",
+                        title: "待产包",
+                        subtitle: "12/50 项",
+                        isCompleted: false
+                    )
+                }
+                .buttonStyle(.plain)
                 
-                TaskGridCard(
-                    icon: "book.fill",
-                    title: "分娩知识",
-                    subtitle: "\(ArticleContent.allArticles.count) 篇待读",
-                    isCompleted: false
-                )
+                Button(action: { selectedTab = 3 }) {
+                    TaskGridCard(
+                        icon: "book.fill",
+                        title: "分娩知识",
+                        subtitle: "\(ArticleContent.allArticles.count) 篇待读",
+                        isCompleted: false
+                    )
+                }
+                .buttonStyle(.plain)
             }
         }
     }
@@ -250,6 +271,6 @@ struct TaskGridCard: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(selectedTab: .constant(0))
         .modelContainer(for: [UserProfile.self, DailyTask.self], inMemory: true)
 }

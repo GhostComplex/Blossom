@@ -241,50 +241,47 @@ struct HospitalBagItemRow: View {
     @Bindable var item: HospitalBagItem
     
     var body: some View {
-        Button(action: {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                item.isCompleted.toggle()
-            }
-            // Trigger notification pre-request on first item check
-            if item.isCompleted {
-                NotificationManager.shared.onTaskCompleted()
-            }
-        }) {
-            HStack(spacing: AppSpacing.md) {
-                // Checkbox
-                Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: 22))
-                    .foregroundStyle(item.isCompleted ? Color.success : Color.n300)
-                
-                // Item info
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack {
-                        Text(item.name)
-                            .font(AppFonts.bodyText)
-                            .foregroundStyle(item.isCompleted ? Color.n500 : Color.n900)
-                            .strikethrough(item.isCompleted)
-                        
-                        if item.quantity > 1 {
-                            Text("×\(item.quantity)")
-                                .font(AppFonts.smallLabel)
-                                .foregroundStyle(Color.n500)
-                        }
-                    }
+        HStack(spacing: AppSpacing.md) {
+            // Checkbox
+            Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
+                .font(.system(size: 22))
+                .foregroundStyle(item.isCompleted ? Color.success : Color.n300)
+            
+            // Item info
+            VStack(alignment: .leading, spacing: 2) {
+                HStack {
+                    Text(item.name)
+                        .font(AppFonts.bodyText)
+                        .foregroundStyle(item.isCompleted ? Color.n500 : Color.n900)
+                        .strikethrough(item.isCompleted)
                     
-                    if !item.note.isEmpty {
-                        Text(item.note)
+                    if item.quantity > 1 {
+                        Text("×\(item.quantity)")
                             .font(AppFonts.smallLabel)
                             .foregroundStyle(Color.n500)
                     }
                 }
                 
-                Spacer()
+                if !item.note.isEmpty {
+                    Text(item.note)
+                        .font(AppFonts.smallLabel)
+                        .foregroundStyle(Color.n500)
+                }
             }
-            .padding(.horizontal, AppSpacing.cardPadding)
-            .padding(.vertical, AppSpacing.md)
-            .contentShape(Rectangle())
+            
+            Spacer()
         }
-        .buttonStyle(.plain)
+        .padding(.horizontal, AppSpacing.cardPadding)
+        .padding(.vertical, AppSpacing.md)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                item.isCompleted.toggle()
+            }
+            if item.isCompleted {
+                NotificationManager.shared.onTaskCompleted()
+            }
+        }
     }
 }
 
