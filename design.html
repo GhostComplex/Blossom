@@ -648,6 +648,36 @@ body {
   </div>
 </div>
 
+<!-- ⑫.5 通知权限请求（Onboarding 完成后自动弹出） -->
+<div class="screen-wrap">
+  <div class="screen-label">⑫.5 通知权限请求</div>
+  <div class="phone">
+    <div class="status-bar"><div class="time">9:41</div><div class="status-icons"><div class="sig"></div><div class="bat"></div></div></div>
+    <div class="content" style="position:relative;">
+      <!-- 背景：首页模糊 -->
+      <div style="filter:blur(4px);opacity:0.5;padding:20px;">
+        <div style="font-size:14px;color:var(--n500);">April 10, 2026</div>
+        <div style="font-size:18px;color:var(--n900);margin-top:4px;">下午好</div>
+        <div style="background:var(--card-bg);border-radius:22px;padding:24px;margin-top:16px;text-align:center;">
+          <div style="font-size:13px;color:var(--n500);">距离与宝宝见面</div>
+          <div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--primary);">21</div>
+          <div style="font-size:13px;color:var(--n500);">天</div>
+        </div>
+      </div>
+      <!-- iOS 系统通知权限弹窗 -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:270px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-radius:14px;padding:20px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);">
+        <div style="font-size:17px;font-weight:600;color:#1c1c1e;margin-bottom:4px;">"如期"想给你发送通知</div>
+        <div style="font-size:13px;color:#8e8e93;margin-bottom:16px;line-height:1.4;">通知可能包括提醒、声音和图标标记。您可以在"设置"中进行配置。</div>
+        <div style="border-top:1px solid rgba(0,0,0,0.1);display:flex;">
+          <div style="flex:1;padding:12px;font-size:17px;color:#007aff;border-right:1px solid rgba(0,0,0,0.1);cursor:pointer;">不允许</div>
+          <div style="flex:1;padding:12px;font-size:17px;font-weight:600;color:#007aff;cursor:pointer;">允许</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav"><div class="nav-item active"><div class="nav-i ni-home"></div><span class="nav-lbl">首页</span></div></div>
+  </div>
+</div>
+
 <!-- ⑬ 预产期修改弹窗 -->
 <div class="screen-wrap">
   <div class="screen-label">⑬ 预产期修改弹窗</div>
