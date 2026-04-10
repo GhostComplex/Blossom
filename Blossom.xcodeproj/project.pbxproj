@@ -18,6 +18,9 @@
 		009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 109; };
 		010 /* ArticleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110; };
 		011 /* Articles in Resources */ = {isa = PBXBuildFile; fileRef = 111; };
+		012 /* KegelExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112; };
+		013 /* LamazeExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
+		014 /* FetalMovementCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		109 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		110 /* ArticleContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContent.swift; sourceTree = "<group>"; };
 		111 /* Articles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Articles; sourceTree = "<group>"; };
+		112 /* KegelExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KegelExerciseView.swift; sourceTree = "<group>"; };
+		113 /* LamazeExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LamazeExerciseView.swift; sourceTree = "<group>"; };
+		114 /* FetalMovementCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetalMovementCounterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -90,8 +96,19 @@
 				106 /* TasksView.swift */,
 				107 /* HospitalBagView.swift */,
 				108 /* KnowledgeView.swift */,
+				208 /* Exercises */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		208 /* Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				112 /* KegelExerciseView.swift */,
+				113 /* LamazeExerciseView.swift */,
+				114 /* FetalMovementCounterView.swift */,
+			);
+			path = Exercises;
 			sourceTree = "<group>";
 		};
 		206 /* Content */ = {
@@ -177,6 +194,9 @@
 				007 /* HospitalBagView.swift in Sources */,
 				008 /* KnowledgeView.swift in Sources */,
 				010 /* ArticleContent.swift in Sources */,
+				012 /* KegelExerciseView.swift in Sources */,
+				013 /* LamazeExerciseView.swift in Sources */,
+				014 /* FetalMovementCounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
