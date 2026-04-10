@@ -21,6 +21,7 @@
 		012 /* KegelExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112; };
 		013 /* LamazeExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113; };
 		014 /* FetalMovementCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114; };
+		015 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		112 /* KegelExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KegelExerciseView.swift; sourceTree = "<group>"; };
 		113 /* LamazeExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LamazeExerciseView.swift; sourceTree = "<group>"; };
 		114 /* FetalMovementCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetalMovementCounterView.swift; sourceTree = "<group>"; };
+		115 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -96,6 +98,7 @@
 				106 /* TasksView.swift */,
 				107 /* HospitalBagView.swift */,
 				108 /* KnowledgeView.swift */,
+				115 /* OnboardingView.swift */,
 				208 /* Exercises */,
 			);
 			path = Views;
@@ -197,6 +200,7 @@
 				012 /* KegelExerciseView.swift in Sources */,
 				013 /* LamazeExerciseView.swift in Sources */,
 				014 /* FetalMovementCounterView.swift in Sources */,
+				015 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
