@@ -115,7 +115,7 @@ struct HospitalBagView: View {
                 Image(systemName: categoryIcon(category))
                     .font(.system(size: 16))
                     .foregroundStyle(Color.primary600)
-                Text(category))
+                Text(category)
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                 
