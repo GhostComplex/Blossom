@@ -62,8 +62,6 @@ struct LamazeExerciseView: View {
     // MARK: - Mode Selection
     private var modeSelectionView: some View {
         VStack(spacing: AppSpacing.lg) {
-            Spacer()
-            
             // Practice mode
             ModeCard(
                 icon: "wind",
@@ -95,9 +93,10 @@ struct LamazeExerciseView: View {
                 dismiss()
             }
             
-            Spacer()
+            Spacer(minLength: AppSpacing.lg)
         }
         .padding(.horizontal, AppSpacing.pageHorizontal)
+        .padding(.top, AppSpacing.xl)
     }
     
     // MARK: - Stage Selection

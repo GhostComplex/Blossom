@@ -12,6 +12,7 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
     @Query private var allTasks: [DailyTask]
+    @Query private var bagItems: [HospitalBagItem]
     @Binding var selectedTab: Int
     @State private var showKegelExercise = false
     @State private var showLamazeExercise = false
@@ -22,6 +23,9 @@ struct HomeView: View {
     
     private var profile: UserProfile? { profiles.first }
     private var todayTask: DailyTask? { todayTasks.first }
+    
+    private var bagTotal: Int { bagItems.count }
+    private var bagCompleted: Int { bagItems.filter { $0.isCompleted }.count }
     
     var body: some View {
         ScrollView {
@@ -164,7 +168,7 @@ struct HomeView: View {
                     TaskGridCard(
                         icon: "bag.fill",
                         title: "待产包",
-                        subtitle: "12/50 项",
+                        subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false
                     )
                 }
@@ -185,13 +189,16 @@ struct HomeView: View {
     
     // MARK: - Hospital Bag Progress
     private var hospitalBagProgress: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
+        let progress = bagTotal > 0 ? Double(bagCompleted) / Double(bagTotal) : 0
+        let percent = Int(progress * 100)
+        
+        return VStack(alignment: .leading, spacing: AppSpacing.md) {
             HStack {
                 Text("待产包准备进度")
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                 Spacer()
-                Text("12 / 50")
+                Text("\(bagCompleted) / \(bagTotal)")
                     .font(AppFonts.bodyText)
                     .foregroundStyle(Color.n500)
             }
@@ -206,12 +213,13 @@ struct HomeView: View {
                     // Progress
                     RoundedRectangle(cornerRadius: AppRadius.full)
                         .fill(LinearGradient.progressBar)
-                        .frame(width: geometry.size.width * 0.24, height: 8)
+                        .frame(width: geometry.size.width * progress, height: 8)
+                        .animation(.easeInOut(duration: 0.3), value: progress)
                 }
             }
             .frame(height: 8)
             
-            Text("24%")
+            Text("\(percent)%")
                 .font(AppFonts.smallLabel)
                 .foregroundStyle(Color.n500)
         }

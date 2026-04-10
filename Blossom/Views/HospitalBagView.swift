@@ -112,7 +112,10 @@ struct HospitalBagView: View {
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
             // Category header
             HStack {
-                Text("\(categoryIcon(category)) \(category)")
+                Image(systemName: categoryIcon(category))
+                    .font(.system(size: 16))
+                    .foregroundStyle(Color.primary600)
+                Text(category))
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                 
@@ -148,7 +151,7 @@ struct HospitalBagView: View {
     }
     
     private func categoryIcon(_ category: String) -> String {
-        HospitalBagCategory(rawValue: category)?.icon ?? "📦"
+        HospitalBagCategory(rawValue: category)?.icon ?? "shippingbox.fill"
     }
     
     // MARK: - Seed Default Items
