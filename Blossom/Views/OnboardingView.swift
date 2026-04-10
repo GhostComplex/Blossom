@@ -16,6 +16,7 @@ struct OnboardingView: View {
         byAdding: .month, value: 2, to: Date()
     ) ?? Date()
     @State private var animateIn = false
+    @State private var flowerBreathing = false
     @State private var showDatePicker = false
     
     var onComplete: () -> Void
@@ -48,22 +49,11 @@ struct OnboardingView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                // ❋ Flower icon in gradient circle
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.accentLight, Color.accentPeach],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 80, height: 80)
-                    
-                    Text("\u{274B}")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundStyle(.white)
-                }
+                // App Icon 花朵 + 呼吸动效
+                BlossomFlowerIcon(size: 100)
+                    .shadow(color: Color(red: 196/255, green: 133/255, blue: 90/255).opacity(0.3), radius: 16, y: 4)
+                    .scaleEffect(flowerBreathing ? 1.06 : 1.0)
+                    .animation(.easeInOut(duration: 3).repeatForever(autoreverses: true), value: flowerBreathing)
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : -20)
                 .padding(.bottom, 28)
@@ -192,6 +182,7 @@ struct OnboardingView: View {
             withAnimation(.easeOut(duration: 0.8)) {
                 animateIn = true
             }
+            flowerBreathing = true
         }
     }
     
