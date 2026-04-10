@@ -155,7 +155,7 @@ struct HomeView: View {
                 TaskGridCard(
                     icon: "book.fill",
                     title: "分娩知识",
-                    subtitle: "6 篇待读",
+                    subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                     isCompleted: false
                 )
             }
