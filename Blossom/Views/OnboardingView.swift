@@ -68,7 +68,7 @@ struct OnboardingView: View {
                 }
                 .padding()
                 .background(
-                    RoundedRectangle(cornerRadius: AppRadius.card)
+                    RoundedRectangle(cornerRadius: AppRadius.lg)
                         .fill(.ultraThinMaterial)
                 )
                 .padding(.horizontal, AppSpacing.pageHorizontal)
