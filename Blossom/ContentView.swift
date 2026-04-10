@@ -12,7 +12,10 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
     @Query private var profiles: [UserProfile]
+    @Query(sort: \DailyTask.date, order: .reverse) private var allTasks: [DailyTask]
+    @StateObject private var notificationManager = NotificationManager.shared
     @State private var selectedTab = 0
     @State private var hasCompletedOnboarding = false
     @State private var didProcessLaunchArgs = false
@@ -21,39 +24,63 @@ struct ContentView: View {
         profiles.isEmpty && !hasCompletedOnboarding
     }
     
+    private var todayTask: DailyTask? {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        return allTasks.first { calendar.startOfDay(for: $0.date) == today }
+    }
+    
     var body: some View {
-        Group {
-            if needsOnboarding {
-                OnboardingView {
-                    hasCompletedOnboarding = true
+        ZStack {
+            Group {
+                if needsOnboarding {
+                    OnboardingView {
+                        hasCompletedOnboarding = true
+                    }
+                } else {
+                    TabView(selection: $selectedTab) {
+                        HomeView()
+                            .tabItem {
+                                Label("首页", systemImage: "house.fill")
+                            }
+                            .tag(0)
+                        
+                        TasksView()
+                            .tabItem {
+                                Label("任务", systemImage: "checkmark.circle.fill")
+                            }
+                            .tag(1)
+                        
+                        HospitalBagView()
+                            .tabItem {
+                                Label("待产包", systemImage: "bag.fill")
+                            }
+                            .tag(2)
+                        
+                        KnowledgeView()
+                            .tabItem {
+                                Label("知识", systemImage: "book.fill")
+                            }
+                            .tag(3)
+                    }
+                    .tint(Color.primary600)
                 }
-            } else {
-                TabView(selection: $selectedTab) {
-                    HomeView()
-                        .tabItem {
-                            Label("首页", systemImage: "house.fill")
+            }
+            
+            // Notification pre-request overlay
+            if notificationManager.shouldShowPreRequest {
+                NotificationPreRequestView(
+                    onAccept: {
+                        withAnimation(.spring(response: 0.3)) {
+                            notificationManager.acceptPreRequest()
                         }
-                        .tag(0)
-                    
-                    TasksView()
-                        .tabItem {
-                            Label("任务", systemImage: "checkmark.circle.fill")
+                    },
+                    onDecline: {
+                        withAnimation(.spring(response: 0.3)) {
+                            notificationManager.declinePreRequest()
                         }
-                        .tag(1)
-                    
-                    HospitalBagView()
-                        .tabItem {
-                            Label("待产包", systemImage: "bag.fill")
-                        }
-                        .tag(2)
-                    
-                    KnowledgeView()
-                        .tabItem {
-                            Label("知识", systemImage: "book.fill")
-                        }
-                        .tag(3)
-                }
-                .tint(Color.primary600)
+                    }
+                )
             }
         }
         .onOpenURL { url in
@@ -63,6 +90,14 @@ struct ContentView: View {
             if !didProcessLaunchArgs {
                 processLaunchArguments()
                 didProcessLaunchArgs = true
+            }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                notificationManager.onAppBecameActive(
+                    profiles: profiles,
+                    todayTask: todayTask
+                )
             }
         }
     }

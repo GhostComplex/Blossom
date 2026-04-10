@@ -164,6 +164,12 @@ struct LamazeExerciseView: View {
         if let task = todayTask {
             task.lamazeCompleted = true
             task.lamazeCompletedAt = Date()
+            
+            // Notify NotificationManager
+            NotificationManager.shared.onExerciseCompleted(
+                kegelDone: task.kegelCompleted,
+                lamazeDone: true
+            )
         }
     }
 }

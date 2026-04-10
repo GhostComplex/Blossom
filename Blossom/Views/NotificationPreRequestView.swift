@@ -1,0 +1,101 @@
+//
+//  NotificationPreRequestView.swift
+//  Blossom (如期)
+//
+//  Custom pre-request popup for notification permission.
+//  Shown after user completes their first task.
+//  Frosted glass card with bell icon, warm theme colors.
+//
+//  PRD §4.5.2
+//
+
+import SwiftUI
+
+struct NotificationPreRequestView: View {
+    let onAccept: () -> Void
+    let onDecline: () -> Void
+    
+    var body: some View {
+        ZStack {
+            // Blur background overlay
+            Color.black.opacity(0.3)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    // Don't dismiss on background tap
+                }
+            
+            // Frosted glass card
+            VStack(spacing: 20) {
+                // Bell icon
+                ZStack {
+                    Circle()
+                        .fill(Color.accentLight)
+                        .frame(width: 64, height: 64)
+                    
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 28))
+                        .foregroundColor(Color.primary600)
+                }
+                .padding(.top, 8)
+                
+                // Title
+                Text("每天提醒你练习")
+                    .font(.appFont(.sectionTitle))
+                    .foregroundColor(Color.n900)
+                
+                // Description
+                Text("每天练几分钟，和宝宝见面那天会更从容。")
+                    .font(.appFont(.bodyText))
+                    .foregroundColor(Color.n500)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 8)
+                
+                // Buttons
+                VStack(spacing: 12) {
+                    // Primary: Accept
+                    Button(action: onAccept) {
+                        Text("好的，提醒我")
+                            .font(.appFont(.cardTitle))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color.primary600)
+                            .clipShape(RoundedRectangle(cornerRadius: CGFloat(AppRadius.lg)))
+                    }
+                    
+                    // Secondary: Decline
+                    Button(action: onDecline) {
+                        Text("不了，谢谢")
+                            .font(.appFont(.bodyText))
+                            .foregroundColor(Color.n500)
+                    }
+                }
+                .padding(.top, 4)
+            }
+            .padding(28)
+            .background(
+                RoundedRectangle(cornerRadius: 28)
+                    .fill(.ultraThinMaterial)
+                    .shadow(color: Color.black.opacity(0.12), radius: 24, x: 0, y: 8)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 28)
+                    .stroke(Color.white.opacity(0.3), lineWidth: 1)
+            )
+            .padding(.horizontal, 40)
+        }
+        .transition(.opacity.combined(with: .scale(scale: 0.9)))
+    }
+}
+
+#Preview {
+    ZStack {
+        LinearGradient.pageBackground
+            .ignoresSafeArea()
+        
+        NotificationPreRequestView(
+            onAccept: { print("accept") },
+            onDecline: { print("decline") }
+        )
+    }
+}

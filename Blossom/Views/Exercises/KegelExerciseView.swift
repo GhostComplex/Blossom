@@ -233,6 +233,12 @@ struct KegelExerciseView: View {
             task.kegelCompleted = true
             task.kegelCompletedAt = Date()
             task.kegelSets = level.totalSets
+            
+            // Notify NotificationManager
+            NotificationManager.shared.onExerciseCompleted(
+                kegelDone: true,
+                lamazeDone: task.lamazeCompleted
+            )
         }
     }
     

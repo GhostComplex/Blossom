@@ -245,6 +245,10 @@ struct HospitalBagItemRow: View {
             withAnimation(.easeInOut(duration: 0.2)) {
                 item.isCompleted.toggle()
             }
+            // Trigger notification pre-request on first item check
+            if item.isCompleted {
+                NotificationManager.shared.onTaskCompleted()
+            }
         }) {
             HStack(spacing: AppSpacing.md) {
                 // Checkbox
