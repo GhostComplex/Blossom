@@ -414,7 +414,7 @@ struct LamazePracticeView: View {
             Circle()
                 .fill(
                     LinearGradient(
-                        colors: [Color.accentLight, Color.accent],
+                        colors: [Color.accentLight, Color.accentPeach],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )

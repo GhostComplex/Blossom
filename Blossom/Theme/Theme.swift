@@ -13,7 +13,7 @@ extension Color {
     // Primary Colors (暖琥珀玫瑰金系)
     static let primary600 = Color(hex: "C4855A")    // 琥珀玫瑰金 — 主色
     static let primaryDark = Color(hex: "A86840")   // 深琥珀棕 — 按钮 hover、强调
-    static let accent = Color(hex: "E8B89A")        // 杏粉 — 图标背景、边框高亮
+    static let accentPeach = Color(hex: "E8B89A")    // 杏粉 — 图标背景、边框高亮
     static let accentLight = Color(hex: "F5DDD0")   // 浅杏 — 图标底色、装饰
     static let warmGold = Color(hex: "D4A86A")      // 暖金 — 渐变点缀
     

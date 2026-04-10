@@ -11,9 +11,11 @@ import SwiftData
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
-    @Query(filter: #Predicate<DailyTask> { task in
-        Calendar.current.isDateInToday(task.date)
-    }) private var todayTasks: [DailyTask]
+    @Query private var allTasks: [DailyTask]
+    
+    private var todayTasks: [DailyTask] {
+        allTasks.filter { Calendar.current.isDateInToday($0.date) }
+    }
     
     private var profile: UserProfile? { profiles.first }
     private var todayTask: DailyTask? { todayTasks.first }
