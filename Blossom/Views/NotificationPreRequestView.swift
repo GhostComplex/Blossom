@@ -40,12 +40,12 @@ struct NotificationPreRequestView: View {
                 
                 // Title
                 Text("每天提醒你练习")
-                    .font(.appFont(.sectionTitle))
+                    .font(AppFonts.sectionTitle)
                     .foregroundColor(Color.n900)
                 
                 // Description
                 Text("每天练几分钟，和宝宝见面那天会更从容。")
-                    .font(.appFont(.bodyText))
+                    .font(AppFonts.bodyText)
                     .foregroundColor(Color.n500)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 8)
@@ -55,7 +55,7 @@ struct NotificationPreRequestView: View {
                     // Primary: Accept
                     Button(action: onAccept) {
                         Text("好的，提醒我")
-                            .font(.appFont(.cardTitle))
+                            .font(AppFonts.cardTitle)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
@@ -66,7 +66,7 @@ struct NotificationPreRequestView: View {
                     // Secondary: Decline
                     Button(action: onDecline) {
                         Text("不了，谢谢")
-                            .font(.appFont(.bodyText))
+                            .font(AppFonts.bodyText)
                             .foregroundColor(Color.n500)
                     }
                 }
