@@ -48,7 +48,7 @@ struct OnboardingView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                // 🌸 Flower icon in gradient circle
+                // ❋ Flower icon in gradient circle
                 ZStack {
                     Circle()
                         .fill(
@@ -60,8 +60,9 @@ struct OnboardingView: View {
                         )
                         .frame(width: 80, height: 80)
                     
-                    Text("🌸")
-                        .font(.system(size: 36))
+                    Text("\u{274B}")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(.white)
                 }
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : -20)
