@@ -72,9 +72,9 @@ enum KegelLevel: Int, Codable, CaseIterable {
     
     var displayName: String {
         switch self {
-        case .beginner: return "🌱 初级"
-        case .intermediate: return "🌿 中级"
-        case .advanced: return "🌳 高级"
+        case .beginner: return "● 初级"
+        case .intermediate: return "●● 中级"
+        case .advanced: return "●●● 高级"
         }
     }
     
@@ -165,11 +165,11 @@ enum HospitalBagCategory: String, CaseIterable {
     
     var icon: String {
         switch self {
-        case .documents: return "📋"
-        case .momItems: return "👩"
-        case .babyItems: return "👶"
-        case .hospitalItems: return "🏥"
-        case .others: return "📦"
+        case .documents: return "□"
+        case .momItems: return ""
+        case .babyItems: return ""
+        case .hospitalItems: return ""
+        case .others: return ""
         }
     }
 }

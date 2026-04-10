@@ -112,7 +112,7 @@ struct HospitalBagView: View {
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
             // Category header
             HStack {
-                Text("\(categoryIcon(category)) \(category)")
+                Text(category)
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                 
