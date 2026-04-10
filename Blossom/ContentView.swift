@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var selectedTab = 0
     @State private var hasCompletedOnboarding = false
     @State private var didProcessLaunchArgs = false
+    @State private var showSettings = false
+    @StateObject private var notificationManager = NotificationManager.shared
     
     private var needsOnboarding: Bool {
         profiles.isEmpty && !hasCompletedOnboarding
@@ -26,6 +28,10 @@ struct ContentView: View {
             if needsOnboarding {
                 OnboardingView {
                     hasCompletedOnboarding = true
+                    // Request notification permission after onboarding
+                    Task {
+                        await notificationManager.requestAuthorization()
+                    }
                 }
             } else {
                 TabView(selection: $selectedTab) {
@@ -54,6 +60,19 @@ struct ContentView: View {
                         .tag(3)
                 }
                 .tint(Color.primary600)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Image(systemName: "gearshape.fill")
+                                .foregroundStyle(Color.n500)
+                        }
+                    }
+                }
+                .sheet(isPresented: $showSettings) {
+                    SettingsView()
+                }
             }
         }
         .onOpenURL { url in
