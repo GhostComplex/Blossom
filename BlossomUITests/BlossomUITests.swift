@@ -54,16 +54,21 @@ final class BlossomUITests: XCTestCase {
         if welcomeTitle.waitForExistence(timeout: 10) {
             snap("01-onboarding")
 
-            // Date picker should be visible
-            let datePicker = app.datePickers.firstMatch
-            XCTAssertTrue(datePicker.waitForExistence(timeout: 3),
-                          "Due-date picker should be visible on onboarding screen")
+            // Date display should be visible (tap to open picker)
+            let dateDisplay = app.buttons["dateDisplay"]
+            XCTAssertTrue(dateDisplay.waitForExistence(timeout: 3),
+                          "Date display should be visible on onboarding screen")
 
             // Tap the CTA button to finish onboarding
-            let ctaButton = app.buttons["开始我的孕期之旅"]
-            XCTAssertTrue(ctaButton.waitForExistence(timeout: 3),
-                          "CTA button '开始我的孕期之旅' must exist")
-            ctaButton.tap()
+            let ctaButton = app.buttons["开始使用"]
+            if !ctaButton.waitForExistence(timeout: 3) {
+                // Try finding by partial match
+                let anyButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '开始使用'")).firstMatch
+                XCTAssertTrue(anyButton.exists, "CTA button '开始使用' must exist")
+                anyButton.tap()
+            } else {
+                ctaButton.tap()
+            }
 
             // Give SwiftUI time to transition and SwiftData to persist
             Thread.sleep(forTimeInterval: 2.0)
