@@ -3,6 +3,7 @@
 //  Blossom (如期)
 //
 //  Main entry: shows OnboardingView on first launch, then TabView.
+//  Supports URL scheme: blossom://tab/{home|tasks|bag|knowledge}
 //
 
 import SwiftUI
@@ -49,6 +50,23 @@ struct ContentView: View {
                     .tag(3)
             }
             .tint(Color.primary600)
+            .onOpenURL { url in
+                handleDeepLink(url)
+            }
+        }
+    }
+    
+    private func handleDeepLink(_ url: URL) {
+        guard url.scheme == "blossom",
+              url.host == "tab" else { return }
+        
+        let tab = url.pathComponents.dropFirst().first ?? ""
+        switch tab {
+        case "home":      selectedTab = 0
+        case "tasks":     selectedTab = 1
+        case "bag":       selectedTab = 2
+        case "knowledge": selectedTab = 3
+        default: break
         }
     }
 }
