@@ -11,13 +11,16 @@ import SwiftData
 struct TasksView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
-    @Query(filter: #Predicate<DailyTask> { task in
-        Calendar.current.isDateInToday(task.date)
-    }) private var todayTasks: [DailyTask]
-    @Query(filter: #Predicate<FetalMovementRecord> { record in
-        Calendar.current.isDateInToday(record.timestamp)
-    }, sort: \FetalMovementRecord.timestamp, order: .descending) 
-    private var todayMovements: [FetalMovementRecord]
+    @Query private var allTasks: [DailyTask]
+    @Query(sort: \FetalMovementRecord.timestamp, order: .reverse)
+    private var allMovements: [FetalMovementRecord]
+    
+    private var todayTasks: [DailyTask] {
+        allTasks.filter { Calendar.current.isDateInToday($0.date) }
+    }
+    private var todayMovements: [FetalMovementRecord] {
+        allMovements.filter { Calendar.current.isDateInToday($0.timestamp) }
+    }
     
     @State private var showKegelExercise = false
     @State private var showLamazeExercise = false

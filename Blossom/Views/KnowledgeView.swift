@@ -15,7 +15,7 @@ struct KnowledgeView: View {
     @State private var searchText = ""
     
     private var categories: [String] {
-        ["拉玛泽呼吸法", "凯格尔运动", "分娩信号", "入院时机", "产程阶段", "产后护理"]
+        ["拉玛泽呼吸法", "凯格尔运动"]
     }
     
     private var filteredArticles: [KnowledgeArticle] {
@@ -97,26 +97,14 @@ struct KnowledgeView: View {
     
     // MARK: - Seed Default Articles
     private func seedDefaultArticles() {
-        let defaultArticles: [(String, String, String, Int)] = [
-            // 拉玛泽呼吸法 (6篇)
-            ("拉玛泽呼吸法", "第 1 阶段：清洁呼吸", "宫缩前后的深呼吸方法，帮助放松身心...", 3),
-            ("拉玛泽呼吸法", "第 2 阶段：胸式呼吸", "适用于宫口开 0-3cm 的阶段，缓慢深呼吸...", 3),
-            ("拉玛泽呼吸法", "第 3 阶段：节律呼吸", "适用于宫口开 3-8cm，随宫缩加速呼吸...", 3),
-            ("拉玛泽呼吸法", "第 4 阶段：喘息呼吸", "适用于宫口开 7-10cm，浅快呼吸（嘻嘻呼）...", 3),
-            ("拉玛泽呼吸法", "第 5 阶段：吹气呼吸", "想用力但不能用力时，像吹蜡烛一样呼气...", 3),
-            ("拉玛泽呼吸法", "第 6 阶段：用力呼吸", "宫口全开后，深吸气憋住用力推...", 3),
-            
-            // 凯格尔运动 (2-3篇)
-            ("凯格尔运动", "凯格尔运动的科学原理", "凯格尔运动通过锻炼盆底肌群，帮助产后恢复...", 4),
-            ("凯格尔运动", "如何正确做凯格尔运动", "很多人做凯格尔运动时方法不对，这里教你正确姿势...", 5),
-        ]
+        let defaultArticles = ArticleContent.allArticles
         
         for (index, article) in defaultArticles.enumerated() {
             let knowledgeArticle = KnowledgeArticle(
-                category: article.0,
-                title: article.1,
-                content: article.2,
-                readTimeMinutes: article.3,
+                category: article.category,
+                title: article.title,
+                content: article.content,
+                readTimeMinutes: article.readTime,
                 sortOrder: index
             )
             modelContext.insert(knowledgeArticle)
@@ -133,10 +121,6 @@ struct CategoryCard: View {
         switch category {
         case "拉玛泽呼吸法": return "wind"
         case "凯格尔运动": return "figure.strengthtraining.traditional"
-        case "分娩信号": return "bell.fill"
-        case "入院时机": return "cross.circle.fill"
-        case "产程阶段": return "clock.fill"
-        case "产后护理": return "heart.fill"
         default: return "book.fill"
         }
     }
@@ -228,6 +212,8 @@ struct CategoryArticlesView: View {
 // MARK: - Article Detail View
 struct ArticleDetailView: View {
     @Bindable var article: KnowledgeArticle
+    @State private var showKegelExercise = false
+    @State private var showLamazeExercise = false
     
     var body: some View {
         ScrollView {
@@ -249,8 +235,21 @@ struct ArticleDetailView: View {
                 Spacer(minLength: 40)
                 
                 // Actions
-                if article.category == "拉玛泽呼吸法" || article.category == "凯格尔运动" {
-                    Button(action: {}) {
+                if article.category == "拉玛泽呼吸法" {
+                    Button(action: { showLamazeExercise = true }) {
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("开始跟练")
+                        }
+                        .font(AppFonts.cardTitle)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(Color.primary600)
+                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
+                    }
+                } else if article.category == "凯格尔运动" {
+                    Button(action: { showKegelExercise = true }) {
                         HStack {
                             Image(systemName: "play.fill")
                             Text("开始跟练")
@@ -280,6 +279,12 @@ struct ArticleDetailView: View {
         }
         .onAppear {
             article.isRead = true
+        }
+        .fullScreenCover(isPresented: $showKegelExercise) {
+            KegelExerciseView()
+        }
+        .fullScreenCover(isPresented: $showLamazeExercise) {
+            LamazeExerciseView()
         }
     }
 }
