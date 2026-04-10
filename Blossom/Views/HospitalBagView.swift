@@ -84,7 +84,7 @@ struct HospitalBagView: View {
                         .frame(height: 10)
                     
                     RoundedRectangle(cornerRadius: AppRadius.full)
-                        .fill(progress >= 1.0 ? Color.success : LinearGradient.progressBar)
+                        .fill(progress >= 1.0 ? AnyShapeStyle(Color.success) : AnyShapeStyle(LinearGradient.progressBar))
                         .frame(width: geometry.size.width * progress, height: 10)
                         .animation(.easeInOut(duration: 0.3), value: progress)
                 }
