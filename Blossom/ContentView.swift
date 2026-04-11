@@ -71,6 +71,7 @@ struct ContentView: View {
                             }
                             .tag(3)
                     }
+                    .tabViewStyle(.tabBarOnly)
                     .tint(Color.primaryDark)
                     .onAppear {
                         configureTabBarAppearance()
@@ -190,12 +191,12 @@ struct ContentView: View {
     // MARK: - Tab Bar Appearance
     private func configureTabBarAppearance() {
         let appearance = UITabBarAppearance()
-        appearance.configureWithDefaultBackground()
+        // Use transparent background to prevent iOS 26 Liquid Glass
+        appearance.configureWithTransparentBackground()
         
-        // Semi-transparent background
+        // Then apply our custom semi-transparent look
         appearance.backgroundColor = UIColor.white.withAlphaComponent(0.35)
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-        appearance.backgroundEffect = blurEffect
+        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
         
         // Active / inactive colors
         let activeColor = UIColor(Color.primaryDark)
@@ -209,7 +210,7 @@ struct ContentView: View {
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
         
-        // Remove iOS 18+ selection indicator circle
+        // Remove selection indicator
         UITabBar.appearance().selectionIndicatorImage = UIImage()
     }
 
