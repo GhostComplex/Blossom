@@ -27,6 +27,7 @@
 		020 /* NotificationPreRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121; };
 		021 /* BlossomFlowerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122; };
 		022 /* ExerciseCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123; };
+		023 /* CormorantGaramond.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 124; };
 		712 /* BlossomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		121 /* NotificationPreRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreRequestView.swift; sourceTree = "<group>"; };
 		122 /* BlossomFlowerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlossomFlowerIcon.swift; sourceTree = "<group>"; };
 		123 /* ExerciseCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionView.swift; sourceTree = "<group>"; };
+		124 /* CormorantGaramond.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CormorantGaramond.ttf; sourceTree = "<group>"; };
 		710 /* BlossomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlossomUITests.swift; sourceTree = "<group>"; };
 		711 /* BlossomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlossomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				204 /* Models */,
 				205 /* Views */,
 				209 /* Services */,
+				210 /* Fonts */,
 				206 /* Content */,
 				207 /* Resources */,
 				109 /* Assets.xcassets */,
@@ -158,6 +161,14 @@
 				120 /* NotificationManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		210 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				124 /* CormorantGaramond.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		207 /* Resources */ = {
@@ -315,6 +326,7 @@
 			files = (
 				009 /* Assets.xcassets in Resources */,
 				011 /* Articles in Resources */,
+				023 /* CormorantGaramond.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
