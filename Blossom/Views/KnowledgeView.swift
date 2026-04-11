@@ -115,18 +115,18 @@ struct CategoryCard: View {
     
     private var iconGradient: [Color] {
         switch category {
-        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0").opacity(0.5), Color.primary600.opacity(0.3)]
-        case "凯格尔运动": return [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]
-        default: return [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]
+        case "拉玛泽呼吸法": return [Color(red: 249/255, green: 181/255, blue: 196/255).opacity(0.8), Color(red: 249/255, green: 181/255, blue: 196/255).opacity(0.5)]
+        case "凯格尔运动": return [Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.8), Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.5)]
+        default: return [Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.8), Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.5)]
         }
     }
     
     var body: some View {
         VStack(spacing: AppSpacing.md) {
-            // Centered icon
+            // Centered icon — white on colored gradient
             Image(systemName: icon)
                 .font(.system(size: 22))
-                .foregroundStyle(Color.primaryDark)
+                .foregroundStyle(.white)
                 .frame(width: 44, height: 44)
                 .background(
                     LinearGradient(
@@ -135,7 +135,7 @@ struct CategoryCard: View {
                         endPoint: .bottomTrailing
                     )
                 )
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                .clipShape(RoundedRectangle(cornerRadius: 13))
             
             VStack(spacing: 2) {
                 Text(category)

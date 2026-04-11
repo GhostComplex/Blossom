@@ -236,10 +236,12 @@ struct StageCard: View {
             HStack(spacing: AppSpacing.lg) {
                 Text("\(stage.rawValue)")
                     .font(.custom("CormorantGaramond-Bold", size: 20))
-                    .foregroundStyle(Color.primary600)
+                    .foregroundStyle(.white)
                     .frame(width: 44, height: 44)
-                    .background(Color.accentLight)
-                    .clipShape(Circle())
+                    .background(
+                        LinearGradient(colors: [Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.8), Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(stage.displayName)

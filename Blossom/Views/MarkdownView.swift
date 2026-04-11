@@ -99,24 +99,24 @@ struct MarkdownView: View {
         switch block {
         case .h2(let text):
             Text(inlineMarkdown(text))
-                .font(.system(size: 20, weight: .bold))
-                .foregroundStyle(Color.n700)
+                .font(.custom("CormorantGaramond-Medium", size: 18))
+                .foregroundStyle(Color(hex: "A87CC0"))
                 .padding(.top, 8)
             
         case .h3(let text):
             Text(inlineMarkdown(text))
-                .font(.system(size: 17, weight: .semibold))
-                .foregroundStyle(Color.n700)
+                .font(.custom("CormorantGaramond-Medium", size: 16))
+                .foregroundStyle(Color(hex: "A87CC0"))
                 .padding(.top, 4)
             
         case .bullet(let text):
             HStack(alignment: .top, spacing: 8) {
                 Text("•")
-                    .font(AppFonts.bodyText)
+                    .font(.system(size: 13))
                     .foregroundStyle(Color.primary600)
                 Text(inlineMarkdown(text))
-                    .font(AppFonts.bodyText)
-                    .foregroundStyle(Color.n700)
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color.n500)
                     .lineSpacing(4)
             }
             
@@ -138,8 +138,8 @@ struct MarkdownView: View {
             
         case .paragraph(let text):
             Text(inlineMarkdown(text))
-                .font(AppFonts.bodyText)
-                .foregroundStyle(Color.n700)
+                .font(.system(size: 13))
+                .foregroundStyle(Color.n500)
                 .lineSpacing(6)
         }
     }

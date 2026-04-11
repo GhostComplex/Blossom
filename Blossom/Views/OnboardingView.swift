@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 
                 // Title
                 Text("欢迎来到拾月")
-                    .font(.custom("CormorantGaramond-SemiBold", size: 28))
+                    .font(.custom("CormorantGaramond-Regular", size: 28))
                     .foregroundStyle(Color.n900)
                     .opacity(animateIn ? 1 : 0)
                     .offset(y: animateIn ? 0 : -10)
@@ -68,7 +68,7 @@ struct OnboardingView: View {
                 
                 // Subtitle
                 Text("告诉我们宝宝的预产期\n我们会陪你一起做好准备")
-                    .font(.system(size: 14, weight: .regular))
+                    .font(.system(size: 13, weight: .regular))
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
@@ -79,39 +79,39 @@ struct OnboardingView: View {
                 VStack(spacing: 0) {
                     // Label
                     Text("预产期")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.system(size: 11, weight: .medium))
                         .foregroundStyle(Color.n500)
-                        .padding(.bottom, 12)
+                        .padding(.bottom, 10)
                     
                     // Large date numbers
                     Button(action: { showDatePicker.toggle() }) {
                         HStack(spacing: 0) {
                             // Year
                             Text(yearText)
-                                .font(.custom("CormorantGaramond-SemiBold", size: 24))
+                                .font(.custom("CormorantGaramond-Regular", size: 20))
                                 .foregroundStyle(Color.n900)
                             
                             Text(" 年 ")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color.n300)
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color.n500)
                             
                             // Month
                             Text(monthText)
-                                .font(.custom("CormorantGaramond-Bold", size: 42))
-                                .foregroundStyle(Color.primary600)
+                                .font(.custom("CormorantGaramond-Regular", size: 40))
+                                .foregroundStyle(Color(hex: "A87CC0"))
                             
                             Text(" 月 ")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color.n300)
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color.n500)
                             
                             // Day
                             Text(dayText)
-                                .font(.custom("CormorantGaramond-Bold", size: 42))
-                                .foregroundStyle(Color.primary600)
+                                .font(.custom("CormorantGaramond-Regular", size: 40))
+                                .foregroundStyle(Color(hex: "A87CC0"))
                             
                             Text(" 日")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color.n300)
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color.n500)
                         }
                     }
                     .accessibilityIdentifier("dateDisplay")
@@ -122,18 +122,23 @@ struct OnboardingView: View {
                         .foregroundStyle(Color.n500)
                         .padding(.top, 10)
                 }
-                .padding(.vertical, 24)
-                .padding(.horizontal, 24)
+                .padding(.vertical, 22)
+                .padding(.horizontal, 22)
                 .frame(maxWidth: .infinity)
                 .background(
-                    RoundedRectangle(cornerRadius: AppRadius.lg)
-                        .fill(Color.cardBg)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: AppRadius.lg)
-                                .stroke(Color.accentPeach.opacity(0.18), lineWidth: 1)
-                        )
-                        .shadow(color: Color(hex: "C4B5E0").opacity(0.07), radius: 4, y: 2)
+                    RoundedRectangle(cornerRadius: 22)
+                        .fill(.ultraThinMaterial)
                 )
+                .background(
+                    RoundedRectangle(cornerRadius: 22)
+                        .fill(Color.white.opacity(0.45))
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 22))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 22)
+                        .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                )
+                .shadow(color: Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.08), radius: 8, x: 0, y: 2)
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : 30)
@@ -142,18 +147,15 @@ struct OnboardingView: View {
                 
                 // CTA Button
                 Button(action: completeOnboarding) {
-                    HStack {
-                        Text("开始使用")
-                            .font(.system(size: 16, weight: .semibold))
-                        Text("→")
-                            .font(.system(size: 16, weight: .semibold))
-                    }
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    Text("开始使用 →")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
                     .background(
-                        RoundedRectangle(cornerRadius: AppRadius.full)
-                            .fill(LinearGradient.progressBar)
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(Color.primary600)
+                            .shadow(color: Color(red: 196/255, green: 160/255, blue: 220/255).opacity(0.2), radius: 8, x: 0, y: 4)
                     )
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)

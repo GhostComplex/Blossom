@@ -87,7 +87,7 @@ struct ExerciseCompletionView: View {
             // Check icon
             Image(systemName: "checkmark")
                 .font(.system(size: 32, weight: .medium))
-                .foregroundStyle(Color.primary600)
+                .foregroundStyle(Color(hex: "7A6E94"))
         }
     }
 
