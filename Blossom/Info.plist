@@ -5,6 +5,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>CormorantGaramond.ttf</string>
+		<string>Nunito.ttf</string>
+		<string>Nunito-Italic.ttf</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>

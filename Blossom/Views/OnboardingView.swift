@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 
                 // Title
                 Text("欢迎来到拾月")
-                    .font(.custom("CormorantGaramond-SemiBold", size: 28))
+                    .font(.custom("CormorantGaramond-Regular", size: 28))
                     .foregroundStyle(Color.n900)
                     .opacity(animateIn ? 1 : 0)
                     .offset(y: animateIn ? 0 : -10)
@@ -68,7 +68,7 @@ struct OnboardingView: View {
                 
                 // Subtitle
                 Text("告诉我们宝宝的预产期\n我们会陪你一起做好准备")
-                    .font(.system(size: 14, weight: .regular))
+                    .font(.custom("Nunito-Regular", size: 13))
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
@@ -88,7 +88,7 @@ struct OnboardingView: View {
                         HStack(spacing: 0) {
                             // Year
                             Text(yearText)
-                                .font(.custom("CormorantGaramond-SemiBold", size: 24))
+                                .font(.custom("CormorantGaramond-Regular", size: 20))
                                 .foregroundStyle(Color.n900)
                             
                             Text(" 年 ")
@@ -97,7 +97,7 @@ struct OnboardingView: View {
                             
                             // Month
                             Text(monthText)
-                                .font(.custom("CormorantGaramond-Bold", size: 42))
+                                .font(.custom("CormorantGaramond-Regular", size: 40))
                                 .foregroundStyle(Color.primary600)
                             
                             Text(" 月 ")
@@ -106,7 +106,7 @@ struct OnboardingView: View {
                             
                             // Day
                             Text(dayText)
-                                .font(.custom("CormorantGaramond-Bold", size: 42))
+                                .font(.custom("CormorantGaramond-Regular", size: 40))
                                 .foregroundStyle(Color.primary600)
                             
                             Text(" 日")
@@ -118,7 +118,7 @@ struct OnboardingView: View {
                     
                     // Hint
                     Text("点击选择日期")
-                        .font(.system(size: 12))
+                        .font(.custom("Nunito-Regular", size: 10))
                         .foregroundStyle(Color.n500)
                         .padding(.top, 10)
                 }
@@ -144,9 +144,9 @@ struct OnboardingView: View {
                 Button(action: completeOnboarding) {
                     HStack {
                         Text("开始使用")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.custom("Nunito-SemiBold", size: 14))
                         Text("→")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.custom("Nunito-SemiBold", size: 14))
                     }
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
@@ -221,7 +221,7 @@ struct DatePickerSheet: View {
         VStack(spacing: 20) {
             // Title
             Text("选择预产期")
-                .font(.custom("CormorantGaramond-SemiBold", size: 20))
+                .font(.custom("CormorantGaramond-Regular", size: 20))
                 .foregroundStyle(Color.n900)
                 .padding(.top, 20)
             
@@ -237,7 +237,7 @@ struct DatePickerSheet: View {
             
             Button(action: { dismiss() }) {
                 Text("确定")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.custom("Nunito-SemiBold", size: 14))
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)

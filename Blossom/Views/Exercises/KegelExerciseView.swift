@@ -89,14 +89,13 @@ struct KegelExerciseView: View {
     // MARK: - Level Badge
     private var levelBadge: some View {
         Text("\(level.displayName) · \(level.contractDuration)s 收缩 / \(level.relaxDuration)s 放松")
-            .font(AppFonts.caption)
+            .font(AppFonts.smallLabel)
             .foregroundStyle(Color.n900)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(Color.white.opacity(0.5))
             .clipShape(Capsule())
     }
-    
     // MARK: - Timer Circle
     private var timerCircle: some View {
         ZStack {
@@ -123,14 +122,14 @@ struct KegelExerciseView: View {
                 .frame(width: 180, height: 180)
                 .overlay(
                     Circle()
-                        .fill(Color.white.opacity(0.3))
+                        .fill(Color.white.opacity(0.4))
                 )
                 .clipShape(Circle())
 
             // Content
             VStack(spacing: 8) {
                 Text(timer.phase == .contract ? "收缩骨盆底肌" : "放松休息")
-                    .font(.custom("CormorantGaramond-Light", size: 26))
+                    .font(.custom("CormorantGaramond-Regular", size: 26))
                     .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
 
                 Text("\(timer.timeRemaining)")
@@ -152,7 +151,7 @@ struct KegelExerciseView: View {
     // MARK: - Progress Text
     private var progressText: some View {
         Text("还剩 \(level.totalSets - timer.completedSets) 组（共 \(level.totalSets) 组）")
-            .font(AppFonts.bodyText)
+            .font(AppFonts.caption)
             .foregroundStyle(Color.n500)
     }
     
@@ -165,7 +164,7 @@ struct KegelExerciseView: View {
                     Image(systemName: timer.isPaused ? "play.fill" : "pause.fill")
                     Text(timer.isPaused ? "继续" : "暂停")
                 }
-                .font(.system(size: 16, weight: .semibold))
+                .font(.custom("Nunito-SemiBold", size: 13))
                 .foregroundStyle(Color.n900)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
@@ -184,7 +183,7 @@ struct KegelExerciseView: View {
                     Image(systemName: "xmark")
                     Text("结束")
                 }
-                .font(.system(size: 16, weight: .semibold))
+                .font(.custom("Nunito-SemiBold", size: 13))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)

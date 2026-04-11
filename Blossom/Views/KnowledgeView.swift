@@ -115,9 +115,9 @@ struct CategoryCard: View {
     
     private var iconGradient: [Color] {
         switch category {
-        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0").opacity(0.5), Color.primary600.opacity(0.3)]
-        case "凯格尔运动": return [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]
-        default: return [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]
+        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "C4B5E0").opacity(0.8)]
+        case "凯格尔运动": return [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "F9B5C4").opacity(0.8)]
+        default: return [Color(hex: "B8DCF5").opacity(0.5), Color(hex: "B8DCF5").opacity(0.8)]
         }
     }
     
@@ -125,8 +125,8 @@ struct CategoryCard: View {
         VStack(spacing: AppSpacing.md) {
             // Centered icon
             Image(systemName: icon)
-                .font(.system(size: 22))
-                .foregroundStyle(Color.primaryDark)
+                .font(.system(size: 18))
+                .foregroundStyle(.white)
                 .frame(width: 44, height: 44)
                 .background(
                     LinearGradient(
@@ -139,7 +139,7 @@ struct CategoryCard: View {
             
             VStack(spacing: 2) {
                 Text(category)
-                    .font(.custom("CormorantGaramond-Light", size: 16))
+                    .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                     .lineLimit(1)
                 
@@ -240,7 +240,7 @@ struct ArticleDetailView: View {
                             Image(systemName: "play.fill")
                             Text("开始跟练")
                         }
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.custom("Nunito-SemiBold", size: 14))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
@@ -253,7 +253,7 @@ struct ArticleDetailView: View {
                             Image(systemName: "play.fill")
                             Text("开始跟练")
                         }
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.custom("Nunito-SemiBold", size: 14))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)

@@ -199,9 +199,15 @@ struct ModeCard: View {
             HStack(spacing: AppSpacing.lg) {
                 Image(systemName: icon)
                     .font(.system(size: 24))
-                    .foregroundStyle(color)
+                    .foregroundStyle(.white)
                     .frame(width: 56, height: 56)
-                    .background(color.opacity(0.15))
+                    .background(
+                        LinearGradient(
+                            colors: [color.opacity(0.5), color.opacity(0.8)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                 
                 VStack(alignment: .leading, spacing: 4) {

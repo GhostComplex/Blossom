@@ -31,7 +31,7 @@ struct ExerciseCompletionView: View {
 
                 // Title
                 Text("做得真棒")
-                    .font(.custom("CormorantGaramond-Light", size: 28))
+                    .font(.custom("CormorantGaramond-Regular", size: 30))
                     .foregroundStyle(Color.n900)
 
                 // Body text
@@ -43,7 +43,7 @@ struct ExerciseCompletionView: View {
 
                 // English hint
                 Text("It's the moment you show up for you.")
-                    .font(.custom("CormorantGaramond-Regular", size: 12))
+                    .font(.custom("Nunito-Italic", size: 11))
                     .foregroundStyle(Color.n300)
                     .italic()
 
@@ -52,7 +52,7 @@ struct ExerciseCompletionView: View {
                 // Return button
                 Button(action: onDismiss) {
                     Text("返回首页")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.custom("Nunito-SemiBold", size: 14))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)

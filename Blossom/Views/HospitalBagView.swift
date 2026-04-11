@@ -112,7 +112,7 @@ struct HospitalBagView: View {
             // Category header
             HStack {
                 Text(category)
-                    .font(AppFonts.cardTitle)
+                    .font(.custom("Nunito-SemiBold", size: 13))
                     .foregroundStyle(Color.n900)
                 
                 Spacer()
