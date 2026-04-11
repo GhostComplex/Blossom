@@ -196,7 +196,7 @@ struct HomeView: View {
                         title: "凯格尔运动",
                         subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.kegelCompleted ?? false,
-                        iconGradient: [Color(hex: "F9B5C4").opacity(0.7), Color(hex: "F9B5C4").opacity(1.0)]
+                        iconGradient: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -207,7 +207,7 @@ struct HomeView: View {
                         title: "拉玛泽练习",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
-                        iconGradient: [Color(hex: "C4B5E0").opacity(0.7), Color(hex: "C4B5E0").opacity(1.0)]
+                        iconGradient: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -218,7 +218,7 @@ struct HomeView: View {
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "B8DCF5").opacity(0.7), Color(hex: "B8DCF5").opacity(1.0)]
+                        iconGradient: [Color(hex: "DBEDFA"), Color(hex: "C6E3F7")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -229,7 +229,7 @@ struct HomeView: View {
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "C9A0DC").opacity(0.7), Color(hex: "C9A0DC").opacity(1.0)]
+                        iconGradient: [Color(hex: "E4CFEE"), Color(hex: "D4B3E3")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -374,7 +374,7 @@ struct TaskGridCard: View {
     let title: String
     let subtitle: String
     let isCompleted: Bool
-    var iconGradient: [Color] = [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)]
+    var iconGradient: [Color] = [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
