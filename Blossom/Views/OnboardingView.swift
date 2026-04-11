@@ -163,10 +163,10 @@ struct OnboardingView: View {
                 
                 // Dimmed bottom tab bar (visual only)
                 HStack {
-                    tabBarItem(icon: "house.fill", label: "首页")
-                    tabBarItem(icon: "checkmark.circle.fill", label: "任务")
-                    tabBarItem(icon: "bag.fill", label: "待产包")
-                    tabBarItem(icon: "book.fill", label: "知识")
+                    tabBarItem(icon: "house", label: "首页")
+                    tabBarItem(icon: "checkmark.circle", label: "任务")
+                    tabBarItem(icon: "bag", label: "待产包")
+                    tabBarItem(icon: "book", label: "知识")
                 }
                 .padding(.vertical, 8)
                 .opacity(0.3)

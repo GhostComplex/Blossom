@@ -152,15 +152,10 @@ struct HomeView: View {
     
     // MARK: - Task Grid (2x2)
     private var taskGrid: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            Text("今日任务")
-                .font(.system(size: 18, weight: .regular, design: .serif))
-                .foregroundStyle(Color.n900)
-            
-            LazyVGrid(columns: [
-                GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
-                GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
-            ], spacing: AppSpacing.cardSpacing) {
+        LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
+            GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
+        ], spacing: AppSpacing.cardSpacing) {
                 Button(action: { showKegelExercise = true }) {
                     TaskGridCard(
                         icon: "figure.strengthtraining.traditional",
@@ -185,7 +180,7 @@ struct HomeView: View {
                 
                 Button(action: { selectedTab = 2 }) {
                     TaskGridCard(
-                        icon: "bag.fill",
+                        icon: "bag",
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false,
@@ -196,7 +191,7 @@ struct HomeView: View {
                 
                 Button(action: { selectedTab = 3 }) {
                     TaskGridCard(
-                        icon: "book.fill",
+                        icon: "book",
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                         isCompleted: false,
@@ -207,7 +202,6 @@ struct HomeView: View {
             }
         }
     }
-    
     // MARK: - Hospital Bag Progress
     private var hospitalBagProgress: some View {
         let progress = bagTotal > 0 ? Double(bagCompleted) / Double(bagTotal) : 0

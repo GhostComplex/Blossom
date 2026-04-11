@@ -12,20 +12,9 @@ struct KnowledgeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \KnowledgeArticle.sortOrder) private var articles: [KnowledgeArticle]
     
-    @State private var searchText = ""
-    
+
     private var categories: [String] {
         ["拉玛泽呼吸法", "凯格尔运动"]
-    }
-    
-    private var filteredArticles: [KnowledgeArticle] {
-        if searchText.isEmpty {
-            return articles
-        }
-        return articles.filter {
-            $0.title.localizedCaseInsensitiveContains(searchText) ||
-            $0.category.localizedCaseInsensitiveContains(searchText)
-        }
     }
     
     var body: some View {
@@ -44,7 +33,6 @@ struct KnowledgeView: View {
             .pageBackground()
             .navigationTitle("知识")
             .navigationBarTitleDisplayMode(.large)
-            .searchable(text: $searchText, prompt: "搜索文章")
             .onAppear {
                 if articles.isEmpty {
                     seedDefaultArticles()
@@ -174,11 +162,6 @@ struct ArticleCard: View {
                     .font(AppFonts.caption)
                     .foregroundStyle(Color.n500)
             }
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundStyle(Color.n300)
         }
         .padding(AppSpacing.cardPadding)
         .glassCard()

@@ -10,6 +10,14 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - UIFont Design Helper
+extension UIFont {
+    func withDesign(_ design: UIFontDescriptor.SystemDesign) -> UIFont? {
+        guard let descriptor = fontDescriptor.withDesign(design) else { return nil }
+        return UIFont(descriptor: descriptor, size: pointSize)
+    }
+}
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
@@ -41,31 +49,32 @@ struct ContentView: View {
                     TabView(selection: $selectedTab) {
                         HomeView(selectedTab: $selectedTab)
                             .tabItem {
-                                Label("首页", systemImage: "house.fill")
+                                Label("首页", systemImage: "house")
                             }
                             .tag(0)
                         
                         TasksView()
                             .tabItem {
-                                Label("任务", systemImage: "checkmark.circle.fill")
+                                Label("任务", systemImage: "checkmark.circle")
                             }
                             .tag(1)
                         
                         HospitalBagView()
                             .tabItem {
-                                Label("待产包", systemImage: "bag.fill")
+                                Label("待产包", systemImage: "bag")
                             }
                             .tag(2)
                         
                         KnowledgeView()
                             .tabItem {
-                                Label("知识", systemImage: "book.fill")
+                                Label("知识", systemImage: "book")
                             }
                             .tag(3)
                     }
                     .tint(Color.primaryDark)
                     .onAppear {
                         configureTabBarAppearance()
+                        configureNavigationBarAppearance()
                     }
                 }
             }
@@ -199,6 +208,36 @@ struct ContentView: View {
         
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+
+    // MARK: - Navigation Bar Appearance
+    private func configureNavigationBarAppearance() {
+        // Large title: serif font (Cormorant Garamond style)
+        let largeTitleFont = UIFont(name: "CormorantGaramond-Regular", size: 28)
+            ?? UIFont.systemFont(ofSize: 28, weight: .light).withDesign(.serif)
+            ?? UIFont.systemFont(ofSize: 28, weight: .light)
+        
+        // Inline title: serif font
+        let inlineTitleFont = UIFont(name: "CormorantGaramond-Regular", size: 17)
+            ?? UIFont.systemFont(ofSize: 17, weight: .light).withDesign(.serif)
+            ?? UIFont.systemFont(ofSize: 17, weight: .light)
+        
+        let titleColor = UIColor(Color.n900)
+        
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithTransparentBackground()
+        navAppearance.largeTitleTextAttributes = [
+            .font: largeTitleFont,
+            .foregroundColor: titleColor
+        ]
+        navAppearance.titleTextAttributes = [
+            .font: inlineTitleFont,
+            .foregroundColor: titleColor
+        ]
+        
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+        UINavigationBar.appearance().compactAppearance = navAppearance
     }
 }
 
