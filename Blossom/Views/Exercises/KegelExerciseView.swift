@@ -89,8 +89,9 @@ struct KegelExerciseView: View {
     // MARK: - Level Badge
     private var levelBadge: some View {
         Text("\(level.displayName) · \(level.contractDuration)s 收缩 / \(level.relaxDuration)s 放松")
-            .font(AppFonts.caption)
-            .foregroundStyle(Color.n900)
+            .font(.system(size: 11, weight: .regular))
+            .tracking(2)
+            .foregroundStyle(Color.n500)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(Color.white.opacity(0.5))
@@ -117,21 +118,21 @@ struct KegelExerciseView: View {
                 .shadow(color: Color.primary600.opacity(0.3), radius: 30, x: 0, y: 0)
                 .animation(.linear(duration: 0.1), value: timer.progress)
 
-            // Frosted center — design spec: rgba(255,255,255,0.4) + blur(16px)
+            // Frosted center — design: rgba(255,255,255,0.4) + blur(16px)
             Circle()
                 .fill(.ultraThinMaterial)
                 .frame(width: 180, height: 180)
                 .overlay(
                     Circle()
-                        .fill(Color.white.opacity(0.3))
+                        .fill(Color.white.opacity(0.4))
                 )
                 .clipShape(Circle())
 
             // Content
             VStack(spacing: 8) {
                 Text(timer.phase == .contract ? "收缩骨盆底肌" : "放松休息")
-                    .font(.custom("CormorantGaramond-Light", size: 26))
-                    .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
+                    .font(.custom("CormorantGaramond-Regular", size: 26))
+                    .foregroundStyle(Color.n900)
 
                 Text("\(timer.timeRemaining)")
                     .font(.custom("CormorantGaramond-Light", size: 60))
@@ -145,7 +146,8 @@ struct KegelExerciseView: View {
     // MARK: - Progress Dots
     private var progressDots: some View {
         Text("第 \(timer.completedSets + 1) 组 / 共 \(level.totalSets) 组")
-            .font(AppFonts.caption)
+            .font(.system(size: 12, weight: .regular))
+            .tracking(0.5)
             .foregroundStyle(Color.n500)
     }
     
@@ -158,38 +160,37 @@ struct KegelExerciseView: View {
     
     // MARK: - Control Buttons
     private var controlButtons: some View {
-        HStack(spacing: 20) {
-            // Pause/Resume button (semi-transparent white)
+        HStack(spacing: 14) {
+            // Pause/Resume button — frosted glass
             Button(action: togglePause) {
                 HStack {
                     Image(systemName: timer.isPaused ? "play.fill" : "pause.fill")
                     Text(timer.isPaused ? "继续" : "暂停")
                 }
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(Color.n900)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(.ultraThinMaterial)
-                .background(Color.white.opacity(0.5))
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(Color.n500)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
+                .background(Color.white.opacity(0.4))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
                 .overlay(
-                    RoundedRectangle(cornerRadius: AppRadius.md)
-                        .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
                 )
             }
             
-            // End button (purple solid)
+            // End button — subtle dark tint
             Button(action: { showExitConfirmation = true }) {
                 HStack {
                     Image(systemName: "xmark")
                     Text("结束")
                 }
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Color.primary600)
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(Color.n900)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
+                .background(Color(hex: "7A6E94").opacity(0.15))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
             }
         }
         .padding(.bottom, 20)

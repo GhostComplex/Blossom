@@ -166,21 +166,28 @@ struct HomeView: View {
         .frame(maxWidth: .infinity)
         .background(
             ZStack {
-                // Blur layer
-                RoundedRectangle(cornerRadius: AppRadius.xl)
-                    .fill(.ultraThinMaterial)
-                    .opacity(0.6)
-                // Gradient overlay
+                // Gradient background
                 RoundedRectangle(cornerRadius: AppRadius.xl)
                     .fill(LinearGradient.countdownCard)
+                
+                // Decorative circles (design.html ::before / ::after)
+                Circle()
+                    .fill(Color.white.opacity(0.2))
+                    .frame(width: 100, height: 100)
+                    .offset(x: 60, y: -50)
+                
+                Circle()
+                    .fill(Color.white.opacity(0.15))
+                    .frame(width: 60, height: 60)
+                    .offset(x: -40, y: 50)
             }
             .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl))
         )
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.xl)
-                .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                .stroke(Color.white.opacity(0.5), lineWidth: 1)
         )
-        .shadow(color: Color(hex: "C4B5E0").opacity(0.10), radius: 12, x: 0, y: 4)
+        .shadow(color: Color(red: 196/255, green: 160/255, blue: 220/255).opacity(0.12), radius: 20, x: 0, y: 8)
     }
     
     // MARK: - Task Grid (2x2)
@@ -195,7 +202,7 @@ struct HomeView: View {
                         title: "凯格尔运动",
                         subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.kegelCompleted ?? false,
-                        iconGradient: [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]
+                        iconGradient: [Color(red: 249/255, green: 181/255, blue: 196/255).opacity(0.8), Color(red: 249/255, green: 181/255, blue: 196/255).opacity(0.5)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -206,7 +213,7 @@ struct HomeView: View {
                         title: "拉玛泽练习",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
-                        iconGradient: [Color.primary600.opacity(0.45), Color(hex: "C4B5E0").opacity(0.3)]
+                        iconGradient: [Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.8), Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.5)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -217,7 +224,7 @@ struct HomeView: View {
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false,
-                        iconGradient: [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]
+                        iconGradient: [Color(red: 184/255, green: 220/255, blue: 245/255).opacity(0.8), Color(red: 184/255, green: 220/255, blue: 245/255).opacity(0.5)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -228,7 +235,7 @@ struct HomeView: View {
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "C4B5E0").opacity(0.45), Color.primary600.opacity(0.25)]
+                        iconGradient: [Color(red: 201/255, green: 160/255, blue: 220/255).opacity(0.8), Color(red: 201/255, green: 160/255, blue: 220/255).opacity(0.5)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -246,19 +253,19 @@ struct HomeView: View {
                     .foregroundStyle(Color.n900)
                 Spacer()
                 Text("\(bagCompleted) / \(bagTotal)")
-                    .font(AppFonts.bodyText)
-                    .foregroundStyle(Color.n500)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(Color.primary600)
             }
             
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    // Background
-                    RoundedRectangle(cornerRadius: AppRadius.full)
-                        .fill(Color.n200)
+                    // Background — rgba(196,181,224,0.12) per design
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.12))
                         .frame(height: 7)
                     
-                    // Progress
-                    RoundedRectangle(cornerRadius: AppRadius.full)
+                    // Progress — pink→lavender gradient
+                    RoundedRectangle(cornerRadius: 3)
                         .fill(LinearGradient.progressBar)
                         .frame(width: geometry.size.width * progress, height: 7)
                         .animation(.easeInOut(duration: 0.3), value: progress)
@@ -377,10 +384,10 @@ struct TaskGridCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-            // Icon
+            // Icon — white stroke on colored gradient bg (per design.html)
             Image(systemName: icon)
                 .font(.system(size: 20))
-                .foregroundStyle(isCompleted ? Color.success : Color.primaryDark)
+                .foregroundStyle(isCompleted ? Color.success : .white)
                 .frame(width: 40, height: 40)
                 .background(
                     Group {
@@ -395,7 +402,7 @@ struct TaskGridCard: View {
                         }
                     }
                 )
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                .clipShape(RoundedRectangle(cornerRadius: 13))
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)

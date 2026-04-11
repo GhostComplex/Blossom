@@ -82,9 +82,9 @@ extension LinearGradient {
     // Countdown card gradient (140deg: 粉紫蓝半透明)
     static let countdownCard = LinearGradient(
         stops: [
-            .init(color: Color.accentPeach.opacity(0.5), location: 0.0),
-            .init(color: Color(hex: "C4B5E0").opacity(0.45), location: 0.5),
-            .init(color: Color.warmGold.opacity(0.4), location: 1.0)
+            .init(color: Color(red: 249/255, green: 181/255, blue: 196/255).opacity(0.5), location: 0.0),
+            .init(color: Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.45), location: 0.5),
+            .init(color: Color(red: 184/255, green: 220/255, blue: 245/255).opacity(0.4), location: 1.0)
         ],
         startPoint: UnitPoint(x: 0.17, y: 0.0),   // 140deg
         endPoint: UnitPoint(x: 0.83, y: 1.0)
@@ -99,7 +99,7 @@ extension LinearGradient {
 
     // Progress bar gradient (粉→紫)
     static let progressBar = LinearGradient(
-        colors: [Color.accentPeach, Color.primary600],
+        colors: [Color(hex: "F9B5C4"), Color(hex: "C4B5E0")],
         startPoint: .leading,
         endPoint: .trailing
     )
@@ -157,7 +157,7 @@ struct AppFonts {
     static let countdownUnit = Font.custom("CormorantGaramond-Regular", size: 22)
     static let pageTitle = Font.custom("CormorantGaramond-Regular", size: 28)
     static let sectionTitle = Font.custom("CormorantGaramond-Regular", size: 24)
-    static let cardTitle = Font.system(size: 14, weight: .medium)
+    static let cardTitle = Font.system(size: 13, weight: .semibold)
     static let bodyText = Font.system(size: 13, weight: .regular)
     static let caption = Font.system(size: 12, weight: .regular)
     static let smallLabel = Font.system(size: 11, weight: .regular)
@@ -216,16 +216,15 @@ struct GlassmorphismCard: ViewModifier {
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .fill(.ultraThinMaterial)
-                    .opacity(0.7)
             )
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white.opacity(0.3))
+                    .fill(Color.white.opacity(0.45))
             )
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
             )
             .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 8, x: 0, y: 2)
     }

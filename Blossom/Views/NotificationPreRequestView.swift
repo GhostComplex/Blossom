@@ -50,15 +50,15 @@ struct NotificationPreRequestView: View {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [Color.accentPeach.opacity(0.4), Color.primary600.opacity(0.25)],
+                                colors: [Color(red: 249/255, green: 181/255, blue: 196/255).opacity(0.4), Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.5)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
-                        .frame(width: 64, height: 64)
+                        .frame(width: 52, height: 52)
                     
-                    Image(systemName: "bell.fill")
-                        .font(.system(size: 28))
+                    Image(systemName: "bell")
+                        .font(.system(size: 22))
                         .foregroundStyle(Color.primaryDark)
                 }
                 .padding(.top, 8)
@@ -99,17 +99,17 @@ struct NotificationPreRequestView: View {
             }
             .padding(28)
             .background(
-                RoundedRectangle(cornerRadius: 28)
-                    .fill(Color.white.opacity(0.45))
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.white.opacity(0.7))
                     .background(
-                        RoundedRectangle(cornerRadius: 28)
+                        RoundedRectangle(cornerRadius: 24)
                             .fill(.ultraThinMaterial)
                     )
-                    .shadow(color: Color.black.opacity(0.12), radius: 24, x: 0, y: 8)
+                    .shadow(color: Color(red: 58/255, green: 47/255, blue: 80/255).opacity(0.08), radius: 24, x: 0, y: 16)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 28)
-                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
             )
             .padding(.horizontal, 40)
         }

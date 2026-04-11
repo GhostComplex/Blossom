@@ -87,17 +87,17 @@ struct HospitalBagView: View {
             
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: AppRadius.full)
-                        .fill(Color.n200)
-                        .frame(height: 10)
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.12))
+                        .frame(height: 7)
                     
-                    RoundedRectangle(cornerRadius: AppRadius.full)
+                    RoundedRectangle(cornerRadius: 3)
                         .fill(progress >= 1.0 ? AnyShapeStyle(Color.success) : AnyShapeStyle(LinearGradient.progressBar))
-                        .frame(width: geometry.size.width * progress, height: 10)
+                        .frame(width: geometry.size.width * progress, height: 7)
                         .animation(.easeInOut(duration: 0.3), value: progress)
                 }
             }
-            .frame(height: 10)
+            .frame(height: 7)
         }
         .padding(AppSpacing.cardPadding)
         .glassCard()

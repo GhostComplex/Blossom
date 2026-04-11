@@ -37,24 +37,24 @@ struct FetalMovementCounterView: View {
                             .frame(width: 170, height: 170)
                             .blur(radius: 15)
 
-                        // Frosted circle
+                        // Frosted circle — design: rgba(255,255,255,0.45) + blur(20px)
                         Circle()
                             .fill(.ultraThinMaterial)
                             .frame(width: 140, height: 140)
                             .overlay(
                                 Circle()
-                                    .fill(Color.white.opacity(0.4))
+                                    .fill(Color.white.opacity(0.45))
                             )
                             .clipShape(Circle())
                             .overlay(
                                 Circle()
                                     .stroke(Color.white.opacity(0.6), lineWidth: 1)
                             )
-                            .shadow(color: Color(hex: "C4B5E0").opacity(0.10), radius: 12, x: 0, y: 4)
+                            .shadow(color: Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.10), radius: 12, x: 0, y: 4)
 
                         // Number
                         Text("\(count)")
-                            .font(.custom("CormorantGaramond-Light", size: 52))
+                            .font(.custom("CormorantGaramond-Light", size: 48))
                             .foregroundStyle(Color.n900)
                             .contentTransition(.numericText())
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: count)
@@ -83,30 +83,30 @@ struct FetalMovementCounterView: View {
                     Spacer()
                     
                     // Action buttons
-                    HStack(spacing: 16) {
-                        // Cancel — frosted
+                    HStack(spacing: 12) {
+                        // Cancel — frosted glass per design
                         Button(action: { dismiss() }) {
                             Text("取消")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(.system(size: 13, weight: .medium))
                                 .foregroundStyle(Color.n700)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
+                                .padding(.horizontal, 28)
+                                .padding(.vertical, 12)
                                 .background(.ultraThinMaterial)
                                 .background(Color.white.opacity(0.5))
-                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: AppRadius.md)
+                                    RoundedRectangle(cornerRadius: 12)
                                         .stroke(Color.white.opacity(0.6), lineWidth: 1)
                                 )
                         }
                         
-                        // Finish — purple solid
+                        // Finish — accent solid
                         Button(action: saveRecord) {
                             Text("完成")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(.system(size: 13, weight: .semibold))
                                 .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
+                                .padding(.horizontal, 28)
+                                .padding(.vertical, 12)
                                 .background(count > 0 ? Color.primary600 : Color.n300)
                                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                         }
