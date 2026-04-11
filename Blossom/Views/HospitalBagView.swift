@@ -232,10 +232,23 @@ struct HospitalBagItemRow: View {
     
     var body: some View {
         HStack(spacing: AppSpacing.md) {
-            // Checkbox — purple circle
-            Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
-                .font(.system(size: 22))
-                .foregroundStyle(item.isCompleted ? Color.primary600 : Color.primary600.opacity(0.35))
+            // Checkbox — custom drawn circle per design spec
+            if item.isCompleted {
+                // Checked: filled purple circle with white checkmark
+                ZStack {
+                    Circle()
+                        .fill(Color.primary600)
+                        .frame(width: 18, height: 18)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(.white)
+                }
+            } else {
+                // Unchecked: 1.5px purple border circle — rgba(183,168,214,0.3)
+                Circle()
+                    .stroke(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.3), lineWidth: 1.5)
+                    .frame(width: 18, height: 18)
+            }
             
             // Item info
             VStack(alignment: .leading, spacing: 2) {

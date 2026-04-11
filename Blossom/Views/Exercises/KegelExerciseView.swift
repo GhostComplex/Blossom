@@ -117,15 +117,13 @@ struct KegelExerciseView: View {
                 .shadow(color: Color.primary600.opacity(0.3), radius: 30, x: 0, y: 0)
                 .animation(.linear(duration: 0.1), value: timer.progress)
 
-            // Frosted center
+            // Frosted center — design spec: rgba(255,255,255,0.4) + blur(16px)
             Circle()
-                .fill(Color.white.opacity(0.4))
+                .fill(.ultraThinMaterial)
                 .frame(width: 180, height: 180)
-                .blur(radius: 0.5)
-                .background(
+                .overlay(
                     Circle()
-                        .fill(.ultraThinMaterial)
-                        .opacity(0.5)
+                        .fill(Color.white.opacity(0.3))
                 )
                 .clipShape(Circle())
 
