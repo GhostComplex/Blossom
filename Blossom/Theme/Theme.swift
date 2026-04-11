@@ -2,41 +2,43 @@
 //  Theme.swift
 //  Blossom (拾月)
 //
-//  Design System: Warm Glassmorphism
-//  Based on DESIGN-SPEC.md v2.0
+//  Design System v2: Soft Glassmorphism — 粉紫蓝
+//  Based on DESIGN-SPEC-v2.md
 //
 
 import SwiftUI
 
 // MARK: - Color Extension
 extension Color {
-    // Primary Colors (暖琥珀玫瑰金系)
-    static let primary600 = Color(hex: "C4855A")    // 琥珀玫瑰金 — 主色
-    static let primaryDark = Color(hex: "A86840")   // 深琥珀棕 — 按钮 hover、强调
-    static let accentPeach = Color(hex: "E8B89A")    // 杏粉 — 图标背景、边框高亮
-    static let accentLight = Color(hex: "F5DDD0")   // 浅杏 — 图标底色、装饰
-    static let warmGold = Color(hex: "D4A86A")      // 暖金 — 渐变点缀
-    
-    // Background Colors
-    static let bgTop = Color(hex: "FDF8F3")         // 页面背景顶部
-    static let bgBottom = Color(hex: "F7EFE6")      // 页面背景底部
-    
-    // Neutral Colors (暖棕调)
-    static let n900 = Color(hex: "2C1F14")          // 深棕 — 主标题
-    static let n700 = Color(hex: "5C3D2A")          // 中棕 — 正文、导航
-    static let n500 = Color(hex: "9B7558")          // 浅棕 — 辅助文字、标签
-    static let n300 = Color(hex: "D4B8A4")          // 极浅棕 — 未激活图标、分割线
-    static let n200 = Color(hex: "EAD9CE")          // 分割线、进度条背景
-    static let n100 = Color(hex: "F5EDE6")          // 浅底色
-    
+    // Primary Colors (薰衣草紫系)
+    static let primary600 = Color(hex: "C9A0DC")    // 薰衣草紫 — 主色、按钮、圆环
+    static let primaryDark = Color(hex: "A87CC0")   // 深紫 — Active Tab、按钮深色
+    static let accentPeach = Color(hex: "F9B5C4")   // 粉色 — 渐变起点、icon 背景
+    static let accentLight = Color(hex: "FDDDE6")   // 浅粉 — 渐变辅助、icon 底色
+    static let warmGold = Color(hex: "B8DCF5")      // 天蓝 — 渐变终点、icon 背景
+
+    // Background Colors (粉紫蓝三色渐变)
+    static let bgTop = Color(hex: "FEF6F8")         // 页面背景 — 粉白
+    static let bgMid = Color(hex: "F6EDF8")         // 页面背景 — 淡紫
+    static let bgBottom = Color(hex: "EDF2FC")       // 页面背景 — 淡蓝
+    static let bgExtra = Color(hex: "F4F0FA")        // 页面背景 — 紫调收尾
+
+    // Neutral Colors (紫调)
+    static let n900 = Color(hex: "3A2F50")          // 深紫 — 主标题
+    static let n700 = Color(hex: "5A4D6E")          // 中深紫 — 正文、导航
+    static let n500 = Color(hex: "7A6E94")          // 中紫 — 辅助文字、标签
+    static let n300 = Color(hex: "AEA3C4")          // 浅紫 — 未激活图标、描述
+    static let n200 = Color(hex: "D4CCE0")          // 分割线、进度条背景
+    static let n100 = Color(hex: "EDE7F8")          // 浅底色
+
     // Functional Colors
-    static let success = Color(hex: "5C9E7A")       // 暖绿（完成状态）
-    static let warning = Color(hex: "D4A86A")       // 暖金（提醒）
-    static let error = Color(hex: "C75B4A")         // 暖红（错误）
-    
+    static let success = Color(hex: "7BC4A0")       // 浅绿（完成状态）
+    static let warning = Color(hex: "E8C97A")       // 暖金（提醒）
+    static let error = Color(hex: "D47B8A")         // 柔红（错误）
+
     // Card Background
-    static let cardBg = Color(hex: "FFF8F2").opacity(0.82)
-    
+    static let cardBg = Color.white.opacity(0.45)
+
     // Hex initializer
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -65,23 +67,34 @@ extension Color {
 
 // MARK: - Gradient Definitions
 extension LinearGradient {
-    // Page background gradient (175deg: top light, bottom warm)
+    // Page background gradient (170deg: 粉→紫→蓝→紫)
     static let pageBackground = LinearGradient(
-        colors: [Color.bgTop, Color.bgBottom],
-        startPoint: .top,
-        endPoint: .bottom
-    )
-    
-    // Countdown number gradient (warm gold)
-    static let countdownText = LinearGradient(
-        colors: [Color.warmGold, Color.primary600, Color.primaryDark],
+        colors: [Color.bgTop, Color.bgMid, Color.bgBottom, Color.bgExtra],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
-    
-    // Progress bar gradient
+
+    // Countdown card gradient (粉紫蓝半透明)
+    static let countdownCard = LinearGradient(
+        colors: [
+            Color.accentPeach.opacity(0.5),
+            Color(hex: "C4B5E0").opacity(0.45),
+            Color.warmGold.opacity(0.4)
+        ],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    // Countdown text gradient (紫调)
+    static let countdownText = LinearGradient(
+        colors: [Color.primaryDark, Color.primary600],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    // Progress bar gradient (粉→紫)
     static let progressBar = LinearGradient(
-        colors: [Color.primaryDark, Color.warmGold],
+        colors: [Color.accentPeach, Color.primary600],
         startPoint: .leading,
         endPoint: .trailing
     )
@@ -89,48 +102,74 @@ extension LinearGradient {
 
 // MARK: - Typography
 struct AppFonts {
-    // Playfair Display for titles and numbers
-    static func playfair(_ size: CGFloat, weight: Font.Weight = .semibold) -> Font {
-        .custom("PlayfairDisplay-SemiBold", size: size)
+    // Cormorant Garamond for titles and numbers
+    static func cormorant(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
+        switch weight {
+        case .light, .thin, .ultraLight:
+            return .custom("CormorantGaramond-Light", size: size)
+        case .medium, .semibold, .bold, .heavy, .black:
+            return .custom("CormorantGaramond-Medium", size: size)
+        default:
+            return .custom("CormorantGaramond-Regular", size: size)
+        }
     }
-    
-    // System font fallback for Playfair
+
+    // System serif fallback for Cormorant
     static func title(_ size: CGFloat) -> Font {
-        .system(size: size, weight: .semibold, design: .serif)
+        .system(size: size, weight: .light, design: .serif)
     }
-    
-    // Inter for body text
+
+    // Nunito for body text
+    static func nunito(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
+        switch weight {
+        case .medium:
+            return .custom("Nunito-Medium", size: size)
+        case .semibold:
+            return .custom("Nunito-SemiBold", size: size)
+        case .bold:
+            return .custom("Nunito-Bold", size: size)
+        default:
+            return .custom("Nunito-Regular", size: size)
+        }
+    }
+
+    // Body text fallback
     static func inter(_ size: CGFloat, weight: Font.Weight = .medium) -> Font {
-        .system(size: size, weight: weight, design: .default)
+        nunito(size, weight: weight)
     }
-    
-    // Specific sizes from design spec
-    static let countdownNumber = Font.system(size: 88, weight: .bold, design: .serif)
-    static let countdownUnit = Font.system(size: 26, weight: .semibold, design: .serif)
-    static let pageTitle = Font.system(size: 34, weight: .semibold, design: .serif)
-    static let sectionTitle = Font.system(size: 20, weight: .semibold, design: .serif)
-    static let cardTitle = Font.system(size: 17, weight: .semibold)
-    static let bodyText = Font.system(size: 14, weight: .medium)
-    static let caption = Font.system(size: 13, weight: .medium)
-    static let smallLabel = Font.system(size: 12, weight: .medium)
-    static let tabLabel = Font.system(size: 10, weight: .semibold)
+
+    // Legacy alias
+    static func playfair(_ size: CGFloat, weight: Font.Weight = .semibold) -> Font {
+        cormorant(size, weight: weight)
+    }
+
+    // Specific sizes from design spec v2
+    static let countdownNumber = Font.system(size: 72, weight: .light, design: .serif)
+    static let countdownUnit = Font.system(size: 22, weight: .regular, design: .serif)
+    static let pageTitle = Font.system(size: 28, weight: .regular, design: .serif)
+    static let sectionTitle = Font.system(size: 24, weight: .regular, design: .serif)
+    static let cardTitle = Font.system(size: 14, weight: .semibold)
+    static let bodyText = Font.system(size: 13, weight: .medium)
+    static let caption = Font.system(size: 12, weight: .medium)
+    static let smallLabel = Font.system(size: 11, weight: .medium)
+    static let tabLabel = Font.system(size: 10, weight: .medium)
 }
 
 // MARK: - Corner Radius
 struct AppRadius {
     static let sm: CGFloat = 10      // Small elements
-    static let md: CGFloat = 14      // Icon backgrounds
-    static let lg: CGFloat = 22      // Cards
-    static let xl: CGFloat = 26      // Main countdown card
-    static let full: CGFloat = 100   // Buttons, badges
+    static let md: CGFloat = 14      // Buttons, icon backgrounds
+    static let lg: CGFloat = 20      // Cards (was 22)
+    static let xl: CGFloat = 28      // Main countdown card (was 26)
+    static let full: CGFloat = 100   // Pill buttons, badges
     static let phone: CGFloat = 50   // Phone frame
 }
 
-// MARK: - Shadows
+// MARK: - Shadows (紫调)
 struct AppShadow {
-    static let sm = Shadow(color: Color(hex: "643214").opacity(0.07), radius: 4, x: 0, y: 2)
-    static let md = Shadow(color: Color(hex: "643214").opacity(0.10), radius: 8, x: 0, y: 6)
-    static let lg = Shadow(color: Color(hex: "643214").opacity(0.13), radius: 16, x: 0, y: 12)
+    static let sm = Shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 4, x: 0, y: 2)
+    static let md = Shadow(color: Color(hex: "C4B5E0").opacity(0.10), radius: 8, x: 0, y: 6)
+    static let lg = Shadow(color: Color(hex: "C4B5E0").opacity(0.13), radius: 16, x: 0, y: 12)
 }
 
 struct Shadow {
@@ -149,11 +188,11 @@ struct AppSpacing {
     static let xl: CGFloat = 20
     static let xxl: CGFloat = 24
     static let xxxl: CGFloat = 32
-    
+
     // Page padding
     static let pageHorizontal: CGFloat = 20
     static let pageVertical: CGFloat = 22
-    
+
     // Card padding
     static let cardPadding: CGFloat = 18
     static let cardSpacing: CGFloat = 12
@@ -162,7 +201,7 @@ struct AppSpacing {
 // MARK: - Glassmorphism Modifier
 struct GlassmorphismCard: ViewModifier {
     var cornerRadius: CGFloat = AppRadius.lg
-    
+
     func body(content: Content) -> some View {
         content
             .background(.ultraThinMaterial)
@@ -170,9 +209,9 @@ struct GlassmorphismCard: ViewModifier {
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(Color.primary600.opacity(0.18), lineWidth: 1)
+                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
             )
-            .shadow(color: Color(hex: "643214").opacity(0.07), radius: 4, x: 0, y: 2)
+            .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 8, x: 0, y: 2)
     }
 }
 

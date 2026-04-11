@@ -132,7 +132,7 @@ struct OnboardingView: View {
                             RoundedRectangle(cornerRadius: AppRadius.lg)
                                 .stroke(Color.accentPeach.opacity(0.18), lineWidth: 1)
                         )
-                        .shadow(color: Color(hex: "643214").opacity(0.07), radius: 4, y: 2)
+                        .shadow(color: Color(hex: "C4B5E0").opacity(0.07), radius: 4, y: 2)
                 )
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .opacity(animateIn ? 1 : 0)

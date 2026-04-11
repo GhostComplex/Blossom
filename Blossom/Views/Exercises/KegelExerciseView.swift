@@ -126,7 +126,7 @@ struct KegelExerciseView: View {
                             lineWidth: 2
                         )
                 )
-                .shadow(color: Color(hex: "643214").opacity(0.13), radius: 16, x: 0, y: 12)
+                .shadow(color: Color(hex: "C4B5E0").opacity(0.13), radius: 16, x: 0, y: 12)
             
             // Progress ring
             Circle()
