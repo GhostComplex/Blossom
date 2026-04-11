@@ -119,6 +119,14 @@ struct ContentView: View {
             hasCompletedOnboarding = true
         }
         
+        // -reset-notification-state: clear notification UserDefaults for testing
+        if args.contains("-reset-notification-state") {
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: "notification_hasShownPreRequest")
+            defaults.removeObject(forKey: "notification_hasCompletedFirstTask")
+            defaults.removeObject(forKey: "notification_permissionGranted")
+        }
+        
         // -tab {name}: switch to specific tab
         if let tabIndex = args.firstIndex(of: "-tab"),
            tabIndex + 1 < args.count {
