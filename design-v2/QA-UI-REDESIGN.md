@@ -33,7 +33,7 @@
 | 2.5 | 卡片标题：Nunito 500（不是 700） | | |
 | 2.6 | 进度条：7px 高度，粉→紫渐变 | | |
 | 2.7 | Tab Bar：半透明白底 + blur(24px) | | |
-| 2.8 | Tab Bar active：紫色 #A87CC0 + 底部 4px 紫色圆点 | | |
+| 2.8 | Tab Bar active：紫色 #A87CC0（颜色区分，无圆点） | | |
 | 2.9 | Tab Bar 图标 stroke：1.5px | | |
 
 ## M3 凯格尔+完成页+胎动（PR #37）
