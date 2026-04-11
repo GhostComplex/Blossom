@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>拾月 App Icon v2</title>
+<style>
+  body { margin:0; background:#f3eff8; display:flex; flex-wrap:wrap; justify-content:center; gap:48px; padding:48px; font-family:-apple-system,sans-serif; }
+  .wrap { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .label { font-size:12px; color:#AEA3C4; font-weight:500; }
+
+  .icon {
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .icon-1024 { width:256px; height:256px; border-radius:56px; }
+  .icon-180 { width:60px; height:60px; border-radius:13px; }
+  .icon-120 { width:40px; height:40px; border-radius:9px; }
+
+  .icon-bg {
+    position:absolute; inset:0;
+    background: linear-gradient(145deg, #FDDDE6 0%, #D4BCE8 40%, #B7A8D6 70%, #A8C8E8 100%);
+  }
+  .icon-glow-top {
+    position:absolute; top:-20%; right:-10%;
+    width:60%; height:60%; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  }
+  .icon-glow-bottom {
+    position:absolute; bottom:-15%; left:-10%;
+    width:50%; height:50%; border-radius:50%;
+    background: radial-gradient(circle, rgba(196,181,224,0.2) 0%, transparent 70%);
+  }
+</style>
+</head>
+<body>
+
+<!-- 1024px -->
+<div class="wrap">
+  <div class="icon icon-1024">
+    <div class="icon-bg"></div>
+    <div class="icon-glow-top"></div>
+    <div class="icon-glow-bottom"></div>
+    <svg width="160" height="160" viewBox="0 0 620 620" fill="none" style="position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.06));">
+      <defs>
+        <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9B5C4"/><stop offset="100%" stop-color="#E8A0B8"/></linearGradient>
+        <linearGradient id="p2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#D4BCE8"/><stop offset="100%" stop-color="#B7A8D6"/></linearGradient>
+        <linearGradient id="p3" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#B8DCF5"/><stop offset="100%" stop-color="#A0C0E0"/></linearGradient>
+        <linearGradient id="inner" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FEF0F3"/><stop offset="100%" stop-color="#E8D8F0"/></linearGradient>
+        <radialGradient id="center" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F0E4F6"/></radialGradient>
+      </defs>
+      <!-- 6 outer petals -->
+      <ellipse cx="310" cy="185" rx="50" ry="112" fill="url(#p1)" opacity="0.85" transform="rotate(0,310,310)"/>
+      <ellipse cx="310" cy="185" rx="50" ry="112" fill="url(#p2)" opacity="0.8" transform="rotate(60,310,310)"/>
+      <ellipse cx="310" cy="185" rx="50" ry="112" fill="url(#p3)" opacity="0.85" transform="rotate(120,310,310)"/>
+      <ellipse cx="310" cy="185" rx="50" ry="112" fill="url(#p1)" opacity="0.8" transform="rotate(180,310,310)"/>
+      <ellipse cx="310" cy="185" rx="50" ry="112" fill="url(#p2)" opacity="0.85" transform="rotate(240,310,310)"/>
+      <ellipse cx="310" cy="185" rx="50" ry="112" fill="url(#p3)" opacity="0.8" transform="rotate(300,310,310)"/>
+      <!-- 6 inner petals -->
+      <ellipse cx="310" cy="215" rx="32" ry="78" fill="url(#inner)" opacity="0.9" transform="rotate(30,310,310)"/>
+      <ellipse cx="310" cy="215" rx="32" ry="78" fill="url(#inner)" opacity="0.85" transform="rotate(90,310,310)"/>
+      <ellipse cx="310" cy="215" rx="32" ry="78" fill="url(#inner)" opacity="0.9" transform="rotate(150,310,310)"/>
+      <ellipse cx="310" cy="215" rx="32" ry="78" fill="url(#inner)" opacity="0.85" transform="rotate(210,310,310)"/>
+      <ellipse cx="310" cy="215" rx="32" ry="78" fill="url(#inner)" opacity="0.9" transform="rotate(270,310,310)"/>
+      <ellipse cx="310" cy="215" rx="32" ry="78" fill="url(#inner)" opacity="0.85" transform="rotate(330,310,310)"/>
+      <!-- Center -->
+      <circle cx="310" cy="310" r="68" fill="url(#center)"/>
+      <circle cx="310" cy="292" r="5" fill="rgba(255,255,255,0.6)"/>
+      <circle cx="326" cy="302" r="4" fill="rgba(255,255,255,0.45)"/>
+      <circle cx="298" cy="320" r="4" fill="rgba(255,255,255,0.4)"/>
+    </svg>
+  </div>
+  <div class="label">1024 × 1024</div>
+</div>
+
+<!-- 180px -->
+<div class="wrap">
+  <div class="icon icon-180">
+    <div class="icon-bg"></div>
+    <div class="icon-glow-top"></div>
+    <svg width="36" height="36" viewBox="0 0 620 620" fill="none" style="position:relative;z-index:1;">
+      <defs>
+        <linearGradient id="sp1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9B5C4"/><stop offset="100%" stop-color="#E8A0B8"/></linearGradient>
+        <linearGradient id="sp2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#D4BCE8"/><stop offset="100%" stop-color="#B7A8D6"/></linearGradient>
+        <radialGradient id="sc" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#FFF"/><stop offset="100%" stop-color="#F0E4F6"/></radialGradient>
+      </defs>
+      <ellipse cx="310" cy="190" rx="48" ry="108" fill="url(#sp1)" opacity="0.85" transform="rotate(0,310,310)"/>
+      <ellipse cx="310" cy="190" rx="48" ry="108" fill="url(#sp2)" opacity="0.8" transform="rotate(60,310,310)"/>
+      <ellipse cx="310" cy="190" rx="48" ry="108" fill="url(#sp1)" opacity="0.85" transform="rotate(120,310,310)"/>
+      <ellipse cx="310" cy="190" rx="48" ry="108" fill="url(#sp2)" opacity="0.8" transform="rotate(180,310,310)"/>
+      <ellipse cx="310" cy="190" rx="48" ry="108" fill="url(#sp1)" opacity="0.85" transform="rotate(240,310,310)"/>
+      <ellipse cx="310" cy="190" rx="48" ry="108" fill="url(#sp2)" opacity="0.8" transform="rotate(300,310,310)"/>
+      <circle cx="310" cy="310" r="65" fill="url(#sc)"/>
+    </svg>
+  </div>
+  <div class="label">180 × 180</div>
+</div>
+
+<!-- 120px -->
+<div class="wrap">
+  <div class="icon icon-120">
+    <div class="icon-bg"></div>
+    <div class="icon-glow-top"></div>
+    <svg width="24" height="24" viewBox="0 0 620 620" fill="none" style="position:relative;z-index:1;">
+      <defs>
+        <linearGradient id="tp1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9B5C4"/><stop offset="100%" stop-color="#E8A0B8"/></linearGradient>
+        <linearGradient id="tp2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#D4BCE8"/><stop offset="100%" stop-color="#B7A8D6"/></linearGradient>
+        <radialGradient id="tc" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#FFF"/><stop offset="100%" stop-color="#F0E4F6"/></radialGradient>
+      </defs>
+      <ellipse cx="310" cy="195" rx="46" ry="100" fill="url(#tp1)" opacity="0.85" transform="rotate(0,310,310)"/>
+      <ellipse cx="310" cy="195" rx="46" ry="100" fill="url(#tp2)" opacity="0.8" transform="rotate(60,310,310)"/>
+      <ellipse cx="310" cy="195" rx="46" ry="100" fill="url(#tp1)" opacity="0.85" transform="rotate(120,310,310)"/>
+      <ellipse cx="310" cy="195" rx="46" ry="100" fill="url(#tp2)" opacity="0.8" transform="rotate(180,310,310)"/>
+      <ellipse cx="310" cy="195" rx="46" ry="100" fill="url(#tp1)" opacity="0.85" transform="rotate(240,310,310)"/>
+      <ellipse cx="310" cy="195" rx="46" ry="100" fill="url(#tp2)" opacity="0.8" transform="rotate(300,310,310)"/>
+      <circle cx="310" cy="310" r="62" fill="url(#tc)"/>
+    </svg>
+  </div>
+  <div class="label">120 × 120</div>
+</div>
+
+</body>
+</html>
