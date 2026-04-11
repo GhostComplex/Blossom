@@ -57,14 +57,6 @@ struct TasksView: View {
             .pageBackground()
             .navigationTitle("任务")
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {}) {
-                        Image(systemName: "calendar")
-                            .foregroundStyle(Color.n700)
-                    }
-                }
-            }
             .fullScreenCover(isPresented: $showKegelExercise) {
                 KegelExerciseView()
             }
@@ -172,15 +164,8 @@ struct TasksView: View {
                 
                 Spacer()
                 
-                if todayTask?.lamazeCompleted != true {
-                    Text("开始练习")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 6)
-                        .background(Color.primary600)
-                        .clipShape(Capsule())
-                }
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Color.n300)
             }
             .padding(AppSpacing.cardPadding)
             .glassCard()
@@ -193,7 +178,7 @@ struct TasksView: View {
         Button(action: { showFetalMovementCounter = true }) {
             HStack(spacing: AppSpacing.lg) {
                 // Icon
-                Image(systemName: "heart.fill")
+                Image(systemName: "heart")
                     .font(.system(size: 22))
                     .foregroundStyle(Color.primaryDark)
                     .frame(width: 44, height: 44)
@@ -218,13 +203,8 @@ struct TasksView: View {
                 
                 Spacer()
                 
-                Text("记录一次")
-                    .font(AppFonts.smallLabel)
-                    .foregroundStyle(Color.primary600)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color.accentLight)
-                    .clipShape(Capsule())
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Color.n300)
             }
             .padding(AppSpacing.cardPadding)
             .glassCard()
