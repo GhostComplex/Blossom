@@ -46,35 +46,24 @@ struct ContentView: View {
                         hasCompletedOnboarding = true
                     }
                 } else {
-                    TabView(selection: $selectedTab) {
-                        HomeView(selectedTab: $selectedTab)
-                            .tabItem {
-                                Label("首页", systemImage: "house")
+                    ZStack(alignment: .bottom) {
+                        // Content area
+                        Group {
+                            switch selectedTab {
+                            case 0: HomeView(selectedTab: $selectedTab)
+                            case 1: TasksView()
+                            case 2: HospitalBagView()
+                            case 3: KnowledgeView()
+                            default: HomeView(selectedTab: $selectedTab)
                             }
-                            .tag(0)
-                        
-                        TasksView()
-                            .tabItem {
-                                Label("任务", systemImage: "checkmark.circle")
-                            }
-                            .tag(1)
-                        
-                        HospitalBagView()
-                            .tabItem {
-                                Label("待产包", systemImage: "bag")
-                            }
-                            .tag(2)
-                        
-                        KnowledgeView()
-                            .tabItem {
-                                Label("知识", systemImage: "book")
-                            }
-                            .tag(3)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+                        // Custom Tab Bar
+                        CustomTabBar(selectedTab: $selectedTab)
                     }
-                    .tabViewStyle(.tabBarOnly)
-                    .tint(Color.primaryDark)
+                    .ignoresSafeArea(.keyboard)
                     .onAppear {
-                        configureTabBarAppearance()
                         configureNavigationBarAppearance()
                     }
                 }
@@ -188,32 +177,6 @@ struct ContentView: View {
         hasCompletedOnboarding = true
     }
     
-    // MARK: - Tab Bar Appearance
-    private func configureTabBarAppearance() {
-        let appearance = UITabBarAppearance()
-        // Use transparent background to prevent iOS 26 Liquid Glass
-        appearance.configureWithTransparentBackground()
-        
-        // Then apply our custom semi-transparent look
-        appearance.backgroundColor = UIColor.white.withAlphaComponent(0.35)
-        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-        
-        // Active / inactive colors
-        let activeColor = UIColor(Color.primaryDark)
-        let inactiveColor = UIColor(Color.n300)
-        
-        appearance.stackedLayoutAppearance.selected.iconColor = activeColor
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: activeColor]
-        appearance.stackedLayoutAppearance.normal.iconColor = inactiveColor
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: inactiveColor]
-        
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-        
-        // Remove selection indicator
-        UITabBar.appearance().selectionIndicatorImage = UIImage()
-    }
-
     // MARK: - Navigation Bar Appearance
     private func configureNavigationBarAppearance() {
         // Large title: Cormorant Garamond Light (design spec: 400 but Light looks closer to mockup)
@@ -249,4 +212,60 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+// MARK: - Custom Tab Bar
+struct CustomTabBar: View {
+    @Binding var selectedTab: Int
+
+    private struct TabItem {
+        let icon: String
+        let label: String
+        let tag: Int
+    }
+
+    private let tabs: [TabItem] = [
+        TabItem(icon: "house", label: "首页", tag: 0),
+        TabItem(icon: "checkmark.circle", label: "任务", tag: 1),
+        TabItem(icon: "bag", label: "待产包", tag: 2),
+        TabItem(icon: "book", label: "知识", tag: 3),
+    ]
+
+    var body: some View {
+        HStack {
+            ForEach(tabs, id: \.tag) { tab in
+                Button(action: { selectedTab = tab.tag }) {
+                    VStack(spacing: 4) {
+                        Image(systemName: tab.icon)
+                            .font(.system(size: 18, weight: .regular))
+                            .imageScale(.medium)
+                        Text(tab.label)
+                            .font(AppFonts.tabLabel)
+                    }
+                    .foregroundStyle(selectedTab == tab.tag ? Color(hex: "A87CC0") : Color(hex: "AEA3C4"))
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier(tab.label)
+                .accessibilityAddTraits(selectedTab == tab.tag ? [.isSelected] : [])
+            }
+        }
+        .padding(.top, 8)
+        .padding(.bottom, 28)
+        .background(
+            ZStack {
+                // Blur
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                // Semi-transparent white
+                Rectangle()
+                    .fill(Color.white.opacity(0.35))
+            }
+        )
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(Color.white.opacity(0.4))
+                .frame(height: 1)
+        }
+    }
 }

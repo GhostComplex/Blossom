@@ -99,7 +99,7 @@ extension LinearGradient {
 
     // Progress bar gradient (粉→紫)
     static let progressBar = LinearGradient(
-        colors: [Color.accentPeach, Color.primary600],
+        colors: [Color.accentPeach, Color(hex: "C4B5E0")],
         startPoint: .leading,
         endPoint: .trailing
     )
@@ -154,14 +154,14 @@ struct AppFonts {
 
     // Specific sizes from design spec v2
     static let countdownNumber = Font.custom("CormorantGaramond-Light", size: 72)
-    static let countdownUnit = Font.custom("CormorantGaramond-Regular", size: 22)
+    static let countdownUnit = Font.custom("Nunito-Regular", size: 15)
     static let pageTitle = Font.custom("CormorantGaramond-Regular", size: 28)
     static let sectionTitle = Font.custom("CormorantGaramond-Regular", size: 24)
-    static let cardTitle = Font.system(size: 14, weight: .medium)
+    static let cardTitle = Font.custom("Nunito-Medium", size: 13)
     static let bodyText = Font.system(size: 13, weight: .regular)
     static let caption = Font.system(size: 12, weight: .regular)
     static let smallLabel = Font.system(size: 11, weight: .regular)
-    static let tabLabel = Font.system(size: 10, weight: .medium)
+    static let tabLabel = Font.custom("Nunito-Medium", size: 9.5)
 }
 
 // MARK: - Corner Radius

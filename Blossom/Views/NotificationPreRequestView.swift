@@ -65,7 +65,7 @@ struct NotificationPreRequestView: View {
                 
                 // Title
                 Text(title)
-                    .font(.custom("CormorantGaramond-Light", size: 20))
+                    .font(.custom("CormorantGaramond-Regular", size: 20))
                     .foregroundStyle(Color.n900)
                 
                 // Description
@@ -80,7 +80,7 @@ struct NotificationPreRequestView: View {
                     // Primary: Accept
                     Button(action: onAccept) {
                         Text("好的，提醒我")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.custom("Nunito-SemiBold", size: 14))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
@@ -91,7 +91,7 @@ struct NotificationPreRequestView: View {
                     // Secondary: Decline
                     Button(action: onDecline) {
                         Text("不了，谢谢")
-                            .font(AppFonts.bodyText)
+                            .font(AppFonts.caption)
                             .foregroundColor(Color.n500)
                     }
                 }

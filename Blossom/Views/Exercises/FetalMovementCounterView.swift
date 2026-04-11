@@ -54,7 +54,7 @@ struct FetalMovementCounterView: View {
 
                         // Number
                         Text("\(count)")
-                            .font(.custom("CormorantGaramond-Light", size: 52))
+                            .font(.custom("CormorantGaramond-Light", size: 48))
                             .foregroundStyle(Color.n900)
                             .contentTransition(.numericText())
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: count)
@@ -69,7 +69,7 @@ struct FetalMovementCounterView: View {
                                 .shadow(color: Color.primary600.opacity(0.3), radius: 12, x: 0, y: 6)
                             
                             Image(systemName: "plus")
-                                .font(.system(size: 24, weight: .medium))
+                                .font(.system(size: 24, weight: .light))
                                 .foregroundStyle(.white)
                         }
                     }
@@ -87,7 +87,7 @@ struct FetalMovementCounterView: View {
                         // Cancel — frosted
                         Button(action: { dismiss() }) {
                             Text("取消")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(.custom("Nunito-SemiBold", size: 13))
                                 .foregroundStyle(Color.n700)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
@@ -103,7 +103,7 @@ struct FetalMovementCounterView: View {
                         // Finish — purple solid
                         Button(action: saveRecord) {
                             Text("完成")
-                                .font(.system(size: 16, weight: .semibold))
+                                .font(.custom("Nunito-SemiBold", size: 13))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)

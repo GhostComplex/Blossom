@@ -100,7 +100,7 @@ struct HomeView: View {
                 .foregroundStyle(Color.n500)
             
             Text(greetingText)
-                .font(AppFonts.sectionTitle)
+                .font(.custom("CormorantGaramond-Regular", size: 26))
                 .foregroundStyle(Color.n900)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -127,7 +127,8 @@ struct HomeView: View {
                     .foregroundStyle(Color.n900)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(Color.white.opacity(0.5))
+                    .background(Color.white.opacity(0.35))
+                    .overlay(Capsule().stroke(Color.white.opacity(0.4), lineWidth: 1))
                     .clipShape(Capsule())
             }
             
@@ -156,7 +157,7 @@ struct HomeView: View {
                     Image(systemName: "calendar")
                         .foregroundStyle(Color.primaryDark)
                     Text("预产期 \(profile.dueDate, format: .dateTime.year().month().day())")
-                        .font(AppFonts.caption)
+                        .font(AppFonts.smallLabel)
                         .foregroundStyle(Color.n900)
                 }
             }
@@ -178,9 +179,9 @@ struct HomeView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.xl)
-                .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                .stroke(Color.white.opacity(0.5), lineWidth: 1)
         )
-        .shadow(color: Color(hex: "C4B5E0").opacity(0.10), radius: 12, x: 0, y: 4)
+        .shadow(color: Color(hex: "C4A0DC").opacity(0.12), radius: 20, x: 0, y: 8)
     }
     
     // MARK: - Task Grid (2x2)
@@ -195,7 +196,7 @@ struct HomeView: View {
                         title: "凯格尔运动",
                         subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.kegelCompleted ?? false,
-                        iconGradient: [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]
+                        iconGradient: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -206,7 +207,7 @@ struct HomeView: View {
                         title: "拉玛泽练习",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
-                        iconGradient: [Color.primary600.opacity(0.45), Color(hex: "C4B5E0").opacity(0.3)]
+                        iconGradient: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -217,7 +218,7 @@ struct HomeView: View {
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false,
-                        iconGradient: [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]
+                        iconGradient: [Color(hex: "DBEDFA"), Color(hex: "C6E3F7")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -228,7 +229,7 @@ struct HomeView: View {
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "C4B5E0").opacity(0.45), Color.primary600.opacity(0.25)]
+                        iconGradient: [Color(hex: "E4CFEE"), Color(hex: "D4B3E3")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -242,11 +243,11 @@ struct HomeView: View {
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
             HStack {
                 Text("待产包准备进度")
-                    .font(.custom("CormorantGaramond-Regular", size: 16))
+                    .font(.custom("Nunito-SemiBold", size: 12))
                     .foregroundStyle(Color.n900)
                 Spacer()
                 Text("\(bagCompleted) / \(bagTotal)")
-                    .font(AppFonts.bodyText)
+                    .font(.custom("Nunito-Medium", size: 12))
                     .foregroundStyle(Color.n500)
             }
             
@@ -254,7 +255,7 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     // Background
                     RoundedRectangle(cornerRadius: AppRadius.full)
-                        .fill(Color.n200)
+                        .fill(Color(hex: "C4B5E0").opacity(0.12))
                         .frame(height: 7)
                     
                     // Progress
@@ -373,14 +374,14 @@ struct TaskGridCard: View {
     let title: String
     let subtitle: String
     let isCompleted: Bool
-    var iconGradient: [Color] = [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)]
+    var iconGradient: [Color] = [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             // Icon
             Image(systemName: icon)
                 .font(.system(size: 20))
-                .foregroundStyle(isCompleted ? Color.success : Color.primaryDark)
+                .foregroundStyle(isCompleted ? Color.success : .white)
                 .frame(width: 40, height: 40)
                 .background(
                     Group {
@@ -399,11 +400,11 @@ struct TaskGridCard: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
-                
+
                 Text(subtitle)
-                    .font(AppFonts.caption)
+                    .font(.custom("Nunito-Regular", size: 10.5))
                     .foregroundStyle(isCompleted ? Color.success : Color.n500)
             }
         }

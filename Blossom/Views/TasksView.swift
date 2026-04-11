@@ -85,10 +85,18 @@ struct TasksView: View {
             HStack(spacing: AppSpacing.lg) {
                 // Icon
                 Image(systemName: "figure.strengthtraining.traditional")
-                    .font(.system(size: 22))
-                    .foregroundStyle(todayTask?.kegelCompleted == true ? Color.success : Color.primaryDark)
+                    .font(.system(size: 18))
+                    .foregroundStyle(todayTask?.kegelCompleted == true ? Color.success : .white)
                     .frame(width: 44, height: 44)
-                    .background(todayTask?.kegelCompleted == true ? Color.success.opacity(0.15) : Color.accentLight)
+                    .background(
+                        todayTask?.kegelCompleted == true
+                        ? AnyShapeStyle(Color.success.opacity(0.15))
+                        : AnyShapeStyle(LinearGradient(
+                            colors: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -133,10 +141,18 @@ struct TasksView: View {
             HStack(spacing: AppSpacing.lg) {
                 // Icon
                 Image(systemName: "wind")
-                    .font(.system(size: 22))
-                    .foregroundStyle(todayTask?.lamazeCompleted == true ? Color.success : Color.primaryDark)
+                    .font(.system(size: 18))
+                    .foregroundStyle(todayTask?.lamazeCompleted == true ? Color.success : .white)
                     .frame(width: 44, height: 44)
-                    .background(todayTask?.lamazeCompleted == true ? Color.success.opacity(0.15) : Color.accentLight)
+                    .background(
+                        todayTask?.lamazeCompleted == true
+                        ? AnyShapeStyle(Color.success.opacity(0.15))
+                        : AnyShapeStyle(LinearGradient(
+                            colors: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -179,10 +195,16 @@ struct TasksView: View {
             HStack(spacing: AppSpacing.lg) {
                 // Icon
                 Image(systemName: "heart")
-                    .font(.system(size: 22))
-                    .foregroundStyle(Color.primaryDark)
+                    .font(.system(size: 18))
+                    .foregroundStyle(.white)
                     .frame(width: 44, height: 44)
-                    .background(Color.accentLight)
+                    .background(
+                        LinearGradient(
+                            colors: [Color(hex: "E4CFEE"), Color(hex: "D4B3E3")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                 
                 VStack(alignment: .leading, spacing: 4) {
