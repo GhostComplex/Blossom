@@ -568,6 +568,11 @@ final class BlossomUITests: XCTestCase {
         let dayUnit = app.staticTexts["天"]
         XCTAssertTrue(dayUnit.exists, "应显示『天』单位")
 
+        // Verify 「预产期」label on home (PRD §2.1.2)
+        let dueDateLabel = app.staticTexts["预产期"]
+        XCTAssertTrue(dueDateLabel.waitForExistence(timeout: 3),
+                      "应显示『预产期』文字")
+
         snap("countdown-01-home")
     }
 
