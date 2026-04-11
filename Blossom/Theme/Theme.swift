@@ -69,20 +69,25 @@ extension Color {
 extension LinearGradient {
     // Page background gradient (170deg: 粉→紫→蓝→紫)
     static let pageBackground = LinearGradient(
-        colors: [Color.bgTop, Color.bgMid, Color.bgBottom, Color.bgExtra],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
+        stops: [
+            .init(color: Color.bgTop, location: 0.0),
+            .init(color: Color.bgMid, location: 0.35),
+            .init(color: Color.bgBottom, location: 0.70),
+            .init(color: Color.bgExtra, location: 1.0)
+        ],
+        startPoint: UnitPoint(x: 0.41, y: 0.0),   // 170deg ≈ nearly vertical
+        endPoint: UnitPoint(x: 0.59, y: 1.0)
     )
 
-    // Countdown card gradient (粉紫蓝半透明)
+    // Countdown card gradient (140deg: 粉紫蓝半透明)
     static let countdownCard = LinearGradient(
-        colors: [
-            Color.accentPeach.opacity(0.5),
-            Color(hex: "C4B5E0").opacity(0.45),
-            Color.warmGold.opacity(0.4)
+        stops: [
+            .init(color: Color.accentPeach.opacity(0.5), location: 0.0),
+            .init(color: Color(hex: "C4B5E0").opacity(0.45), location: 0.5),
+            .init(color: Color.warmGold.opacity(0.4), location: 1.0)
         ],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
+        startPoint: UnitPoint(x: 0.17, y: 0.0),   // 140deg
+        endPoint: UnitPoint(x: 0.83, y: 1.0)
     )
 
     // Countdown text gradient (紫调)
@@ -148,10 +153,10 @@ struct AppFonts {
     static let countdownUnit = Font.system(size: 22, weight: .regular, design: .serif)
     static let pageTitle = Font.system(size: 28, weight: .regular, design: .serif)
     static let sectionTitle = Font.system(size: 24, weight: .regular, design: .serif)
-    static let cardTitle = Font.system(size: 14, weight: .semibold)
-    static let bodyText = Font.system(size: 13, weight: .medium)
-    static let caption = Font.system(size: 12, weight: .medium)
-    static let smallLabel = Font.system(size: 11, weight: .medium)
+    static let cardTitle = Font.system(size: 14, weight: .medium)
+    static let bodyText = Font.system(size: 13, weight: .regular)
+    static let caption = Font.system(size: 12, weight: .regular)
+    static let smallLabel = Font.system(size: 11, weight: .regular)
     static let tabLabel = Font.system(size: 10, weight: .medium)
 }
 
@@ -204,8 +209,15 @@ struct GlassmorphismCard: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background(.ultraThinMaterial)
-            .background(Color.cardBg)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(.ultraThinMaterial)
+                    .opacity(0.7)
+            )
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.white.opacity(0.3))
+            )
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)

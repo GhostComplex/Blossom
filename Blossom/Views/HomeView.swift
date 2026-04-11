@@ -132,13 +132,16 @@ struct HomeView: View {
         .padding(.horizontal, 28)
         .frame(maxWidth: .infinity)
         .background(
-            RoundedRectangle(cornerRadius: AppRadius.xl)
-                .fill(LinearGradient.countdownCard)
-                .background(
-                    RoundedRectangle(cornerRadius: AppRadius.xl)
-                        .fill(.ultraThinMaterial)
-                )
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl))
+            ZStack {
+                // Blur layer
+                RoundedRectangle(cornerRadius: AppRadius.xl)
+                    .fill(.ultraThinMaterial)
+                    .opacity(0.6)
+                // Gradient overlay
+                RoundedRectangle(cornerRadius: AppRadius.xl)
+                    .fill(LinearGradient.countdownCard)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl))
         )
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.xl)
@@ -151,7 +154,7 @@ struct HomeView: View {
     private var taskGrid: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             Text("今日任务")
-                .font(AppFonts.cardTitle)
+                .font(.system(size: 18, weight: .regular, design: .serif))
                 .foregroundStyle(Color.n900)
             
             LazyVGrid(columns: [
@@ -163,7 +166,8 @@ struct HomeView: View {
                         icon: "figure.strengthtraining.traditional",
                         title: "凯格尔运动",
                         subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
-                        isCompleted: todayTask?.kegelCompleted ?? false
+                        isCompleted: todayTask?.kegelCompleted ?? false,
+                        iconGradient: [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -173,7 +177,8 @@ struct HomeView: View {
                         icon: "wind",
                         title: "拉玛泽练习",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
-                        isCompleted: todayTask?.lamazeCompleted ?? false
+                        isCompleted: todayTask?.lamazeCompleted ?? false,
+                        iconGradient: [Color.primary600.opacity(0.45), Color(hex: "C4B5E0").opacity(0.3)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -183,7 +188,8 @@ struct HomeView: View {
                         icon: "bag.fill",
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
-                        isCompleted: false
+                        isCompleted: false,
+                        iconGradient: [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -193,7 +199,8 @@ struct HomeView: View {
                         icon: "book.fill",
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
-                        isCompleted: false
+                        isCompleted: false,
+                        iconGradient: [Color(hex: "C4B5E0").opacity(0.45), Color.primary600.opacity(0.25)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -209,7 +216,7 @@ struct HomeView: View {
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
             HStack {
                 Text("待产包准备进度")
-                    .font(AppFonts.cardTitle)
+                    .font(.system(size: 16, weight: .regular, design: .serif))
                     .foregroundStyle(Color.n900)
                 Spacer()
                 Text("\(bagCompleted) / \(bagTotal)")
@@ -340,6 +347,7 @@ struct TaskGridCard: View {
     let title: String
     let subtitle: String
     let isCompleted: Bool
+    var iconGradient: [Color] = [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)]
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -354,7 +362,7 @@ struct TaskGridCard: View {
                             Color.success.opacity(0.15)
                         } else {
                             LinearGradient(
-                                colors: [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)],
+                                colors: iconGradient,
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
