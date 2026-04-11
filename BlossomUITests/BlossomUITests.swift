@@ -38,6 +38,15 @@ final class BlossomUITests: XCTestCase {
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+
+        // Also save to /tmp/blossom-qa/ for easy extraction
+        let dir = "/tmp/blossom-qa"
+        try? FileManager.default.createDirectory(
+            atPath: dir, withIntermediateDirectories: true)
+        if let pngData = screenshot.pngRepresentation {
+            let path = "\(dir)/\(name).png"
+            try? pngData.write(to: URL(fileURLWithPath: path))
+        }
     }
 
     // MARK: - Full User Flow (Onboarding → All Tabs → Exercises → Articles)
