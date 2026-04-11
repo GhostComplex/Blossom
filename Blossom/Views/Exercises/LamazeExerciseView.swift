@@ -75,7 +75,7 @@ struct LamazeExerciseView: View {
                 icon: "wind",
                 title: "跟练模式",
                 description: "跟随动画一起练习呼吸",
-                color: Color.primary600
+                iconGradient: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
             ) {
                 withAnimation { selectedMode = .practice }
             }
@@ -85,7 +85,7 @@ struct LamazeExerciseView: View {
                 icon: "book.fill",
                 title: "学习模式",
                 description: "查看 6 阶段呼吸法图文教程",
-                color: Color.warmGold
+                iconGradient: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")]
             ) {
                 withAnimation { selectedMode = .learn }
             }
@@ -95,7 +95,7 @@ struct LamazeExerciseView: View {
                 icon: "lightbulb.fill",
                 title: "知识卡片",
                 description: "了解拉玛泽分娩法原理",
-                color: Color.success
+                iconGradient: [Color(hex: "DBEDFA"), Color(hex: "C6E3F7")]
             ) {
                 // TODO: Navigate to knowledge tab
                 dismiss()
@@ -191,7 +191,7 @@ struct ModeCard: View {
     let icon: String
     let title: String
     let description: String
-    let color: Color
+    let iconGradient: [Color]
     let action: () -> Void
     
     var body: some View {
@@ -203,7 +203,7 @@ struct ModeCard: View {
                     .frame(width: 56, height: 56)
                     .background(
                         LinearGradient(
-                            colors: [color.opacity(0.7), color.opacity(1.0)],
+                            colors: iconGradient,
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
