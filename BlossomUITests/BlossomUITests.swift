@@ -307,15 +307,15 @@ final class BlossomUITests: XCTestCase {
             let circleButton = app.images["plus"].firstMatch
             XCTAssertTrue(circleButton.waitForExistence(timeout: 3), "+1 按钮应存在")
             circleButton.tap()
-            sleep(0.5)
+            Thread.sleep(forTimeInterval: 0.5)
             circleButton.tap()
-            sleep(0.5)
+            Thread.sleep(forTimeInterval: 0.5)
             circleButton.tap()
         } else {
             plusButton.tap()
-            sleep(0.5)
+            Thread.sleep(forTimeInterval: 0.5)
             plusButton.tap()
-            sleep(0.5)
+            Thread.sleep(forTimeInterval: 0.5)
             plusButton.tap()
         }
         sleep(1)
@@ -622,7 +622,8 @@ final class BlossomUITests: XCTestCase {
         if endButton.waitForExistence(timeout: 2) {
             endButton.tap()
             sleep(1)
-            let confirmEnd = app.buttons["结束"]
+            // Confirm in alert (destructive button)
+            let confirmEnd = app.alerts.buttons["结束"]
             if confirmEnd.waitForExistence(timeout: 2) {
                 confirmEnd.tap()
             }
@@ -673,7 +674,7 @@ final class BlossomUITests: XCTestCase {
             // Some stages may need scrolling
             if !stageText.exists {
                 app.swipeUp()
-                sleep(0.5)
+                Thread.sleep(forTimeInterval: 0.5)
             }
             XCTAssertTrue(stageText.waitForExistence(timeout: 3),
                           "应显示『\(name)』阶段")
@@ -742,12 +743,12 @@ final class BlossomUITests: XCTestCase {
             // Adjust month wheel (typically index 1 for zh locale)
             let monthWheel = pickerWheels.element(boundBy: min(1, pickerWheels.count - 1))
             monthWheel.adjust(toPickerWheelValue: "\(month)月")
-            sleep(0.5)
+            Thread.sleep(forTimeInterval: 0.5)
 
             // Adjust day wheel
             let dayWheel = pickerWheels.element(boundBy: min(2, pickerWheels.count - 1))
             dayWheel.adjust(toPickerWheelValue: "\(day)日")
-            sleep(0.5)
+            Thread.sleep(forTimeInterval: 0.5)
         }
 
         snap("duedate-today-03-today-selected")
