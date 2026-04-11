@@ -60,16 +60,7 @@ struct KegelExerciseView: View {
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.vertical, AppSpacing.pageVertical)
             }
-            .navigationTitle("凯格尔运动")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: handleBack) {
-                        Image(systemName: "chevron.left")
-                            .foregroundStyle(Color.n700)
-                    }
-                }
-            }
+            .navigationBarHidden(true)
             .onAppear {
                 timer.configure(level: level)
             }
@@ -128,11 +119,13 @@ struct KegelExerciseView: View {
 
             // Frosted center
             Circle()
-                .fill(.ultraThinMaterial)
+                .fill(Color.white.opacity(0.4))
                 .frame(width: 180, height: 180)
-                .overlay(
+                .blur(radius: 0.5)
+                .background(
                     Circle()
-                        .fill(Color.white.opacity(0.4))
+                        .fill(.ultraThinMaterial)
+                        .opacity(0.5)
                 )
                 .clipShape(Circle())
 
@@ -153,14 +146,9 @@ struct KegelExerciseView: View {
     
     // MARK: - Progress Dots
     private var progressDots: some View {
-        HStack(spacing: 8) {
-            ForEach(0..<level.totalSets, id: \.self) { index in
-                Circle()
-                    .fill(index < timer.completedSets ? Color.primary600 : Color.n200)
-                    .frame(width: 10, height: 10)
-                    .animation(.easeInOut(duration: 0.3), value: timer.completedSets)
-            }
-        }
+        Text("第 \(timer.completedSets + 1) 组 / 共 \(level.totalSets) 组")
+            .font(AppFonts.caption)
+            .foregroundStyle(Color.n500)
     }
     
     // MARK: - Progress Text
