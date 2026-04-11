@@ -57,7 +57,7 @@ struct KnowledgeView: View {
     private var categoryGrid: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             Text("分类")
-                .font(AppFonts.cardTitle)
+                .font(.system(size: 20, weight: .light, design: .serif))
                 .foregroundStyle(Color.n900)
             
             LazyVGrid(columns: [
@@ -81,7 +81,7 @@ struct KnowledgeView: View {
     private var hotArticlesSection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             Text("热门文章")
-                .font(AppFonts.cardTitle)
+                .font(.system(size: 20, weight: .light, design: .serif))
                 .foregroundStyle(Color.n900)
             
             VStack(spacing: AppSpacing.md) {
@@ -126,17 +126,24 @@ struct CategoryCard: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
+        VStack(spacing: AppSpacing.md) {
+            // Centered icon
             Image(systemName: icon)
                 .font(.system(size: 22))
                 .foregroundStyle(Color.primaryDark)
                 .frame(width: 44, height: 44)
-                .background(Color.accentLight)
+                .background(
+                    LinearGradient(
+                        colors: [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(spacing: 2) {
                 Text(category)
-                    .font(AppFonts.cardTitle)
+                    .font(.system(size: 16, weight: .light, design: .serif))
                     .foregroundStyle(Color.n900)
                     .lineLimit(1)
                 
@@ -145,7 +152,7 @@ struct CategoryCard: View {
                     .foregroundStyle(Color.n500)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .padding(AppSpacing.cardPadding)
         .glassCard()
     }
@@ -218,8 +225,12 @@ struct ArticleDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppSpacing.xxl) {
-                // Article content (render markdown)
-                MarkdownView(text: article.content)
+                // Article content in frosted container
+                VStack(alignment: .leading, spacing: AppSpacing.lg) {
+                    MarkdownView(text: article.content)
+                }
+                .padding(AppSpacing.cardPadding)
+                .glassCard()
                 
                 // Disclaimer
                 VStack(alignment: .leading, spacing: 8) {
@@ -238,12 +249,12 @@ struct ArticleDetailView: View {
                             Image(systemName: "play.fill")
                             Text("开始跟练")
                         }
-                        .font(AppFonts.cardTitle)
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
                         .background(Color.primary600)
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
+                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                     }
                 } else if article.category == "凯格尔运动" {
                     Button(action: { showKegelExercise = true }) {
@@ -251,12 +262,12 @@ struct ArticleDetailView: View {
                             Image(systemName: "play.fill")
                             Text("开始跟练")
                         }
-                        .font(AppFonts.cardTitle)
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
                         .background(Color.primary600)
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
+                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                     }
                 }
             }
@@ -270,7 +281,7 @@ struct ArticleDetailView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: { article.isFavorited.toggle() }) {
                     Image(systemName: article.isFavorited ? "heart.fill" : "heart")
-                        .foregroundStyle(article.isFavorited ? Color.error : Color.n700)
+                        .foregroundStyle(article.isFavorited ? Color.accentPeach : Color.n500)
                 }
             }
         }

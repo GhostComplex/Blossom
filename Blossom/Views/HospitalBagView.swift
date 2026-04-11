@@ -47,7 +47,16 @@ struct HospitalBagView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: { showAddItem = true }) {
                         Image(systemName: "plus")
-                            .foregroundStyle(Color.n700)
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(Color.primaryDark)
+                            .frame(width: 32, height: 32)
+                            .background(.ultraThinMaterial)
+                            .background(Color.white.opacity(0.5))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                            )
                     }
                 }
             }
@@ -242,10 +251,10 @@ struct HospitalBagItemRow: View {
     
     var body: some View {
         HStack(spacing: AppSpacing.md) {
-            // Checkbox
+            // Checkbox — purple circle
             Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                 .font(.system(size: 22))
-                .foregroundStyle(item.isCompleted ? Color.success : Color.n300)
+                .foregroundStyle(item.isCompleted ? Color.primary600 : Color.primary600.opacity(0.35))
             
             // Item info
             VStack(alignment: .leading, spacing: 2) {
