@@ -219,3 +219,79 @@ background: linear-gradient(140deg,
 2. **按钮字号偏大** — Design HTML 13-14px，代码 16px。统一改小
 3. **正文字号偏大** — Design HTML 12-13px，代码 14px
 4. **正文字体** — Design HTML 用 Nunito，代码用 `.system`。需要 bundle Nunito 或接受系统字体
+
+---
+
+## 自定义 Tab Bar（替代系统 TabView）
+
+**原因：** iOS 26 Liquid Glass 圆底无法通过 API 关闭，需要完全自定义 Tab Bar。
+
+**Design HTML CSS 值：**
+```css
+.bn {
+    /* 容器 */
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 28px;           /* 顶部 8px，底部 28px（safe area） */
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255,255,255,0.4);
+}
+
+.ni {
+    /* 每个 Tab item */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 9.5px;
+    color: var(--text-light);      /* #AEA3C4 — inactive */
+    font-weight: 500;
+}
+
+.ni.act {
+    color: var(--accent-dark);     /* #A87CC0 — active */
+}
+```
+
+**Tab icon 规格：**
+- SVG stroke 1.5px, fill: none
+- 尺寸：18×18
+- inactive: `#AEA3C4`
+- active: `#A87CC0`
+
+**Tab 文字：**
+- 字号：9.5px
+- 字重：500 (medium)
+- inactive: `#AEA3C4`
+- active: `#A87CC0`
+
+**实现方案：**
+```swift
+// 用 HStack 替代系统 TabView 底部栏
+struct CustomTabBar: View {
+    @Binding var selectedTab: Int
+    
+    var body: some View {
+        HStack {
+            // 4 个 tab item，等宽分布
+            // 每个 item: VStack { Image(SVG) + Text }
+            // 背景: .background(.ultraThinMaterial) 或 Color.white.opacity(0.35).blur(24)
+            // 顶部 border: Rectangle().frame(height: 1).foregroundColor(Color.white.opacity(0.4))
+        }
+        .padding(.top, 8)
+        .padding(.bottom, 28)  // safe area
+    }
+}
+```
+
+**4 个 Tab 的 icon（systemName）：**
+| Tab | icon | 文字 |
+|-----|------|------|
+| 首页 | `house` | 首页 |
+| 任务 | `clock` | 任务 |
+| 待产包 | `checklist` | 待产包 |
+| 知识 | `book` | 知识 |
+
+**注意：** 不使用 `Image(systemName:).renderingMode(.template)` 的实心模式，用 outline 模式（SwiftUI 默认就是 outline）。
