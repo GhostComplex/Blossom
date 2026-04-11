@@ -13,7 +13,6 @@ struct HospitalBagView: View {
     @Query(sort: \HospitalBagItem.sortOrder) private var items: [HospitalBagItem]
     
     @State private var showAddItem = false
-    @State private var hideCompleted = false
     
     private var categories: [String] {
         HospitalBagCategory.allCases.map { $0.rawValue }
@@ -99,14 +98,6 @@ struct HospitalBagView: View {
                 }
             }
             .frame(height: 10)
-            
-            // 隐藏已完成开关
-            Toggle(isOn: $hideCompleted) {
-                Text("隐藏已准备")
-                    .font(AppFonts.caption)
-                    .foregroundStyle(Color.n500)
-            }
-            .toggleStyle(SwitchToggleStyle(tint: Color.primary600))
         }
         .padding(AppSpacing.cardPadding)
         .glassCard()
@@ -115,7 +106,6 @@ struct HospitalBagView: View {
     // MARK: - Category Section
     private func categorySection(_ category: String) -> some View {
         let categoryItems = items.filter { $0.category == category }
-        let filteredItems = hideCompleted ? categoryItems.filter { !$0.isCompleted } : categoryItems
         let categoryCompleted = categoryItems.filter { $0.isCompleted }.count
         
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
@@ -133,26 +123,17 @@ struct HospitalBagView: View {
             }
             
             // Items
-            if filteredItems.isEmpty {
-                if hideCompleted && categoryCompleted == categoryItems.count {
-                    Text("全部已准备 ✓")
-                        .font(AppFonts.caption)
-                        .foregroundStyle(Color.success)
-                        .padding(.vertical, 8)
-                }
-            } else {
-                VStack(spacing: 0) {
-                    ForEach(filteredItems) { item in
-                        HospitalBagItemRow(item: item)
-                        
-                        if item.id != filteredItems.last?.id {
-                            Divider()
-                                .background(Color.n200)
-                        }
+            VStack(spacing: 0) {
+                ForEach(categoryItems) { item in
+                    HospitalBagItemRow(item: item)
+                    
+                    if item.id != categoryItems.last?.id {
+                        Divider()
+                            .background(Color.n200)
                     }
                 }
-                .glassCard()
             }
+            .glassCard()
         }
     }
     
