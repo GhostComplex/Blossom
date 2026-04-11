@@ -70,6 +70,7 @@ struct ContentView: View {
             // Notification pre-request overlay
             if notificationManager.shouldShowPreRequest {
                 NotificationPreRequestView(
+                    triggerSource: notificationManager.preRequestTriggerSource,
                     onAccept: {
                         withAnimation(.spring(response: 0.3)) {
                             notificationManager.acceptPreRequest()
