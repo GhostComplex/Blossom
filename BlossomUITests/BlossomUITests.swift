@@ -43,10 +43,8 @@ final class BlossomUITests: XCTestCase {
         let dir = "/tmp/blossom-qa"
         try? FileManager.default.createDirectory(
             atPath: dir, withIntermediateDirectories: true)
-        if let pngData = screenshot.pngRepresentation {
-            let path = "\(dir)/\(name).png"
-            try? pngData.write(to: URL(fileURLWithPath: path))
-        }
+        let path = "\(dir)/\(name).png"
+        try? screenshot.pngRepresentation.write(to: URL(fileURLWithPath: path))
     }
 
     // MARK: - Full User Flow (Onboarding → All Tabs → Exercises → Articles)
