@@ -1,101 +1,161 @@
-# UI 还原度逐屏对比报告
+# UI 还原度精确对比：Design HTML CSS 值 vs Swift 代码值
 
 **日期：** 2026-04-11  
-**对比基准：** `design-v2/design.html` vs App（HEAD `c8ee143`，clean build）
+**目的：** 逐值对比，开发直接改数值
 
 ---
 
-## 1. 首页
+## P0 — icon 颜色反了
 
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 1.1 | icon 背景色 | 粉色 `rgba(249,181,196,0.5→0.8)` / 紫色 / 蓝色 / 深紫色 **各不同** | 灰紫色，区分度不够 | HomeView.swift |
-| 1.2 | icon 内容 | **白色 stroke SVG** (fill:none) | 彩色 SF Symbol (实心) | HomeView.swift |
-| 1.3 | 卡片毛玻璃 | `rgba(255,255,255,0.45)` 能透出背景渐变 | 偏白偏不透明 | Theme.swift |
-| 1.4 | 进度条颜色 | `linear-gradient(90deg, #F9B5C4, #C4B5E0)` 粉→紫 | 灰色 | HomeView.swift |
-| 1.5 | 倒计时卡片渐变 | 粉紫蓝三色渐变明显 | 渐变偏淡偏灰 | HomeView.swift |
-| 1.6 | 「晚上好」字体 | Cormorant Garamond 纤细 | 系统粗黑体（中文 fallback 预期） | — |
-| 1.7 | Tab Bar 圆底 | 无 | Liquid Glass 圆底 | iOS 26 限制已接受 |
+### 问题：icon 内容用了彩色 SF Symbol，应该是白色 stroke
 
-## 2. 任务页
+**Design HTML：**
+```html
+<svg stroke="white" stroke-width="2" fill="none">  <!-- 白色描边，无填充 -->
+```
 
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 2.1 | 「任务」标题 | Cormorant Garamond 24px | 系统粗黑体（中文 fallback） | — |
-| 2.2 | icon 背景+内容 | 同首页：彩色背景+白色 stroke | 灰色背景+彩色 icon | TasksView.swift |
-| 2.3 | 「完成 0/3」字体 | Nunito 轻 | 系统字体（接近） | ✅ 可接受 |
+**Swift 代码（HomeView.swift:383-384）：**
+```swift
+Image(systemName: icon)
+    .foregroundStyle(isCompleted ? Color.success : Color.primaryDark)  // ❌ 紫色图标
+```
 
-## 3. 凯格尔
+**应改为：**
+```swift
+Image(systemName: icon)
+    .foregroundStyle(.white)  // ✅ 白色图标
+```
 
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 3.1 | 背景渐变 | 浅粉→浅紫渐变 | 偏白偏淡 | KegelExerciseView.swift |
-| 3.2 | 圆环中心 | `rgba(255,255,255,0.4)` + blur | 偏白（PR#52 改善了但仍偏实） | KegelExerciseView.swift |
-| 3.3 | 导航栏 | 无（全屏） | 已隐藏 ✅ | — |
-| 3.4 | 组数指示器 | 文字「第 X 组 / 共 10 组」 | 已改 ✅ | — |
+### 问题：icon 背景颜色不够饱和
 
-## 4. 拉玛泽
+**Design HTML（每个卡片不同）：**
+```css
+/* 凯格尔 */ background: linear-gradient(135deg, rgba(249,181,196,0.5), rgba(249,181,196,0.8));  /* 粉色 */
+/* 拉玛泽 */ background: linear-gradient(135deg, rgba(196,181,224,0.5), rgba(196,181,224,0.8));  /* 紫色 */
+/* 待产包 */ background: linear-gradient(135deg, rgba(184,220,245,0.5), rgba(184,220,245,0.8));  /* 蓝色 */
+/* 知识   */ background: linear-gradient(135deg, rgba(201,160,220,0.5), rgba(201,160,220,0.8));  /* 深紫 */
+```
 
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 4.1 | icon 背景+内容 | 粉/紫/蓝渐变背景 + 白色 stroke | 紫色背景 + 彩色 icon | LamazeExerciseView.swift |
-| 4.2 | 「知识卡片」icon 颜色 | 蓝色背景 | 绿色 | LamazeExerciseView.swift |
+**Swift 代码（HomeView.swift:198-231）：**
+```swift
+iconGradient: [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]  // ❌ 0.25 太淡
+iconGradient: [Color.primary600.opacity(0.45), Color(hex: "C4B5E0").opacity(0.3)]  // ❌ 0.3 太淡
+iconGradient: [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]  // ❌ 0.25 太淡
+iconGradient: [Color(hex: "C4B5E0").opacity(0.45), Color.primary600.opacity(0.25)]  // ❌ 0.25 太淡
+```
 
-## 5. 待产包
-
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 5.1 | 未勾选圆圈 | 紫色半透明边框 `rgba(183,168,214,0.3)` | 已修 ✅ (PR#52) | — |
-| 5.2 | 进度条 | 粉→紫渐变 | 粉紫色（接近但可能偏淡） | HospitalBagView.swift |
-
-## 6. 知识页
-
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 6.1 | 「知识」标题 | Cormorant Garamond | 系统黑体（中文 fallback） | — |
-| 6.2 | 分类卡片 icon | 粉色渐变圆 + 白色 stroke | 紫色渐变圆 + 紫色 icon | KnowledgeView.swift |
-| 6.3 | 文章卡片样式 | 毛玻璃卡片 | 偏白不透明 | KnowledgeView.swift |
-
-## 7. 胎动记录
-
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 7.1 | + 按钮 | 紫色圆形 56px | 紫色圆形 ✅ | — |
-| 7.2 | 计数圆 | 毛玻璃 `rgba(255,255,255,0.45)` | 偏白（不够透） | FetalMovementCounterView.swift |
-| 7.3 | 底部按钮 | 紫色「完成」+ 毛玻璃「取消」 | 灰紫色（颜色偏灰） | FetalMovementCounterView.swift |
-
-## 8. 通知弹窗
-
-| # | 差异项 | Design HTML | App 当前 | 文件 |
-|---|--------|------------|---------|------|
-| 8.1 | 弹窗背景 | `rgba(255,255,255,0.7)` + blur(24px) 半透明 | PR#52 改善了 | — |
-| 8.2 | 铃铛 icon 背景 | 粉紫渐变 | 粉紫渐变 ✅ | — |
-| 8.3 | 主按钮 | 紫色实底 | 紫色 ✅ | — |
+**应改为（匹配 design HTML 的 0.5→0.8）：**
+```swift
+iconGradient: [Color.accentPeach.opacity(0.5), Color.accentPeach.opacity(0.8)]  // 粉色
+iconGradient: [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "C4B5E0").opacity(0.8)]  // 紫色
+iconGradient: [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.8)]  // 蓝色
+iconGradient: [Color(hex: "C9A0DC").opacity(0.5), Color(hex: "C9A0DC").opacity(0.8)]  // 深紫
+```
 
 ---
 
-## 优先修复清单（按影响大小排序）
+## P0 — 进度条颜色
 
-### P0 — 最大视觉差异
-1. **所有 icon：彩色背景+白色 stroke → 替换实心 SF Symbol**
-   - 文件：HomeView, TasksView, LamazeExerciseView, KnowledgeView
-   - 改法：icon 背景用 `linear-gradient` 渐变色（每个卡片不同颜色），icon 内容用 `Image(systemName: "xxx").renderingMode(.template).foregroundColor(.white)` 或自定义 SVG
-   - 这是最大的单项差异
+**Design HTML：**
+```css
+.pf { background: linear-gradient(90deg, var(--pink), var(--lavender)); }
+/* --pink: #F9B5C4, --lavender: #C4B5E0 */
+```
 
-2. **进度条颜色：灰色 → 粉紫渐变**
-   - 文件：HomeView
-   - 改法：`LinearGradient(colors: [Color.pink, Color.lavender])`
+**Swift 代码（Theme.swift:102）：**
+```swift
+static let progressBar = LinearGradient(
+    colors: [Color.accentPeach, Color.primary600],  // accentPeach=#F9B5C4, primary600=#C9A0DC
+```
 
-### P1 — 透明度问题
-3. **所有卡片毛玻璃更透**
-   - 所有 View
-   - 需要降低 white opacity，增加 blur
+**值接近但视觉偏灰** — 可能是 `primary600` 太亮。改成：
+```swift
+colors: [Color(hex: "F9B5C4"), Color(hex: "C4B5E0")]  // 精确匹配 design HTML
+```
 
-4. **倒计时卡片渐变更饱和**
-   - HomeView
-   - 渐变色值需要更接近 design HTML 的值
+---
 
-### P2 — 小差异
-5. 凯格尔背景渐变偏淡
-6. 胎动「完成」按钮颜色偏灰
-7. 知识页文章卡片不够透
+## P1 — 卡片毛玻璃透明度
+
+**Design HTML：**
+```css
+.tc {
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.6);
+}
+```
+
+**Swift 代码（Theme.swift:40）：**
+```swift
+static let cardBg = Color.white.opacity(0.45)  // ✅ 数值正确
+```
+
+**但视觉上偏白** — SwiftUI 的 `.background(Color.white.opacity(0.45))` 在浅色背景上可能不等同于 CSS 的 `rgba(255,255,255,0.45) + backdrop-filter:blur(24px)`。需要确认 `glassCard` modifier 是否正确应用了 blur。
+
+检查 `Theme.swift` 的 `glassCard` 实现：
+```swift
+// 需要确认 .background(.ultraThinMaterial) 或自定义 blur 是否生效
+```
+
+---
+
+## P1 — 倒计时卡片渐变
+
+**Design HTML：**
+```css
+background: linear-gradient(140deg,
+    rgba(249,181,196,0.5) 0%,    /* 粉色 */
+    rgba(196,181,224,0.45) 50%,  /* 紫色 */
+    rgba(184,220,245,0.4) 100%   /* 蓝色 */
+);
+```
+
+**Swift 代码（Theme.swift:85-87）：**
+```swift
+.init(color: Color.accentPeach.opacity(0.5), location: 0.0),
+.init(color: Color(hex: "C4B5E0").opacity(0.45), location: 0.5),
+.init(color: Color.warmGold.opacity(0.4), location: 1.0)
+```
+
+**数值匹配 ✅** — 但视觉偏淡。可能是 SwiftUI LinearGradient 的渲染和 CSS 不完全一致。尝试提高 opacity 到 0.6/0.55/0.5。
+
+---
+
+## P2 — 凯格尔圆环中心
+
+**Design HTML：**
+```css
+.ring-center {
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(16px);
+}
+```
+
+**Swift 代码（KegelExerciseView.swift:120-126）：**
+```swift
+// Frosted center — design spec: rgba(255,255,255,0.4) + blur(16px)
+.fill(.ultraThinMaterial)  // 材质
+.fill(Color.white.opacity(0.3))  // overlay
+```
+
+**改为更匹配的值：**
+```swift
+.fill(Color.white.opacity(0.4))  // 匹配 design HTML
+.blur(radius: 16)  // 匹配 design HTML
+```
+
+---
+
+## 汇总修改文件清单
+
+| 文件 | 改什么 |
+|------|--------|
+| HomeView.swift:383 | icon foregroundStyle → `.white` |
+| HomeView.swift:198-231 | icon gradient opacity 0.25→0.8 |
+| Theme.swift:102 | progressBar 颜色精确匹配 |
+| Theme.swift:85-87 | 倒计时卡片渐变 opacity 提高 |
+| KegelExerciseView.swift:126 | 圆环中心 white opacity 0.3→0.4 |
+| TasksView.swift | 同 HomeView icon 修改 |
+| KnowledgeView.swift | 同 HomeView icon 修改 |
+| LamazeExerciseView.swift | 同 HomeView icon 修改 |
