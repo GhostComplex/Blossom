@@ -559,9 +559,12 @@ final class BlossomUITests: XCTestCase {
         XCTAssertTrue(dayUnit.exists, "应显示『天』单位")
 
         // Verify 「预产期」label on home (PRD §2.1.2)
-        let dueDateLabel = app.staticTexts["预产期"]
+        // Text renders as "预产期 2026年X月X日" — use CONTAINS predicate
+        let dueDateLabel = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] '预产期'")
+        ).firstMatch
         XCTAssertTrue(dueDateLabel.waitForExistence(timeout: 3),
-                      "应显示『预产期』文字")
+                      "应显示包含『预产期』的文字")
 
         snap("countdown-01-home")
     }
