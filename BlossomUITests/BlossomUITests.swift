@@ -226,7 +226,7 @@ final class BlossomUITests: XCTestCase {
     /// Verifies the pre-request notification popup appears after completing
     /// the first task (checking a hospital bag item).
     func testNotificationPreRequestPopup() throws {
-        app.launchArguments = ["-skip-onboarding"]
+        app.launchArguments = ["-skip-onboarding", "-reset-notification-state"]
         app.launch()
 
         // Navigate to Hospital Bag tab
@@ -301,23 +301,13 @@ final class BlossomUITests: XCTestCase {
         snap("fetal-01-sheet")
 
         // Tap +1 button three times
-        let plusButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'plus'")).firstMatch
-        if !plusButton.waitForExistence(timeout: 3) {
-            // Try finding the circle button by image
-            let circleButton = app.images["plus"].firstMatch
-            XCTAssertTrue(circleButton.waitForExistence(timeout: 3), "+1 按钮应存在")
-            circleButton.tap()
-            Thread.sleep(forTimeInterval: 0.5)
-            circleButton.tap()
-            Thread.sleep(forTimeInterval: 0.5)
-            circleButton.tap()
-        } else {
-            plusButton.tap()
-            Thread.sleep(forTimeInterval: 0.5)
-            plusButton.tap()
-            Thread.sleep(forTimeInterval: 0.5)
-            plusButton.tap()
-        }
+        let plusButton = app.buttons["胎动加一"]
+        XCTAssertTrue(plusButton.waitForExistence(timeout: 3), "+1 按钮应存在")
+        plusButton.tap()
+        Thread.sleep(forTimeInterval: 0.5)
+        plusButton.tap()
+        Thread.sleep(forTimeInterval: 0.5)
+        plusButton.tap()
         sleep(1)
 
         snap("fetal-02-count-3")

@@ -49,6 +49,7 @@ struct FetalMovementCounterView: View {
                                 .foregroundStyle(.white)
                         }
                     }
+                    .accessibilityLabel("胎动加一")
                     .buttonStyle(ScaleButtonStyle())
                     
                     Text("感受到胎动时点击 +1")
