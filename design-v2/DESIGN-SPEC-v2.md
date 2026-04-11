@@ -44,6 +44,39 @@ background: linear-gradient(140deg, rgba(249,181,196,0.5), rgba(196,181,224,0.45
 | 正文 | Nunito | 400 | 12-13px |
 | 描述/辅助 | Nunito | 400 | 10-11px |
 
+## 任务卡片 icon
+
+**规则：彩色渐变背景 + 白色 stroke icon**（不是灰色背景 + 彩色 icon）
+
+| 卡片 | icon 背景 | icon 内容 |
+|------|----------|----------|
+| 凯格尔 | `linear-gradient(135deg, rgba(249,181,196,0.5), rgba(249,181,196,0.8))` 粉色 | 白色 stroke SVG (stroke-width:2) |
+| 拉玛泽 | `linear-gradient(135deg, rgba(196,181,224,0.5), rgba(196,181,224,0.8))` 紫色 | 白色 stroke SVG |
+| 待产包 | `linear-gradient(135deg, rgba(184,220,245,0.5), rgba(184,220,245,0.8))` 蓝色 | 白色 stroke SVG |
+| 知识 | `linear-gradient(135deg, rgba(201,160,220,0.5), rgba(201,160,220,0.8))` 深紫色 | 白色 stroke SVG |
+
+```css
+.icon-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    /* 背景用上表中对应的渐变 */
+    /* icon 内容是 SVG，stroke: white, stroke-width: 2, fill: none */
+}
+```
+
+## 进度条
+
+```css
+/* 进度条轨道 */
+height: 7px;
+background: rgba(196,181,224,0.12);  /* 浅紫灰底 */
+border-radius: 3px;
+
+/* 进度条填充 — 粉→紫渐变（不是灰色！） */
+background: linear-gradient(90deg, #F9B5C4, #C4B5E0);  /* Pink → Lavender */
+```
+
 ## 卡片系统
 
 ```css
@@ -76,9 +109,10 @@ color: var(--text-mid);
 ## Tab Bar
 
 - 背景：`rgba(255,255,255,0.35)` + `blur(24px)`
-- Active：`var(--accent-dark)` + 底部 4px 圆点
+- Active：`var(--accent-dark)` 颜色区分（无圆底、无圆点）
 - Inactive：`var(--text-light)`
-- 图标：SVG stroke 1.5px
+- 图标：**SVG stroke 1.5px, fill: none**（线条风格，不是实心填充）
+- iOS 26 Liquid Glass 圆底：系统限制无法关闭，已接受
 
 ## 圆环计时器
 
