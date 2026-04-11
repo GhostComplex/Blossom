@@ -159,3 +159,63 @@ background: linear-gradient(140deg,
 | TasksView.swift | 同 HomeView icon 修改 |
 | KnowledgeView.swift | 同 HomeView icon 修改 |
 | LamazeExerciseView.swift | 同 HomeView icon 修改 |
+
+---
+
+## 字体对比
+
+### 首页
+
+| 元素 | Design HTML | Swift 代码 | 匹配？ |
+|------|------------|-----------|--------|
+| 问候语「下午好」| Cormorant Garamond 26px w400 | 未找到对应代码（可能用 navigationTitle） | ❌ 中文 fallback 到系统字体 |
+| 日期「April 11」| Nunito 12px w400 | 未确认 | ⚠️ |
+| 倒计时数字「65」| Cormorant Garamond 72px **w300** | `CormorantGaramond-Light` size 应在首页确认 | ⚠️ 需确认 |
+| 「天」| Nunito 15px w400 | 需确认 | ⚠️ |
+| 卡片标题「凯格尔运动」| Nunito 13px **w500** | `.system(size:14, weight:.medium)` HomeView:402 | ⚠️ size 14 vs 13 |
+| 卡片描述 | Nunito 10.5px w400 | 需确认 | ⚠️ |
+| 进度条标题 | Nunito 12px **w600** | `.system(size:14, weight:.medium)` | ❌ w600 vs medium, 12 vs 14 |
+| Tab Bar 文字 | Nunito 9.5px w500 | 系统默认 | ⚠️ |
+
+### 凯格尔
+
+| 元素 | Design HTML | Swift 代码 | 匹配？ |
+|------|------------|-----------|--------|
+| 级别文字 | Nunito 11px w400 uppercase | 需确认 | ⚠️ |
+| 阶段标题 | Cormorant Garamond 26px **w400** | `CormorantGaramond-Light` 26px | ❌ w400(Regular) vs Light(300) |
+| 倒计时数字 | Cormorant Garamond 60px **w300** | `CormorantGaramond-Light` 60px | ✅ |
+| 「秒」| Nunito 11px w400 | 需确认 | ⚠️ |
+| 组数「第 X 组」| Nunito 12px w400 | 需确认 | ⚠️ |
+| 按钮文字 | Nunito 13px w600 | `.system(size:16, weight:.semibold)` | ❌ 13 vs 16, 600 vs semibold |
+
+### 完成页
+
+| 元素 | Design HTML | Swift 代码 | 匹配？ |
+|------|------------|-----------|--------|
+| 「做得真棒」| Cormorant Garamond 30px **w400** | `CormorantGaramond-Light` 28px | ❌ w400 vs Light, 30 vs 28 |
+| 正文 | Nunito 14px w300 | `.system(size:14)` | ⚠️ w300 vs default |
+| 英文 hint | Nunito 11px w300 italic | `CormorantGaramond-Regular` 12px | ❌ 字体不同 |
+| 按钮 | Nunito 14px w600 | `.system(size:16, weight:.semibold)` | ❌ 14 vs 16 |
+
+### 通知弹窗
+
+| 元素 | Design HTML | Swift 代码 | 匹配？ |
+|------|------------|-----------|--------|
+| 标题 | Cormorant Garamond 20px w400 | `CormorantGaramond-Light` 20px | ❌ w400 vs Light |
+| 正文 | Nunito 13px w400 | `.system(size:14)` | ❌ 13 vs 14 |
+| 按钮 | Nunito 14px w600 | `.system(size:16, weight:.semibold)` | ❌ 14 vs 16 |
+
+### Onboarding
+
+| 元素 | Design HTML | Swift 代码 | 匹配？ |
+|------|------------|-----------|--------|
+| 「欢迎来到拾月」| Cormorant Garamond 28px w400 | `CormorantGaramond-SemiBold` 28px | ❌ w400 vs SemiBold |
+| 正文 | Nunito 13px w400 | `.system(size:14, weight:.regular)` | ❌ 13 vs 14 |
+
+### 字体修复总结
+
+**高频问题：**
+1. **Cormorant Garamond 字重** — Design HTML 多数用 w400(Regular)，代码用了 Light(300) 或 SemiBold(600)。统一改成 `CormorantGaramond-Regular`
+2. **按钮字号偏大** — Design HTML 13-14px，代码 16px。统一改小
+3. **正文字号偏大** — Design HTML 12-13px，代码 14px
+4. **正文字体** — Design HTML 用 Nunito，代码用 `.system`。需要 bundle Nunito 或接受系统字体
