@@ -201,7 +201,6 @@ struct HomeView: View {
                 .buttonStyle(.plain)
             }
         }
-    }
     // MARK: - Hospital Bag Progress
     private var hospitalBagProgress: some View {
         let progress = bagTotal > 0 ? Double(bagCompleted) / Double(bagTotal) : 0
