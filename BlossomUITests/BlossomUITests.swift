@@ -124,11 +124,13 @@ final class BlossomUITests: XCTestCase {
         snap("05-knowledge")
 
         // ────────────────────────────────────────────
-        // Step 6: Tap into the first knowledge article
+        // Step 6: Tap into the first knowledge article (hot articles section)
         // ────────────────────────────────────────────
-        let firstArticle = app.scrollViews.firstMatch.buttons.firstMatch
-        if firstArticle.waitForExistence(timeout: 3) {
-            firstArticle.tap()
+        let hotArticle = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] '清洁呼吸' OR label CONTAINS[c] '凯格尔'")
+        ).firstMatch
+        if hotArticle.waitForExistence(timeout: 3) {
+            hotArticle.tap()
             sleep(1)
             snap("06-article-detail")
 
@@ -440,16 +442,18 @@ final class BlossomUITests: XCTestCase {
         knowledgeTab.tap()
         sleep(2) // Wait for seedDefaultArticles
 
-        // Tap the first category card to see articles
-        let firstCategory = app.scrollViews.firstMatch.buttons.firstMatch
-        XCTAssertTrue(firstCategory.waitForExistence(timeout: 5), "应能找到分类卡片")
-        firstCategory.tap()
+        // Tap 拉玛泽呼吸法 category card
+        let lamazeCategory = app.staticTexts["拉玛泽呼吸法"]
+        XCTAssertTrue(lamazeCategory.waitForExistence(timeout: 5), "应能找到『拉玛泽呼吸法』分类")
+        lamazeCategory.tap()
         sleep(1)
 
-        // Tap the first article
-        let firstArticle = app.scrollViews.firstMatch.buttons.firstMatch
-        XCTAssertTrue(firstArticle.waitForExistence(timeout: 3), "应能找到文章")
-        firstArticle.tap()
+        // Tap the first article by title
+        let articleTitle = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] '清洁呼吸'")
+        ).firstMatch
+        XCTAssertTrue(articleTitle.waitForExistence(timeout: 3), "应能找到文章『清洁呼吸』")
+        articleTitle.tap()
         sleep(1)
 
         snap("favorite-01-article-detail")
@@ -500,10 +504,12 @@ final class BlossomUITests: XCTestCase {
         kegelCategory.tap()
         sleep(1)
 
-        // Tap the first article in the category
-        let firstArticle = app.scrollViews.firstMatch.buttons.firstMatch
-        XCTAssertTrue(firstArticle.waitForExistence(timeout: 3), "应能找到凯格尔文章")
-        firstArticle.tap()
+        // Tap the first article by title
+        let articleTitle = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] '凯格尔运动的科学原理'")
+        ).firstMatch
+        XCTAssertTrue(articleTitle.waitForExistence(timeout: 3), "应能找到凯格尔文章")
+        articleTitle.tap()
         sleep(1)
 
         snap("exercise-01-kegel-article")
