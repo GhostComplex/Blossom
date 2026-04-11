@@ -29,23 +29,47 @@ struct FetalMovementCounterView: View {
                         .font(AppFonts.caption)
                         .foregroundStyle(Color.n500)
                     
-                    // Counter display
-                    Text("\(count)")
-                        .font(.system(size: 100, weight: .bold, design: .serif))
-                        .foregroundStyle(LinearGradient.countdownText)
-                        .contentTransition(.numericText())
-                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: count)
+                    // Counter display — frosted circle
+                    ZStack {
+                        // Outer glow
+                        Circle()
+                            .fill(Color.primary600.opacity(0.08))
+                            .frame(width: 170, height: 170)
+                            .blur(radius: 15)
+
+                        // Frosted circle
+                        Circle()
+                            .fill(.ultraThinMaterial)
+                            .frame(width: 140, height: 140)
+                            .overlay(
+                                Circle()
+                                    .fill(Color.white.opacity(0.4))
+                            )
+                            .clipShape(Circle())
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                            )
+                            .shadow(color: Color(hex: "C4B5E0").opacity(0.10), radius: 12, x: 0, y: 4)
+
+                        // Number
+                        Text("\(count)")
+                            .font(.system(size: 52, weight: .light, design: .serif))
+                            .foregroundStyle(Color.n900)
+                            .contentTransition(.numericText())
+                            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: count)
+                    }
                     
-                    // +1 Button
+                    // +1 Button — 56px purple circle
                     Button(action: incrementCount) {
                         ZStack {
                             Circle()
                                 .fill(Color.primary600)
-                                .frame(width: 120, height: 120)
-                                .shadow(color: Color.primary600.opacity(0.4), radius: 20, x: 0, y: 10)
+                                .frame(width: 56, height: 56)
+                                .shadow(color: Color.primary600.opacity(0.3), radius: 12, x: 0, y: 6)
                             
                             Image(systemName: "plus")
-                                .font(.system(size: 48, weight: .medium))
+                                .font(.system(size: 24, weight: .medium))
                                 .foregroundStyle(.white)
                         }
                     }
@@ -60,24 +84,31 @@ struct FetalMovementCounterView: View {
                     
                     // Action buttons
                     HStack(spacing: 16) {
+                        // Cancel — frosted
                         Button(action: { dismiss() }) {
                             Text("取消")
-                                .font(AppFonts.cardTitle)
+                                .font(.system(size: 16, weight: .semibold))
                                 .foregroundStyle(Color.n700)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
-                                .background(Color.n100)
-                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
+                                .background(.ultraThinMaterial)
+                                .background(Color.white.opacity(0.5))
+                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: AppRadius.md)
+                                        .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                                )
                         }
                         
+                        // Finish — purple solid
                         Button(action: saveRecord) {
                             Text("完成")
-                                .font(AppFonts.cardTitle)
+                                .font(.system(size: 16, weight: .semibold))
                                 .foregroundStyle(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
                                 .background(count > 0 ? Color.primary600 : Color.n300)
-                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
+                                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                         }
                         .disabled(count == 0)
                     }
