@@ -45,27 +45,33 @@ struct NotificationPreRequestView: View {
             
             // Frosted glass card
             VStack(spacing: 20) {
-                // Bell icon
+                // Bell icon — semi-transparent pink-purple bg
                 ZStack {
                     Circle()
-                        .fill(Color.accentLight)
+                        .fill(
+                            LinearGradient(
+                                colors: [Color.accentPeach.opacity(0.4), Color.primary600.opacity(0.25)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
                         .frame(width: 64, height: 64)
                     
                     Image(systemName: "bell.fill")
                         .font(.system(size: 28))
-                        .foregroundColor(Color.primary600)
+                        .foregroundStyle(Color.primaryDark)
                 }
                 .padding(.top, 8)
                 
                 // Title
                 Text(title)
-                    .font(AppFonts.sectionTitle)
-                    .foregroundColor(Color.n900)
+                    .font(.system(size: 20, weight: .light, design: .serif))
+                    .foregroundStyle(Color.n900)
                 
                 // Description
                 Text(body_text)
                     .font(AppFonts.bodyText)
-                    .foregroundColor(Color.n500)
+                    .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 8)
                 
@@ -74,12 +80,12 @@ struct NotificationPreRequestView: View {
                     // Primary: Accept
                     Button(action: onAccept) {
                         Text("好的，提醒我")
-                            .font(AppFonts.cardTitle)
-                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
                             .background(Color.primary600)
-                            .clipShape(RoundedRectangle(cornerRadius: CGFloat(AppRadius.lg)))
+                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                     }
                     
                     // Secondary: Decline

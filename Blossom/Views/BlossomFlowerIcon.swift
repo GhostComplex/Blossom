@@ -1,18 +1,19 @@
 import SwiftUI
 
 /// App icon 花朵 — 6 外瓣 + 6 内瓣 + 花蕊，纯 SwiftUI 绘制
+/// Design v2: pink / purple / blue petals
 struct BlossomFlowerIcon: View {
     let size: CGFloat
     
-    // 色板（与 design.html / app-icon 一致）
+    // 色板 — design-v2 粉紫蓝系
     private let outerColors: [Color] = [
-        Color(red: 232/255, green: 196/255, blue: 168/255), // #E8C4A8
-        Color(red: 221/255, green: 184/255, blue: 168/255), // #DDB8A8
-        Color(red: 201/255, green: 160/255, blue: 132/255), // #C9A084
+        Color(red: 249/255, green: 181/255, blue: 196/255), // #F9B5C4 Pink
+        Color(red: 196/255, green: 181/255, blue: 224/255), // #C4B5E0 Lavender
+        Color(red: 184/255, green: 220/255, blue: 245/255), // #B8DCF5 Sky
     ]
-    private let innerColor = Color(red: 240/255, green: 221/255, blue: 211/255) // #F0DDD3
-    private let centerColor1 = Color(red: 245/255, green: 234/255, blue: 224/255) // #F5EAE0
-    private let centerColor2 = Color(red: 201/255, green: 160/255, blue: 132/255) // #C9A084
+    private let innerColor = Color(red: 253/255, green: 221/255, blue: 230/255) // #FDDDE6 Pink Light
+    private let centerColor1 = Color(red: 237/255, green: 231/255, blue: 248/255) // #EDE7F8 Lavender Pale
+    private let centerColor2 = Color(red: 201/255, green: 160/255, blue: 220/255) // #C9A0DC Accent
     
     var body: some View {
         Canvas { context, canvasSize in
@@ -100,8 +101,16 @@ struct BlossomFlowerIcon: View {
 
 #Preview {
     ZStack {
-        Color(red: 250/255, green: 245/255, blue: 240/255)
-            .ignoresSafeArea()
+        LinearGradient(
+            colors: [
+                Color(hex: "FEF6F8"),
+                Color(hex: "F6EDF8"),
+                Color(hex: "EDF2FC")
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
         BlossomFlowerIcon(size: 200)
     }
 }
