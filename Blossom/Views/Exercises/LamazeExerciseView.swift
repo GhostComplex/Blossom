@@ -75,7 +75,7 @@ struct LamazeExerciseView: View {
                 icon: "wind",
                 title: "跟练模式",
                 description: "跟随动画一起练习呼吸",
-                iconGradient: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
+                iconGradient: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
             ) {
                 withAnimation { selectedMode = .practice }
             }
@@ -85,7 +85,7 @@ struct LamazeExerciseView: View {
                 icon: "book.fill",
                 title: "学习模式",
                 description: "查看 6 阶段呼吸法图文教程",
-                iconGradient: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")]
+                iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
             ) {
                 withAnimation { selectedMode = .learn }
             }
@@ -95,7 +95,7 @@ struct LamazeExerciseView: View {
                 icon: "lightbulb.fill",
                 title: "知识卡片",
                 description: "了解拉玛泽分娩法原理",
-                iconGradient: [Color(hex: "DBEDFA"), Color(hex: "C6E3F7")]
+                iconGradient: [Color(hex: "B8DCF5"), Color(hex: "ABC2E6")]
             ) {
                 // TODO: Navigate to knowledge tab
                 dismiss()

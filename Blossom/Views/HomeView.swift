@@ -196,7 +196,7 @@ struct HomeView: View {
                         title: "凯格尔运动",
                         subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.kegelCompleted ?? false,
-                        iconGradient: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
+                        iconGradient: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -207,7 +207,7 @@ struct HomeView: View {
                         title: "拉玛泽练习",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
-                        iconGradient: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")]
+                        iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -218,7 +218,7 @@ struct HomeView: View {
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "DBEDFA"), Color(hex: "C6E3F7")]
+                        iconGradient: [Color(hex: "B8DCF5"), Color(hex: "ABC2E6")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -229,7 +229,7 @@ struct HomeView: View {
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "E4CFEE"), Color(hex: "D4B3E3")]
+                        iconGradient: [Color(hex: "C9A0DC"), Color(hex: "BB8DCE")]
                     )
                 }
                 .buttonStyle(.plain)
@@ -374,7 +374,7 @@ struct TaskGridCard: View {
     let title: String
     let subtitle: String
     let isCompleted: Bool
-    var iconGradient: [Color] = [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")]
+    var iconGradient: [Color] = [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {

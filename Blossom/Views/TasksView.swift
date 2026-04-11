@@ -92,7 +92,7 @@ struct TasksView: View {
                         todayTask?.kegelCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
                         : AnyShapeStyle(LinearGradient(
-                            colors: [Color(hex: "FCDAE2"), Color(hex: "FAC3CF")],
+                            colors: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
@@ -148,7 +148,7 @@ struct TasksView: View {
                         todayTask?.lamazeCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
                         : AnyShapeStyle(LinearGradient(
-                            colors: [Color(hex: "E2DAF0"), Color(hex: "D0C4E6")],
+                            colors: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
@@ -200,7 +200,7 @@ struct TasksView: View {
                     .frame(width: 44, height: 44)
                     .background(
                         LinearGradient(
-                            colors: [Color(hex: "E4CFEE"), Color(hex: "D4B3E3")],
+                            colors: [Color(hex: "C9A0DC"), Color(hex: "BB8DCE")],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
