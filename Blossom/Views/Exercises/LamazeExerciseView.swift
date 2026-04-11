@@ -21,6 +21,7 @@ struct LamazeExerciseView: View {
     
     @State private var selectedMode: LamazeMode?
     @State private var selectedStage: LamazeStage?
+    @State private var showCompletionView = false
     
     private var todayTask: DailyTask? { todayTasks.first }
     
@@ -35,6 +36,7 @@ struct LamazeExerciseView: View {
                         markTaskCompleted()
                         selectedStage = nil
                         selectedMode = nil
+                        showCompletionView = true
                     }, onBack: {
                         selectedStage = nil
                     })
@@ -57,8 +59,14 @@ struct LamazeExerciseView: View {
                 }
             }
         }
+        .fullScreenCover(isPresented: $showCompletionView) {
+            ExerciseCompletionView(exerciseName: "拉玛泽练习") {
+                showCompletionView = false
+                dismiss()
+            }
+        }
     }
-    
+
     // MARK: - Mode Selection
     private var modeSelectionView: some View {
         VStack(spacing: AppSpacing.lg) {
