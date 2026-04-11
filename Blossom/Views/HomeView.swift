@@ -349,13 +349,17 @@ struct TaskGridCard: View {
                 .foregroundStyle(isCompleted ? Color.success : Color.primaryDark)
                 .frame(width: 40, height: 40)
                 .background(
-                    isCompleted
-                        ? Color.success.opacity(0.15)
-                        : LinearGradient(
-                            colors: [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                          )
+                    Group {
+                        if isCompleted {
+                            Color.success.opacity(0.15)
+                        } else {
+                            LinearGradient(
+                                colors: [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        }
+                    }
                 )
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
             
