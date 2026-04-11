@@ -100,12 +100,16 @@ struct NotificationPreRequestView: View {
             .padding(28)
             .background(
                 RoundedRectangle(cornerRadius: 28)
-                    .fill(.ultraThinMaterial)
+                    .fill(Color.white.opacity(0.45))
+                    .background(
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(.ultraThinMaterial)
+                    )
                     .shadow(color: Color.black.opacity(0.12), radius: 24, x: 0, y: 8)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 28)
-                    .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
             )
             .padding(.horizontal, 40)
         }
