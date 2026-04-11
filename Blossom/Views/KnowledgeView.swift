@@ -45,7 +45,7 @@ struct KnowledgeView: View {
     private var categoryGrid: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             Text("分类")
-                .font(.system(size: 20, weight: .light, design: .serif))
+                .font(.custom("CormorantGaramond-Light", size: 20))
                 .foregroundStyle(Color.n900)
             
             LazyVGrid(columns: [
@@ -69,7 +69,7 @@ struct KnowledgeView: View {
     private var hotArticlesSection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             Text("热门文章")
-                .font(.system(size: 20, weight: .light, design: .serif))
+                .font(.custom("CormorantGaramond-Light", size: 20))
                 .foregroundStyle(Color.n900)
             
             VStack(spacing: AppSpacing.md) {
@@ -139,7 +139,7 @@ struct CategoryCard: View {
             
             VStack(spacing: 2) {
                 Text(category)
-                    .font(.system(size: 16, weight: .light, design: .serif))
+                    .font(.custom("CormorantGaramond-Light", size: 16))
                     .foregroundStyle(Color.n900)
                     .lineLimit(1)
                 

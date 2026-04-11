@@ -242,7 +242,7 @@ struct HomeView: View {
         return VStack(alignment: .leading, spacing: AppSpacing.md) {
             HStack {
                 Text("待产包准备进度")
-                    .font(.system(size: 16, weight: .regular, design: .serif))
+                    .font(.custom("CormorantGaramond-Regular", size: 16))
                     .foregroundStyle(Color.n900)
                 Spacer()
                 Text("\(bagCompleted) / \(bagTotal)")

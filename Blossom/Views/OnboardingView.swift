@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 
                 // Title
                 Text("欢迎来到拾月")
-                    .font(.system(size: 28, weight: .semibold, design: .serif))
+                    .font(.custom("CormorantGaramond-SemiBold", size: 28))
                     .foregroundStyle(Color.n900)
                     .opacity(animateIn ? 1 : 0)
                     .offset(y: animateIn ? 0 : -10)
@@ -88,7 +88,7 @@ struct OnboardingView: View {
                         HStack(spacing: 0) {
                             // Year
                             Text(yearText)
-                                .font(.system(size: 24, weight: .semibold, design: .serif))
+                                .font(.custom("CormorantGaramond-SemiBold", size: 24))
                                 .foregroundStyle(Color.n900)
                             
                             Text(" 年 ")
@@ -97,7 +97,7 @@ struct OnboardingView: View {
                             
                             // Month
                             Text(monthText)
-                                .font(.system(size: 42, weight: .bold, design: .serif))
+                                .font(.custom("CormorantGaramond-Bold", size: 42))
                                 .foregroundStyle(Color.primary600)
                             
                             Text(" 月 ")
@@ -106,7 +106,7 @@ struct OnboardingView: View {
                             
                             // Day
                             Text(dayText)
-                                .font(.system(size: 42, weight: .bold, design: .serif))
+                                .font(.custom("CormorantGaramond-Bold", size: 42))
                                 .foregroundStyle(Color.primary600)
                             
                             Text(" 日")
@@ -221,7 +221,7 @@ struct DatePickerSheet: View {
         VStack(spacing: 20) {
             // Title
             Text("选择预产期")
-                .font(.system(size: 20, weight: .semibold, design: .serif))
+                .font(.custom("CormorantGaramond-SemiBold", size: 20))
                 .foregroundStyle(Color.n900)
                 .padding(.top, 20)
             

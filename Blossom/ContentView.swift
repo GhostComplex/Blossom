@@ -208,17 +208,22 @@ struct ContentView: View {
         
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
+        
+        // Remove iOS 18+ selection indicator circle
+        UITabBar.appearance().selectionIndicatorImage = UIImage()
     }
 
     // MARK: - Navigation Bar Appearance
     private func configureNavigationBarAppearance() {
-        // Large title: serif font (Cormorant Garamond style)
-        let largeTitleFont = UIFont(name: "CormorantGaramond-Regular", size: 28)
+        // Large title: Cormorant Garamond Light (design spec: 400 but Light looks closer to mockup)
+        let largeTitleFont = UIFont(name: "CormorantGaramond-Light", size: 28)
+            ?? UIFont(name: "CormorantGaramond-Regular", size: 28)
             ?? UIFont.systemFont(ofSize: 28, weight: .light).withDesign(.serif)
             ?? UIFont.systemFont(ofSize: 28, weight: .light)
         
-        // Inline title: serif font
-        let inlineTitleFont = UIFont(name: "CormorantGaramond-Regular", size: 17)
+        // Inline title: Cormorant Garamond Light
+        let inlineTitleFont = UIFont(name: "CormorantGaramond-Light", size: 17)
+            ?? UIFont(name: "CormorantGaramond-Regular", size: 17)
             ?? UIFont.systemFont(ofSize: 17, weight: .light).withDesign(.serif)
             ?? UIFont.systemFont(ofSize: 17, weight: .light)
         

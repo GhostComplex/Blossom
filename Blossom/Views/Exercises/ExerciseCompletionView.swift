@@ -31,7 +31,7 @@ struct ExerciseCompletionView: View {
 
                 // Title
                 Text("做得真棒")
-                    .font(.system(size: 28, weight: .light, design: .serif))
+                    .font(.custom("CormorantGaramond-Light", size: 28))
                     .foregroundStyle(Color.n900)
 
                 // Body text
@@ -43,7 +43,7 @@ struct ExerciseCompletionView: View {
 
                 // English hint
                 Text("It's the moment you show up for you.")
-                    .font(.system(size: 12, weight: .regular, design: .serif))
+                    .font(.custom("CormorantGaramond-Regular", size: 12))
                     .foregroundStyle(Color.n300)
                     .italic()
 

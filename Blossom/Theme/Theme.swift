@@ -119,9 +119,13 @@ struct AppFonts {
         }
     }
 
-    // System serif fallback for Cormorant
+    // Cormorant Garamond for titles (bundled variable font)
     static func title(_ size: CGFloat) -> Font {
-        .system(size: size, weight: .light, design: .serif)
+        .custom("CormorantGaramond-Light", size: size)
+    }
+    
+    static func titleRegular(_ size: CGFloat) -> Font {
+        .custom("CormorantGaramond-Regular", size: size)
     }
 
     // Nunito for body text
@@ -149,10 +153,10 @@ struct AppFonts {
     }
 
     // Specific sizes from design spec v2
-    static let countdownNumber = Font.system(size: 72, weight: .light, design: .serif)
-    static let countdownUnit = Font.system(size: 22, weight: .regular, design: .serif)
-    static let pageTitle = Font.system(size: 28, weight: .regular, design: .serif)
-    static let sectionTitle = Font.system(size: 24, weight: .regular, design: .serif)
+    static let countdownNumber = Font.custom("CormorantGaramond-Light", size: 72)
+    static let countdownUnit = Font.custom("CormorantGaramond-Regular", size: 22)
+    static let pageTitle = Font.custom("CormorantGaramond-Regular", size: 28)
+    static let sectionTitle = Font.custom("CormorantGaramond-Regular", size: 24)
     static let cardTitle = Font.system(size: 14, weight: .medium)
     static let bodyText = Font.system(size: 13, weight: .regular)
     static let caption = Font.system(size: 12, weight: .regular)

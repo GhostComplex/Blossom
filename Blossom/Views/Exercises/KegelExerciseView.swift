@@ -132,11 +132,11 @@ struct KegelExerciseView: View {
             // Content
             VStack(spacing: 8) {
                 Text(timer.phase == .contract ? "收缩骨盆底肌" : "放松休息")
-                    .font(.system(size: 26, weight: .light, design: .serif))
+                    .font(.custom("CormorantGaramond-Light", size: 26))
                     .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
 
                 Text("\(timer.timeRemaining)")
-                    .font(.system(size: 60, weight: .light, design: .serif))
+                    .font(.custom("CormorantGaramond-Light", size: 60))
                     .foregroundStyle(Color.n900)
                     .contentTransition(.numericText())
                     .animation(.easeInOut(duration: 0.2), value: timer.timeRemaining)

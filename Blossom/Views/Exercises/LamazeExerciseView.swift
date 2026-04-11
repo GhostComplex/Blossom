@@ -235,7 +235,7 @@ struct StageCard: View {
         Button(action: action) {
             HStack(spacing: AppSpacing.lg) {
                 Text("\(stage.rawValue)")
-                    .font(.system(size: 20, weight: .bold, design: .serif))
+                    .font(.custom("CormorantGaramond-Bold", size: 20))
                     .foregroundStyle(Color.primary600)
                     .frame(width: 44, height: 44)
                     .background(Color.accentLight)
