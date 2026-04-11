@@ -91,10 +91,10 @@ struct HomeView: View {
                 let week = profile.currentPregnancyWeek
                 Text("孕 \(week.week) 周 + \(week.day) 天")
                     .font(AppFonts.smallLabel)
-                    .foregroundStyle(Color.n700)
+                    .foregroundStyle(Color.n900)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(Color.accentLight)
+                    .background(Color.white.opacity(0.5))
                     .clipShape(Capsule())
             }
             
@@ -107,7 +107,7 @@ struct HomeView: View {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text("\(profile?.daysUntilDue ?? 0)")
                     .font(AppFonts.countdownNumber)
-                    .foregroundStyle(LinearGradient.countdownText)
+                    .foregroundStyle(Color.n900)
                 
                 Text("天")
                     .font(AppFonts.countdownUnit)
@@ -115,23 +115,36 @@ struct HomeView: View {
             }
             
             Divider()
-                .background(Color.n200)
+                .background(Color.white.opacity(0.4))
             
             // 预产期信息
             if let profile = profile {
                 HStack {
                     Image(systemName: "calendar")
-                        .foregroundStyle(Color.primary600)
+                        .foregroundStyle(Color.primaryDark)
                     Text("预产期 \(profile.dueDate, format: .dateTime.year().month().day())")
                         .font(AppFonts.caption)
-                        .foregroundStyle(Color.n700)
+                        .foregroundStyle(Color.n900)
                 }
             }
         }
         .padding(.vertical, 32)
         .padding(.horizontal, 28)
         .frame(maxWidth: .infinity)
-        .glassCard(cornerRadius: AppRadius.xl)
+        .background(
+            RoundedRectangle(cornerRadius: AppRadius.xl)
+                .fill(LinearGradient.countdownCard)
+                .background(
+                    RoundedRectangle(cornerRadius: AppRadius.xl)
+                        .fill(.ultraThinMaterial)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.xl)
+                .stroke(Color.white.opacity(0.6), lineWidth: 1)
+        )
+        .shadow(color: Color(hex: "C4B5E0").opacity(0.10), radius: 12, x: 0, y: 4)
     }
     
     // MARK: - Task Grid (2x2)
@@ -209,16 +222,16 @@ struct HomeView: View {
                     // Background
                     RoundedRectangle(cornerRadius: AppRadius.full)
                         .fill(Color.n200)
-                        .frame(height: 8)
+                        .frame(height: 7)
                     
                     // Progress
                     RoundedRectangle(cornerRadius: AppRadius.full)
                         .fill(LinearGradient.progressBar)
-                        .frame(width: geometry.size.width * progress, height: 8)
+                        .frame(width: geometry.size.width * progress, height: 7)
                         .animation(.easeInOut(duration: 0.3), value: progress)
                 }
             }
-            .frame(height: 8)
+            .frame(height: 7)
             
             Text("\(percent)%")
                 .font(AppFonts.smallLabel)
@@ -332,15 +345,23 @@ struct TaskGridCard: View {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
             // Icon
             Image(systemName: icon)
-                .font(.system(size: 22))
+                .font(.system(size: 20))
                 .foregroundStyle(isCompleted ? Color.success : Color.primaryDark)
-                .frame(width: 44, height: 44)
-                .background(isCompleted ? Color.success.opacity(0.15) : Color.accentLight)
+                .frame(width: 40, height: 40)
+                .background(
+                    isCompleted
+                        ? Color.success.opacity(0.15)
+                        : LinearGradient(
+                            colors: [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                          )
+                )
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(AppFonts.cardTitle)
+                    .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Color.n900)
                 
                 Text(subtitle)

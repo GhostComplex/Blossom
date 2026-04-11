@@ -63,7 +63,10 @@ struct ContentView: View {
                             }
                             .tag(3)
                     }
-                    .tint(Color.primary600)
+                    .tint(Color.primaryDark)
+                    .onAppear {
+                        configureTabBarAppearance()
+                    }
                 }
             }
             
@@ -173,6 +176,29 @@ struct ContentView: View {
             modelContext.insert(task)
         }
         hasCompletedOnboarding = true
+    }
+    
+    // MARK: - Tab Bar Appearance
+    private func configureTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
+        // Semi-transparent background
+        appearance.backgroundColor = UIColor.white.withAlphaComponent(0.35)
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        appearance.backgroundEffect = blurEffect
+        
+        // Active / inactive colors
+        let activeColor = UIColor(Color.primaryDark)
+        let inactiveColor = UIColor(Color.n300)
+        
+        appearance.stackedLayoutAppearance.selected.iconColor = activeColor
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: activeColor]
+        appearance.stackedLayoutAppearance.normal.iconColor = inactiveColor
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: inactiveColor]
+        
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
 }
 
