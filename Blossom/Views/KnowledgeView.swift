@@ -115,9 +115,9 @@ struct CategoryCard: View {
     
     private var iconGradient: [Color] {
         switch category {
-        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "C4B5E0").opacity(0.8)]
-        case "凯格尔运动": return [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "F9B5C4").opacity(0.8)]
-        default: return [Color(hex: "B8DCF5").opacity(0.5), Color(hex: "B8DCF5").opacity(0.8)]
+        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0").opacity(0.7), Color(hex: "C4B5E0").opacity(1.0)]
+        case "凯格尔运动": return [Color(hex: "F9B5C4").opacity(0.7), Color(hex: "F9B5C4").opacity(1.0)]
+        default: return [Color(hex: "B8DCF5").opacity(0.7), Color(hex: "B8DCF5").opacity(1.0)]
         }
     }
     

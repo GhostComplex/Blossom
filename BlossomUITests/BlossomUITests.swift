@@ -87,7 +87,7 @@ final class BlossomUITests: XCTestCase {
         // ────────────────────────────────────────────
         // Step 2: Home Tab (default after onboarding)
         // ────────────────────────────────────────────
-        let homeTab = app.tabBars.buttons["首页"]
+        let homeTab = app.buttons["首页"]
         XCTAssertTrue(homeTab.waitForExistence(timeout: 10),
                       "Tab bar with '首页' should appear after onboarding")
 
@@ -96,7 +96,7 @@ final class BlossomUITests: XCTestCase {
         // ────────────────────────────────────────────
         // Step 3: Tasks Tab
         // ────────────────────────────────────────────
-        let tasksTab = app.tabBars.buttons["任务"]
+        let tasksTab = app.buttons["任务"]
         XCTAssertTrue(tasksTab.waitForExistence(timeout: 3))
         tasksTab.tap()
         sleep(1)
@@ -106,7 +106,7 @@ final class BlossomUITests: XCTestCase {
         // ────────────────────────────────────────────
         // Step 4: Hospital Bag Tab
         // ────────────────────────────────────────────
-        let bagTab = app.tabBars.buttons["待产包"]
+        let bagTab = app.buttons["待产包"]
         XCTAssertTrue(bagTab.waitForExistence(timeout: 3))
         bagTab.tap()
         sleep(1)
@@ -116,7 +116,7 @@ final class BlossomUITests: XCTestCase {
         // ────────────────────────────────────────────
         // Step 5: Knowledge Tab
         // ────────────────────────────────────────────
-        let knowledgeTab = app.tabBars.buttons["知识"]
+        let knowledgeTab = app.buttons["知识"]
         XCTAssertTrue(knowledgeTab.waitForExistence(timeout: 3))
         knowledgeTab.tap()
         sleep(1)
@@ -213,19 +213,19 @@ final class BlossomUITests: XCTestCase {
         app.launchArguments = ["-skip-onboarding"]
         app.launch()
 
-        let homeTab = app.tabBars.buttons["首页"]
+        let homeTab = app.buttons["首页"]
         XCTAssertTrue(homeTab.waitForExistence(timeout: 10))
         snap("smoke-home")
 
-        app.tabBars.buttons["任务"].tap()
+        app.buttons["任务"].tap()
         sleep(1)
         snap("smoke-tasks")
 
-        app.tabBars.buttons["待产包"].tap()
+        app.buttons["待产包"].tap()
         sleep(1)
         snap("smoke-hospital-bag")
 
-        app.tabBars.buttons["知识"].tap()
+        app.buttons["知识"].tap()
         sleep(1)
         snap("smoke-knowledge")
     }
@@ -239,7 +239,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Hospital Bag tab
-        let bagTab = app.tabBars.buttons["待产包"]
+        let bagTab = app.buttons["待产包"]
         XCTAssertTrue(bagTab.waitForExistence(timeout: 10))
         bagTab.tap()
         sleep(1)
@@ -296,7 +296,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Tasks tab
-        let tasksTab = app.tabBars.buttons["任务"]
+        let tasksTab = app.buttons["任务"]
         XCTAssertTrue(tasksTab.waitForExistence(timeout: 10))
         tasksTab.tap()
         sleep(1)
@@ -350,7 +350,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Hospital Bag tab
-        let bagTab = app.tabBars.buttons["待产包"]
+        let bagTab = app.buttons["待产包"]
         XCTAssertTrue(bagTab.waitForExistence(timeout: 10))
         bagTab.tap()
         sleep(2) // Wait for seedDefaultItems
@@ -391,7 +391,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Hospital Bag tab
-        let bagTab = app.tabBars.buttons["待产包"]
+        let bagTab = app.buttons["待产包"]
         XCTAssertTrue(bagTab.waitForExistence(timeout: 10))
         bagTab.tap()
         sleep(1)
@@ -437,7 +437,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Knowledge tab
-        let knowledgeTab = app.tabBars.buttons["知识"]
+        let knowledgeTab = app.buttons["知识"]
         XCTAssertTrue(knowledgeTab.waitForExistence(timeout: 10))
         knowledgeTab.tap()
         sleep(2) // Wait for seedDefaultArticles
@@ -493,7 +493,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Knowledge tab
-        let knowledgeTab = app.tabBars.buttons["知识"]
+        let knowledgeTab = app.buttons["知识"]
         XCTAssertTrue(knowledgeTab.waitForExistence(timeout: 10))
         knowledgeTab.tap()
         sleep(2)
@@ -558,7 +558,7 @@ final class BlossomUITests: XCTestCase {
         app.launchArguments = ["-skip-onboarding"]
         app.launch()
 
-        let homeTab = app.tabBars.buttons["首页"]
+        let homeTab = app.buttons["首页"]
         XCTAssertTrue(homeTab.waitForExistence(timeout: 10))
         homeTab.tap()
         sleep(1)
@@ -590,7 +590,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Tasks tab
-        let tasksTab = app.tabBars.buttons["任务"]
+        let tasksTab = app.buttons["任务"]
         XCTAssertTrue(tasksTab.waitForExistence(timeout: 10))
         tasksTab.tap()
         sleep(1)
@@ -652,7 +652,7 @@ final class BlossomUITests: XCTestCase {
         app.launch()
 
         // Navigate to Tasks tab
-        let tasksTab = app.tabBars.buttons["任务"]
+        let tasksTab = app.buttons["任务"]
         XCTAssertTrue(tasksTab.waitForExistence(timeout: 10))
         tasksTab.tap()
         sleep(1)
@@ -785,7 +785,7 @@ final class BlossomUITests: XCTestCase {
         snap("duedate-today-04-home")
 
         // Verify countdown shows 0
-        let homeTab = app.tabBars.buttons["首页"]
+        let homeTab = app.buttons["首页"]
         XCTAssertTrue(homeTab.waitForExistence(timeout: 10))
 
         let zeroCountdown = app.staticTexts["0"]

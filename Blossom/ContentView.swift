@@ -246,6 +246,8 @@ struct CustomTabBar: View {
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier(tab.label)
+                .accessibilityAddTraits(selectedTab == tab.tag ? [.isSelected] : [])
             }
         }
         .padding(.top, 8)

@@ -203,7 +203,7 @@ struct ModeCard: View {
                     .frame(width: 56, height: 56)
                     .background(
                         LinearGradient(
-                            colors: [color.opacity(0.5), color.opacity(0.8)],
+                            colors: [color.opacity(0.7), color.opacity(1.0)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
