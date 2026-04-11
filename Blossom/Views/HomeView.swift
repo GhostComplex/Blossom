@@ -46,6 +46,39 @@ struct HomeView: View {
             .padding(.vertical, AppSpacing.pageVertical)
         }
         .pageBackground()
+        .overlay(
+            // Decorative radial gradient orbs (design spec)
+            ZStack {
+                // Top-right pink orb
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [Color(hex: "F9B5C4").opacity(0.25), Color.clear],
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: 130
+                        )
+                    )
+                    .frame(width: 260, height: 260)
+                    .offset(x: 100, y: -80)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                
+                // Bottom-left purple orb
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [Color(hex: "C4B5E0").opacity(0.2), Color.clear],
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: 110
+                        )
+                    )
+                    .frame(width: 220, height: 220)
+                    .offset(x: -80, y: 100)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            }
+            .allowsHitTesting(false)
+        )
         .onAppear {
             ensureProfileExists()
             ensureTodayTaskExists()

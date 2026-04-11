@@ -109,7 +109,15 @@ struct CategoryCard: View {
         switch category {
         case "拉玛泽呼吸法": return "wind"
         case "凯格尔运动": return "figure.strengthtraining.traditional"
-        default: return "book.fill"
+        default: return "book"
+        }
+    }
+    
+    private var iconGradient: [Color] {
+        switch category {
+        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0").opacity(0.5), Color.primary600.opacity(0.3)]
+        case "凯格尔运动": return [Color.accentPeach.opacity(0.6), Color.accentPeach.opacity(0.25)]
+        default: return [Color.warmGold.opacity(0.5), Color.warmGold.opacity(0.25)]
         }
     }
     
@@ -122,7 +130,7 @@ struct CategoryCard: View {
                 .frame(width: 44, height: 44)
                 .background(
                     LinearGradient(
-                        colors: [Color.accentPeach.opacity(0.5), Color.primary600.opacity(0.3)],
+                        colors: iconGradient,
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
