@@ -123,7 +123,7 @@ struct KegelExerciseView: View {
                 )
                 .frame(width: 200, height: 200)
                 .rotationEffect(.degrees(-90))
-                .shadow(color: Color.primary600.opacity(0.15), radius: 30, x: 0, y: 0)
+                .shadow(color: Color.primary600.opacity(0.3), radius: 30, x: 0, y: 0)
                 .animation(.linear(duration: 0.1), value: timer.progress)
 
             // Frosted center

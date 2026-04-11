@@ -277,6 +277,8 @@ struct ArticleDetailView: View {
         .pageBackground()
         .navigationTitle(article.title)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .tint(Color.primaryDark)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: { article.isFavorited.toggle() }) {
