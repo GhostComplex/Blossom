@@ -51,7 +51,7 @@ struct OnboardingView: View {
                 
                 // App Icon 花朵 + 呼吸动效
                 BlossomFlowerIcon(size: 100)
-                    .shadow(color: Color(red: 196/255, green: 133/255, blue: 90/255).opacity(0.3), radius: 16, y: 4)
+                    .shadow(color: Color.primary600.opacity(0.25), radius: 16, y: 4)
                     .scaleEffect(flowerBreathing ? 1.06 : 1.0)
                     .animation(.easeInOut(duration: 3).repeatForever(autoreverses: true), value: flowerBreathing)
                 .opacity(animateIn ? 1 : 0)
@@ -67,7 +67,7 @@ struct OnboardingView: View {
                     .padding(.bottom, 12)
                 
                 // Subtitle
-                Text("请告诉我们你的预产期\n我们会为你安排每日任务")
+                Text("告诉我们宝宝的预产期\n我们会陪你一起做好准备")
                     .font(.system(size: 14, weight: .regular))
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
