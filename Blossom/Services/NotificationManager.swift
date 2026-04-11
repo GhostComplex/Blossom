@@ -20,6 +20,13 @@ final class NotificationManager: ObservableObject {
     
     // MARK: - Published State
     @Published var shouldShowPreRequest = false
+    @Published var preRequestTriggerSource: PreRequestTriggerSource = .exercise
+    
+    /// Trigger source for pre-request popup — determines which copy to show
+    enum PreRequestTriggerSource {
+        case exercise      // 凯格尔/拉玛泽
+        case hospitalBag   // 待产包
+    }
     
     // MARK: - UserDefaults Keys
     private let kHasShownPreRequest = "notification_hasShownPreRequest"
@@ -44,7 +51,7 @@ final class NotificationManager: ObservableObject {
     
     /// Called when user completes any task for the first time.
     /// Shows pre-request popup if conditions are met.
-    func onTaskCompleted() {
+    func onTaskCompleted(source: PreRequestTriggerSource = .exercise) {
         let defaults = UserDefaults.standard
         
         // Mark that user has completed at least one task
@@ -54,6 +61,7 @@ final class NotificationManager: ObservableObject {
         
         // Show pre-request if never shown before
         if !defaults.bool(forKey: kHasShownPreRequest) {
+            preRequestTriggerSource = source
             shouldShowPreRequest = true
         }
     }
@@ -211,7 +219,7 @@ final class NotificationManager: ObservableObject {
     /// Called when user completes a task. Cancel today's notification if all done.
     func onExerciseCompleted(kegelDone: Bool, lamazeDone: Bool) {
         // Also trigger pre-request check
-        onTaskCompleted()
+        onTaskCompleted(source: .exercise)
         
         if kegelDone && lamazeDone {
             // Both done — cancel today's notification

@@ -281,7 +281,7 @@ struct HospitalBagItemRow: View {
                 item.isCompleted.toggle()
             }
             if item.isCompleted {
-                NotificationManager.shared.onTaskCompleted()
+                NotificationManager.shared.onTaskCompleted(source: .hospitalBag)
             }
         }
     }

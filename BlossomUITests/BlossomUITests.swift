@@ -260,9 +260,9 @@ final class BlossomUITests: XCTestCase {
 
         snap("prerequest-02-after-check")
 
-        // Verify pre-request popup appears
-        let preRequestTitle = app.staticTexts["每天提醒你练习"]
-        let preRequestBody = app.staticTexts["每天练几分钟，和宝宝见面那天会更从容。"]
+        // Verify pre-request popup appears (hospital bag trigger → bag-specific copy)
+        let preRequestTitle = app.staticTexts["别忘了每天的小任务"]
+        let preRequestBody = app.staticTexts["我们会在合适的时候提醒你练习和准备。"]
         let acceptButton = app.buttons["好的，提醒我"]
         let declineButton = app.buttons["不了，谢谢"]
 

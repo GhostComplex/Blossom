@@ -12,8 +12,27 @@
 import SwiftUI
 
 struct NotificationPreRequestView: View {
+    let triggerSource: NotificationManager.PreRequestTriggerSource
     let onAccept: () -> Void
     let onDecline: () -> Void
+    
+    private var title: String {
+        switch triggerSource {
+        case .exercise:
+            return "每天提醒你练习"
+        case .hospitalBag:
+            return "别忘了每天的小任务"
+        }
+    }
+    
+    private var body_text: String {
+        switch triggerSource {
+        case .exercise:
+            return "每天练几分钟，和宝宝见面那天会更从容。"
+        case .hospitalBag:
+            return "我们会在合适的时候提醒你练习和准备。"
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -39,12 +58,12 @@ struct NotificationPreRequestView: View {
                 .padding(.top, 8)
                 
                 // Title
-                Text("每天提醒你练习")
+                Text(title)
                     .font(AppFonts.sectionTitle)
                     .foregroundColor(Color.n900)
                 
                 // Description
-                Text("每天练几分钟，和宝宝见面那天会更从容。")
+                Text(body_text)
                     .font(AppFonts.bodyText)
                     .foregroundColor(Color.n500)
                     .multilineTextAlignment(.center)
@@ -94,6 +113,7 @@ struct NotificationPreRequestView: View {
             .ignoresSafeArea()
         
         NotificationPreRequestView(
+            triggerSource: .exercise,
             onAccept: { print("accept") },
             onDecline: { print("decline") }
         )
