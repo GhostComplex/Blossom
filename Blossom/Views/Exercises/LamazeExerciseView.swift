@@ -84,7 +84,7 @@ struct LamazeExerciseView: View {
             ModeCard(
                 icon: "book.fill",
                 title: "学习模式",
-                description: "查看 6 阶段呼吸法图文教程",
+                description: "查看 6 阶段呼吸法教程",
                 iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
             ) {
                 withAnimation { selectedMode = .learn }
