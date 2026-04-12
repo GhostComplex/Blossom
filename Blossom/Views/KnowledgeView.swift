@@ -252,7 +252,7 @@ struct ArticleDetailView: View {
                 // Disclaimer
                 VStack(alignment: .leading, spacing: 8) {
                     Divider()
-                    Text("⚠️ 免责声明：本文内容仅供参考，不构成医学建议。如有疑问，请咨询专业医生。")
+                    Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
                         .font(AppFonts.smallLabel)
                         .foregroundStyle(Color.n500)
                 }

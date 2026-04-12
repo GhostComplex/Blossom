@@ -25,7 +25,7 @@ struct FetalMovementCounterView: View {
                     Spacer()
                     
                     // Title
-                    Text("胎动次数")
+                    Text("记录胎动")
                         .font(AppFonts.caption)
                         .foregroundStyle(Color.n500)
                     
