@@ -35,7 +35,13 @@ struct ExerciseCompletionView: View {
                     .foregroundStyle(Color.n900)
 
                 // Body text
-                Text("今日\(exerciseName)已完成，坚持就是最好的准备。")
+                Text("今天的\(exerciseName)已完成")
+                    .font(AppFonts.bodyText)
+                    .foregroundStyle(Color.n500)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                
+                Text("坚持下去，和宝宝见面那天会更从容")
                     .font(AppFonts.bodyText)
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)

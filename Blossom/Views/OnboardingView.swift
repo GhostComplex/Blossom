@@ -67,7 +67,7 @@ struct OnboardingView: View {
                     .padding(.bottom, 12)
                 
                 // Subtitle
-                Text("告诉我们宝宝的预产期\n我们会陪你一起做好准备")
+                Text("请告诉我们你的预产期\n我们会为你安排每日任务")
                     .font(.custom("Nunito-Regular", size: 13))
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
