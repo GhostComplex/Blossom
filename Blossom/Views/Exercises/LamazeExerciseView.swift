@@ -48,9 +48,13 @@ struct LamazeExerciseView: View {
                     modeSelectionView
                 }
             }
-            .navigationTitle("拉玛泽呼吸练习")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("拉玛泽呼吸练习")
+                        .font(.custom("CormorantGaramond-Regular", size: 18))
+                        .foregroundStyle(Color(hex: "3A2F50"))
+                }
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: handleBack) {
                         Image(systemName: "chevron.left")
@@ -92,7 +96,7 @@ struct LamazeExerciseView: View {
             
             // Knowledge mode
             ModeCard(
-                icon: "lightbulb.fill",
+                icon: "info.circle",
                 title: "知识卡片",
                 description: "了解拉玛泽分娩法原理",
                 iconGradient: [Color(hex: "B8DCF5"), Color(hex: "ABC2E6")]
