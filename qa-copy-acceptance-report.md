@@ -26,14 +26,14 @@
 
 ## Verification Results
 
-### 1. Tab 名称（PRD §2.2）
+### 1. Tab 名称 + 首页文案（PRD §2.2）
 
-**截图证据：**
+| Design | Actual |
+|--------|--------|
+| ![design-home](./qa-screenshots/comparison/design-home.png) | ![actual-home](./qa-screenshots/copy-qa/01-home-tab.png) |
 
-![首页 Tab 栏](./qa-screenshots/copy-qa/01-home-tab.png)
-
-| # | Item | PRD 预期 | 实际截图所见 | Result |
-|---|------|---------|------------|--------|
+| # | Item | PRD 预期 | 实际所见 | Result |
+|---|------|---------|---------|--------|
 | 1.1 | Tab 1 | 首页 | 首页 | ✅ |
 | 1.2 | Tab 2 | 任务 | 任务 | ✅ |
 | 1.3 | Tab 3 | 待产包 | 待产包 | ✅ |
@@ -41,11 +41,11 @@
 
 ---
 
-### 2. 凯格尔（PRD §2.2.3）
+### 2. 凯格尔 + 任务页文案（PRD §2.2.3）
 
-**截图证据：**
-
-![任务页 - 凯格尔卡片](./qa-screenshots/copy-qa/02-tasks-tab.png)
+| Design | Actual |
+|--------|--------|
+| ![design-tasks](./qa-screenshots/comparison/design-tasks.png) | ![actual-tasks](./qa-screenshots/copy-qa/02-tasks-tab.png) |
 
 | # | Item | PRD 预期 | 实际所见 | Result |
 |---|------|---------|---------|--------|
@@ -53,14 +53,14 @@
 | 2.2 | 任务卡片描述 | "初级 · 5 秒收缩 - 10 秒放松 × 10" | "● 初级 · 5秒收缩 - 10秒放松 × 10" | ✅ |
 | 2.3 | 完成后文案 | Toast "✓ 今日凯格尔运动已完成" | 全屏完成页 "今天的凯格尔运动已完成"（无 ✓） | ❌ |
 | 2.4 | 首页卡片完成状态 | "✓ 已完成" | "✓ 已完成"（代码: HomeView:195） | ✅ |
-| 2.5 | 级别名称 | 🌱 初级 / 🌿 中级 / 🌳 高级 | ● 初级 / ●● 中级 / ●●● 高级（见截图任务卡片） | ❌ |
+| 2.5 | 级别名称 | 🌱 初级 / 🌿 中级 / 🌳 高级 | ● 初级 / ●● 中级 / ●●● 高级 | ❌ |
 | 2.6 | 拉玛泽练习 emoji | 设计规范禁止 emoji | 代码用了 🫁💨（代码: LamazeExerciseView:356） | ❌ |
 
 ---
 
 ### 3. 拉玛泽 6 阶段名称（PRD §2.2.4）
 
-代码审查验证（代码: Models.swift:210-220），无对应截图（需 XCUITest 交互进入阶段选择页）
+代码审查验证（代码: Models.swift:210-220），需 XCUITest 交互进入阶段选择页截图
 
 | # | Item | PRD 预期 | 代码实际 | Result |
 |---|------|---------|---------|--------|
@@ -75,9 +75,9 @@
 
 ### 4. 免责声明（PRD §5.5）
 
-**截图证据：**
-
-![知识页 - 免责声明在文章底部](./qa-screenshots/copy-qa/04-knowledge-tab.png)
+| Design | Actual |
+|--------|--------|
+| ![design-knowledge](./qa-screenshots/comparison/design-knowledge.png) | ![actual-knowledge](./qa-screenshots/copy-qa/04-knowledge-tab.png) |
 
 | # | Item | PRD 预期 | 代码实际 | Result |
 |---|------|---------|---------|--------|
@@ -88,7 +88,11 @@
 
 ### 5. 通知预请求弹窗（PRD §4.5.2）
 
-代码审查验证（代码: NotificationPreRequestView.swift），弹窗需触发首次任务完成，无截图
+| Design | Actual |
+|--------|--------|
+| ![design-prerequest](./qa-screenshots/design-notification-prerequest.png) | ⏳ 需触发首次完成任务后截图 |
+
+代码审查验证（代码: NotificationPreRequestView.swift）
 
 | # | Item | PRD 预期 | 代码实际 | Result |
 |---|------|---------|---------|--------|
@@ -103,7 +107,7 @@
 
 ### 6. 推送通知文案（PRD §4.5.4）
 
-代码审查验证（代码: NotificationManager.swift:43-46），推送无法模拟器 UI 验证
+代码审查验证（代码: NotificationManager.swift:43-46），推送无法模拟器 UI 截图
 
 | # | Item | PRD 预期 | 代码实际 | Result |
 |---|------|---------|---------|--------|
