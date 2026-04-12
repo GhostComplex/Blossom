@@ -41,6 +41,14 @@ struct TasksView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: AppSpacing.xxl) {
+                    // 自定义标题
+                    HStack {
+                        Text("任务")
+                            .font(.custom("CormorantGaramond-Regular", size: 24))
+                            .foregroundStyle(Color(hex: "3A2F50"))
+                        Spacer()
+                    }
+                    
                     // 顶部统计
                     headerSection
                     
@@ -55,8 +63,7 @@ struct TasksView: View {
                 .padding(.vertical, AppSpacing.pageVertical)
             }
             .pageBackground()
-            .navigationTitle("任务")
-            .navigationBarTitleDisplayMode(.large)
+            .toolbar(.hidden, for: .navigationBar)
             .fullScreenCover(isPresented: $showKegelExercise) {
                 KegelExerciseView()
             }
@@ -213,7 +220,7 @@ struct TasksView: View {
                         .foregroundStyle(Color.n900)
                     
                     if todayMovements.isEmpty {
-                        Text("今天还没有记录")
+                        Text("今天记录 0 次")
                             .font(AppFonts.caption)
                             .foregroundStyle(Color.n500)
                     } else {

@@ -154,8 +154,6 @@ struct HomeView: View {
             // 预产期信息
             if let profile = profile {
                 HStack {
-                    Image(systemName: "calendar")
-                        .foregroundStyle(Color.primaryDark)
                     Text("预产期 \(profile.dueDate, format: .dateTime.year().month().day())")
                         .font(AppFonts.smallLabel)
                         .foregroundStyle(Color.n900)
