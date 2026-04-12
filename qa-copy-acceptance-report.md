@@ -30,17 +30,17 @@
 
 | # | Item | PRD 预期 | 实际截图所见 | Result | Screenshot |
 |---|------|---------|------------|--------|------------|
-| 1.1 | Tab 1 | 首页 | 首页 | ✅ | [截图](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/01-home-tab.png) |
-| 1.2 | Tab 2 | 任务 | 任务 | ✅ | [截图](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/01-home-tab.png) |
-| 1.3 | Tab 3 | 待产包 | 待产包 | ✅ | [截图](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/01-home-tab.png) |
-| 1.4 | Tab 4 | 知识 | 知识 | ✅ | [截图](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/01-home-tab.png) |
+| 1.1 | Tab 1 | 首页 | 首页 | ✅ | [截图](./qa-screenshots/copy-qa/01-home-tab.png) |
+| 1.2 | Tab 2 | 任务 | 任务 | ✅ | [截图](./qa-screenshots/copy-qa/01-home-tab.png) |
+| 1.3 | Tab 3 | 待产包 | 待产包 | ✅ | [截图](./qa-screenshots/copy-qa/01-home-tab.png) |
+| 1.4 | Tab 4 | 知识 | 知识 | ✅ | [截图](./qa-screenshots/copy-qa/01-home-tab.png) |
 
 ### 2. 凯格尔（PRD §2.2.3）
 
 | # | Item | PRD 预期 | 实际所见 | Result | Screenshot / Source |
 |---|------|---------|---------|--------|---------------------|
-| 2.1 | 任务卡片标题 | "凯格尔运动" | "凯格尔运动" | ✅ | [截图](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/02-tasks-tab.png) |
-| 2.2 | 任务卡片描述 | "初级 · 5 秒收缩 - 10 秒放松 × 10" | "● 初级 · 5秒收缩 - 10秒放松 × 10" | ✅ | [截图](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/02-tasks-tab.png) |
+| 2.1 | 任务卡片标题 | "凯格尔运动" | "凯格尔运动" | ✅ | [截图](./qa-screenshots/copy-qa/02-tasks-tab.png) |
+| 2.2 | 任务卡片描述 | "初级 · 5 秒收缩 - 10 秒放松 × 10" | "● 初级 · 5秒收缩 - 10秒放松 × 10" | ✅ | [截图](./qa-screenshots/copy-qa/02-tasks-tab.png) |
 | 2.3 | 完成后文案 | Toast "✓ 今日凯格尔运动已完成" | 全屏完成页 "今天的凯格尔运动已完成"（无 ✓） | ❌ | 代码: ExerciseCompletionView:38 |
 | 2.4 | 首页卡片完成状态 | "✓ 已完成" | "✓ 已完成" | ✅ | 代码: HomeView:195 |
 | 2.5 | 级别名称 | 🌱 初级 / 🌿 中级 / 🌳 高级 | ● 初级 / ●● 中级 / ●●● 高级 | ❌ | 代码: Models.swift:75-77, 截图: 02-tasks-tab.png |
@@ -120,7 +120,7 @@
 
 | 页面 | 截图 |
 |------|------|
-| 首页 + Tab 栏 | ![01-home](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/01-home-tab.png) |
-| 任务页 | ![02-tasks](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/02-tasks-tab.png) |
-| 待产包页 | ![03-bag](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/03-bag-tab.png) |
-| 知识页 | ![04-knowledge](https://raw.githubusercontent.com/GhostComplex/Blossom/main/qa-screenshots/copy-qa/04-knowledge-tab.png) |
+| 首页 + Tab 栏 | ![01-home](./qa-screenshots/copy-qa/01-home-tab.png) |
+| 任务页 | ![02-tasks](./qa-screenshots/copy-qa/02-tasks-tab.png) |
+| 待产包页 | ![03-bag](./qa-screenshots/copy-qa/03-bag-tab.png) |
+| 知识页 | ![04-knowledge](./qa-screenshots/copy-qa/04-knowledge-tab.png) |
