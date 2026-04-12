@@ -28,8 +28,37 @@ struct HospitalBagView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: AppSpacing.xxl) {
-                    // 进度卡片
-                    progressCard
+                    // Custom title + subtitle + add button
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("待产包")
+                                .font(.custom("CormorantGaramond-Regular", size: 24))
+                                .foregroundStyle(Color(hex: "3A2F50"))
+                            
+                            Text("已准备 \(completedCount) / \(totalCount) 项 (\(Int(progress * 100))%)")
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color(hex: "AEA3C4"))
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: { showAddItem = true }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(Color.primaryDark)
+                                .frame(width: 32, height: 32)
+                                .background(.ultraThinMaterial)
+                                .background(Color.white.opacity(0.5))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                                )
+                        }
+                    }
+                    
+                    // 进度条
+                    progressBar
                     
                     // 分类列表
                     ForEach(categories, id: \.self) { category in
@@ -40,25 +69,7 @@ struct HospitalBagView: View {
                 .padding(.vertical, AppSpacing.pageVertical)
             }
             .pageBackground()
-            .navigationTitle("待产包")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: { showAddItem = true }) {
-                        Image(systemName: "plus")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(Color.primaryDark)
-                            .frame(width: 32, height: 32)
-                            .background(.ultraThinMaterial)
-                            .background(Color.white.opacity(0.5))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
-                            )
-                    }
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
             .sheet(isPresented: $showAddItem) {
                 AddHospitalBagItemView()
             }
@@ -70,37 +81,21 @@ struct HospitalBagView: View {
         }
     }
     
-    // MARK: - Progress Card
-    private var progressCard: some View {
-        VStack(spacing: AppSpacing.md) {
-            HStack {
-                Text("已准备 \(completedCount) / \(totalCount) 项")
-                    .font(AppFonts.cardTitle)
-                    .foregroundStyle(Color.n900)
+    // MARK: - Progress Bar
+    private var progressBar: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 3)
+                    .fill(Color(red: 196/255, green: 181/255, blue: 224/255).opacity(0.12))
+                    .frame(height: 7)
                 
-                Spacer()
-                
-                Text("\(Int(progress * 100))%")
-                    .font(AppFonts.bodyText)
-                    .foregroundStyle(Color.n500)
+                RoundedRectangle(cornerRadius: 3)
+                    .fill(progress >= 1.0 ? AnyShapeStyle(Color.success) : AnyShapeStyle(LinearGradient.progressBar))
+                    .frame(width: geometry.size.width * progress, height: 7)
+                    .animation(.easeInOut(duration: 0.3), value: progress)
             }
-            
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: AppRadius.full)
-                        .fill(Color.n200)
-                        .frame(height: 10)
-                    
-                    RoundedRectangle(cornerRadius: AppRadius.full)
-                        .fill(progress >= 1.0 ? AnyShapeStyle(Color.success) : AnyShapeStyle(LinearGradient.progressBar))
-                        .frame(width: geometry.size.width * progress, height: 10)
-                        .animation(.easeInOut(duration: 0.3), value: progress)
-                }
-            }
-            .frame(height: 10)
         }
-        .padding(AppSpacing.cardPadding)
-        .glassCard()
+        .frame(height: 7)
     }
     
     // MARK: - Category Section
