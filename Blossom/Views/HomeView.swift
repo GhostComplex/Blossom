@@ -204,7 +204,7 @@ struct HomeView: View {
                 Button(action: { showLamazeExercise = true }) {
                     TaskGridCard(
                         icon: "wind",
-                        title: "拉玛泽练习",
+                        title: "拉玛泽呼吸",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
                         iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]

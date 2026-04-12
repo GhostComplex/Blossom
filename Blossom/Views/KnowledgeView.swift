@@ -21,9 +21,22 @@ struct KnowledgeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: AppSpacing.xxl) {
+                    // 自定义标题区
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("知识")
+                            .font(.custom("CormorantGaramond-Regular", size: 24))
+                            .foregroundStyle(Color(hex: "3A2F50"))
+
+                        Text("分娩准备 · 科学备产")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color(hex: "AEA3C4"))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 8)
+
                     // 分类卡片 (2列)
                     categoryGrid
-                    
+
                     // 热门文章
                     hotArticlesSection
                 }
@@ -31,8 +44,7 @@ struct KnowledgeView: View {
                 .padding(.vertical, AppSpacing.pageVertical)
             }
             .pageBackground()
-            .navigationTitle("知识")
-            .navigationBarTitleDisplayMode(.large)
+            .toolbar(.hidden, for: .navigationBar)
             .onAppear {
                 if articles.isEmpty {
                     seedDefaultArticles()
@@ -43,34 +55,29 @@ struct KnowledgeView: View {
     
     // MARK: - Category Grid
     private var categoryGrid: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            Text("分类")
-                .font(.custom("CormorantGaramond-Light", size: 20))
-                .foregroundStyle(Color.n900)
-            
-            LazyVGrid(columns: [
-                GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
-                GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
-            ], spacing: AppSpacing.cardSpacing) {
-                ForEach(categories, id: \.self) { category in
-                    NavigationLink(destination: CategoryArticlesView(category: category)) {
-                        CategoryCard(
-                            category: category,
-                            articleCount: articles.filter { $0.category == category }.count
-                        )
-                    }
-                    .buttonStyle(.plain)
+        LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
+            GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
+        ], spacing: AppSpacing.cardSpacing) {
+            ForEach(categories, id: \.self) { category in
+                NavigationLink(destination: CategoryArticlesView(category: category)) {
+                    CategoryCard(
+                        category: category,
+                        articleCount: articles.filter { $0.category == category }.count
+                    )
                 }
+                .buttonStyle(.plain)
             }
         }
     }
     
     // MARK: - Hot Articles Section
     private var hotArticlesSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
+        VStack(alignment: .leading, spacing: 10) {
             Text("热门文章")
-                .font(.custom("CormorantGaramond-Light", size: 20))
-                .foregroundStyle(Color.n900)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(Color(hex: "7A6E94"))
+                .tracking(0.5)
             
             VStack(spacing: AppSpacing.md) {
                 ForEach(articles.prefix(3)) { article in
@@ -115,9 +122,25 @@ struct CategoryCard: View {
     
     private var iconGradient: [Color] {
         switch category {
-        case "拉玛泽呼吸法": return [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
-        case "凯格尔运动": return [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
+        case "拉玛泽呼吸法": return [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
+        case "凯格尔运动": return [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
         default: return [Color(hex: "B8DCF5"), Color(hex: "ABC2E6")]
+        }
+    }
+    
+    private var displayName: String {
+        switch category {
+        case "拉玛泽呼吸法": return "拉玛泽呼吸"
+        case "凯格尔运动": return "凯格尔运动"
+        default: return category
+        }
+    }
+    
+    private var displaySubtitle: String {
+        switch category {
+        case "拉玛泽呼吸法": return "6 篇图文"
+        case "凯格尔运动": return "科学原理"
+        default: return "\(articleCount) 篇文章"
         }
     }
     
@@ -138,12 +161,12 @@ struct CategoryCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
             
             VStack(spacing: 2) {
-                Text(category)
+                Text(displayName)
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                     .lineLimit(1)
                 
-                Text("\(articleCount) 篇文章")
+                Text(displaySubtitle)
                     .font(AppFonts.caption)
                     .foregroundStyle(Color.n500)
             }
@@ -165,12 +188,15 @@ struct ArticleCard: View {
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                     .lineLimit(2)
+                    .multilineTextAlignment(.leading)
                 
                 Text("\(article.readTimeMinutes) 分钟阅读")
                     .font(AppFonts.caption)
                     .foregroundStyle(Color.n500)
             }
+            Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(AppSpacing.cardPadding)
         .glassCard()
     }
