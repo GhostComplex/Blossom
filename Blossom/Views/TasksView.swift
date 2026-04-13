@@ -2,7 +2,7 @@
 //  TasksView.swift
 //  Blossom (拾月)
 //
-//  Tab 2 - 任务：凯格尔 + 拉玛泽 + 胎动记录
+//  Tab 2 - 任务：凯格尔 + 拉玛泽
 //
 
 import SwiftUI
@@ -12,19 +12,13 @@ struct TasksView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
     @Query private var allTasks: [DailyTask]
-    @Query(sort: \FetalMovementRecord.timestamp, order: .reverse)
-    private var allMovements: [FetalMovementRecord]
     
     private var todayTasks: [DailyTask] {
         allTasks.filter { Calendar.current.isDateInToday($0.date) }
     }
-    private var todayMovements: [FetalMovementRecord] {
-        allMovements.filter { Calendar.current.isDateInToday($0.timestamp) }
-    }
     
     @State private var showKegelExercise = false
     @State private var showLamazeExercise = false
-    @State private var showFetalMovementCounter = false
     
     private var profile: UserProfile? { profiles.first }
     private var todayTask: DailyTask? { todayTasks.first }
@@ -33,7 +27,6 @@ struct TasksView: View {
         var count = 0
         if todayTask?.kegelCompleted == true { count += 1 }
         if todayTask?.lamazeCompleted == true { count += 1 }
-        if !todayMovements.isEmpty { count += 1 }
         return count
     }
     
@@ -56,7 +49,6 @@ struct TasksView: View {
                     VStack(spacing: AppSpacing.md) {
                         kegelTaskCard
                         lamazeTaskCard
-                        fetalMovementCard
                     }
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -70,16 +62,13 @@ struct TasksView: View {
             .fullScreenCover(isPresented: $showLamazeExercise) {
                 LamazeExerciseView()
             }
-            .sheet(isPresented: $showFetalMovementCounter) {
-                FetalMovementCounterView()
-            }
         }
     }
     
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
-            Text("今天完成 \(completedTaskCount) / 3 个任务")
+            Text("今天完成 \(completedTaskCount) / 2 个任务")
                 .font(AppFonts.caption)
                 .foregroundStyle(Color.n500)
             Spacer()
@@ -196,53 +185,9 @@ struct TasksView: View {
         .buttonStyle(.plain)
     }
     
-    // MARK: - Fetal Movement Card
-    private var fetalMovementCard: some View {
-        Button(action: { showFetalMovementCounter = true }) {
-            HStack(spacing: AppSpacing.lg) {
-                // Icon
-                Image(systemName: "heart")
-                    .font(.system(size: 18))
-                    .foregroundStyle(.white)
-                    .frame(width: 44, height: 44)
-                    .background(
-                        LinearGradient(
-                            colors: [Color(hex: "C9A0DC"), Color(hex: "BB8DCE")],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("胎动记录（可选）")
-                        .font(AppFonts.cardTitle)
-                        .foregroundStyle(Color.n900)
-                    
-                    if todayMovements.isEmpty {
-                        Text("今天记录 0 次")
-                            .font(AppFonts.caption)
-                            .foregroundStyle(Color.n500)
-                    } else {
-                        Text("今天记录 \(todayMovements.count) 次")
-                            .font(AppFonts.caption)
-                            .foregroundStyle(Color.n500)
-                    }
-                }
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(Color.n300)
-            }
-            .padding(AppSpacing.cardPadding)
-            .glassCard()
-        }
-        .buttonStyle(.plain)
-    }
 }
 
 #Preview {
     TasksView()
-        .modelContainer(for: [UserProfile.self, DailyTask.self, FetalMovementRecord.self], inMemory: true)
+        .modelContainer(for: [UserProfile.self, DailyTask.self], inMemory: true)
 }

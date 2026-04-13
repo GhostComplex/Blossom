@@ -117,20 +117,6 @@ final class DailyTask {
     }
 }
 
-// MARK: - Fetal Movement Record
-@Model
-final class FetalMovementRecord {
-    var id: UUID
-    var timestamp: Date
-    var count: Int
-    
-    init(count: Int) {
-        self.id = UUID()
-        self.timestamp = Date()
-        self.count = count
-    }
-}
-
 // MARK: - Hospital Bag Item
 @Model
 final class HospitalBagItem {
