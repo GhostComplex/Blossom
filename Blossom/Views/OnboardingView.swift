@@ -41,7 +41,7 @@ struct OnboardingView: View {
         let calendar = Calendar.current
         let defaultDate = calendar.date(byAdding: .month, value: 2, to: Date()) ?? Date()
         let currentYear = calendar.component(.year, from: Date())
-        self.years = Array(currentYear...(currentYear + 2))
+        self.years = Array((currentYear - 1)...(currentYear + 2))
         self._selectedYear = State(initialValue: calendar.component(.year, from: defaultDate))
         self._selectedMonth = State(initialValue: calendar.component(.month, from: defaultDate))
         self._selectedDay = State(initialValue: calendar.component(.day, from: defaultDate))
