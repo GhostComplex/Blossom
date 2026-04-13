@@ -64,7 +64,7 @@ struct LamazeExerciseView: View {
             }
         }
         .fullScreenCover(isPresented: $showCompletionView) {
-            ExerciseCompletionView(exerciseName: "拉玛泽练习") {
+            ExerciseCompletionView(exerciseName: "拉玛泽呼吸") {
                 showCompletionView = false
                 dismiss()
             }
@@ -336,88 +336,35 @@ struct LamazePracticeView: View {
     let stage: LamazeStage
     let onComplete: () -> Void
     let onBack: () -> Void
-    
+
     @StateObject private var timer = LamazeBreathingTimer()
-    @State private var showCompletionAlert = false
+    @State private var hasStarted = false
     @State private var showExitConfirmation = false
-    
+
     var body: some View {
-        VStack(spacing: AppSpacing.xxxl) {
+        VStack(spacing: 0) {
             Spacer()
-            
-            // Stage title
-            Text("第 \(stage.rawValue) 阶段：\(stage.displayName)")
-                .font(AppFonts.sectionTitle)
-                .foregroundStyle(Color.n900)
-            
-            // Breathing animation
-            breathingCircle
-            
-            // Breathing instruction
-            Text(timer.phase == .inhale ? "🫁 深吸气..." : "💨 慢慢呼气...")
-                .font(AppFonts.cardTitle)
-                .foregroundStyle(timer.phase == .inhale ? Color.primary600 : Color.n500)
-            
-            Text("跟随圆圈\(timer.phase == .inhale ? "扩大吸气" : "缩小呼气")")
-                .font(AppFonts.caption)
-                .foregroundStyle(Color.n500)
-            
-            // Progress
-            Text("还剩 \(stage.cycleCount - timer.completedCycles) 次呼吸")
-                .font(AppFonts.bodyText)
-                .foregroundStyle(Color.n500)
-            
-            Spacer()
-            
-            // Control buttons
-            HStack(spacing: 20) {
-                Button(action: {
-                    timer.stop()
-                    showExitConfirmation = true
-                }) {
-                    HStack {
-                        Image(systemName: "xmark")
-                        Text("结束")
-                    }
-                    .font(AppFonts.cardTitle)
-                    .foregroundStyle(Color.n500)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(Color.n100)
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
-                }
-                
-                if timer.completedCycles < stage.cycleCount {
-                    Button(action: nextStage) {
-                        HStack {
-                            Text("下一阶段")
-                            Image(systemName: "chevron.right")
-                        }
-                        .font(AppFonts.cardTitle)
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color.primary600)
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.full))
-                    }
-                }
+
+            if hasStarted {
+                timerView
+            } else {
+                preparationView
             }
-            .padding(.bottom, 20)
+
+            Spacer()
+
+            // Disclaimer
+            Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
+                .font(.system(size: 10))
+                .foregroundStyle(Color(hex: "AEA3C4").opacity(0.6))
+                .padding(.bottom, 16)
         }
         .padding(.horizontal, AppSpacing.pageHorizontal)
-        .onAppear {
-            timer.configure(stage: stage)
-        }
         .onChange(of: timer.isCompleted) { _, completed in
             if completed {
-                showCompletionAlert = true
+                timer.stop()
+                onComplete()
             }
-        }
-        .alert("✓ 完成！", isPresented: $showCompletionAlert) {
-            Button("继续下一阶段") { nextStage() }
-            Button("结束练习") { onComplete() }
-        } message: {
-            Text("已完成 \(stage.displayName) 练习")
         }
         .overlay {
             ExitConfirmationOverlay(
@@ -427,57 +374,193 @@ struct LamazePracticeView: View {
             )
         }
     }
-    
-    // MARK: - Breathing Circle
-    private var breathingCircle: some View {
-        ZStack {
-            // Outer glow
-            Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [Color.primary600.opacity(0.3), Color.clear],
-                        center: .center,
-                        startRadius: 60,
-                        endRadius: 140
-                    )
+
+    // MARK: - Preparation View
+    private var preparationView: some View {
+        VStack(spacing: 0) {
+            // Level badge
+            Text("拉玛泽呼吸练习 · 6 阶段")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(Color(hex: "7A6E94"))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 6)
+                .background(Color(hex: "B7A8D6").opacity(0.15))
+                .clipShape(Capsule())
+                .padding(.bottom, 20)
+
+            // Title
+            Text("准备好了吗？")
+                .font(.custom("NotoSerifSC-Regular", size: 22))
+                .foregroundStyle(Color(hex: "3A2F50"))
+                .padding(.bottom, 16)
+
+            // Description
+            Text("跟随动画练习呼吸节奏\n从清洁呼吸开始，逐步进阶")
+                .font(.system(size: 12))
+                .foregroundStyle(Color(hex: "AEA3C4"))
+                .lineSpacing(12 * 0.6)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: 240)
+                .padding(.bottom, 32)
+
+            // Ring
+            ZStack {
+                // Ring glow
+                RadialGradient(
+                    colors: [Color(hex: "C9A0DC").opacity(0.15), Color.clear],
+                    center: .center,
+                    startRadius: 40,
+                    endRadius: 120
                 )
-                .frame(width: 280, height: 280)
-            
-            // Main circle with breathing animation
-            Circle()
-                .fill(
-                    LinearGradient(
-                        colors: [Color.accentLight, Color.accentPeach],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(width: 160, height: 160)
-                .scaleEffect(timer.scale)
-                .opacity(timer.opacity)
-                .animation(
-                    .easeInOut(duration: timer.phase == .inhale ? stage.breathingRhythm.inhale : stage.breathingRhythm.exhale),
-                    value: timer.scale
-                )
-            
-            // Inner circle
-            Circle()
-                .fill(Color.white.opacity(0.5))
-                .frame(width: 80, height: 80)
-                .scaleEffect(timer.scale)
-                .animation(
-                    .easeInOut(duration: timer.phase == .inhale ? stage.breathingRhythm.inhale : stage.breathingRhythm.exhale),
-                    value: timer.scale
-                )
+                .frame(width: 240, height: 240)
+
+                // Track ring
+                Circle()
+                    .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 8)
+                    .frame(width: 200, height: 200)
+
+                // Center text
+                Text("6 阶段")
+                    .font(.custom("NotoSerifSC-Regular", size: 18))
+                    .foregroundStyle(Color(hex: "7A6E94"))
+            }
+            .padding(.bottom, 32)
+
+            // Start button
+            Button(action: {
+                hasStarted = true
+                timer.configure(stage: stage)
+            }) {
+                Text("开始练习")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 200)
+                    .padding(.vertical, 14)
+                    .background(Color(hex: "C9A0DC"))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .shadow(color: Color(hex: "C4A0DC").opacity(0.2), radius: 16, x: 0, y: 4)
+            }
         }
     }
-    
+
+    // MARK: - Timer View
+    private var timerView: some View {
+        VStack(spacing: 0) {
+            // Stage label
+            Text("第 \(stage.rawValue) 阶段：\(stage.displayName)")
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(Color(hex: "7A6E94"))
+                .padding(.bottom, 12)
+
+            // Phase instruction (no emoji)
+            Text(timer.phase == .inhale ? "深吸气..." : "慢慢呼气...")
+                .font(.custom("NotoSerifSC-Regular", size: 22))
+                .foregroundStyle(Color(hex: "3A2F50"))
+                .padding(.bottom, 4)
+
+            // Hint text
+            Text(timer.phase == .inhale ? "跟随圆圈扩大吸气" : "跟随圆圈缩小呼气")
+                .font(.system(size: 12))
+                .foregroundStyle(Color(hex: "AEA3C4"))
+                .padding(.bottom, 24)
+
+            // Ring timer
+            ZStack {
+                // Ring glow
+                RadialGradient(
+                    colors: [Color(hex: "C9A0DC").opacity(0.15), Color.clear],
+                    center: .center,
+                    startRadius: 40,
+                    endRadius: 120
+                )
+                .frame(width: 240, height: 240)
+
+                // Track ring
+                Circle()
+                    .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 8)
+                    .frame(width: 200, height: 200)
+
+                // Progress ring
+                Circle()
+                    .trim(from: 0, to: timer.progress)
+                    .stroke(Color(hex: "C9A0DC"), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                    .frame(width: 200, height: 200)
+                    .rotationEffect(.degrees(-90))
+                    .animation(.linear(duration: 0.3), value: timer.progress)
+
+                // Center content
+                VStack(spacing: 2) {
+                    Text("\(timer.secondsRemaining)")
+                        .font(.custom("NotoSerifSC-Regular", size: 48))
+                        .foregroundStyle(Color(hex: "3A2F50"))
+                        .contentTransition(.numericText())
+                        .animation(.linear(duration: 0.1), value: timer.secondsRemaining)
+
+                    Text("秒")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(hex: "7A6E94"))
+                }
+            }
+            .padding(.bottom, 16)
+
+            // Remaining count
+            Text("还剩 \(stage.cycleCount - timer.completedCycles) 次呼吸")
+                .font(.system(size: 13))
+                .foregroundStyle(Color(hex: "7A6E94"))
+                .padding(.bottom, 24)
+
+            // Control buttons
+            HStack(spacing: 12) {
+                // End button
+                Button(action: handleEndTap) {
+                    HStack(spacing: 4) {
+                        Text("✕")
+                        Text("结束")
+                    }
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Color(hex: "7A6E94"))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color.white.opacity(0.5))
+                    .overlay(
+                        Capsule()
+                            .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 1)
+                    )
+                    .clipShape(Capsule())
+                }
+
+                // Next stage button
+                Button(action: nextStage) {
+                    HStack(spacing: 4) {
+                        Text("▶")
+                        Text("下一阶段")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color(hex: "C9A0DC"))
+                    .clipShape(Capsule())
+                }
+            }
+            .padding(.bottom, 20)
+        }
+    }
+
+    // MARK: - Actions
+    private func handleEndTap() {
+        timer.stop()
+        if timer.completedCycles > 0 {
+            showExitConfirmation = true
+        } else {
+            hasStarted = false
+        }
+    }
+
     private func nextStage() {
         timer.stop()
-        // Navigate to next stage or complete
         if let currentIndex = LamazeStage.allCases.firstIndex(of: stage),
            currentIndex < LamazeStage.allCases.count - 1 {
-            // Would navigate to next stage - for now just complete
             onComplete()
         } else {
             onComplete()
@@ -491,65 +574,90 @@ class LamazeBreathingTimer: ObservableObject {
     enum Phase {
         case inhale, exhale
     }
-    
+
     @Published var phase: Phase = .inhale
-    @Published var scale: CGFloat = 0.8
-    @Published var opacity: Double = 0.6
     @Published var completedCycles: Int = 0
     @Published var isCompleted: Bool = false
-    
+    @Published var secondsRemaining: Int = 0
+    @Published var progress: Double = 1.0
+
     private var stage: LamazeStage = .chestBreathing
-    private var timer: Timer?
-    
+    private var countdownTimer: Timer?
+    private var phaseTotalSeconds: Int = 0
+
     func configure(stage: LamazeStage) {
         self.stage = stage
         self.completedCycles = 0
         self.isCompleted = false
         startBreathing()
     }
-    
+
     func stop() {
-        timer?.invalidate()
-        timer = nil
+        countdownTimer?.invalidate()
+        countdownTimer = nil
     }
-    
+
     private func startBreathing() {
         breatheIn()
     }
-    
+
     private func breatheIn() {
         phase = .inhale
-        scale = 1.2
-        opacity = 1.0
-        
+        phaseTotalSeconds = Int(stage.breathingRhythm.inhale)
+        secondsRemaining = phaseTotalSeconds
+        progress = 0.0
+
         // Light haptic
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
-        
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: stage.breathingRhythm.inhale, repeats: false) { [weak self] _ in
-            Task { @MainActor in
-                self?.breatheOut()
-            }
-        }
+
+        startCountdown()
     }
-    
+
     private func breatheOut() {
         phase = .exhale
-        scale = 0.8
-        opacity = 0.6
-        
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: stage.breathingRhythm.exhale, repeats: false) { [weak self] _ in
+        phaseTotalSeconds = Int(stage.breathingRhythm.exhale)
+        secondsRemaining = phaseTotalSeconds
+        progress = 1.0
+
+        startCountdown()
+    }
+
+    private func startCountdown() {
+        countdownTimer?.invalidate()
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             Task { @MainActor in
-                self?.completeCycle()
+                self?.tick()
             }
         }
     }
-    
+
+    private func tick() {
+        secondsRemaining -= 1
+
+        if phase == .inhale {
+            // Inhale: progress fills up from 0 to 1
+            progress = Double(phaseTotalSeconds - secondsRemaining) / Double(phaseTotalSeconds)
+        } else {
+            // Exhale: progress empties from 1 to 0
+            progress = Double(secondsRemaining) / Double(phaseTotalSeconds)
+        }
+
+        if secondsRemaining <= 0 {
+            countdownTimer?.invalidate()
+            countdownTimer = nil
+
+            if phase == .inhale {
+                breatheOut()
+            } else {
+                completeCycle()
+            }
+        }
+    }
+
     private func completeCycle() {
         completedCycles += 1
-        
+
         if completedCycles >= stage.cycleCount {
             isCompleted = true
             // Success haptic
@@ -559,9 +667,9 @@ class LamazeBreathingTimer: ObservableObject {
             breatheIn()
         }
     }
-    
+
     deinit {
-        timer?.invalidate()
+        countdownTimer?.invalidate()
     }
 }
 
