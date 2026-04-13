@@ -33,7 +33,7 @@ struct TasksView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: AppSpacing.xxl) {
+                VStack(spacing: 0) {
                     // 自定义标题
                     HStack {
                         Text("任务")
@@ -41,12 +41,14 @@ struct TasksView: View {
                             .foregroundStyle(Color(hex: "3A2F50"))
                         Spacer()
                     }
-                    
+                    .padding(.top, 8)
+                    .padding(.bottom, 6)
+
                     // 顶部统计
                     headerSection
-                    
+
                     // 任务列表
-                    VStack(spacing: AppSpacing.md) {
+                    VStack(spacing: 11) {
                         kegelTaskCard
                         lamazeTaskCard
                     }
@@ -70,15 +72,16 @@ struct TasksView: View {
         HStack {
             Text("今天完成 \(completedTaskCount) / 2 个任务")
                 .font(AppFonts.caption)
-                .foregroundStyle(Color.n500)
+                .foregroundStyle(Color.n300)
             Spacer()
         }
+        .padding(.bottom, 16)
     }
     
     // MARK: - Kegel Task Card
     private var kegelTaskCard: some View {
         Button(action: { showKegelExercise = true }) {
-            HStack(spacing: AppSpacing.lg) {
+            HStack(spacing: 14) {
                 // Icon
                 Image(systemName: "figure.strengthtraining.traditional")
                     .font(.system(size: 18))
@@ -88,17 +91,18 @@ struct TasksView: View {
                         todayTask?.kegelCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
                         : AnyShapeStyle(LinearGradient(
-                            colors: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")],
+                            colors: [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "F9B5C4").opacity(0.8)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 13))
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text("凯格尔运动")
                             .font(AppFonts.cardTitle)
+                            .tracking(-0.1)
                             .foregroundStyle(Color.n900)
                         
                         if todayTask?.kegelCompleted == true {
@@ -134,7 +138,7 @@ struct TasksView: View {
     // MARK: - Lamaze Task Card
     private var lamazeTaskCard: some View {
         Button(action: { showLamazeExercise = true }) {
-            HStack(spacing: AppSpacing.lg) {
+            HStack(spacing: 14) {
                 // Icon
                 Image(systemName: "wind")
                     .font(.system(size: 18))
@@ -144,17 +148,18 @@ struct TasksView: View {
                         todayTask?.lamazeCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
                         : AnyShapeStyle(LinearGradient(
-                            colors: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")],
+                            colors: [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "C4B5E0").opacity(0.8)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 13))
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text("拉玛泽呼吸练习")
                             .font(AppFonts.cardTitle)
+                            .tracking(-0.1)
                             .foregroundStyle(Color.n900)
                         
                         if todayTask?.lamazeCompleted == true {
