@@ -333,41 +333,60 @@
   </div>
 </div>
 
-<!-- ④-b ONBOARDING · 日期选择态 -->
+<!-- ④-b ONBOARDING · 选择态（同一页面，卡片区域变为滚轮） -->
 <div class="wrap">
-  <div class="label">Onboarding · 日期选择</div>
+  <div class="label">Onboarding · 选择态</div>
   <div class="phone">
     <div class="home" style="justify-content:center;align-items:center;text-align:center;">
       <div class="sb" style="position:absolute;top:0;left:0;right:0;color:var(--text-dark);"><span>9:41</span><span style="opacity:0.4;">···</span></div>
-      <!-- Faded flower + title -->
-      <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--text-dark);opacity:0.35;margin-bottom:24px;">选择宝宝的预产期</div>
-      <!-- Date Picker Card -->
-      <div style="width:100%;background:rgba(255,255,255,0.55);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.7);border-radius:22px;padding:24px;margin-bottom:24px;box-shadow:0 4px 24px rgba(196,181,224,0.12);">
+      <!-- 花朵 icon（和默认态完全一样） -->
+      <div style="width:88px;height:88px;margin-bottom:24px;filter:drop-shadow(0 4px 20px rgba(196,160,220,0.25));">
+        <svg width="88" height="88" viewBox="0 0 620 620" fill="none">
+          <defs>
+            <linearGradient id="op1c" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F9B5C4"/><stop offset="100%" stop-color="#E8A0B8"/></linearGradient>
+            <linearGradient id="op2c" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#D4BCE8"/><stop offset="100%" stop-color="#B7A8D6"/></linearGradient>
+            <radialGradient id="occ" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#FEF0F3"/><stop offset="100%" stop-color="#E8D8F0"/></radialGradient>
+          </defs>
+          <ellipse cx="310" cy="190" rx="48" ry="105" fill="url(#op1c)" opacity="0.8" transform="rotate(0,310,310)"/>
+          <ellipse cx="310" cy="190" rx="48" ry="105" fill="url(#op2c)" opacity="0.75" transform="rotate(60,310,310)"/>
+          <ellipse cx="310" cy="190" rx="48" ry="105" fill="url(#op1c)" opacity="0.8" transform="rotate(120,310,310)"/>
+          <ellipse cx="310" cy="190" rx="48" ry="105" fill="url(#op2c)" opacity="0.75" transform="rotate(180,310,310)"/>
+          <ellipse cx="310" cy="190" rx="48" ry="105" fill="url(#op1c)" opacity="0.8" transform="rotate(240,310,310)"/>
+          <ellipse cx="310" cy="190" rx="48" ry="105" fill="url(#op2c)" opacity="0.75" transform="rotate(300,310,310)"/>
+          <circle cx="310" cy="310" r="65" fill="url(#occ)"/>
+          <circle cx="310" cy="295" r="5" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="325" cy="305" r="4" fill="rgba(255,255,255,0.4)"/>
+        </svg>
+      </div>
+      <div style="font-family:'Noto Serif SC',serif;font-size:28px;font-weight:400;color:var(--text-dark);margin-bottom:8px;">欢迎来到拾月</div>
+      <div style="font-size:13px;color:var(--text-light);line-height:1.6;margin-bottom:32px;">告诉我们宝宝的预产期<br>我们会陪你一起做好准备</div>
+      <!-- 日期卡片 → 变为滚轮选择器 -->
+      <div style="width:100%;background:rgba(255,255,255,0.45);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.6);border-radius:22px;padding:22px;margin-bottom:24px;box-shadow:0 2px 16px rgba(196,181,224,0.08);">
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:10px;font-weight:500;">选择预产期</div>
         <!-- Wheel picker -->
-        <div style="display:flex;justify-content:center;gap:8px;align-items:center;height:140px;overflow:hidden;position:relative;">
+        <div style="display:flex;justify-content:center;gap:8px;align-items:center;height:120px;overflow:hidden;position:relative;">
           <div style="flex:1;text-align:center;">
             <div style="font-size:14px;color:var(--text-light);opacity:0.25;">2025</div>
-            <div style="font-family:'Noto Serif SC',serif;font-size:24px;font-weight:400;color:var(--accent-dark);padding:10px 0;">2026</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">2026</div>
             <div style="font-size:14px;color:var(--text-light);opacity:0.25;">2027</div>
           </div>
           <div style="font-size:14px;color:var(--text-light);">年</div>
           <div style="flex:1;text-align:center;">
             <div style="font-size:14px;color:var(--text-light);opacity:0.25;">4</div>
-            <div style="font-family:'Noto Serif SC',serif;font-size:24px;font-weight:400;color:var(--accent-dark);padding:10px 0;">5</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">5</div>
             <div style="font-size:14px;color:var(--text-light);opacity:0.25;">6</div>
           </div>
           <div style="font-size:14px;color:var(--text-light);">月</div>
           <div style="flex:1;text-align:center;">
             <div style="font-size:14px;color:var(--text-light);opacity:0.25;">5</div>
-            <div style="font-family:'Noto Serif SC',serif;font-size:24px;font-weight:400;color:var(--accent-dark);padding:10px 0;">6</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">6</div>
             <div style="font-size:14px;color:var(--text-light);opacity:0.25;">7</div>
           </div>
           <div style="font-size:14px;color:var(--text-light);">日</div>
-          <!-- Selection highlight -->
-          <div style="position:absolute;left:12px;right:12px;height:40px;top:50%;transform:translateY(-50%);border-radius:12px;background:rgba(196,160,220,0.06);border:1px solid rgba(196,160,220,0.12);pointer-events:none;"></div>
+          <div style="position:absolute;left:12px;right:12px;height:36px;top:50%;transform:translateY(-50%);border-radius:10px;background:rgba(196,160,220,0.06);border:1px solid rgba(196,160,220,0.12);pointer-events:none;"></div>
         </div>
+        <button style="width:100%;padding:10px;border-radius:10px;background:var(--accent);color:white;font-size:13px;font-weight:600;border:none;margin-top:12px;box-shadow:0 2px 8px rgba(196,160,220,0.15);">确定</button>
       </div>
-      <button style="width:100%;padding:14px;border-radius:14px;background:var(--accent);color:white;font-size:14px;font-weight:600;border:none;box-shadow:0 4px 16px rgba(196,160,220,0.2);cursor:pointer;">确定</button>
     </div>
   </div>
 </div>
