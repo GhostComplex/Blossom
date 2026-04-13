@@ -236,26 +236,51 @@ struct CategoryArticlesView: View {
 // MARK: - Article Detail View
 struct ArticleDetailView: View {
     @Bindable var article: KnowledgeArticle
+    @Environment(\.dismiss) private var dismiss
     @State private var showKegelExercise = false
     @State private var showLamazeExercise = false
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AppSpacing.xxl) {
-                // Article content in frosted container
-                VStack(alignment: .leading, spacing: AppSpacing.lg) {
+            VStack(alignment: .leading, spacing: 0) {
+                // Custom nav bar
+                HStack(spacing: 12) {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .regular))
+                            .foregroundStyle(Color(hex: "7A6E94"))
+                    }
+                    
+                    Text(article.title)
+                        .font(.custom("NotoSerifSC-Regular", size: 18))
+                        .foregroundStyle(Color(hex: "3A2F50"))
+                        .lineLimit(1)
+                    
+                    Spacer()
+                    
+                    Button(action: { article.isFavorited.toggle() }) {
+                        Image(systemName: article.isFavorited ? "heart.fill" : "heart")
+                            .font(.system(size: 16))
+                            .foregroundStyle(article.isFavorited ? Color.accentPeach : Color(hex: "AEA3C4"))
+                    }
+                }
+                .padding(.top, 4)
+                .padding(.bottom, 16)
+                
+                // Article content card
+                VStack(alignment: .leading, spacing: 0) {
                     MarkdownView(text: article.content)
                 }
-                .padding(AppSpacing.cardPadding)
+                .padding(20)
                 .glassCard()
+                .padding(.bottom, 12)
                 
                 // Disclaimer
-                VStack(alignment: .leading, spacing: 8) {
-                    Divider()
-                    Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.n500)
-                }
+                Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
+                    .font(.custom("Nunito-Regular", size: 10))
+                    .foregroundStyle(Color(hex: "AEA3C4"))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(8)
                 
                 Spacer(minLength: 40)
                 
@@ -292,18 +317,7 @@ struct ArticleDetailView: View {
             .padding(.vertical, AppSpacing.pageVertical)
         }
         .pageBackground()
-        .navigationTitle(article.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.hidden, for: .navigationBar)
-        .tint(Color.primaryDark)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { article.isFavorited.toggle() }) {
-                    Image(systemName: article.isFavorited ? "heart.fill" : "heart")
-                        .foregroundStyle(article.isFavorited ? Color.accentPeach : Color.n500)
-                }
-            }
-        }
+        .navigationBarHidden(true)
         .onAppear {
             article.isRead = true
         }

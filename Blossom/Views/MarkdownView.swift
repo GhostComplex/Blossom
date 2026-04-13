@@ -99,27 +99,29 @@ struct MarkdownView: View {
         switch block {
         case .h2(let text):
             Text(inlineMarkdown(text))
-                .font(.system(size: 20, weight: .bold))
-                .foregroundStyle(Color.n700)
-                .padding(.top, 8)
-            
+                .font(.custom("NotoSerifSC-Medium", size: 18))
+                .foregroundStyle(Color(hex: "A87CC0"))
+                .padding(.top, 12)
+                .padding(.bottom, 12)
+
         case .h3(let text):
             Text(inlineMarkdown(text))
-                .font(.system(size: 17, weight: .semibold))
-                .foregroundStyle(Color.n700)
+                .font(.custom("NotoSerifSC-Medium", size: 16))
+                .foregroundStyle(Color(hex: "A87CC0"))
                 .padding(.top, 4)
-            
+                .padding(.bottom, 8)
+
         case .bullet(let text):
             HStack(alignment: .top, spacing: 8) {
                 Text("•")
-                    .font(AppFonts.bodyText)
-                    .foregroundStyle(Color.primary600)
+                    .font(.custom("Nunito-Regular", size: 13))
+                    .foregroundStyle(Color(hex: "C9A0DC"))
                 Text(inlineMarkdown(text))
-                    .font(AppFonts.bodyText)
-                    .foregroundStyle(Color.n700)
-                    .lineSpacing(4)
+                    .font(.custom("Nunito-Regular", size: 13))
+                    .foregroundStyle(Color(hex: "7A6E94"))
+                    .lineSpacing(9)
             }
-            
+
         case .blockquote(let text):
             HStack(spacing: 12) {
                 RoundedRectangle(cornerRadius: 2)
@@ -131,16 +133,17 @@ struct MarkdownView: View {
                     .lineSpacing(4)
             }
             .padding(.vertical, 8)
-            
+
         case .divider:
             Divider()
                 .padding(.vertical, 4)
-            
+
         case .paragraph(let text):
             Text(inlineMarkdown(text))
-                .font(AppFonts.bodyText)
-                .foregroundStyle(Color.n700)
-                .lineSpacing(6)
+                .font(.custom("Nunito-Regular", size: 13))
+                .foregroundStyle(Color(hex: "7A6E94"))
+                .lineSpacing(9)
+                .padding(.bottom, 14)
         }
     }
     
