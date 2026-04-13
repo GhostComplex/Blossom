@@ -20,7 +20,7 @@ struct KnowledgeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: AppSpacing.xxl) {
+                VStack(spacing: 0) {
                     // 自定义标题区
                     VStack(alignment: .leading, spacing: 4) {
                         Text("知识")
@@ -28,17 +28,20 @@ struct KnowledgeView: View {
                             .foregroundStyle(Color(hex: "3A2F50"))
 
                         Text("分娩准备 · 科学备产")
-                            .font(.system(size: 12))
+                            .font(.custom("Nunito-Regular", size: 12))
                             .foregroundStyle(Color(hex: "AEA3C4"))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 8)
+                    .padding(.bottom, 16)
 
                     // 分类卡片 (2列)
                     categoryGrid
+                        .padding(.bottom, 16)
 
                     // 热门文章
                     hotArticlesSection
+                        .padding(.top, 16)
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .padding(.vertical, AppSpacing.pageVertical)
@@ -75,11 +78,11 @@ struct KnowledgeView: View {
     private var hotArticlesSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("热门文章")
-                .font(.system(size: 12, weight: .semibold))
+                .font(.custom("Nunito-SemiBold", size: 12))
                 .foregroundStyle(Color(hex: "7A6E94"))
                 .tracking(0.5)
-            
-            VStack(spacing: AppSpacing.md) {
+
+            VStack(spacing: 8) {
                 ForEach(articles.prefix(3)) { article in
                     NavigationLink(destination: ArticleDetailView(article: article)) {
                         ArticleCard(article: article)
@@ -145,34 +148,39 @@ struct CategoryCard: View {
     }
     
     var body: some View {
-        VStack(spacing: AppSpacing.md) {
+        VStack(spacing: 0) {
             // Centered icon
             Image(systemName: icon)
                 .font(.system(size: 18))
                 .foregroundStyle(.white)
-                .frame(width: 44, height: 44)
+                .frame(width: 40, height: 40)
                 .background(
                     LinearGradient(
-                        colors: iconGradient,
+                        colors: iconGradient.enumerated().map { index, color in
+                            color.opacity(index == 0 ? 0.5 : 0.8)
+                        },
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 )
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
-            
+                .clipShape(RoundedRectangle(cornerRadius: 13))
+                .padding(.bottom, 10)
+
             VStack(spacing: 2) {
                 Text(displayName)
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
                     .lineLimit(1)
-                
+                    .tracking(-0.1)
+
                 Text(displaySubtitle)
                     .font(AppFonts.caption)
-                    .foregroundStyle(Color.n500)
+                    .foregroundStyle(Color.n300)
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(AppSpacing.cardPadding)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 12)
         .glassCard()
     }
 }
@@ -189,15 +197,17 @@ struct ArticleCard: View {
                     .foregroundStyle(Color.n900)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
-                
+                    .tracking(-0.1)
+
                 Text("\(article.readTimeMinutes) 分钟阅读")
-                    .font(AppFonts.caption)
-                    .foregroundStyle(Color.n500)
+                    .font(.custom("Nunito-Regular", size: 10.5))
+                    .foregroundStyle(Color.n300)
             }
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(AppSpacing.cardPadding)
+        .padding(.vertical, 14)
+        .padding(.horizontal, 16)
         .glassCard()
     }
 }
