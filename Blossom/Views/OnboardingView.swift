@@ -202,7 +202,7 @@ struct OnboardingView: View {
         .offset(y: animateIn ? 0 : 30)
     }
     
-    // MARK: - Selection State: Inline Wheel Picker
+    // MARK: - Selection State: Custom Wheel Picker
     
     private var datePickerCard: some View {
         VStack(spacing: 0) {
@@ -210,11 +210,11 @@ struct OnboardingView: View {
             Text("选择预产期")
                 .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(Color.n500)
-                .padding(.bottom, 12)
+                .padding(.bottom, 10)
             
-            // Wheel area with highlight bar
+            // Custom wheel area — design: flex row with year/月/day labels between columns
             ZStack {
-                // Highlight bar for selected row
+                // Highlight bar — centered vertically
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(hex: "C4A0DC").opacity(0.06))
                     .overlay(
@@ -222,61 +222,59 @@ struct OnboardingView: View {
                             .stroke(Color(hex: "C4A0DC").opacity(0.12), lineWidth: 1)
                     )
                     .frame(height: 36)
+                    .padding(.horizontal, 12)
                 
-                // Three-column picker
+                // Three columns with labels between them
                 HStack(spacing: 8) {
-                    // Year
-                    VStack(spacing: 0) {
-                        Picker("年", selection: $selectedYear) {
-                            ForEach(years, id: \.self) { year in
-                                Text("\(year)")
-                                    .tag(year)
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .frame(height: 120)
-                        .clipped()
-                        
-                        Text("年")
-                            .font(.system(size: 14))
-                            .foregroundStyle(Color.n500)
-                    }
+                    // Year column
+                    DragWheelColumn(
+                        items: years.map { "\($0)" },
+                        selectedIndex: Binding(
+                            get: { years.firstIndex(of: selectedYear) ?? 0 },
+                            set: { selectedYear = years[$0] }
+                        )
+                    )
                     
-                    // Month
-                    VStack(spacing: 0) {
-                        Picker("月", selection: $selectedMonth) {
-                            ForEach(months, id: \.self) { month in
-                                Text("\(month)")
-                                    .tag(month)
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .frame(height: 120)
-                        .clipped()
-                        
-                        Text("月")
-                            .font(.system(size: 14))
-                            .foregroundStyle(Color.n500)
-                    }
+                    // 年 label
+                    Text("年")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color.n500)
                     
-                    // Day
-                    VStack(spacing: 0) {
-                        Picker("日", selection: $selectedDay) {
-                            ForEach(days, id: \.self) { day in
-                                Text("\(day)")
-                                    .tag(day)
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .frame(height: 120)
-                        .clipped()
-                        
-                        Text("日")
-                            .font(.system(size: 14))
-                            .foregroundStyle(Color.n500)
-                    }
+                    // Month column
+                    DragWheelColumn(
+                        items: months.map { "\($0)" },
+                        selectedIndex: Binding(
+                            get: { months.firstIndex(of: selectedMonth) ?? 0 },
+                            set: { selectedMonth = months[$0] }
+                        )
+                    )
+                    
+                    // 月 label
+                    Text("月")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color.n500)
+                    
+                    // Day column
+                    DragWheelColumn(
+                        items: days.map { "\($0)" },
+                        selectedIndex: Binding(
+                            get: {
+                                let idx = days.firstIndex(of: selectedDay) ?? 0
+                                return min(idx, days.count - 1)
+                            },
+                            set: { selectedDay = days[$0] }
+                        )
+                    )
+                    
+                    // 日 label
+                    Text("日")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color.n500)
                 }
+                .padding(.horizontal, 12)
             }
+            .frame(height: 120)
+            .clipped()
         }
         .padding(.vertical, 22)
         .padding(.horizontal, 22)
@@ -302,7 +300,6 @@ struct OnboardingView: View {
     // MARK: - Actions
     
     private func confirmDate() {
-        // Clamp day if needed (e.g. switched from month with 31 days to month with 28)
         let maxDay = days.last ?? 31
         if selectedDay > maxDay {
             selectedDay = maxDay
@@ -320,6 +317,69 @@ struct OnboardingView: View {
         try? modelContext.save()
         
         onComplete()
+    }
+}
+
+// MARK: - Custom Drag Wheel Column
+private struct DragWheelColumn: View {
+    let items: [String]
+    @Binding var selectedIndex: Int
+    
+    private let rowHeight: CGFloat = 40
+    @State private var dragOffset: CGFloat = 0
+    
+    private var prevIndex: Int? {
+        selectedIndex > 0 ? selectedIndex - 1 : nil
+    }
+    
+    private var nextIndex: Int? {
+        selectedIndex < items.count - 1 ? selectedIndex + 1 : nil
+    }
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // Previous row
+            Text(prevIndex != nil ? items[prevIndex!] : "")
+                .font(.system(size: 14))
+                .foregroundStyle(Color.n500.opacity(0.25))
+                .frame(maxWidth: .infinity)
+                .frame(height: rowHeight)
+            
+            // Selected row
+            Text(items[selectedIndex])
+                .font(.custom("NotoSerifSC-Regular", size: 22))
+                .foregroundStyle(Color(hex: "A87CC0"))
+                .frame(maxWidth: .infinity)
+                .frame(height: rowHeight)
+            
+            // Next row
+            Text(nextIndex != nil ? items[nextIndex!] : "")
+                .font(.system(size: 14))
+                .foregroundStyle(Color.n500.opacity(0.25))
+                .frame(maxWidth: .infinity)
+                .frame(height: rowHeight)
+        }
+        .offset(y: dragOffset)
+        .frame(height: 120, alignment: .center)
+        .clipped()
+        .contentShape(Rectangle())
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    dragOffset = value.translation.height
+                }
+                .onEnded { value in
+                    let threshold: CGFloat = rowHeight / 3
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        if value.translation.height > threshold && selectedIndex > 0 {
+                            selectedIndex -= 1
+                        } else if value.translation.height < -threshold && selectedIndex < items.count - 1 {
+                            selectedIndex += 1
+                        }
+                        dragOffset = 0
+                    }
+                }
+        )
     }
 }
 
