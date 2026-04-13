@@ -157,7 +157,7 @@ struct AppFonts {
     }
 
     // Specific sizes from design spec v2
-    static let countdownNumber = Font.custom("NotoSerifSC-Regular", size: 72)
+    static let countdownNumber = Font.custom("NotoSerifSC-Light", size: 72)
     static let countdownUnit = Font.custom("Nunito-Regular", size: 15)
     static let pageTitle = Font.custom("NotoSerifSC-Regular", size: 28)
     static let sectionTitle = Font.custom("NotoSerifSC-Regular", size: 24)
