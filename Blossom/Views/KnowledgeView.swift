@@ -11,12 +11,12 @@ import SwiftData
 struct KnowledgeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \KnowledgeArticle.sortOrder) private var articles: [KnowledgeArticle]
-    
+
 
     private var categories: [String] {
         ["拉玛泽呼吸法", "凯格尔运动"]
     }
-    
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -55,7 +55,7 @@ struct KnowledgeView: View {
             }
         }
     }
-    
+
     // MARK: - Category Grid
     private var categoryGrid: some View {
         LazyVGrid(columns: [
@@ -73,7 +73,7 @@ struct KnowledgeView: View {
             }
         }
     }
-    
+
     // MARK: - Hot Articles Section
     private var hotArticlesSection: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -92,11 +92,11 @@ struct KnowledgeView: View {
             }
         }
     }
-    
+
     // MARK: - Seed Default Articles
     private func seedDefaultArticles() {
         let defaultArticles = ArticleContent.allArticles
-        
+
         for (index, article) in defaultArticles.enumerated() {
             let knowledgeArticle = KnowledgeArticle(
                 category: article.category,
@@ -114,7 +114,7 @@ struct KnowledgeView: View {
 struct CategoryCard: View {
     let category: String
     let articleCount: Int
-    
+
     private var icon: String {
         switch category {
         case "拉玛泽呼吸法": return "wind"
@@ -122,7 +122,7 @@ struct CategoryCard: View {
         default: return "book"
         }
     }
-    
+
     private var iconGradient: [Color] {
         switch category {
         case "拉玛泽呼吸法": return [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "F9B5C4").opacity(0.8)]
@@ -130,7 +130,7 @@ struct CategoryCard: View {
         default: return [Color(hex: "B8DCF5").opacity(0.5), Color(hex: "B8DCF5").opacity(0.8)]
         }
     }
-    
+
     private var displayName: String {
         switch category {
         case "拉玛泽呼吸法": return "拉玛泽呼吸"
@@ -138,7 +138,7 @@ struct CategoryCard: View {
         default: return category
         }
     }
-    
+
     private var displaySubtitle: String {
         switch category {
         case "拉玛泽呼吸法": return "6 篇图文"
@@ -146,7 +146,7 @@ struct CategoryCard: View {
         default: return "\(articleCount) 篇文章"
         }
     }
-    
+
     var body: some View {
         VStack(spacing: 10) {
             // Centered icon
@@ -185,7 +185,7 @@ struct CategoryCard: View {
 // MARK: - Article Card
 struct ArticleCard: View {
     let article: KnowledgeArticle
-    
+
     var body: some View {
         HStack(spacing: AppSpacing.lg) {
             VStack(alignment: .leading, spacing: 4) {
@@ -213,14 +213,14 @@ struct ArticleCard: View {
 struct CategoryArticlesView: View {
     let category: String
     @Query private var articles: [KnowledgeArticle]
-    
+
     init(category: String) {
         self.category = category
         _articles = Query(filter: #Predicate<KnowledgeArticle> { article in
             article.category == category
         }, sort: \KnowledgeArticle.sortOrder)
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: AppSpacing.md) {
@@ -243,82 +243,58 @@ struct CategoryArticlesView: View {
 // MARK: - Article Detail View
 struct ArticleDetailView: View {
     @Bindable var article: KnowledgeArticle
-    @State private var showKegelExercise = false
-    @State private var showLamazeExercise = false
-    
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AppSpacing.xxl) {
+            VStack(alignment: .leading, spacing: 0) {
+                // Custom nav bar
+                HStack(spacing: 12) {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 20))
+                            .foregroundStyle(Color.n500)
+                    }
+
+                    Text(article.title)
+                        .font(.custom("NotoSerifSC-Regular", size: 18))
+                        .foregroundStyle(Color.n900)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Button(action: { article.isFavorited.toggle() }) {
+                        Image(systemName: article.isFavorited ? "heart.fill" : "heart")
+                            .font(.system(size: 20))
+                            .foregroundStyle(article.isFavorited ? Color.accentPeach : Color.n300)
+                    }
+                }
+                .padding(.top, 4)
+                .padding(.bottom, 16)
+
                 // Article content in frosted container
                 VStack(alignment: .leading, spacing: AppSpacing.lg) {
                     MarkdownView(text: article.content)
                 }
-                .padding(AppSpacing.cardPadding)
+                .padding(20)
                 .glassCard()
-                
+                .padding(.bottom, 12)
+
                 // Disclaimer
-                VStack(alignment: .leading, spacing: 8) {
-                    Divider()
-                    Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.n500)
-                }
-                
-                Spacer(minLength: 40)
-                
-                // Actions
-                if article.category == "拉玛泽呼吸法" {
-                    Button(action: { showLamazeExercise = true }) {
-                        HStack {
-                            Image(systemName: "play.fill")
-                            Text("开始跟练")
-                        }
-                        .font(.custom("Nunito-SemiBold", size: 14))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color.primary600)
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
-                    }
-                } else if article.category == "凯格尔运动" {
-                    Button(action: { showKegelExercise = true }) {
-                        HStack {
-                            Image(systemName: "play.fill")
-                            Text("开始跟练")
-                        }
-                        .font(.custom("Nunito-SemiBold", size: 14))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(Color.primary600)
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
-                    }
-                }
+                Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
+                    .font(.system(size: 10))
+                    .foregroundStyle(Color.n300)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .padding(8)
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.vertical, AppSpacing.pageVertical)
         }
         .pageBackground()
-        .navigationTitle(article.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.hidden, for: .navigationBar)
-        .tint(Color.primaryDark)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { article.isFavorited.toggle() }) {
-                    Image(systemName: article.isFavorited ? "heart.fill" : "heart")
-                        .foregroundStyle(article.isFavorited ? Color.accentPeach : Color.n500)
-                }
-            }
-        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             article.isRead = true
-        }
-        .fullScreenCover(isPresented: $showKegelExercise) {
-            KegelExerciseView()
-        }
-        .fullScreenCover(isPresented: $showLamazeExercise) {
-            LamazeExerciseView()
         }
     }
 }
