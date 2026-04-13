@@ -52,13 +52,13 @@ struct LamazeExerciseView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("拉玛泽呼吸练习")
-                        .font(.custom("NotoSerifSC-Regular", size: 18))
+                        .font(.custom("NotoSerifSC-Regular", size: 20))
                         .foregroundStyle(Color(hex: "3A2F50"))
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: handleBack) {
                         Image(systemName: "chevron.left")
-                            .foregroundStyle(Color.n700)
+                            .foregroundStyle(Color.n500)
                     }
                 }
             }
@@ -73,13 +73,13 @@ struct LamazeExerciseView: View {
 
     // MARK: - Mode Selection
     private var modeSelectionView: some View {
-        VStack(spacing: AppSpacing.lg) {
+        VStack(spacing: 11) {
             // Practice mode
             ModeCard(
                 icon: "wind",
                 title: "跟练模式",
                 description: "跟随动画一起练习呼吸",
-                iconGradient: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
+                iconGradient: [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "F9B5C4").opacity(0.8)]
             ) {
                 withAnimation { selectedMode = .practice }
             }
@@ -89,7 +89,7 @@ struct LamazeExerciseView: View {
                 icon: "book.fill",
                 title: "学习模式",
                 description: "查看 6 阶段呼吸法教程",
-                iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
+                iconGradient: [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "C4B5E0").opacity(0.8)]
             ) {
                 withAnimation { selectedMode = .learn }
             }
@@ -99,16 +99,15 @@ struct LamazeExerciseView: View {
                 icon: "info.circle",
                 title: "知识卡片",
                 description: "了解拉玛泽分娩法原理",
-                iconGradient: [Color(hex: "B8DCF5"), Color(hex: "ABC2E6")]
+                iconGradient: [Color(hex: "B8DCF5").opacity(0.5), Color(hex: "B8DCF5").opacity(0.8)]
             ) {
                 // TODO: Navigate to knowledge tab
                 dismiss()
             }
-            
-            Spacer(minLength: AppSpacing.lg)
         }
         .padding(.horizontal, AppSpacing.pageHorizontal)
-        .padding(.top, AppSpacing.xl)
+        .frame(maxHeight: .infinity, alignment: .top)
+        .padding(.top, AppSpacing.sm)
     }
     
     // MARK: - Stage Selection
@@ -200,11 +199,11 @@ struct ModeCard: View {
     
     var body: some View {
         Button(action: action) {
-            HStack(spacing: AppSpacing.lg) {
+            HStack(spacing: 14) {
                 Image(systemName: icon)
-                    .font(.system(size: 24))
+                    .font(.system(size: 20))
                     .foregroundStyle(.white)
-                    .frame(width: 56, height: 56)
+                    .frame(width: 44, height: 44)
                     .background(
                         LinearGradient(
                             colors: iconGradient,
@@ -216,12 +215,13 @@ struct ModeCard: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
-                        .font(AppFonts.cardTitle)
+                        .font(.custom("Nunito-Medium", size: 14))
+                        .tracking(-0.1)
                         .foregroundStyle(Color.n900)
-                    
+
                     Text(description)
-                        .font(AppFonts.caption)
-                        .foregroundStyle(Color.n500)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Color.n300)
                 }
                 
                 Spacer()
@@ -229,7 +229,7 @@ struct ModeCard: View {
                 Image(systemName: "chevron.right")
                     .foregroundStyle(Color.n300)
             }
-            .padding(AppSpacing.cardPadding)
+            .padding(20)
             .glassCard()
         }
         .buttonStyle(.plain)
