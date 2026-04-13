@@ -171,7 +171,7 @@ struct AppFonts {
 // MARK: - Corner Radius
 struct AppRadius {
     static let sm: CGFloat = 10      // Small elements
-    static let md: CGFloat = 14      // Buttons, icon backgrounds
+    static let md: CGFloat = 13      // Buttons, icon backgrounds
     static let lg: CGFloat = 20      // Cards (was 22)
     static let xl: CGFloat = 28      // Main countdown card (was 26)
     static let full: CGFloat = 100   // Pill buttons, badges
@@ -207,8 +207,8 @@ struct AppSpacing {
     static let pageVertical: CGFloat = 22
 
     // Card padding
-    static let cardPadding: CGFloat = 18
-    static let cardSpacing: CGFloat = 12
+    static let cardPadding: CGFloat = 15
+    static let cardSpacing: CGFloat = 11
 }
 
 // MARK: - Glassmorphism Modifier
@@ -229,9 +229,9 @@ struct GlassmorphismCard: ViewModifier {
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
             )
-            .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 8, x: 0, y: 2)
+            .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 16, x: 0, y: 2)
     }
 }
 

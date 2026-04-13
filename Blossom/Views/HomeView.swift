@@ -29,7 +29,7 @@ struct HomeView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: AppSpacing.xxl) {
+            VStack(spacing: 20) {
                 // 顶部问候
                 greetingHeader
                 
@@ -95,13 +95,15 @@ struct HomeView: View {
     // MARK: - Greeting Header
     private var greetingHeader: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(Date(), format: .dateTime.month().day().year())
+            Text(Date(), format: .dateTime.month(.wide).day().year())
+                .environment(\.locale, Locale(identifier: "en_US"))
                 .font(AppFonts.caption)
                 .foregroundStyle(Color.n500)
-            
+
             Text(greetingText)
                 .font(.custom("NotoSerifSC-Regular", size: 26))
                 .foregroundStyle(Color.n900)
+                .tracking(-0.3)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -123,45 +125,47 @@ struct HomeView: View {
             if let profile = profile {
                 let week = profile.currentPregnancyWeek
                 Text("孕 \(week.week) 周 + \(week.day) 天")
-                    .font(AppFonts.smallLabel)
-                    .foregroundStyle(Color.n900)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(Color.n500)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 4)
                     .background(Color.white.opacity(0.35))
                     .overlay(Capsule().stroke(Color.white.opacity(0.4), lineWidth: 1))
                     .clipShape(Capsule())
             }
-            
+
             // 倒计时描述
             Text("距离与宝宝见面")
                 .font(AppFonts.caption)
                 .foregroundStyle(Color.n500)
-            
+
             // 倒计时数字
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text("\(profile?.daysUntilDue ?? 0)")
-                    .font(AppFonts.countdownNumber)
+                    .font(.custom("NotoSerifSC-Light", size: 72))
                     .foregroundStyle(Color.n900)
-                
+                    .tracking(-2)
+                    .shadow(color: Color.black.opacity(0.06), radius: 16, x: 0, y: 2)
+                    .padding(.top, 6)
+                    .padding(.bottom, 2)
+
                 Text("天")
                     .font(AppFonts.countdownUnit)
-                    .foregroundStyle(Color.n700)
+                    .foregroundStyle(Color.n500)
             }
-            
-            Divider()
-                .background(Color.white.opacity(0.4))
-            
+
             // 预产期信息
             if let profile = profile {
+                let comps = Calendar.current.dateComponents([.year, .month, .day], from: profile.dueDate)
                 HStack {
-                    Text("预产期 \(profile.dueDate, format: .dateTime.year().month().day())")
+                    Text("预产期 \(comps.year!) 年 \(comps.month!) 月 \(comps.day!) 日")
                         .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.n900)
+                        .foregroundStyle(Color.n300)
                 }
             }
         }
-        .padding(.vertical, 32)
-        .padding(.horizontal, 28)
+        .padding(.top, 28)
+        .padding([.horizontal, .bottom], 24)
         .frame(maxWidth: .infinity)
         .background(
             ZStack {
@@ -179,7 +183,7 @@ struct HomeView: View {
             RoundedRectangle(cornerRadius: AppRadius.xl)
                 .stroke(Color.white.opacity(0.5), lineWidth: 1)
         )
-        .shadow(color: Color(hex: "C4A0DC").opacity(0.12), radius: 20, x: 0, y: 8)
+        .shadow(color: Color(hex: "C4A0DC").opacity(0.12), radius: 40, x: 0, y: 8)
     }
     
     // MARK: - Task Grid (2x2)
@@ -192,7 +196,7 @@ struct HomeView: View {
                     TaskGridCard(
                         icon: "figure.strengthtraining.traditional",
                         title: "凯格尔运动",
-                        subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
+                        subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "初级 · 3 分钟",
                         isCompleted: todayTask?.kegelCompleted ?? false,
                         iconGradient: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
                     )
@@ -203,7 +207,7 @@ struct HomeView: View {
                     TaskGridCard(
                         icon: "wind",
                         title: "拉玛泽呼吸",
-                        subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
+                        subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "6 阶段跟练",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
                         iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
                     )
@@ -267,7 +271,7 @@ struct HomeView: View {
             
             Text("\(percent)%")
                 .font(AppFonts.smallLabel)
-                .foregroundStyle(Color.n500)
+                .foregroundStyle(Color(hex: "C9A0DC"))
         }
         .padding(AppSpacing.cardPadding)
         .glassCard()
