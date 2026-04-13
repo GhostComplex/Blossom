@@ -114,8 +114,25 @@ struct OnboardingView: View {
                 }
                 .padding(.bottom, 24)
                 
-                // CTA Button — only show in default state
-                if !showDatePicker {
+                // CTA Button — same position for both states
+                if showDatePicker {
+                    Button(action: confirmDate) {
+                        Text("确定")
+                            .font(.custom("Nunito-SemiBold", size: 14))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(
+                                RoundedRectangle(cornerRadius: 14)
+                                    .fill(Color(hex: "C9A0DC"))
+                            )
+                            .shadow(color: Color(hex: "C4A0DC").opacity(0.2), radius: 16, y: 4)
+                    }
+                    .padding(.horizontal, AppSpacing.pageHorizontal)
+                    .opacity(animateIn ? 1 : 0)
+                    .offset(y: animateIn ? 0 : 20)
+                    .padding(.bottom, 16)
+                } else {
                     Button(action: completeOnboarding) {
                         HStack {
                             Text("开始使用")
@@ -278,20 +295,6 @@ struct OnboardingView: View {
             .frame(height: 120)
             .clipped()
             
-            // 确定 button — inside card, margin-top 12px per design spec
-            Button(action: confirmDate) {
-                Text("确定")
-                    .font(.custom("Nunito-SemiBold", size: 13))
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: "C9A0DC"))
-                    )
-                    .shadow(color: Color(hex: "C4A0DC").opacity(0.15), radius: 8, y: 2)
-            }
-            .padding(.top, 12)
         }
         .padding(.vertical, 22)
         .padding(.horizontal, 22)
