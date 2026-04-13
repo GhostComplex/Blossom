@@ -111,30 +111,29 @@ struct OnboardingView: View {
                 }
                 .padding(.bottom, 24)
                 
-                // CTA Button
-                Button(action: showDatePicker ? confirmDate : completeOnboarding) {
-                    HStack {
-                        Text(showDatePicker ? "确定" : "开始使用")
-                            .font(.custom("Nunito-SemiBold", size: showDatePicker ? 13 : 14))
-                        if !showDatePicker {
+                // CTA Button — only show in default state
+                if !showDatePicker {
+                    Button(action: completeOnboarding) {
+                        HStack {
+                            Text("开始使用")
+                                .font(.custom("Nunito-SemiBold", size: 14))
                             Text("→")
                                 .font(.custom("Nunito-SemiBold", size: 14))
                         }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14)
+                                .fill(Color(hex: "C9A0DC"))
+                        )
+                        .shadow(color: Color(hex: "C4A0DC").opacity(0.2), radius: 16, y: 4)
                     }
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, showDatePicker ? 10 : 14)
-                    .background(
-                        RoundedRectangle(cornerRadius: showDatePicker ? 10 : 14)
-                            .fill(Color(hex: "C9A0DC"))
-                    )
-                    .shadow(color: Color(hex: "C4A0DC").opacity(showDatePicker ? 0.15 : 0.2),
-                            radius: showDatePicker ? 8 : 16, y: showDatePicker ? 2 : 4)
+                    .padding(.horizontal, AppSpacing.pageHorizontal)
+                    .opacity(animateIn ? 1 : 0)
+                    .offset(y: animateIn ? 0 : 20)
+                    .padding(.bottom, 16)
                 }
-                .padding(.horizontal, AppSpacing.pageHorizontal)
-                .opacity(animateIn ? 1 : 0)
-                .offset(y: animateIn ? 0 : 20)
-                .padding(.bottom, 16)
                 
                 Spacer()
             }
@@ -275,6 +274,21 @@ struct OnboardingView: View {
             }
             .frame(height: 120)
             .clipped()
+            
+            // 确定 button — inside card, margin-top 12px per design spec
+            Button(action: confirmDate) {
+                Text("确定")
+                    .font(.custom("Nunito-SemiBold", size: 13))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color(hex: "C9A0DC"))
+                    )
+                    .shadow(color: Color(hex: "C4A0DC").opacity(0.15), radius: 8, y: 2)
+            }
+            .padding(.top, 12)
         }
         .padding(.vertical, 22)
         .padding(.horizontal, 22)
