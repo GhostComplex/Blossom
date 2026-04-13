@@ -27,25 +27,25 @@ struct HospitalBagView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: AppSpacing.xxl) {
+                VStack(spacing: 0) {
                     // Custom title + subtitle + add button
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("待产包")
                                 .font(.custom("NotoSerifSC-Regular", size: 24))
                                 .foregroundStyle(Color(hex: "3A2F50"))
-                            
+
                             Text("已准备 \(completedCount) / \(totalCount) 项 (\(Int(progress * 100))%)")
-                                .font(.system(size: 12))
+                                .font(.custom("Nunito-Regular", size: 12))
                                 .foregroundStyle(Color(hex: "AEA3C4"))
                         }
-                        
+
                         Spacer()
-                        
+
                         Button(action: { showAddItem = true }) {
                             Image(systemName: "plus")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(Color.primaryDark)
+                                .foregroundStyle(Color(hex: "C9A0DC"))
                                 .frame(width: 32, height: 32)
                                 .background(.ultraThinMaterial)
                                 .background(Color.white.opacity(0.5))
@@ -56,17 +56,20 @@ struct HospitalBagView: View {
                                 )
                         }
                     }
-                    
+                    .padding(.bottom, 6)
+
                     // 进度条
                     progressBar
-                    
+                        .padding(.bottom, 14)
+
                     // 分类列表
                     ForEach(categories, id: \.self) { category in
                         categorySection(category)
+                            .padding(.bottom, 8)
                     }
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
-                .padding(.vertical, AppSpacing.pageVertical)
+                .padding(.vertical, 8)
             }
             .pageBackground()
             .toolbar(.hidden, for: .navigationBar)
@@ -103,33 +106,33 @@ struct HospitalBagView: View {
         let categoryItems = items.filter { $0.category == category }
         let categoryCompleted = categoryItems.filter { $0.isCompleted }.count
         
-        return VStack(alignment: .leading, spacing: AppSpacing.md) {
+        return VStack(alignment: .leading, spacing: 0) {
             // Category header
             HStack {
                 Text(category)
                     .font(.custom("Nunito-SemiBold", size: 13))
                     .foregroundStyle(Color.n900)
-                
+
                 Spacer()
-                
+
                 Text("(\(categoryCompleted)/\(categoryItems.count))")
-                    .font(AppFonts.caption)
+                    .font(.system(size: 11))
                     .foregroundStyle(Color.n500)
             }
-            
-            // Items
-            VStack(spacing: 0) {
-                ForEach(categoryItems) { item in
-                    HospitalBagItemRow(item: item)
-                    
-                    if item.id != categoryItems.last?.id {
-                        Divider()
-                            .background(Color.n200)
+
+            if !categoryItems.isEmpty {
+                // Items
+                VStack(spacing: 8) {
+                    ForEach(categoryItems) { item in
+                        HospitalBagItemRow(item: item)
                     }
                 }
+                .padding(.top, 10)
             }
-            .glassCard()
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .glassCard()
     }
     
     private func categoryIcon(_ category: String) -> String {
@@ -226,13 +229,13 @@ struct HospitalBagItemRow: View {
     @Bindable var item: HospitalBagItem
     
     var body: some View {
-        HStack(spacing: AppSpacing.md) {
+        HStack(spacing: 10) {
             // Checkbox — custom drawn circle per design spec
             if item.isCompleted {
                 // Checked: filled purple circle with white checkmark
                 ZStack {
                     Circle()
-                        .fill(Color.primary600)
+                        .fill(Color(hex: "C9A0DC"))
                         .frame(width: 18, height: 18)
                     Image(systemName: "checkmark")
                         .font(.system(size: 10, weight: .bold))
@@ -244,12 +247,12 @@ struct HospitalBagItemRow: View {
                     .stroke(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.3), lineWidth: 1.5)
                     .frame(width: 18, height: 18)
             }
-            
+
             // Item info
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
                     Text(item.name)
-                        .font(AppFonts.bodyText)
+                        .font(.system(size: 13))
                         .foregroundStyle(item.isCompleted ? Color.n500 : Color.n900)
                         .strikethrough(item.isCompleted)
                     
@@ -269,8 +272,6 @@ struct HospitalBagItemRow: View {
             
             Spacer()
         }
-        .padding(.horizontal, AppSpacing.cardPadding)
-        .padding(.vertical, AppSpacing.md)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
