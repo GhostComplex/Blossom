@@ -3,7 +3,7 @@
 //  Blossom (拾月)
 //
 //  首次启动预产期设置页面
-//  Design spec: ⑫ 首次使用 · 预产期设置
+//  Design spec: ④ 首次使用 · 预产期设置 + ④-b 日期选择态
 //
 
 import SwiftUI
@@ -12,31 +12,60 @@ import SwiftData
 struct OnboardingView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var selectedDate = Calendar.current.date(
-        byAdding: .month, value: 2, to: Date()
-    ) ?? Date()
+    @State private var selectedYear: Int
+    @State private var selectedMonth: Int
+    @State private var selectedDay: Int
     @State private var animateIn = false
     @State private var showDatePicker = false
     
     var onComplete: () -> Void
     
+    // Date ranges
+    private let years: [Int]
+    private let months = Array(1...12)
+    
+    private var days: [Int] {
+        let calendar = Calendar.current
+        var components = DateComponents()
+        components.year = selectedYear
+        components.month = selectedMonth
+        if let date = calendar.date(from: components),
+           let range = calendar.range(of: .day, in: .month, for: date) {
+            return Array(range)
+        }
+        return Array(1...31)
+    }
+    
+    init(onComplete: @escaping () -> Void) {
+        self.onComplete = onComplete
+        let calendar = Calendar.current
+        let defaultDate = calendar.date(byAdding: .month, value: 2, to: Date()) ?? Date()
+        let currentYear = calendar.component(.year, from: Date())
+        self.years = Array(currentYear...(currentYear + 2))
+        self._selectedYear = State(initialValue: calendar.component(.year, from: defaultDate))
+        self._selectedMonth = State(initialValue: calendar.component(.month, from: defaultDate))
+        self._selectedDay = State(initialValue: calendar.component(.day, from: defaultDate))
+    }
+    
+    private var selectedDate: Date {
+        var components = DateComponents()
+        components.year = selectedYear
+        components.month = selectedMonth
+        components.day = selectedDay
+        return Calendar.current.date(from: components) ?? Date()
+    }
+    
     // Formatted date components
     private var yearText: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
-        return formatter.string(from: selectedDate)
+        String(format: "%04d", selectedYear)
     }
     
     private var monthText: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM"
-        return formatter.string(from: selectedDate)
+        String(format: "%02d", selectedMonth)
     }
     
     private var dayText: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd"
-        return formatter.string(from: selectedDate)
+        String(format: "%02d", selectedDay)
     }
     
     var body: some View {
@@ -72,87 +101,35 @@ struct OnboardingView: View {
                     .opacity(animateIn ? 1 : 0)
                     .padding(.bottom, 32)
                 
-                // Date display card (glassmorphism)
-                VStack(spacing: 0) {
-                    // Label
-                    Text("预产期")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(Color.n500)
-                        .padding(.bottom, 12)
-                    
-                    // Large date numbers
-                    Button(action: { showDatePicker.toggle() }) {
-                        HStack(spacing: 0) {
-                            // Year
-                            Text(yearText)
-                                .font(.custom("NotoSerifSC-Regular", size: 20))
-                                .foregroundStyle(Color.n900)
-                            
-                            Text(" 年 ")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color.n300)
-                            
-                            // Month
-                            Text(monthText)
-                                .font(.custom("NotoSerifSC-Regular", size: 40))
-                                .foregroundStyle(Color.primary600)
-                            
-                            Text(" 月 ")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color.n300)
-                            
-                            // Day
-                            Text(dayText)
-                                .font(.custom("NotoSerifSC-Regular", size: 40))
-                                .foregroundStyle(Color.primary600)
-                            
-                            Text(" 日")
-                                .font(.system(size: 14))
-                                .foregroundStyle(Color.n300)
-                        }
+                // Date card — two states
+                Group {
+                    if showDatePicker {
+                        datePickerCard
+                    } else {
+                        dateDisplayCard
                     }
-                    .accessibilityIdentifier("dateDisplay")
-                    
-                    // Hint
-                    Text("点击选择日期")
-                        .font(.custom("Nunito-Regular", size: 10))
-                        .foregroundStyle(Color.n500)
-                        .padding(.top, 10)
                 }
-                .padding(.vertical, 24)
-                .padding(.horizontal, 24)
-                .frame(maxWidth: .infinity)
-                .background(
-                    RoundedRectangle(cornerRadius: 22)
-                        .fill(Color.cardBg)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 22)
-                                .stroke(Color.accentPeach.opacity(0.18), lineWidth: 1)
-                        )
-                        .shadow(color: Color(hex: "C4B5E0").opacity(0.07), radius: 4, y: 2)
-                )
-                .padding(.horizontal, AppSpacing.pageHorizontal)
-                .opacity(animateIn ? 1 : 0)
-                .offset(y: animateIn ? 0 : 30)
-                
                 .padding(.bottom, 24)
                 
                 // CTA Button
-                Button(action: completeOnboarding) {
+                Button(action: showDatePicker ? confirmDate : completeOnboarding) {
                     HStack {
-                        Text("开始使用")
-                            .font(.custom("Nunito-SemiBold", size: 14))
-                        Text("→")
-                            .font(.custom("Nunito-SemiBold", size: 14))
+                        Text(showDatePicker ? "确定" : "开始使用")
+                            .font(.custom("Nunito-SemiBold", size: showDatePicker ? 13 : 14))
+                        if !showDatePicker {
+                            Text("→")
+                                .font(.custom("Nunito-SemiBold", size: 14))
+                        }
                     }
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, showDatePicker ? 10 : 14)
                     .background(
-                        RoundedRectangle(cornerRadius: 14)
+                        RoundedRectangle(cornerRadius: showDatePicker ? 10 : 14)
                             .fill(Color(hex: "C9A0DC"))
                     )
-                    .shadow(color: Color(hex: "C4A0DC").opacity(0.2), radius: 16, y: 4)
+                    .shadow(color: Color(hex: "C4A0DC").opacity(showDatePicker ? 0.15 : 0.2),
+                            radius: showDatePicker ? 8 : 16, y: showDatePicker ? 2 : 4)
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .opacity(animateIn ? 1 : 0)
@@ -162,16 +139,175 @@ struct OnboardingView: View {
                 Spacer()
             }
         }
-        .sheet(isPresented: $showDatePicker) {
-            DatePickerSheet(selectedDate: $selectedDate)
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-        }
+        .animation(.easeInOut(duration: 0.3), value: showDatePicker)
         .onAppear {
             withAnimation(.easeOut(duration: 0.8)) {
                 animateIn = true
             }
         }
+    }
+    
+    // MARK: - Default State: Date Display Card
+    
+    private var dateDisplayCard: some View {
+        VStack(spacing: 0) {
+            // Label
+            Text("预产期")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(Color.n500)
+                .padding(.bottom, 12)
+            
+            // Large date numbers
+            Button(action: { showDatePicker = true }) {
+                HStack(spacing: 0) {
+                    Text(yearText)
+                        .font(.custom("NotoSerifSC-Regular", size: 20))
+                        .foregroundStyle(Color.n900)
+                    
+                    Text(" 年 ")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color.n300)
+                    
+                    Text(monthText)
+                        .font(.custom("NotoSerifSC-Regular", size: 40))
+                        .foregroundStyle(Color.primary600)
+                    
+                    Text(" 月 ")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color.n300)
+                    
+                    Text(dayText)
+                        .font(.custom("NotoSerifSC-Regular", size: 40))
+                        .foregroundStyle(Color.primary600)
+                    
+                    Text(" 日")
+                        .font(.system(size: 14))
+                        .foregroundStyle(Color.n300)
+                }
+            }
+            .accessibilityIdentifier("dateDisplay")
+            
+            // Hint
+            Text("点击选择日期")
+                .font(.custom("Nunito-Regular", size: 10))
+                .foregroundStyle(Color.n500)
+                .padding(.top, 10)
+        }
+        .padding(.vertical, 24)
+        .padding(.horizontal, 24)
+        .frame(maxWidth: .infinity)
+        .background(cardBackground)
+        .padding(.horizontal, AppSpacing.pageHorizontal)
+        .opacity(animateIn ? 1 : 0)
+        .offset(y: animateIn ? 0 : 30)
+    }
+    
+    // MARK: - Selection State: Inline Wheel Picker
+    
+    private var datePickerCard: some View {
+        VStack(spacing: 0) {
+            // Label
+            Text("选择预产期")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(Color.n500)
+                .padding(.bottom, 12)
+            
+            // Wheel area with highlight bar
+            ZStack {
+                // Highlight bar for selected row
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(hex: "C4A0DC").opacity(0.06))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(hex: "C4A0DC").opacity(0.12), lineWidth: 1)
+                    )
+                    .frame(height: 36)
+                
+                // Three-column picker
+                HStack(spacing: 8) {
+                    // Year
+                    VStack(spacing: 0) {
+                        Picker("年", selection: $selectedYear) {
+                            ForEach(years, id: \.self) { year in
+                                Text("\(year)")
+                                    .tag(year)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(height: 120)
+                        .clipped()
+                        
+                        Text("年")
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color.n500)
+                    }
+                    
+                    // Month
+                    VStack(spacing: 0) {
+                        Picker("月", selection: $selectedMonth) {
+                            ForEach(months, id: \.self) { month in
+                                Text("\(month)")
+                                    .tag(month)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(height: 120)
+                        .clipped()
+                        
+                        Text("月")
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color.n500)
+                    }
+                    
+                    // Day
+                    VStack(spacing: 0) {
+                        Picker("日", selection: $selectedDay) {
+                            ForEach(days, id: \.self) { day in
+                                Text("\(day)")
+                                    .tag(day)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(height: 120)
+                        .clipped()
+                        
+                        Text("日")
+                            .font(.system(size: 14))
+                            .foregroundStyle(Color.n500)
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 22)
+        .padding(.horizontal, 22)
+        .frame(maxWidth: .infinity)
+        .background(cardBackground)
+        .padding(.horizontal, AppSpacing.pageHorizontal)
+        .opacity(animateIn ? 1 : 0)
+        .offset(y: animateIn ? 0 : 30)
+    }
+    
+    // MARK: - Shared Card Background
+    
+    private var cardBackground: some View {
+        RoundedRectangle(cornerRadius: 22)
+            .fill(Color.cardBg)
+            .overlay(
+                RoundedRectangle(cornerRadius: 22)
+                    .stroke(Color.accentPeach.opacity(0.18), lineWidth: 1)
+            )
+            .shadow(color: Color(hex: "C4B5E0").opacity(0.07), radius: 4, y: 2)
+    }
+    
+    // MARK: - Actions
+    
+    private func confirmDate() {
+        // Clamp day if needed (e.g. switched from month with 31 days to month with 28)
+        let maxDay = days.last ?? 31
+        if selectedDay > maxDay {
+            selectedDay = maxDay
+        }
+        showDatePicker = false
     }
     
     private func completeOnboarding() {
@@ -184,47 +320,6 @@ struct OnboardingView: View {
         try? modelContext.save()
         
         onComplete()
-    }
-}
-
-// MARK: - Date Picker Sheet
-
-struct DatePickerSheet: View {
-    @Binding var selectedDate: Date
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            // Title
-            Text("选择预产期")
-                .font(.custom("NotoSerifSC-Regular", size: 20))
-                .foregroundStyle(Color.n900)
-                .padding(.top, 20)
-            
-            DatePicker(
-                "预产期",
-                selection: $selectedDate,
-                in: Date()...,
-                displayedComponents: .date
-            )
-            .datePickerStyle(.wheel)
-            .labelsHidden()
-            .environment(\.locale, Locale(identifier: "zh-Hans"))
-            
-            Button(action: { dismiss() }) {
-                Text("确定")
-                    .font(.custom("Nunito-SemiBold", size: 14))
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(
-                        RoundedRectangle(cornerRadius: AppRadius.full)
-                            .fill(LinearGradient.progressBar)
-                    )
-            }
-            .padding(.horizontal, AppSpacing.pageHorizontal)
-            .padding(.bottom, 20)
-        }
     }
 }
 
