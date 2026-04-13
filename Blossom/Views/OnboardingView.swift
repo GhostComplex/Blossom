@@ -16,7 +16,6 @@ struct OnboardingView: View {
         byAdding: .month, value: 2, to: Date()
     ) ?? Date()
     @State private var animateIn = false
-    @State private var flowerBreathing = false
     @State private var showDatePicker = false
     
     var onComplete: () -> Void
@@ -52,8 +51,6 @@ struct OnboardingView: View {
                 // App Icon 花朵 + 呼吸动效
                 BlossomFlowerIcon(size: 100)
                     .shadow(color: Color.primary600.opacity(0.25), radius: 16, y: 4)
-                    .scaleEffect(flowerBreathing ? 1.06 : 1.0)
-                    .animation(.easeInOut(duration: 3).repeatForever(autoreverses: true), value: flowerBreathing)
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : -20)
                 .padding(.bottom, 28)
@@ -138,7 +135,7 @@ struct OnboardingView: View {
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : 30)
                 
-                Spacer()
+                .padding(.bottom, 24)
                 
                 // CTA Button
                 Button(action: completeOnboarding) {
@@ -160,17 +157,6 @@ struct OnboardingView: View {
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : 20)
                 .padding(.bottom, 16)
-                
-                // Dimmed bottom tab bar (visual only)
-                HStack {
-                    tabBarItem(icon: "house", label: "首页")
-                    tabBarItem(icon: "checkmark.circle", label: "任务")
-                    tabBarItem(icon: "bag", label: "待产包")
-                    tabBarItem(icon: "book", label: "知识")
-                }
-                .padding(.vertical, 8)
-                .opacity(0.3)
-                .padding(.bottom, 8)
             }
         }
         .sheet(isPresented: $showDatePicker) {
@@ -182,20 +168,7 @@ struct OnboardingView: View {
             withAnimation(.easeOut(duration: 0.8)) {
                 animateIn = true
             }
-            flowerBreathing = true
         }
-    }
-    
-    @ViewBuilder
-    private func tabBarItem(icon: String, label: String) -> some View {
-        VStack(spacing: 4) {
-            Image(systemName: icon)
-                .font(.system(size: 18))
-            Text(label)
-                .font(AppFonts.tabLabel)
-        }
-        .foregroundStyle(Color.n500)
-        .frame(maxWidth: .infinity)
     }
     
     private func completeOnboarding() {
