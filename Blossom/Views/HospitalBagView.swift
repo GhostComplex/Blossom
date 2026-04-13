@@ -115,7 +115,7 @@ struct HospitalBagView: View {
 
                 Spacer()
 
-                Text("(\(categoryCompleted)/\(categoryItems.count))")
+                Text("\(categoryCompleted) / \(categoryItems.count)")
                     .font(.system(size: 11))
                     .foregroundStyle(Color.n500)
             }
@@ -286,24 +286,215 @@ struct HospitalBagItemRow: View {
     }
 }
 
-// MARK: - Add Item View (Placeholder)
+// MARK: - Add Item View
 struct AddHospitalBagItemView: View {
     @Environment(\.dismiss) private var dismiss
-    
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \HospitalBagItem.sortOrder) private var existingItems: [HospitalBagItem]
+
+    @State private var itemName = ""
+    @State private var quantity = 1
+    @State private var selectedCategory = HospitalBagCategory.momItems.rawValue
+    @State private var note = ""
+
     var body: some View {
-        NavigationStack {
-            Text("添加物品")
-                .navigationTitle("添加物品")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button("取消") { dismiss() }
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("添加") { dismiss() }
+        ScrollView {
+            VStack(spacing: 0) {
+                // Handle bar
+                RoundedRectangle(cornerRadius: 2)
+                    .fill(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.3))
+                    .frame(width: 36, height: 4)
+                    .padding(.top, 24)
+                    .padding(.bottom, 20)
+
+                // Title
+                Text("添加物品")
+                    .font(.custom("NotoSerifSC-Regular", size: 20))
+                    .foregroundStyle(Color(hex: "3A2F50"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 20)
+
+                // 物品名称
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("物品名称")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundStyle(Color(hex: "AEA3C4"))
+
+                    TextField("输入物品名称", text: $itemName)
+                        .font(.system(size: 14))
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 12)
+                        .background(Color.white.opacity(0.6))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.2), lineWidth: 1)
+                        )
+                }
+                .padding(.bottom, 16)
+
+                // 数量
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("数量")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundStyle(Color(hex: "AEA3C4"))
+
+                    HStack(spacing: 12) {
+                        Button {
+                            if quantity > 1 { quantity -= 1 }
+                        } label: {
+                            Text("-")
+                                .font(.system(size: 16))
+                                .foregroundStyle(Color(hex: "7A6E94"))
+                                .frame(width: 32, height: 32)
+                                .background(Color.white.opacity(0.5))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.2), lineWidth: 1)
+                                )
+                        }
+
+                        Text("\(quantity)")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(Color(hex: "3A2F50"))
+
+                        Button {
+                            quantity += 1
+                        } label: {
+                            Text("+")
+                                .font(.system(size: 16))
+                                .foregroundStyle(Color(hex: "7A6E94"))
+                                .frame(width: 32, height: 32)
+                                .background(Color.white.opacity(0.5))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.2), lineWidth: 1)
+                                )
+                        }
                     }
                 }
+                .padding(.bottom, 16)
+
+                // 分类
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("分类")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundStyle(Color(hex: "AEA3C4"))
+
+                    FlowLayout(spacing: 8) {
+                        ForEach(HospitalBagCategory.allCases, id: \.self) { category in
+                            let isSelected = selectedCategory == category.rawValue
+                            Text(category.rawValue)
+                                .font(.system(size: 12, weight: isSelected ? .medium : .regular))
+                                .foregroundStyle(isSelected ? .white : Color(hex: "7A6E94"))
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 6)
+                                .background(isSelected ? Color(hex: "C9A0DC") : Color.white.opacity(0.5))
+                                .clipShape(Capsule())
+                                .overlay(
+                                    Capsule()
+                                        .stroke(isSelected ? Color.clear : Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.2), lineWidth: 1)
+                                )
+                                .onTapGesture {
+                                    selectedCategory = category.rawValue
+                                }
+                        }
+                    }
+                }
+                .padding(.bottom, 16)
+
+                // 备注
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("备注（可选）")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundStyle(Color(hex: "AEA3C4"))
+
+                    TextField("添加备注", text: $note)
+                        .font(.system(size: 14))
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 12)
+                        .background(Color.white.opacity(0.6))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(red: 183/255, green: 168/255, blue: 214/255).opacity(0.2), lineWidth: 1)
+                        )
+                }
+                .padding(.bottom, 20)
+
+                // 添加 button
+                Button {
+                    let maxSort = existingItems.map(\.sortOrder).max() ?? -1
+                    let newItem = HospitalBagItem(
+                        category: selectedCategory,
+                        name: itemName.trimmingCharacters(in: .whitespaces),
+                        quantity: quantity,
+                        note: note.trimmingCharacters(in: .whitespaces),
+                        sortOrder: maxSort + 1,
+                        isCustom: true
+                    )
+                    modelContext.insert(newItem)
+                    dismiss()
+                } label: {
+                    Text("添加")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color(hex: "C9A0DC"))
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                        .shadow(color: Color(red: 196/255, green: 160/255, blue: 220/255).opacity(0.2), radius: 8, y: 4)
+                }
+                .disabled(itemName.trimmingCharacters(in: .whitespaces).isEmpty)
+                .opacity(itemName.trimmingCharacters(in: .whitespaces).isEmpty ? 0.5 : 1.0)
+            }
+            .padding(.horizontal, 24)
         }
+        .background(LinearGradient.pageBackground.ignoresSafeArea())
+        .presentationDetents([.fraction(0.7)])
+        .presentationDragIndicator(.hidden)
+    }
+}
+
+// MARK: - Flow Layout for category pills
+private struct FlowLayout: Layout {
+    var spacing: CGFloat = 8
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let result = arrange(proposal: proposal, subviews: subviews)
+        return result.size
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let result = arrange(proposal: ProposedViewSize(width: bounds.width, height: bounds.height), subviews: subviews)
+        for (index, subview) in subviews.enumerated() {
+            let position = result.positions[index]
+            subview.place(at: CGPoint(x: bounds.minX + position.x, y: bounds.minY + position.y), proposal: .unspecified)
+        }
+    }
+
+    private func arrange(proposal: ProposedViewSize, subviews: Subviews) -> (size: CGSize, positions: [CGPoint]) {
+        let maxWidth = proposal.width ?? .infinity
+        var positions: [CGPoint] = []
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var rowHeight: CGFloat = 0
+
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x + size.width > maxWidth, x > 0 {
+                x = 0
+                y += rowHeight + spacing
+                rowHeight = 0
+            }
+            positions.append(CGPoint(x: x, y: y))
+            rowHeight = max(rowHeight, size.height)
+            x += size.width + spacing
+        }
+
+        return (CGSize(width: maxWidth, height: y + rowHeight), positions)
     }
 }
 
