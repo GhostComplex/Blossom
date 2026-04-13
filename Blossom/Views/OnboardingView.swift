@@ -49,11 +49,11 @@ struct OnboardingView: View {
                 Spacer()
                 
                 // App Icon 花朵 + 呼吸动效
-                BlossomFlowerIcon(size: 100)
+                BlossomFlowerIcon(size: 88)
                     .shadow(color: Color.primary600.opacity(0.25), radius: 16, y: 4)
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : -20)
-                .padding(.bottom, 28)
+                .padding(.bottom, 24)
                 
                 // Title
                 Text("欢迎来到拾月")
@@ -61,7 +61,7 @@ struct OnboardingView: View {
                     .foregroundStyle(Color.n900)
                     .opacity(animateIn ? 1 : 0)
                     .offset(y: animateIn ? 0 : -10)
-                    .padding(.bottom, 12)
+                    .padding(.bottom, 8)
                 
                 // Subtitle
                 Text("告诉我们宝宝的预产期\n我们会陪你一起做好准备")
@@ -70,7 +70,7 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
                     .lineSpacing(4)
                     .opacity(animateIn ? 1 : 0)
-                    .padding(.bottom, 36)
+                    .padding(.bottom, 32)
                 
                 // Date display card (glassmorphism)
                 VStack(spacing: 0) {
@@ -123,10 +123,10 @@ struct OnboardingView: View {
                 .padding(.horizontal, 24)
                 .frame(maxWidth: .infinity)
                 .background(
-                    RoundedRectangle(cornerRadius: AppRadius.lg)
+                    RoundedRectangle(cornerRadius: 22)
                         .fill(Color.cardBg)
                         .overlay(
-                            RoundedRectangle(cornerRadius: AppRadius.lg)
+                            RoundedRectangle(cornerRadius: 22)
                                 .stroke(Color.accentPeach.opacity(0.18), lineWidth: 1)
                         )
                         .shadow(color: Color(hex: "C4B5E0").opacity(0.07), radius: 4, y: 2)
@@ -147,11 +147,12 @@ struct OnboardingView: View {
                     }
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
+                    .padding(.vertical, 14)
                     .background(
-                        RoundedRectangle(cornerRadius: AppRadius.full)
-                            .fill(LinearGradient.progressBar)
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(Color(hex: "C9A0DC"))
                     )
+                    .shadow(color: Color(hex: "C4A0DC").opacity(0.2), radius: 16, y: 4)
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
                 .opacity(animateIn ? 1 : 0)
