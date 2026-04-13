@@ -54,7 +54,7 @@ struct FetalMovementCounterView: View {
 
                         // Number
                         Text("\(count)")
-                            .font(.custom("CormorantGaramond-Light", size: 48))
+                            .font(.custom("NotoSerifSC-Light", size: 48))
                             .foregroundStyle(Color.n900)
                             .contentTransition(.numericText())
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: count)

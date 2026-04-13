@@ -52,7 +52,7 @@ struct LamazeExerciseView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("拉玛泽呼吸练习")
-                        .font(.custom("CormorantGaramond-Regular", size: 18))
+                        .font(.custom("NotoSerifSC-Regular", size: 18))
                         .foregroundStyle(Color(hex: "3A2F50"))
                 }
                 ToolbarItem(placement: .topBarLeading) {
@@ -245,7 +245,7 @@ struct StageCard: View {
         Button(action: action) {
             HStack(spacing: AppSpacing.lg) {
                 Text("\(stage.rawValue)")
-                    .font(.custom("CormorantGaramond-Bold", size: 20))
+                    .font(.custom("NotoSerifSC-Bold", size: 20))
                     .foregroundStyle(Color.primary600)
                     .frame(width: 44, height: 44)
                     .background(Color.accentLight)

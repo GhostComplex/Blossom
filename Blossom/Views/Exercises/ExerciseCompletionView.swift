@@ -31,7 +31,7 @@ struct ExerciseCompletionView: View {
 
                 // Title
                 Text("做得真棒")
-                    .font(.custom("CormorantGaramond-Regular", size: 30))
+                    .font(.custom("NotoSerifSC-Regular", size: 30))
                     .foregroundStyle(Color.n900)
 
                 // Body text

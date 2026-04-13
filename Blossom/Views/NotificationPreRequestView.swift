@@ -65,7 +65,7 @@ struct NotificationPreRequestView: View {
                 
                 // Title
                 Text(title)
-                    .font(.custom("CormorantGaramond-Regular", size: 20))
+                    .font(.custom("NotoSerifSC-Regular", size: 20))
                     .foregroundStyle(Color.n900)
                 
                 // Description

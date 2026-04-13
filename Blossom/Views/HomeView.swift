@@ -100,7 +100,7 @@ struct HomeView: View {
                 .foregroundStyle(Color.n500)
             
             Text(greetingText)
-                .font(.custom("CormorantGaramond-Regular", size: 26))
+                .font(.custom("NotoSerifSC-Regular", size: 26))
                 .foregroundStyle(Color.n900)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

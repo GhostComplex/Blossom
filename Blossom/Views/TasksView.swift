@@ -44,7 +44,7 @@ struct TasksView: View {
                     // 自定义标题
                     HStack {
                         Text("任务")
-                            .font(.custom("CormorantGaramond-Regular", size: 24))
+                            .font(.custom("NotoSerifSC-Regular", size: 24))
                             .foregroundStyle(Color(hex: "3A2F50"))
                         Spacer()
                     }

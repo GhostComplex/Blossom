@@ -32,7 +32,7 @@ struct HospitalBagView: View {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("待产包")
-                                .font(.custom("CormorantGaramond-Regular", size: 24))
+                                .font(.custom("NotoSerifSC-Regular", size: 24))
                                 .foregroundStyle(Color(hex: "3A2F50"))
                             
                             Text("已准备 \(completedCount) / \(totalCount) 项 (\(Int(progress * 100))%)")

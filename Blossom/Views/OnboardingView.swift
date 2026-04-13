@@ -60,7 +60,7 @@ struct OnboardingView: View {
                 
                 // Title
                 Text("欢迎来到拾月")
-                    .font(.custom("CormorantGaramond-Regular", size: 28))
+                    .font(.custom("NotoSerifSC-Regular", size: 28))
                     .foregroundStyle(Color.n900)
                     .opacity(animateIn ? 1 : 0)
                     .offset(y: animateIn ? 0 : -10)
@@ -88,7 +88,7 @@ struct OnboardingView: View {
                         HStack(spacing: 0) {
                             // Year
                             Text(yearText)
-                                .font(.custom("CormorantGaramond-Regular", size: 20))
+                                .font(.custom("NotoSerifSC-Regular", size: 20))
                                 .foregroundStyle(Color.n900)
                             
                             Text(" 年 ")
@@ -97,7 +97,7 @@ struct OnboardingView: View {
                             
                             // Month
                             Text(monthText)
-                                .font(.custom("CormorantGaramond-Regular", size: 40))
+                                .font(.custom("NotoSerifSC-Regular", size: 40))
                                 .foregroundStyle(Color.primary600)
                             
                             Text(" 月 ")
@@ -106,7 +106,7 @@ struct OnboardingView: View {
                             
                             // Day
                             Text(dayText)
-                                .font(.custom("CormorantGaramond-Regular", size: 40))
+                                .font(.custom("NotoSerifSC-Regular", size: 40))
                                 .foregroundStyle(Color.primary600)
                             
                             Text(" 日")
@@ -221,7 +221,7 @@ struct DatePickerSheet: View {
         VStack(spacing: 20) {
             // Title
             Text("选择预产期")
-                .font(.custom("CormorantGaramond-Regular", size: 20))
+                .font(.custom("NotoSerifSC-Regular", size: 20))
                 .foregroundStyle(Color.n900)
                 .padding(.top, 20)
             
