@@ -153,7 +153,7 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
             // Label
             Text("预产期")
-                .font(.system(size: 13, weight: .semibold))
+                .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(Color.n500)
                 .padding(.bottom, 12)
             
@@ -193,8 +193,8 @@ struct OnboardingView: View {
                 .foregroundStyle(Color.n500)
                 .padding(.top, 10)
         }
-        .padding(.vertical, 24)
-        .padding(.horizontal, 24)
+        .padding(.vertical, 22)
+        .padding(.horizontal, 22)
         .frame(maxWidth: .infinity)
         .background(cardBackground)
         .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -296,7 +296,7 @@ struct OnboardingView: View {
                 RoundedRectangle(cornerRadius: 22)
                     .stroke(Color.accentPeach.opacity(0.18), lineWidth: 1)
             )
-            .shadow(color: Color(hex: "C4B5E0").opacity(0.07), radius: 4, y: 2)
+            .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 16, y: 2)
     }
     
     // MARK: - Actions
