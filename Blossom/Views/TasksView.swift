@@ -83,7 +83,7 @@ struct TasksView: View {
                 Image(systemName: "figure.strengthtraining.traditional")
                     .font(.system(size: 18))
                     .foregroundStyle(todayTask?.kegelCompleted == true ? Color.success : .white)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 40, height: 40)
                     .background(
                         todayTask?.kegelCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
@@ -93,7 +93,7 @@ struct TasksView: View {
                             endPoint: .bottomTrailing
                         ))
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                    .clipShape(RoundedRectangle(cornerRadius: 13))
                 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
@@ -110,7 +110,7 @@ struct TasksView: View {
                     if let profile = profile {
                         Text("\(profile.currentKegelLevel.displayName) · \(profile.currentKegelLevel.contractDuration)秒收缩 - \(profile.currentKegelLevel.relaxDuration)秒放松 × 10")
                             .font(AppFonts.caption)
-                            .foregroundStyle(Color.n500)
+                            .foregroundStyle(Color.n300)
                     }
                     
                     if let completedAt = todayTask?.kegelCompletedAt {
@@ -139,7 +139,7 @@ struct TasksView: View {
                 Image(systemName: "wind")
                     .font(.system(size: 18))
                     .foregroundStyle(todayTask?.lamazeCompleted == true ? Color.success : .white)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 40, height: 40)
                     .background(
                         todayTask?.lamazeCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
@@ -149,7 +149,7 @@ struct TasksView: View {
                             endPoint: .bottomTrailing
                         ))
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                    .clipShape(RoundedRectangle(cornerRadius: 13))
                 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
@@ -165,7 +165,7 @@ struct TasksView: View {
                     
                     Text("6 阶段呼吸法，跟练模式")
                         .font(AppFonts.caption)
-                        .foregroundStyle(Color.n500)
+                        .foregroundStyle(Color.n300)
                     
                     if let completedAt = todayTask?.lamazeCompletedAt {
                         Text("今天 \(completedAt, format: .dateTime.hour().minute()) 完成")
