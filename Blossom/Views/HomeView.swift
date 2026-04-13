@@ -158,7 +158,7 @@ struct HomeView: View {
             if let profile = profile {
                 let comps = Calendar.current.dateComponents([.year, .month, .day], from: profile.dueDate)
                 HStack {
-                    Text("预产期 \(comps.year!) 年 \(comps.month!) 月 \(comps.day!) 日")
+                    Text("预产期 \(String(comps.year!)) 年 \(comps.month!) 月 \(comps.day!) 日")
                         .font(AppFonts.smallLabel)
                         .foregroundStyle(Color.n300)
                 }
