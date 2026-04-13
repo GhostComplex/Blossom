@@ -156,8 +156,8 @@ struct OnboardingView: View {
             // Label
             Text("预产期")
                 .font(.system(size: 11, weight: .medium))
-                .foregroundStyle(Color.n500)
-                .padding(.bottom, 12)
+                .foregroundStyle(Color.n300)
+                .padding(.bottom, 10)
             
             // Large date numbers
             Button(action: { showDatePicker = true }) {
@@ -167,23 +167,23 @@ struct OnboardingView: View {
                         .foregroundStyle(Color.n900)
                     
                     Text(" 年 ")
-                        .font(.system(size: 14))
+                        .font(.system(size: 12))
                         .foregroundStyle(Color.n300)
                     
                     Text(monthText)
                         .font(.custom("NotoSerifSC-Regular", size: 40))
-                        .foregroundStyle(Color.primary600)
+                        .foregroundStyle(Color(hex: "A87CC0"))
                     
                     Text(" 月 ")
-                        .font(.system(size: 14))
+                        .font(.system(size: 12))
                         .foregroundStyle(Color.n300)
                     
                     Text(dayText)
                         .font(.custom("NotoSerifSC-Regular", size: 40))
-                        .foregroundStyle(Color.primary600)
+                        .foregroundStyle(Color(hex: "A87CC0"))
                     
                     Text(" 日")
-                        .font(.system(size: 14))
+                        .font(.system(size: 12))
                         .foregroundStyle(Color.n300)
                 }
             }
@@ -192,8 +192,8 @@ struct OnboardingView: View {
             // Hint
             Text("点击选择日期")
                 .font(.custom("Nunito-Regular", size: 10))
-                .foregroundStyle(Color.n500)
-                .padding(.top, 10)
+                .foregroundStyle(Color.n300)
+                .padding(.top, 8)
         }
         .padding(.vertical, 22)
         .padding(.horizontal, 22)
@@ -211,7 +211,7 @@ struct OnboardingView: View {
             // Label
             Text("选择预产期")
                 .font(.system(size: 11, weight: .medium))
-                .foregroundStyle(Color.n500)
+                .foregroundStyle(Color.n300)
                 .padding(.bottom, 10)
             
             // Custom wheel area — design: flex row with year/月/day labels between columns
@@ -240,7 +240,7 @@ struct OnboardingView: View {
                     // 年 label
                     Text("年")
                         .font(.system(size: 14))
-                        .foregroundStyle(Color.n500)
+                        .foregroundStyle(Color.n300)
                     
                     // Month column
                     DragWheelColumn(
@@ -254,7 +254,7 @@ struct OnboardingView: View {
                     // 月 label
                     Text("月")
                         .font(.system(size: 14))
-                        .foregroundStyle(Color.n500)
+                        .foregroundStyle(Color.n300)
                     
                     // Day column
                     DragWheelColumn(
@@ -271,7 +271,7 @@ struct OnboardingView: View {
                     // 日 label
                     Text("日")
                         .font(.system(size: 14))
-                        .foregroundStyle(Color.n500)
+                        .foregroundStyle(Color.n300)
                 }
                 .padding(.horizontal, 12)
             }
@@ -358,7 +358,7 @@ private struct DragWheelColumn: View {
             // Previous row
             Text(prevIndex != nil ? items[prevIndex!] : "")
                 .font(.system(size: 14))
-                .foregroundStyle(Color.n500.opacity(0.25))
+                .foregroundStyle(Color.n300.opacity(0.25))
                 .frame(maxWidth: .infinity)
                 .frame(height: rowHeight)
             
@@ -372,7 +372,7 @@ private struct DragWheelColumn: View {
             // Next row
             Text(nextIndex != nil ? items[nextIndex!] : "")
                 .font(.system(size: 14))
-                .foregroundStyle(Color.n500.opacity(0.25))
+                .foregroundStyle(Color.n300.opacity(0.25))
                 .frame(maxWidth: .infinity)
                 .frame(height: rowHeight)
         }
