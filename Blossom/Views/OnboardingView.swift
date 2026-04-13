@@ -75,7 +75,10 @@ struct OnboardingView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                Spacer()
+                // Fixed top padding — flower/title/subtitle stay at same position
+                // regardless of card height (default vs picker state)
+                Color.clear.frame(height: 0)
+                    .padding(.top, 120)
                 
                 // App Icon 花朵 + 呼吸动效
                 BlossomFlowerIcon(size: 88)
