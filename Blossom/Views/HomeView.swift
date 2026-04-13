@@ -16,29 +16,33 @@ struct HomeView: View {
     @Binding var selectedTab: Int
     @State private var showKegelExercise = false
     @State private var showLamazeExercise = false
-    
+
     private var todayTasks: [DailyTask] {
         allTasks.filter { Calendar.current.isDateInToday($0.date) }
     }
-    
+
     private var profile: UserProfile? { profiles.first }
     private var todayTask: DailyTask? { todayTasks.first }
-    
+
     private var bagTotal: Int { bagItems.count }
     private var bagCompleted: Int { bagItems.filter { $0.isCompleted }.count }
-    
+
     var body: some View {
         ScrollView {
-            VStack(spacing: AppSpacing.xxl) {
+            // #5: Remove uniform VStack spacing, use per-section spacing
+            VStack(spacing: 0) {
                 // 顶部问候
                 greetingHeader
-                
+                    .padding(.bottom, 22) // #5: 22px gap after greeting
+
                 // 倒计时主卡片
                 countdownCard
-                
+                    .padding(.bottom, 20) // #7: 20px gap after card
+
                 // 今日任务 (2x2 Grid)
                 taskGrid
-                
+                    .padding(.bottom, 14) // #25: 14px gap after grid
+
                 // 待产包进度
                 hospitalBagProgress
             }
@@ -62,7 +66,7 @@ struct HomeView: View {
                     .frame(width: 260, height: 260)
                     .offset(x: 100, y: -80)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                
+
                 // Bottom-left purple orb
                 Circle()
                     .fill(
@@ -91,21 +95,23 @@ struct HomeView: View {
             LamazeExerciseView()
         }
     }
-    
+
     // MARK: - Greeting Header
     private var greetingHeader: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(Date(), format: .dateTime.month().day().year())
-                .font(AppFonts.caption)
-                .foregroundStyle(Color.n500)
-            
+                .font(AppFonts.caption) // #1: Already Nunito-Regular 12
+                .foregroundStyle(Color.n300) // #2: n500 → n300
+                .tracking(0.3) // #3: letter-spacing 0.3
+
             Text(greetingText)
                 .font(.custom("NotoSerifSC-Regular", size: 26))
                 .foregroundStyle(Color.n900)
+                .tracking(-0.3) // #4: letter-spacing -0.3
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
     private var greetingText: String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
@@ -115,53 +121,61 @@ struct HomeView: View {
         default: return "夜深了，早点休息"
         }
     }
-    
+
     // MARK: - Countdown Card
     private var countdownCard: some View {
-        VStack(spacing: AppSpacing.lg) {
+        VStack(spacing: 0) {
             // 孕周徽章
             if let profile = profile {
                 let week = profile.currentPregnancyWeek
                 Text("孕 \(week.week) 周 + \(week.day) 天")
-                    .font(AppFonts.smallLabel)
-                    .foregroundStyle(Color.n900)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
+                    .font(.custom("Nunito-Medium", size: 11)) // #8: system 11pt → Nunito-Medium 11
+                    .foregroundStyle(Color.n500) // #9: n900 → n500
+                    .padding(.horizontal, 14) // #10: 12 → 14
+                    .padding(.vertical, 4) // #10: 6 → 4
                     .background(Color.white.opacity(0.35))
                     .overlay(Capsule().stroke(Color.white.opacity(0.4), lineWidth: 1))
                     .clipShape(Capsule())
+                    .padding(.bottom, 14) // #11: 14px below badge
             }
-            
+
             // 倒计时描述
             Text("距离与宝宝见面")
-                .font(AppFonts.caption)
+                .font(.custom("Nunito-Regular", size: 13)) // #12: caption 12 → 13
                 .foregroundStyle(Color.n500)
-            
+                .tracking(0.5) // #13: letter-spacing 0.5
+
             // 倒计时数字
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text("\(profile?.daysUntilDue ?? 0)")
-                    .font(AppFonts.countdownNumber)
+                    .font(.custom("NotoSerifSC-Light", size: 72)) // #14: Regular → Light (300 weight)
                     .foregroundStyle(Color.n900)
-                
+                    .shadow(color: Color.black.opacity(0.06), radius: 16, x: 0, y: 2) // #15: text shadow
+                    .tracking(-2) // #17: letter-spacing -2
+
                 Text("天")
                     .font(AppFonts.countdownUnit)
-                    .foregroundStyle(Color.n700)
+                    .foregroundStyle(Color.n500) // #18: n700 → n500
+                    .tracking(2) // #19: letter-spacing 2
             }
-            
-            Divider()
-                .background(Color.white.opacity(0.4))
-            
+            .padding(.top, 6) // #16: 6px top spacing around number
+            .padding(.bottom, 2) // #16: 2px bottom spacing around number
+
+            // #23: Divider REMOVED
+
             // 预产期信息
             if let profile = profile {
                 HStack {
                     Text("预产期 \(profile.dueDate, format: .dateTime.year().month().day())")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.n900)
+                        .font(AppFonts.smallLabel) // #20: Nunito-Regular 11 (verified correct)
+                        .foregroundStyle(Color.n300) // #21: n900 → n300
                 }
+                .padding(.top, 10) // #22: 10px above due date text
             }
         }
-        .padding(.vertical, 32)
-        .padding(.horizontal, 28)
+        .padding(.top, 28) // #6: vertical 32 → top 28
+        .padding(.horizontal, 24) // #6: horizontal 28 → 24
+        .padding(.bottom, 24) // #6: bottom 24
         .frame(maxWidth: .infinity)
         .background(
             ZStack {
@@ -181,53 +195,57 @@ struct HomeView: View {
         )
         .shadow(color: Color(hex: "C4A0DC").opacity(0.12), radius: 20, x: 0, y: 8)
     }
-    
+
     // MARK: - Task Grid (2x2)
     private var taskGrid: some View {
         LazyVGrid(columns: [
-            GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
-            GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
-        ], spacing: AppSpacing.cardSpacing) {
+            GridItem(.flexible(), spacing: 11), // #24: cardSpacing 12 → 11
+            GridItem(.flexible(), spacing: 11)  // #24: cardSpacing 12 → 11
+        ], spacing: 11) { // #24: cardSpacing 12 → 11
                 Button(action: { showKegelExercise = true }) {
                     TaskGridCard(
                         icon: "figure.strengthtraining.traditional",
                         title: "凯格尔运动",
                         subtitle: todayTask?.kegelCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.kegelCompleted ?? false,
-                        iconGradient: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
+                        // #31: gradient opacity — 0.5 start, 0.8 end
+                        iconGradient: [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "E8A0B8").opacity(0.8)]
                     )
                 }
                 .buttonStyle(.plain)
-                
+
                 Button(action: { showLamazeExercise = true }) {
                     TaskGridCard(
                         icon: "wind",
                         title: "拉玛泽呼吸",
                         subtitle: todayTask?.lamazeCompleted == true ? "✓ 已完成" : "待完成",
                         isCompleted: todayTask?.lamazeCompleted ?? false,
-                        iconGradient: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")]
+                        // #31: gradient opacity — 0.5 start, 0.8 end
+                        iconGradient: [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "B6A0D2").opacity(0.8)]
                     )
                 }
                 .buttonStyle(.plain)
-                
+
                 Button(action: { selectedTab = 2 }) {
                     TaskGridCard(
                         icon: "bag",
                         title: "待产包",
                         subtitle: "\(bagCompleted)/\(bagTotal) 项",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "B8DCF5"), Color(hex: "ABC2E6")]
+                        // #31: gradient opacity — 0.5 start, 0.8 end
+                        iconGradient: [Color(hex: "B8DCF5").opacity(0.5), Color(hex: "ABC2E6").opacity(0.8)]
                     )
                 }
                 .buttonStyle(.plain)
-                
+
                 Button(action: { selectedTab = 3 }) {
                     TaskGridCard(
                         icon: "book",
                         title: "分娩知识",
                         subtitle: "\(ArticleContent.allArticles.count) 篇待读",
                         isCompleted: false,
-                        iconGradient: [Color(hex: "C9A0DC"), Color(hex: "BB8DCE")]
+                        // #31: gradient opacity — 0.5 start, 0.8 end
+                        iconGradient: [Color(hex: "C9A0DC").opacity(0.5), Color(hex: "BB8DCE").opacity(0.8)]
                     )
                 }
                 .buttonStyle(.plain)
@@ -236,9 +254,8 @@ struct HomeView: View {
     // MARK: - Hospital Bag Progress
     private var hospitalBagProgress: some View {
         let progress = bagTotal > 0 ? Double(bagCompleted) / Double(bagTotal) : 0
-        let percent = Int(progress * 100)
-        
-        return VStack(alignment: .leading, spacing: AppSpacing.md) {
+
+        return VStack(alignment: .leading, spacing: 7) { // #40: md=12 → 7
             HStack {
                 Text("待产包准备进度")
                     .font(.custom("Nunito-SemiBold", size: 12))
@@ -246,33 +263,38 @@ struct HomeView: View {
                 Spacer()
                 Text("\(bagCompleted) / \(bagTotal)")
                     .font(.custom("Nunito-Medium", size: 12))
-                    .foregroundStyle(Color.n500)
+                    .foregroundStyle(Color.primary600) // #39: n500 → primary600
             }
-            
+
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     // Background
-                    RoundedRectangle(cornerRadius: AppRadius.full)
+                    RoundedRectangle(cornerRadius: 3) // #41: full=100 → 3
                         .fill(Color(hex: "C4B5E0").opacity(0.12))
                         .frame(height: 7)
-                    
+
                     // Progress
-                    RoundedRectangle(cornerRadius: AppRadius.full)
+                    RoundedRectangle(cornerRadius: 3) // #41: full=100 → 3
                         .fill(LinearGradient.progressBar)
                         .frame(width: geometry.size.width * progress, height: 7)
                         .animation(.easeInOut(duration: 0.3), value: progress)
                 }
             }
             .frame(height: 7)
-            
-            Text("\(percent)%")
-                .font(AppFonts.smallLabel)
-                .foregroundStyle(Color.n500)
+
+            // #42: Percent text REMOVED
         }
-        .padding(AppSpacing.cardPadding)
-        .glassCard()
+        .padding(.vertical, 14) // #35: cardPadding=18 → vertical 14
+        .padding(.horizontal, 16) // #35: cardPadding=18 → horizontal 16
+        .glassCard(cornerRadius: 18) // #36: lg=20 → 18
+        .overlay(
+            // #37: Override border opacity to 0.65 for progress card
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(Color.white.opacity(0.65), lineWidth: 1)
+        )
+        .shadow(color: Color(hex: "C4B5E0").opacity(0.06), radius: 12, x: 0, y: 2) // #38: Override shadow
     }
-    
+
     // MARK: - Data Setup
     private func ensureProfileExists() {
         if profiles.isEmpty {
@@ -282,14 +304,14 @@ struct HomeView: View {
             modelContext.insert(profile)
         }
     }
-    
+
     private func ensureTodayTaskExists() {
         if todayTasks.isEmpty {
             let task = DailyTask(date: Date())
             modelContext.insert(task)
         }
     }
-    
+
     private func ensureBagItemsExist() {
         if bagItems.isEmpty {
             let defaultItems: [(String, String, Int, String)] = [
@@ -373,9 +395,9 @@ struct TaskGridCard: View {
     let subtitle: String
     let isCompleted: Bool
     var iconGradient: [Color] = [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")]
-    
+
     var body: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
+        VStack(alignment: .leading, spacing: 9) { // #30: md=12 → 9
             // Icon
             Image(systemName: icon)
                 .font(.system(size: 20))
@@ -394,21 +416,22 @@ struct TaskGridCard: View {
                         }
                     }
                 )
-                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
-            
-            VStack(alignment: .leading, spacing: 4) {
+                .clipShape(RoundedRectangle(cornerRadius: 13)) // #29: md=14 → 13
+
+            VStack(alignment: .leading, spacing: 2) { // #33: 4 → 2
                 Text(title)
                     .font(AppFonts.cardTitle)
                     .foregroundStyle(Color.n900)
+                    .tracking(-0.1) // #32: letter-spacing -0.1
 
                 Text(subtitle)
                     .font(.custom("Nunito-Regular", size: 10.5))
-                    .foregroundStyle(isCompleted ? Color.success : Color.n500)
+                    .foregroundStyle(isCompleted ? Color.success : Color.n300) // #34: n500 → n300
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(AppSpacing.cardPadding)
-        .glassCard()
+        .padding(15) // #26: cardPadding=18 → 15
+        .glassCard() // #27, #28: glassCard applied (border 0.7 + shadow radius 16 from Theme.swift)
     }
 }
 
