@@ -27,7 +27,6 @@
 		020 /* NotificationPreRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121; };
 		021 /* BlossomFlowerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122; };
 		022 /* ExerciseCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123; };
-		023 /* CormorantGaramond.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 124; };
 		024 /* NotoSerifSC-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 125; };
 		025 /* NotoSerifSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 126; };
 		026 /* NotoSerifSC-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 127; };
@@ -59,7 +58,6 @@
 		121 /* NotificationPreRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreRequestView.swift; sourceTree = "<group>"; };
 		122 /* BlossomFlowerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlossomFlowerIcon.swift; sourceTree = "<group>"; };
 		123 /* ExerciseCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletionView.swift; sourceTree = "<group>"; };
-		124 /* CormorantGaramond.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CormorantGaramond.ttf; sourceTree = "<group>"; };
 		125 /* NotoSerifSC-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifSC-Light.ttf"; sourceTree = "<group>"; };
 		126 /* NotoSerifSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifSC-Regular.ttf"; sourceTree = "<group>"; };
 		127 /* NotoSerifSC-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifSC-Medium.ttf"; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 		210 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				124 /* CormorantGaramond.ttf */,
 				125 /* NotoSerifSC-Light.ttf */,
 				126 /* NotoSerifSC-Regular.ttf */,
 				127 /* NotoSerifSC-Medium.ttf */,
@@ -341,7 +338,6 @@
 			files = (
 				009 /* Assets.xcassets in Resources */,
 				011 /* Articles in Resources */,
-				023 /* CormorantGaramond.ttf in Resources */,
 				024 /* NotoSerifSC-Light.ttf in Resources */,
 				025 /* NotoSerifSC-Regular.ttf in Resources */,
 				026 /* NotoSerifSC-Medium.ttf in Resources */,

@@ -112,8 +112,12 @@ struct AppFonts {
         switch weight {
         case .light, .thin, .ultraLight:
             return .custom("NotoSerifSC-Regular", size: size)
-        case .medium, .semibold, .bold, .heavy, .black:
+        case .medium:
             return .custom("NotoSerifSC-Medium", size: size)
+        case .semibold:
+            return .custom("NotoSerifSC-SemiBold", size: size)
+        case .bold, .heavy, .black:
+            return .custom("NotoSerifSC-Bold", size: size)
         default:
             return .custom("NotoSerifSC-Regular", size: size)
         }
