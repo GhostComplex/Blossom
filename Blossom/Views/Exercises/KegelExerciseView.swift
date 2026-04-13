@@ -22,6 +22,7 @@ struct KegelExerciseView: View {
     }
 
     @StateObject private var timer = KegelTimer()
+    @State private var hasStarted = false
     @State private var showCompletionAlert = false
     @State private var showExitConfirmation = false
     @State private var showCompletionView = false
@@ -69,23 +70,38 @@ struct KegelExerciseView: View {
                     Spacer()
 
                     // Level indicator
-                    levelBadge
-                        .padding(.bottom, 10)
+                    if hasStarted {
+                        // Timer view level badge (no bullet, no × N)
+                        levelBadge
+                            .padding(.bottom, 10)
 
-                    // Phase text — above the ring
-                    phaseText
-                        .padding(.bottom, 28)
+                        // Phase text — above the ring
+                        phaseText
+                            .padding(.bottom, 28)
 
-                    // Main timer circle
-                    timerCircle
-                        .padding(.bottom, 32)
+                        // Main timer circle
+                        timerCircle
+                            .padding(.bottom, 32)
 
-                    // Progress text (single, merged)
-                    progressText
-                        .padding(.bottom, 36)
+                        // Progress text (single, merged)
+                        progressText
+                            .padding(.bottom, 36)
 
-                    // Control buttons
-                    controlButtons
+                        // Control buttons
+                        controlButtons
+                    } else {
+                        // Preparation view level badge (with bullet and × N)
+                        preparationLevelBadge
+                            .padding(.bottom, 10)
+
+                        // Preparation view
+                        preparationText
+                            .padding(.bottom, 16)
+
+                        preparationRing
+
+                        startButton
+                    }
 
                     Spacer()
                 }
@@ -239,12 +255,90 @@ struct KegelExerciseView: View {
         .padding(.bottom, 20)
     }
 
+    // MARK: - Preparation Level Badge
+    private var preparationLevelBadge: some View {
+        Text("\(level.displayName) · \(level.contractDuration)s 收缩 / \(level.relaxDuration)s 放松 × \(level.totalSets)")
+            .font(.custom("Nunito-Regular", size: 11))
+            .tracking(2)
+            .textCase(.uppercase)
+            .foregroundStyle(Color.n300)
+    }
+
+    // MARK: - Preparation Text
+    private var preparationText: some View {
+        VStack(spacing: 0) {
+            Text("准备好了吗？")
+                .font(.custom("NotoSerifSC-Regular", size: 22))
+                .foregroundStyle(Color.n500)
+                .padding(.bottom, 16)
+
+            let totalSeconds = (level.contractDuration + level.relaxDuration) * level.totalSets
+            let totalMinutes = (totalSeconds + 59) / 60  // round up
+            Text("收缩骨盆底肌 \(level.contractDuration) 秒，然后放松 \(level.relaxDuration) 秒\n共 \(level.totalSets) 组，大约 \(totalMinutes) 分钟")
+                .font(.custom("Nunito-Regular", size: 12))
+                .foregroundStyle(Color.n300)
+                .lineSpacing(12 * 0.6)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: 240)
+                .padding(.bottom, 32)
+        }
+    }
+
+    // MARK: - Preparation Ring
+    private var preparationRing: some View {
+        ZStack {
+            // Ring glow
+            Circle()
+                .fill(Color.clear)
+                .frame(width: 216, height: 216)
+                .shadow(color: Color(hex: "C4A0DC").opacity(0.15), radius: 30, x: 0, y: 0)
+
+            // Track ring
+            Circle()
+                .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 2)
+                .frame(width: 200, height: 200)
+
+            // Frosted center
+            Circle()
+                .fill(.ultraThinMaterial)
+                .frame(width: 176, height: 176)
+                .overlay(
+                    Circle()
+                        .fill(Color.white.opacity(0.4))
+                )
+                .clipShape(Circle())
+
+            // Center text: total sets
+            Text("\(level.totalSets) 组")
+                .font(.custom("NotoSerifSC-Regular", size: 18))
+                .foregroundStyle(Color.n500)
+        }
+    }
+
+    // MARK: - Start Button
+    private var startButton: some View {
+        Button(action: {
+            hasStarted = true
+            timer.start()
+        }) {
+            Text("开始练习")
+                .font(.custom("Nunito-SemiBold", size: 15))
+                .foregroundStyle(.white)
+                .frame(width: 200)
+                .padding(.vertical, 14)
+                .background(Color(hex: "C9A0DC"))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+                .shadow(color: Color(hex: "C4A0DC").opacity(0.2), radius: 16, x: 0, y: 4)
+        }
+        .padding(.top, 32)
+    }
+
     // MARK: - Actions
     private func handleBack() {
-        if timer.completedSets > 0 {
-            showExitConfirmation = true
-        } else {
+        if !hasStarted || timer.completedSets == 0 {
             dismiss()
+        } else {
+            showExitConfirmation = true
         }
     }
 
@@ -299,6 +393,9 @@ class KegelTimer: ObservableObject {
         self.timeRemaining = level.contractDuration
         self.totalTime = level.contractDuration
         self.progress = 1.0
+    }
+
+    func start() {
         startTimer()
     }
 
