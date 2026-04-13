@@ -162,9 +162,9 @@ struct AppFonts {
     static let pageTitle = Font.custom("NotoSerifSC-Regular", size: 28)
     static let sectionTitle = Font.custom("NotoSerifSC-Regular", size: 24)
     static let cardTitle = Font.custom("Nunito-Medium", size: 13)
-    static let bodyText = Font.system(size: 13, weight: .regular)
-    static let caption = Font.system(size: 12, weight: .regular)
-    static let smallLabel = Font.system(size: 11, weight: .regular)
+    static let bodyText = Font.custom("Nunito-Regular", size: 13)
+    static let caption = Font.custom("Nunito-Regular", size: 12)
+    static let smallLabel = Font.custom("Nunito-Regular", size: 11)
     static let tabLabel = Font.custom("Nunito-Medium", size: 9.5)
 }
 
@@ -229,9 +229,9 @@ struct GlassmorphismCard: ViewModifier {
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
             )
-            .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 8, x: 0, y: 2)
+            .shadow(color: Color(hex: "C4B5E0").opacity(0.08), radius: 16, x: 0, y: 2)
     }
 }
 
