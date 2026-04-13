@@ -15,7 +15,6 @@ struct BlossomApp: App {
             UserProfile.self,
             DailyTask.self,
             HospitalBagItem.self,
-            FetalMovementRecord.self,
             KnowledgeArticle.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
