@@ -4,7 +4,11 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>CormorantGaramond.ttf</string>
+		<string>NotoSerifSC-Light.ttf</string>
+		<string>NotoSerifSC-Regular.ttf</string>
+		<string>NotoSerifSC-Medium.ttf</string>
+		<string>NotoSerifSC-SemiBold.ttf</string>
+		<string>NotoSerifSC-Bold.ttf</string>
 		<string>Nunito.ttf</string>
 		<string>Nunito-Italic.ttf</string>
 	</array>

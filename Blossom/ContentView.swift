@@ -180,14 +180,12 @@ struct ContentView: View {
     // MARK: - Navigation Bar Appearance
     private func configureNavigationBarAppearance() {
         // Large title: Cormorant Garamond Light (design spec: 400 but Light looks closer to mockup)
-        let largeTitleFont = UIFont(name: "CormorantGaramond-Light", size: 28)
-            ?? UIFont(name: "CormorantGaramond-Regular", size: 28)
+        let largeTitleFont = UIFont(name: "NotoSerifSC-Regular", size: 28)
             ?? UIFont.systemFont(ofSize: 28, weight: .light).withDesign(.serif)
             ?? UIFont.systemFont(ofSize: 28, weight: .light)
         
         // Inline title: Cormorant Garamond Light
-        let inlineTitleFont = UIFont(name: "CormorantGaramond-Light", size: 17)
-            ?? UIFont(name: "CormorantGaramond-Regular", size: 17)
+        let inlineTitleFont = UIFont(name: "NotoSerifSC-Regular", size: 17)
             ?? UIFont.systemFont(ofSize: 17, weight: .light).withDesign(.serif)
             ?? UIFont.systemFont(ofSize: 17, weight: .light)
         

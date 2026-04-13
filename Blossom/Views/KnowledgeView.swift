@@ -24,7 +24,7 @@ struct KnowledgeView: View {
                     // 自定义标题区
                     VStack(alignment: .leading, spacing: 4) {
                         Text("知识")
-                            .font(.custom("CormorantGaramond-Regular", size: 24))
+                            .font(.custom("NotoSerifSC-Regular", size: 24))
                             .foregroundStyle(Color(hex: "3A2F50"))
 
                         Text("分娩准备 · 科学备产")
