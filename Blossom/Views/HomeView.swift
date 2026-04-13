@@ -189,6 +189,25 @@ struct HomeView: View {
             .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl))
         )
         .overlay(
+            // Decorative glow orbs (design .cd-card::before / ::after)
+            ZStack {
+                // Right-top glow: 100×100, white 0.2, offset top:-30 right:-20
+                Circle()
+                    .fill(Color.white.opacity(0.2))
+                    .frame(width: 100, height: 100)
+                    .offset(x: 20, y: -30)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                // Left-bottom glow: 60×60, white 0.15, offset bottom:-20 left:30
+                Circle()
+                    .fill(Color.white.opacity(0.15))
+                    .frame(width: 60, height: 60)
+                    .offset(x: 30, y: 20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            }
+            .allowsHitTesting(false)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl))
+        .overlay(
             RoundedRectangle(cornerRadius: AppRadius.xl)
                 .stroke(Color.white.opacity(0.5), lineWidth: 1)
         )
