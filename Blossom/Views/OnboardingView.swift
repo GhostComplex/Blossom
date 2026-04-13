@@ -157,6 +157,8 @@ struct OnboardingView: View {
                 .opacity(animateIn ? 1 : 0)
                 .offset(y: animateIn ? 0 : 20)
                 .padding(.bottom, 16)
+                
+                Spacer()
             }
         }
         .sheet(isPresented: $showDatePicker) {
