@@ -32,9 +32,8 @@ struct ExerciseCompletionView: View {
             // Decorative halos (#24-25)
             decorativeHalos
 
+            // justify-content: center — all content vertically centered
             VStack(spacing: 0) {
-                Spacer()
-
                 // Frosted check circle (#2-7)
                 checkCircle
                     .padding(.bottom, 28)
@@ -48,7 +47,7 @@ struct ExerciseCompletionView: View {
 
                 // #16 — Merged body text (single Text)
                 // #11 — font 14px Nunito-Light
-                // #13 — weight light (using fontWeight since no Nunito-Light font file)
+                // #13 — weight light
                 // #15 — line-height 1.6 → lineSpacing(8.4)
                 Text("今天的\(exerciseName)已完成，坚持下去，和宝宝见面那天会更从容")
                     .font(.custom("Nunito-Regular", size: 14))
@@ -57,18 +56,9 @@ struct ExerciseCompletionView: View {
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
-                    .padding(.bottom, 16)
+                    .padding(.bottom, 44)
 
-                // #17-20 — English hint
-                Text("It's the moment you show up for you.")
-                    .font(.custom("Nunito-Italic", size: 11))
-                    .fontWeight(.light)
-                    .foregroundStyle(Color.n300)
-                    .italic()
-
-                Spacer()
-
-                // #21-23 — Return button
+                // #21-23 — Return button (design order: sub → btn → hint)
                 Button(action: onDismiss) {
                     Text("返回首页")
                         .font(.custom("Nunito-SemiBold", size: 14))
@@ -80,8 +70,16 @@ struct ExerciseCompletionView: View {
                         .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                 }
                 .shadow(color: Color(hex: "3A2F50").opacity(0.15), radius: 12, x: 0, y: 8)
-                .padding(.bottom, 40)
+                .padding(.bottom, 16)
+
+                // #17-20 — English hint (below button per design)
+                Text("It's the moment you show up for you.")
+                    .font(.custom("Nunito-Italic", size: 11))
+                    .fontWeight(.light)
+                    .foregroundStyle(Color.n300)
+                    .italic()
             }
+            .frame(maxHeight: .infinity) // vertically centered
         }
     }
 
