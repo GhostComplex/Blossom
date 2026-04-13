@@ -339,6 +339,7 @@ struct LamazePracticeView: View {
     
     @StateObject private var timer = LamazeBreathingTimer()
     @State private var showCompletionAlert = false
+    @State private var showExitConfirmation = false
     
     var body: some View {
         VStack(spacing: AppSpacing.xxxl) {
@@ -372,7 +373,7 @@ struct LamazePracticeView: View {
             HStack(spacing: 20) {
                 Button(action: {
                     timer.stop()
-                    onBack()
+                    showExitConfirmation = true
                 }) {
                     HStack {
                         Image(systemName: "xmark")
@@ -417,6 +418,13 @@ struct LamazePracticeView: View {
             Button("结束练习") { onComplete() }
         } message: {
             Text("已完成 \(stage.displayName) 练习")
+        }
+        .overlay {
+            ExitConfirmationOverlay(
+                isPresented: $showExitConfirmation,
+                onContinue: { timer.configure(stage: stage) },
+                onExit: { onBack() }
+            )
         }
     }
     

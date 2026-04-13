@@ -64,11 +64,11 @@ struct KegelExerciseView: View {
             .onAppear {
                 timer.configure(level: level)
             }
-            .alert("确定要结束练习吗？", isPresented: $showExitConfirmation) {
-                Button("继续练习", role: .cancel) { }
-                Button("结束", role: .destructive) { dismiss() }
-            } message: {
-                Text("当前进度不会保存")
+            .overlay {
+                ExitConfirmationOverlay(
+                    isPresented: $showExitConfirmation,
+                    onExit: { dismiss() }
+                )
             }
             .fullScreenCover(isPresented: $showCompletionView) {
                 ExerciseCompletionView(exerciseName: "凯格尔运动") {
