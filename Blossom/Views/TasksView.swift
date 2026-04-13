@@ -33,7 +33,7 @@ struct TasksView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: AppSpacing.xxl) {
+                VStack(spacing: 0) {
                     // 自定义标题
                     HStack {
                         Text("任务")
@@ -41,12 +41,15 @@ struct TasksView: View {
                             .foregroundStyle(Color(hex: "3A2F50"))
                         Spacer()
                     }
+                    .padding(.top, 8)                              // item 1
+                    .padding(.bottom, 6)                           // item 1
                     
                     // 顶部统计
                     headerSection
+                        .padding(.bottom, AppSpacing.xxl)          // restore gap before cards
                     
                     // 任务列表
-                    VStack(spacing: AppSpacing.md) {
+                    VStack(spacing: 11) {                          // item 5: md=12 → 11
                         kegelTaskCard
                         lamazeTaskCard
                     }
@@ -70,7 +73,7 @@ struct TasksView: View {
         HStack {
             Text("今天完成 \(completedTaskCount) / 2 个任务")
                 .font(AppFonts.caption)
-                .foregroundStyle(Color.n500)
+                .foregroundStyle(Color.n300)                       // item 3: n500 → n300
             Spacer()
         }
     }
@@ -78,28 +81,29 @@ struct TasksView: View {
     // MARK: - Kegel Task Card
     private var kegelTaskCard: some View {
         Button(action: { showKegelExercise = true }) {
-            HStack(spacing: AppSpacing.lg) {
+            HStack(spacing: 14) {                              // item 6: lg=16 → 14
                 // Icon
                 Image(systemName: "figure.strengthtraining.traditional")
                     .font(.system(size: 18))
                     .foregroundStyle(todayTask?.kegelCompleted == true ? Color.success : .white)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 40, height: 40)                  // item 7: 44 → 40
                     .background(
                         todayTask?.kegelCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
                         : AnyShapeStyle(LinearGradient(
-                            colors: [Color(hex: "F9B5C4"), Color(hex: "E8A0B8")],
+                            colors: [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "E8A0B8").opacity(0.8)],  // item 9
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                    .clipShape(RoundedRectangle(cornerRadius: 13)) // item 8: md=14 → 13
                 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text("凯格尔运动")
                             .font(AppFonts.cardTitle)
                             .foregroundStyle(Color.n900)
+                            .tracking(-0.1)                        // item 10
                         
                         if todayTask?.kegelCompleted == true {
                             Image(systemName: "checkmark.circle.fill")
@@ -110,7 +114,7 @@ struct TasksView: View {
                     if let profile = profile {
                         Text("\(profile.currentKegelLevel.displayName) · \(profile.currentKegelLevel.contractDuration)秒收缩 - \(profile.currentKegelLevel.relaxDuration)秒放松 × 10")
                             .font(AppFonts.caption)
-                            .foregroundStyle(Color.n500)
+                            .foregroundStyle(Color.n300)           // item 11: n500 → n300
                     }
                     
                     if let completedAt = todayTask?.kegelCompletedAt {
@@ -134,28 +138,29 @@ struct TasksView: View {
     // MARK: - Lamaze Task Card
     private var lamazeTaskCard: some View {
         Button(action: { showLamazeExercise = true }) {
-            HStack(spacing: AppSpacing.lg) {
+            HStack(spacing: 14) {                              // item 6: lg=16 → 14
                 // Icon
                 Image(systemName: "wind")
                     .font(.system(size: 18))
                     .foregroundStyle(todayTask?.lamazeCompleted == true ? Color.success : .white)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 40, height: 40)                  // item 7: 44 → 40
                     .background(
                         todayTask?.lamazeCompleted == true
                         ? AnyShapeStyle(Color.success.opacity(0.15))
                         : AnyShapeStyle(LinearGradient(
-                            colors: [Color(hex: "C4B5E0"), Color(hex: "B6A0D2")],
+                            colors: [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "B6A0D2").opacity(0.8)],  // item 9
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                    .clipShape(RoundedRectangle(cornerRadius: 13)) // item 8: md=14 → 13
                 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Text("拉玛泽呼吸练习")
                             .font(AppFonts.cardTitle)
                             .foregroundStyle(Color.n900)
+                            .tracking(-0.1)                        // item 10
                         
                         if todayTask?.lamazeCompleted == true {
                             Image(systemName: "checkmark.circle.fill")
@@ -165,7 +170,7 @@ struct TasksView: View {
                     
                     Text("6 阶段呼吸法，跟练模式")
                         .font(AppFonts.caption)
-                        .foregroundStyle(Color.n500)
+                        .foregroundStyle(Color.n300)               // item 11: n500 → n300
                     
                     if let completedAt = todayTask?.lamazeCompletedAt {
                         Text("今天 \(completedAt, format: .dateTime.hour().minute()) 完成")
