@@ -95,42 +95,46 @@ background: #EDE0D4;
 ### 字体家族
 
 ```css
-/* 标题/数字 — 衬线体（优雅、高级） */
-font-family: 'Playfair Display', serif;
+/* 标题/数字 — 衬线体（优雅、支持中英文） */
+font-family: 'Noto Serif SC', serif;
 
 /* 正文/按钮/标签 — 无衬线体（清晰、现代） */
-font-family: 'Inter', -apple-system, sans-serif;
+font-family: 'Nunito', -apple-system, sans-serif;
 ```
 
 **Google Fonts 引入：**
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
 ```
+
+**iOS 字体文件：**
+- NotoSerifSC-Light.ttf (300)
+- NotoSerifSC-Regular.ttf (400)
+- NotoSerifSC-Medium.ttf (500)
+- NotoSerifSC-SemiBold.ttf (600)
+- NotoSerifSC-Bold.ttf (700)
 
 ### 字体层级
 
-| 用途 | 字体 | 大小 | 字重 | 行高 | 字间距 |
-|------|------|------|------|------|--------|
-| 页面大标题 | Playfair | 34px | 600 | 1.1 | -0.5px |
-| 章节标题 | Playfair | 20px | 600 | 1.2 | -0.3px |
-| 子页面标题 | Playfair | 20px | 600 | 1.2 | -0.3px |
-| 倒计时数字 | Playfair | 88px | 700 | 0.95 | -4px |
-| 计时器数字 | Playfair | 80px | 700 | 1.0 | — |
-| 胎动计数 | Playfair | 100px | 700 | 1.0 | — |
-| 倒计时单位 | Playfair | 26px | 600 | 1.0 | — |
-| 倒计时描述 | Playfair | 15px | 500 | 1.3 | — |
-| 卡片标题 | Inter | 16-17px | 600 | 1.4 | -0.2px |
-| 正文 | Inter | 14px | 500-600 | 1.4 | — |
-| 描述文字 | Inter | 13px | 500 | 1.5 | — |
-| 小标签 | Inter | 12px | 500-600 | 1.0 | 0.2px |
-| 导航文字 | Inter | 10px | 600 | 1.0 | 0.2px |
+| 用途 | 字体 | 大小 | 字重 | iOS PostScript Name |
+|------|------|------|------|---------------------|
+| 页面大标题 | Noto Serif SC | 28px | 400 (Regular) | NotoSerifSC-Regular |
+| 章节标题 | Noto Serif SC | 24px | 400 (Regular) | NotoSerifSC-Regular |
+| 倒计时数字 | Noto Serif SC | 72px | 400 (Regular) | NotoSerifSC-Regular |
+| 倒计时单位 | Noto Serif SC | 26px | 400 (Regular) | NotoSerifSC-Regular |
+| 导航栏标题 | Noto Serif SC | 28px/17px | 400 (Regular) | NotoSerifSC-Regular |
+| 计时器标题 | Noto Serif SC | 26px | 400 (Regular) | NotoSerifSC-Regular |
+| 卡片标题 | Nunito | 17px | 600 (SemiBold) | Nunito-SemiBold |
+| 正文 | Nunito | 14px | 500 (Medium) | Nunito-Medium |
+| 描述文字 | Nunito | 13px | 500 (Medium) | Nunito-Medium |
+| 小标签 | Nunito | 12px | 500 (Medium) | Nunito-Medium |
+| Tab 标签 | Nunito | 10px | 600 (SemiBold) | Nunito-SemiBold |
 
 ### 字体应用规则
 
-- **标题/数字** → Playfair Display（温暖的优雅感）
-- **正文/按钮/标签** → Inter（清晰可读）
-- **中文** → 自动回退系统字体（-apple-system）
-- **数字渐变** → 倒计时数字用 `background-clip: text` 实现暖金渐变
+- **标题/数字** → Noto Serif SC（中英文统一，优雅衬线体）
+- **正文/按钮/标签** → Nunito（清晰可读，圆润友好）
+- **中英文统一** → Noto Serif SC 覆盖中英文，无需 fallback
 
 ---
 
