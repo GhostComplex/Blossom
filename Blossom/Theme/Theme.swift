@@ -111,7 +111,7 @@ struct AppFonts {
     static func cormorant(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
         switch weight {
         case .light, .thin, .ultraLight:
-            return .custom("NotoSerifSC-Light", size: size)
+            return .custom("NotoSerifSC-Regular", size: size)
         case .medium, .semibold, .bold, .heavy, .black:
             return .custom("NotoSerifSC-Medium", size: size)
         default:
@@ -121,7 +121,7 @@ struct AppFonts {
 
     // Cormorant Garamond for titles (bundled variable font)
     static func title(_ size: CGFloat) -> Font {
-        .custom("NotoSerifSC-Light", size: size)
+        .custom("NotoSerifSC-Regular", size: size)
     }
     
     static func titleRegular(_ size: CGFloat) -> Font {
@@ -153,7 +153,7 @@ struct AppFonts {
     }
 
     // Specific sizes from design spec v2
-    static let countdownNumber = Font.custom("NotoSerifSC-Light", size: 72)
+    static let countdownNumber = Font.custom("NotoSerifSC-Regular", size: 72)
     static let countdownUnit = Font.custom("Nunito-Regular", size: 15)
     static let pageTitle = Font.custom("NotoSerifSC-Regular", size: 28)
     static let sectionTitle = Font.custom("NotoSerifSC-Regular", size: 24)

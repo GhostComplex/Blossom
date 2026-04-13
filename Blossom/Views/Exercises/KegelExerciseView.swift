@@ -133,7 +133,7 @@ struct KegelExerciseView: View {
                     .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
 
                 Text("\(timer.timeRemaining)")
-                    .font(.custom("NotoSerifSC-Light", size: 60))
+                    .font(.custom("NotoSerifSC-Regular", size: 60))
                     .foregroundStyle(Color.n900)
                     .contentTransition(.numericText())
                     .animation(.easeInOut(duration: 0.2), value: timer.timeRemaining)
