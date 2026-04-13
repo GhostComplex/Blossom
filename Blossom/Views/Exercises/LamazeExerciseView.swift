@@ -378,14 +378,12 @@ struct LamazePracticeView: View {
     // MARK: - Preparation View
     private var preparationView: some View {
         VStack(spacing: 0) {
-            // Level badge
+            // Level badge (#6: remove bg/capsule, #12: 12→11, #13: +tracking(2), #14: +uppercase)
             Text("拉玛泽呼吸练习 · 6 阶段")
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 11, weight: .medium))
+                .tracking(2)
+                .textCase(.uppercase)
                 .foregroundStyle(Color(hex: "7A6E94"))
-                .padding(.horizontal, 14)
-                .padding(.vertical, 6)
-                .background(Color(hex: "B7A8D6").opacity(0.15))
-                .clipShape(Capsule())
                 .padding(.bottom, 20)
 
             // Title
@@ -414,9 +412,9 @@ struct LamazePracticeView: View {
                 )
                 .frame(width: 240, height: 240)
 
-                // Track ring
+                // Track ring (#3: 8→2)
                 Circle()
-                    .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 8)
+                    .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 2)
                     .frame(width: 200, height: 200)
 
                 // Center text
@@ -446,15 +444,18 @@ struct LamazePracticeView: View {
     // MARK: - Timer View
     private var timerView: some View {
         VStack(spacing: 0) {
-            // Stage label
+            // Stage label (#4: 14→11, #7: +tracking(2), #8: +uppercase)
             Text("第 \(stage.rawValue) 阶段：\(stage.displayName)")
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 11, weight: .medium))
+                .tracking(2)
+                .textCase(.uppercase)
                 .foregroundStyle(Color(hex: "7A6E94"))
                 .padding(.bottom, 12)
 
-            // Phase instruction (no emoji)
+            // Phase instruction (#5: 22→26, #9: +tracking(0.3))
             Text(timer.phase == .inhale ? "深吸气..." : "慢慢呼气...")
-                .font(.custom("NotoSerifSC-Regular", size: 22))
+                .font(.custom("NotoSerifSC-Regular", size: 26))
+                .tracking(0.3)
                 .foregroundStyle(Color(hex: "3A2F50"))
                 .padding(.bottom, 4)
 
@@ -475,15 +476,15 @@ struct LamazePracticeView: View {
                 )
                 .frame(width: 240, height: 240)
 
-                // Track ring
+                // Track ring (#1: 8→2)
                 Circle()
-                    .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 8)
+                    .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 2)
                     .frame(width: 200, height: 200)
 
-                // Progress ring
+                // Progress ring (#2: 8→2.5)
                 Circle()
                     .trim(from: 0, to: timer.progress)
-                    .stroke(Color(hex: "C9A0DC"), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                    .stroke(Color(hex: "C9A0DC"), style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
                     .frame(width: 200, height: 200)
                     .rotationEffect(.degrees(-90))
                     .animation(.linear(duration: 0.3), value: timer.progress)
@@ -503,11 +504,12 @@ struct LamazePracticeView: View {
             }
             .padding(.bottom, 16)
 
-            // Remaining count
+            // Remaining count (#15: 13→12, #16: +tracking(0.5), #10: bottom 24→36)
             Text("还剩 \(stage.cycleCount - timer.completedCycles) 次呼吸")
-                .font(.system(size: 13))
+                .font(.system(size: 12))
+                .tracking(0.5)
                 .foregroundStyle(Color(hex: "7A6E94"))
-                .padding(.bottom, 24)
+                .padding(.bottom, 36)
 
             // Control buttons
             HStack(spacing: 12) {
@@ -517,16 +519,18 @@ struct LamazePracticeView: View {
                         Text("✕")
                         Text("结束")
                     }
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: 13, weight: .semibold))
+                    .tracking(0.3)
                     .foregroundStyle(Color(hex: "7A6E94"))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 13)
+                    .padding(.horizontal, 32)
                     .background(Color.white.opacity(0.5))
                     .overlay(
-                        Capsule()
+                        RoundedRectangle(cornerRadius: 14)
                             .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 1)
                     )
-                    .clipShape(Capsule())
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
 
                 // Next stage button
@@ -535,12 +539,14 @@ struct LamazePracticeView: View {
                         Text("▶")
                         Text("下一阶段")
                     }
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: 13, weight: .semibold))
+                    .tracking(0.3)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 13)
+                    .padding(.horizontal, 32)
                     .background(Color(hex: "C9A0DC"))
-                    .clipShape(Capsule())
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
             }
             .padding(.bottom, 20)
