@@ -27,7 +27,7 @@ struct HospitalBagView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: AppSpacing.xxl) {
+                VStack(spacing: 0) {
                     // Custom title + subtitle + add button
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 4) {
@@ -36,7 +36,7 @@ struct HospitalBagView: View {
                                 .foregroundStyle(Color(hex: "3A2F50"))
                             
                             Text("已准备 \(completedCount) / \(totalCount) 项 (\(Int(progress * 100))%)")
-                                .font(.system(size: 12))
+                                .font(.custom("Nunito-Regular", size: 12))
                                 .foregroundStyle(Color(hex: "AEA3C4"))
                         }
                         
@@ -45,7 +45,7 @@ struct HospitalBagView: View {
                         Button(action: { showAddItem = true }) {
                             Image(systemName: "plus")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(Color.primaryDark)
+                                .foregroundStyle(Color.primary600)
                                 .frame(width: 32, height: 32)
                                 .background(.ultraThinMaterial)
                                 .background(Color.white.opacity(0.5))
@@ -56,13 +56,17 @@ struct HospitalBagView: View {
                                 )
                         }
                     }
-                    
+                    .padding(.top, 8)
+                    .padding(.bottom, 6)
+
                     // 进度条
                     progressBar
-                    
+                        .padding(.bottom, 14)
+
                     // 分类列表
                     ForEach(categories, id: \.self) { category in
                         categorySection(category)
+                            .padding(.top, 14)
                     }
                 }
                 .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -103,7 +107,7 @@ struct HospitalBagView: View {
         let categoryItems = items.filter { $0.category == category }
         let categoryCompleted = categoryItems.filter { $0.isCompleted }.count
         
-        return VStack(alignment: .leading, spacing: AppSpacing.md) {
+        return VStack(alignment: .leading, spacing: 8) {
             // Category header
             HStack {
                 Text(category)
@@ -113,8 +117,8 @@ struct HospitalBagView: View {
                 Spacer()
                 
                 Text("(\(categoryCompleted)/\(categoryItems.count))")
-                    .font(AppFonts.caption)
-                    .foregroundStyle(Color.n500)
+                    .font(.custom("Nunito-Regular", size: 11))
+                    .foregroundStyle(Color.n300)
             }
             
             // Items
@@ -226,7 +230,7 @@ struct HospitalBagItemRow: View {
     @Bindable var item: HospitalBagItem
     
     var body: some View {
-        HStack(spacing: AppSpacing.md) {
+        HStack(spacing: 10) {
             // Checkbox — custom drawn circle per design spec
             if item.isCompleted {
                 // Checked: filled purple circle with white checkmark
@@ -249,7 +253,7 @@ struct HospitalBagItemRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
                     Text(item.name)
-                        .font(AppFonts.bodyText)
+                        .font(.custom("Nunito-Regular", size: 13))
                         .foregroundStyle(item.isCompleted ? Color.n500 : Color.n900)
                         .strikethrough(item.isCompleted)
                     
@@ -269,8 +273,8 @@ struct HospitalBagItemRow: View {
             
             Spacer()
         }
-        .padding(.horizontal, AppSpacing.cardPadding)
-        .padding(.vertical, AppSpacing.md)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
