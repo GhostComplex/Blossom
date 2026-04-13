@@ -125,10 +125,7 @@ struct KegelExerciseView: View {
             .tracking(2)
             .textCase(.uppercase)
             .foregroundStyle(Color.n300)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .background(Color.white.opacity(0.5))
-            .clipShape(Capsule())
+
     }
 
     // MARK: - Phase Text (above ring)
