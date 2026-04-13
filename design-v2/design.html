@@ -327,6 +327,38 @@
         </div>
         <div style="font-size:10px;color:var(--text-light);margin-top:8px;">点击选择日期</div>
       </div>
+
+      <!-- Date Picker (expanded state) — 点击卡片后展开 -->
+      <div style="width:100%;background:rgba(255,255,255,0.45);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.6);border-radius:22px;padding:22px;margin-bottom:24px;box-shadow:0 2px 16px rgba(196,181,224,0.08);">
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:12px;font-weight:500;">选择预产期</div>
+        <!-- Wheel picker simulation -->
+        <div style="display:flex;justify-content:center;gap:8px;align-items:center;height:120px;overflow:hidden;position:relative;">
+          <!-- Year column -->
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:14px;color:var(--text-light);opacity:0.3;">2025</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">2026</div>
+            <div style="font-size:14px;color:var(--text-light);opacity:0.3;">2027</div>
+          </div>
+          <div style="font-size:14px;color:var(--text-light);">年</div>
+          <!-- Month column -->
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:14px;color:var(--text-light);opacity:0.3;">4</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">5</div>
+            <div style="font-size:14px;color:var(--text-light);opacity:0.3;">6</div>
+          </div>
+          <div style="font-size:14px;color:var(--text-light);">月</div>
+          <!-- Day column -->
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:14px;color:var(--text-light);opacity:0.3;">5</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">6</div>
+            <div style="font-size:14px;color:var(--text-light);opacity:0.3;">7</div>
+          </div>
+          <div style="font-size:14px;color:var(--text-light);">日</div>
+          <!-- Selection highlight bar -->
+          <div style="position:absolute;left:12px;right:12px;height:36px;top:50%;transform:translateY(-50%);border-radius:10px;background:rgba(196,160,220,0.08);border:1px solid rgba(196,160,220,0.15);pointer-events:none;"></div>
+        </div>
+        <button style="width:100%;padding:10px;border-radius:10px;background:var(--accent);color:white;font-size:13px;font-weight:600;border:none;margin-top:12px;box-shadow:0 2px 8px rgba(196,160,220,0.15);">确定</button>
+      </div>
       <button style="width:100%;padding:14px;border-radius:14px;background:var(--accent);color:white;font-size:14px;font-weight:600;border:none;box-shadow:0 4px 16px rgba(196,160,220,0.2);cursor:pointer;">开始使用 →</button>
     </div>
   </div>
