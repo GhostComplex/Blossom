@@ -34,26 +34,58 @@ struct KegelExerciseView: View {
         NavigationStack {
             ZStack {
                 // Background
-                LinearGradient.pageBackground
-                    .ignoresSafeArea()
+                LinearGradient(
+                    stops: [
+                        .init(color: Color(hex: "FEF2F6"), location: 0.0),
+                        .init(color: Color(hex: "F0E4F6"), location: 0.35),
+                        .init(color: Color(hex: "E8DEF4"), location: 0.65),
+                        .init(color: Color(hex: "E0D6F0"), location: 1.0)
+                    ],
+                    startPoint: UnitPoint(x: 0.41, y: 0.0),
+                    endPoint: UnitPoint(x: 0.59, y: 1.0)
+                )
+                .ignoresSafeArea()
+
+                // Background decorations
+                Circle()
+                    .fill(Color.white.opacity(0.06))
+                    .frame(width: 200, height: 200)
+                    .offset(x: -60, y: 40)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+
+                Circle()
+                    .fill(Color.white.opacity(0.04))
+                    .frame(width: 280, height: 280)
+                    .offset(x: 80, y: -60)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+
+                Ellipse()
+                    .stroke(Color.white.opacity(0.08), lineWidth: 1)
+                    .frame(width: 200, height: 400)
+                    .offset(x: 100, y: -50)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
                 
-                VStack(spacing: AppSpacing.xxxl) {
+                VStack(spacing: 0) {
                     Spacer()
-                    
+
                     // Level indicator
                     levelBadge
-                    
+                        .padding(.bottom, 10)
+
+                    // Phase text
+                    phaseText
+                        .padding(.bottom, 28)
+
                     // Main timer circle
                     timerCircle
-                    
-                    // Progress dots
-                    progressDots
-                    
+                        .padding(.bottom, 32)
+
                     // Progress text
                     progressText
-                    
+                        .padding(.bottom, 36)
+
                     Spacer()
-                    
+
                     // Control buttons
                     controlButtons
                 }
@@ -89,16 +121,32 @@ struct KegelExerciseView: View {
     // MARK: - Level Badge
     private var levelBadge: some View {
         Text("\(level.displayName) · \(level.contractDuration)s 收缩 / \(level.relaxDuration)s 放松")
-            .font(AppFonts.smallLabel)
-            .foregroundStyle(Color.n900)
+            .font(.custom("Nunito-Regular", size: 11))
+            .tracking(2)
+            .textCase(.uppercase)
+            .foregroundStyle(Color.n300)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(Color.white.opacity(0.5))
             .clipShape(Capsule())
     }
+    // MARK: - Phase Text
+    private var phaseText: some View {
+        Text(timer.phase == .contract ? "收缩骨盆底肌" : "放松休息")
+            .font(.custom("NotoSerifSC-Regular", size: 26))
+            .tracking(0.3)
+            .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
+    }
+
     // MARK: - Timer Circle
     private var timerCircle: some View {
         ZStack {
+            // Ring glow
+            Circle()
+                .fill(Color.clear)
+                .frame(width: 216, height: 216)
+                .shadow(color: Color(hex: "C4A0DC").opacity(0.15), radius: 15)
+
             // Track ring (subtle)
             Circle()
                 .stroke(Color(hex: "B7A8D6").opacity(0.2), lineWidth: 2)
@@ -119,7 +167,7 @@ struct KegelExerciseView: View {
             // Frosted center — design spec: rgba(255,255,255,0.4) + blur(16px)
             Circle()
                 .fill(.ultraThinMaterial)
-                .frame(width: 180, height: 180)
+                .frame(width: 176, height: 176)
                 .overlay(
                     Circle()
                         .fill(Color.white.opacity(0.4))
@@ -127,37 +175,32 @@ struct KegelExerciseView: View {
                 .clipShape(Circle())
 
             // Content
-            VStack(spacing: 8) {
-                Text(timer.phase == .contract ? "收缩骨盆底肌" : "放松休息")
-                    .font(.custom("NotoSerifSC-Regular", size: 26))
-                    .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
-
+            VStack(spacing: 4) {
                 Text("\(timer.timeRemaining)")
                     .font(.custom("NotoSerifSC-Regular", size: 60))
+                    .tracking(-1)
                     .foregroundStyle(Color.n900)
                     .contentTransition(.numericText())
                     .animation(.easeInOut(duration: 0.2), value: timer.timeRemaining)
+
+                Text("秒")
+                    .font(.custom("Nunito-Regular", size: 11))
+                    .foregroundStyle(Color.n300)
             }
         }
     }
     
-    // MARK: - Progress Dots
-    private var progressDots: some View {
-        Text("第 \(timer.completedSets + 1) 组 / 共 \(level.totalSets) 组")
-            .font(AppFonts.caption)
-            .foregroundStyle(Color.n500)
-    }
-    
     // MARK: - Progress Text
     private var progressText: some View {
-        Text("还剩 \(level.totalSets - timer.completedSets) 组（共 \(level.totalSets) 组）")
-            .font(AppFonts.caption)
-            .foregroundStyle(Color.n500)
+        Text("第 \(timer.completedSets + 1) 组 / 共 \(level.totalSets) 组")
+            .font(.custom("Nunito-Regular", size: 12))
+            .tracking(0.5)
+            .foregroundStyle(Color.n300)
     }
     
     // MARK: - Control Buttons
     private var controlButtons: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 14) {
             // Pause/Resume button (semi-transparent white)
             Button(action: togglePause) {
                 HStack {
@@ -165,9 +208,10 @@ struct KegelExerciseView: View {
                     Text(timer.isPaused ? "继续" : "暂停")
                 }
                 .font(.custom("Nunito-SemiBold", size: 13))
-                .foregroundStyle(Color.n900)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
+                .tracking(0.3)
+                .foregroundStyle(Color.n500)
+                .padding(.vertical, 13)
+                .padding(.horizontal, 32)
                 .background(.ultraThinMaterial)
                 .background(Color.white.opacity(0.5))
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
@@ -175,8 +219,9 @@ struct KegelExerciseView: View {
                     RoundedRectangle(cornerRadius: AppRadius.md)
                         .stroke(Color.white.opacity(0.6), lineWidth: 1)
                 )
+                .shadow(color: Color.black.opacity(0.06), radius: 10, y: 4)
             }
-            
+
             // End button (purple solid)
             Button(action: { showExitConfirmation = true }) {
                 HStack {
@@ -184,11 +229,13 @@ struct KegelExerciseView: View {
                     Text("结束")
                 }
                 .font(.custom("Nunito-SemiBold", size: 13))
+                .tracking(0.3)
                 .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
+                .padding(.vertical, 13)
+                .padding(.horizontal, 32)
                 .background(Color.primary600)
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                .shadow(color: Color.black.opacity(0.06), radius: 10, y: 4)
             }
         }
         .padding(.bottom, 20)
