@@ -16,6 +16,7 @@ struct HomeView: View {
     @Binding var selectedTab: Int
     @State private var showKegelExercise = false
     @State private var showLamazeExercise = false
+    @State private var showEditDueDate = false
     
     private var todayTasks: [DailyTask] {
         allTasks.filter { Calendar.current.isDateInToday($0.date) }
@@ -36,6 +37,7 @@ struct HomeView: View {
 
                 // 倒计时主卡片
                 countdownCard
+                    .onTapGesture { showEditDueDate = true }
                     .padding(.bottom, 20)   // #7: countdown margin-bottom 20
 
                 // 今日任务 (2x2 Grid)
@@ -92,6 +94,14 @@ struct HomeView: View {
         }
         .fullScreenCover(isPresented: $showLamazeExercise) {
             LamazeExerciseView()
+        }
+        .sheet(isPresented: $showEditDueDate) {
+            if let profile = profile {
+                EditDueDateSheet(profile: profile)
+                    .presentationDetents([.fraction(0.45)])
+                    .presentationBackground(.clear)
+                    .presentationCornerRadius(22)
+            }
         }
     }
     
