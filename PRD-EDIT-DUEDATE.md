@@ -39,25 +39,30 @@
 
 ### 5.1 布局（从上到下）
 
+复用"添加物品弹窗"（⑥-b）的设计语言：
+
 | 元素 | 规格 |
 |------|------|
-| 拖拽手柄 | 36x4px，圆角 2px，颜色 n300，居中 |
-| 标题 | "修改预产期"，Noto Serif SC 18px，颜色 n900，居中 |
-| 当前日期 | "当前：2026年5月1日"，Nunito 12px，颜色 n500，居中 |
-| 日期选择器 | 年/月/日 三列 wheel picker，毛玻璃卡片容器 |
+| 拖拽手柄 | 36x4px，圆角 2px，rgba(183,168,214,0.3)，居中 |
+| 标题 | "修改预产期"，Noto Serif SC 20px，font-weight 400，color text-dark |
+| 当前日期 | "当前预产期：2026年5月1日"，12px，color text-light |
+| 日期选择器 | 年/月/日 三列，容器 rgba(255,255,255,0.6) + 1px border rgba(183,168,214,0.2)，border-radius 16px |
+| 选中项 | 16px，font-weight 600，color text-dark，背景 rgba(183,168,214,0.12)，border-radius 10px |
+| 未选中项 | 14px，color text-mid 或 text-light |
 | 按钮区 | 左"取消" + 右"确认"，flex 等宽，gap 12px |
 
-### 5.2 按钮样式
+### 5.2 按钮样式（与结束确认弹窗一致）
 
 | 按钮 | 背景 | 文字 |
 |------|------|------|
-| 取消 | rgba(255,255,255,0.6) + 1px border rgba(201,160,220,0.2) | n500, 15px, weight 500 |
-| 确认 | linear-gradient(135deg, primary400, primary600) | white, 15px, weight 600 |
+| 取消 | rgba(255,255,255,0.6) + 1px border rgba(183,168,214,0.2) | text-dark, 14px, weight 500 |
+| 确认 | var(--accent) + box-shadow 0 4px 16px rgba(196,160,220,0.2) | white, 14px, weight 600 |
 
-### 5.3 Sheet 背景
-- 背景：rgba(255,255,255,0.95) + backdrop-filter: blur(20px)
-- 圆角：24px 24px 0 0
-- 遮罩层：rgba(0,0,0,0.3) 覆盖整个首页
+### 5.3 Sheet 背景（与添加物品弹窗一致）
+- 背景：rgba(255,255,255,0.85) + backdrop-filter: blur(24px)
+- 圆角：22px 22px 0 0
+- 边框：1px solid rgba(255,255,255,0.7)
+- 遮罩层：rgba(0,0,0,0.3) + border-radius 50px
 
 ## 6. Design 截图
 

@@ -797,4 +797,160 @@ final class BlossomUITests: XCTestCase {
 
         snap("duedate-today-05-zero-countdown")
     }
+
+    // MARK: - Lamaze Practice Mode Screenshot
+    func testLamazePracticeScreenshot() throws {
+        app.launchArguments = ["-skip-onboarding"]
+        app.launch()
+        
+        let tasksTab = app.buttons["任务"]
+        XCTAssertTrue(tasksTab.waitForExistence(timeout: 10))
+        tasksTab.tap()
+        sleep(1)
+        
+        let lamazeText = app.staticTexts["拉玛泽呼吸练习"]
+        XCTAssertTrue(lamazeText.waitForExistence(timeout: 5))
+        lamazeText.tap()
+        sleep(1)
+        
+        let practiceMode = app.staticTexts["跟练模式"]
+        if practiceMode.waitForExistence(timeout: 3) {
+            practiceMode.tap()
+            sleep(1)
+        }
+        
+        let firstStage = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] '清洁呼吸'")).firstMatch
+        if firstStage.waitForExistence(timeout: 3) {
+            firstStage.tap()
+            sleep(1)
+        }
+        
+        snap("lamaze-practice-prep")
+        
+        let startButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '开始练习'")).firstMatch
+        if startButton.waitForExistence(timeout: 3) {
+            startButton.tap()
+            sleep(2)
+        }
+        
+        snap("lamaze-practice-timer")
+    }
+
+
+    // MARK: - Hospital Bag Add Item Screenshot
+    func testBagAddItemScreenshot() throws {
+        app.launchArguments = ["-skip-onboarding"]
+        app.launch()
+        
+        let bagTab = app.buttons["待产包"]
+        XCTAssertTrue(bagTab.waitForExistence(timeout: 10))
+        bagTab.tap()
+        sleep(2)
+        
+        // Find the + button by its image
+        let plusButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'plus' OR label CONTAINS[c] '+'")).firstMatch
+        if !plusButton.waitForExistence(timeout: 3) {
+            // Try finding by image
+            let allButtons = app.buttons.allElementsBoundByIndex
+            for button in allButtons {
+                if button.label.contains("plus") || button.label.contains("+") || button.label.contains("Add") {
+                    button.tap()
+                    break
+                }
+            }
+            // If still not found, try tapping by coordinate (top right area)
+            if !app.staticTexts["添加物品"].waitForExistence(timeout: 2) {
+                let topRight = app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.12))
+                topRight.tap()
+            }
+        } else {
+            plusButton.tap()
+        }
+        sleep(2)
+        
+        snap("bag-add-item-sheet")
+    }
+
+
+    // MARK: - Lamaze Completion Screenshot
+    func testLamazeCompletionScreenshot() throws {
+        app.launchArguments = ["-skip-onboarding"]
+        app.launch()
+        
+        let tasksTab = app.buttons["任务"]
+        XCTAssertTrue(tasksTab.waitForExistence(timeout: 10))
+        tasksTab.tap()
+        sleep(1)
+        
+        let lamazeText = app.staticTexts["拉玛泽呼吸练习"]
+        XCTAssertTrue(lamazeText.waitForExistence(timeout: 5))
+        lamazeText.tap()
+        sleep(1)
+        
+        // Tap 跟练模式
+        let practiceMode = app.staticTexts["跟练模式"]
+        if practiceMode.waitForExistence(timeout: 3) {
+            practiceMode.tap()
+            sleep(1)
+        }
+        
+        // Tap first stage
+        let firstStage = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] '清洁呼吸'")).firstMatch
+        if firstStage.waitForExistence(timeout: 3) {
+            firstStage.tap()
+            sleep(1)
+        }
+        
+        // Start practice
+        let startButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '开始练习'")).firstMatch
+        if startButton.waitForExistence(timeout: 3) {
+            startButton.tap()
+            // Wait for the breathing cycle to complete (inhale + exhale × cycles)
+            // Stage 1: 4s inhale + 6s exhale × cycles - wait longer
+            sleep(90)
+        }
+        
+        // Check if completion view appeared
+        let completionTitle = app.staticTexts["做得真棒"]
+        if completionTitle.waitForExistence(timeout: 10) {
+            snap("lamaze-completion")
+        } else {
+            snap("lamaze-completion-not-found")
+        }
+    }
+
+
+    // MARK: - Kegel Timer Color Verification
+    func testKegelTimerColorVerify() throws {
+        app.launchArguments = ["-skip-onboarding"]
+        app.launch()
+        
+        let tasksTab = app.buttons["任务"]
+        XCTAssertTrue(tasksTab.waitForExistence(timeout: 10))
+        tasksTab.tap()
+        sleep(1)
+        
+        let kegelText = app.staticTexts["凯格尔运动"]
+        XCTAssertTrue(kegelText.waitForExistence(timeout: 5))
+        kegelText.tap()
+        sleep(1)
+        
+        // Snap prep page first
+        snap("kegel-prep-backbtn")
+        
+        // Tap 开始练习
+        let startButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] '开始练习'")).firstMatch
+        if startButton.waitForExistence(timeout: 3) {
+            startButton.tap()
+            sleep(2)
+        }
+        
+        // Now on timer page
+        snap("kegel-timer-color-verify")
+        
+        // Wait for relax phase
+        sleep(6)
+        snap("kegel-relax-color-verify")
+    }
+
 }
