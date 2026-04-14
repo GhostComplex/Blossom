@@ -47,7 +47,6 @@ struct HospitalBagView: View {
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundStyle(Color(hex: "C9A0DC"))
                                 .frame(width: 32, height: 32)
-                                .background(.ultraThinMaterial)
                                 .background(Color.white.opacity(0.5))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .overlay(
