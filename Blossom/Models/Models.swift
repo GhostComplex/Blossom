@@ -228,4 +228,38 @@ enum LamazeStage: Int, CaseIterable {
     }
     
     var cycleCount: Int { 6 }  // 每阶段练习次数
+
+    // MARK: - Learning content (了解拉玛泽)
+    var whenToUse: String {
+        switch self {
+        case .cleansingBreath: return "每次宫缩开始和结束时"
+        case .chestBreathing: return "宫缩初期，开指 0-3cm"
+        case .rhythmicBreathing: return "活跃期，开指 3-8cm"
+        case .pantingBreathing: return "过渡期，开指 7-10cm，宫缩最强"
+        case .blowingBreathing: return "想用力但医生说还不能用力"
+        case .pushingBreathing: return "全开（10cm），医生说可以用力了"
+        }
+    }
+
+    var why: String {
+        switch self {
+        case .cleansingBreath: return "帮你从紧张切换到放松，像一个呼吸的\"开关\""
+        case .chestBreathing: return "用缓慢的胸部呼吸保持平静"
+        case .rhythmicBreathing: return "呼吸跟着加快，帮你\"骑\"在宫缩上面"
+        case .pantingBreathing: return "浅快的呼吸帮你\"度过\"每一波宫缩"
+        case .blowingBreathing: return "吹气能抑制用力的冲动"
+        case .pushingBreathing: return "配合用力的呼吸让每次推更有效"
+        }
+    }
+
+    var howToDo: String {
+        switch self {
+        case .cleansingBreath: return "鼻子慢慢吸气 4 秒 → 嘴巴慢慢呼气 6 秒"
+        case .chestBreathing: return "鼻子吸气 4 秒 → 嘴巴呼气 4 秒"
+        case .rhythmicBreathing: return "吸气 3 秒 → 呼气 3 秒"
+        case .pantingBreathing: return "嘴巴浅快呼吸，像说\"嘻-嘻-呼\""
+        case .blowingBreathing: return "像吹蜡烛一样用力吹气"
+        case .pushingBreathing: return "深吸一口气 → 憋住 → 跟着宫缩用力推"
+        }
+    }
 }
