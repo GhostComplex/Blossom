@@ -149,7 +149,8 @@ struct KegelExerciseView: View {
         Text(timer.phase == .contract ? "收缩骨盆底肌" : "放松休息")
             .font(.custom("NotoSerifSC-Regular", size: 26))
             .tracking(0.3)
-            .foregroundStyle(timer.phase == .contract ? Color.primaryDark : Color.n500)
+            .foregroundStyle(Color(hex: "3A2F50"))
+            .opacity(timer.phase == .contract ? 1.0 : 0.3)
     }
 
     // MARK: - Timer Circle
