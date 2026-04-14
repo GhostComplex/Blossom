@@ -35,7 +35,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![HOME Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/home.png) | ![HOME Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/0bb35a9/qa-screenshots/issue-76/actual-home.png) |
+| ![HOME Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/home.png) | ![HOME Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/b2be768/qa-screenshots/round1-supplement/actual-home-latest.png) |
 
 ### 参数对比
 
