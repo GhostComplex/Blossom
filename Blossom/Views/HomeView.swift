@@ -268,7 +268,8 @@ struct HomeView: View {
     private var hospitalBagProgress: some View {
         let progress = bagTotal > 0 ? Double(bagCompleted) / Double(bagTotal) : 0
 
-        return VStack(alignment: .leading, spacing: 7) {           // #40: header spacing 7
+        return Button(action: { selectedTab = 2 }) {
+        VStack(alignment: .leading, spacing: 7) {           // #40: header spacing 7
             HStack {
                 Text("待产包准备进度")
                     .font(.custom("Nunito-SemiBold", size: 12))
@@ -313,6 +314,8 @@ struct HomeView: View {
                 .stroke(Color.white.opacity(0.65), lineWidth: 1)   // #37: border 0.65
         )
         .shadow(color: Color(hex: "C4B5E0").opacity(0.06), radius: 12, x: 0, y: 2) // #38: shadow
+        }
+        .buttonStyle(.plain)
     }
     
     // MARK: - Data Setup
