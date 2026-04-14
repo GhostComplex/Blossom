@@ -109,6 +109,16 @@ struct KegelExerciseView: View {
                 .padding(.vertical, AppSpacing.pageVertical)
             }
             .navigationBarHidden(true)
+            .overlay(alignment: .topLeading) {
+                Button(action: handleBack) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Color.n500)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 8)
+                .padding(.leading, 20)
+            }
             .onAppear {
                 timer.configure(level: level)
             }
