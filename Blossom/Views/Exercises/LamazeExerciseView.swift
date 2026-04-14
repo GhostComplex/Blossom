@@ -3,7 +3,7 @@
 //  Blossom (拾月)
 //
 //  拉玛泽呼吸练习
-//  - 3 种模式：学习模式 / 跟练模式 / 知识卡片
+//  - 2 种模式：跟练模式 / 了解拉玛泽
 //  - 6 个阶段：清洁呼吸 → 胸式呼吸 → 节律呼吸 → 喘息呼吸 → 吹气呼吸 → 用力呼吸
 //
 
@@ -22,6 +22,7 @@ struct LamazeExerciseView: View {
     @State private var selectedMode: LamazeMode?
     @State private var selectedStage: LamazeStage?
     @State private var showCompletionView = false
+    @State private var cameFromLearn = false
     
     private var todayTask: DailyTask? { todayTasks.first }
     
@@ -35,8 +36,12 @@ struct LamazeExerciseView: View {
                     LamazePracticeView(stage: stage, onComplete: {
                         markTaskCompleted()
                         selectedStage = nil
-                        selectedMode = nil
-                        showCompletionView = true
+                        if cameFromLearn {
+                            showCompletionView = true
+                        } else {
+                            selectedMode = nil
+                            showCompletionView = true
+                        }
                     }, onBack: {
                         selectedStage = nil
                     })
@@ -51,7 +56,7 @@ struct LamazeExerciseView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("拉玛泽呼吸练习")
+                    Text(selectedMode == .learn ? "了解拉玛泽" : "拉玛泽呼吸练习")
                         .font(.custom("NotoSerifSC-Regular", size: 20))
                         .foregroundStyle(Color(hex: "3A2F50"))
                 }
@@ -66,9 +71,16 @@ struct LamazeExerciseView: View {
             }
         }
         .fullScreenCover(isPresented: $showCompletionView) {
-            ExerciseCompletionView(exerciseName: "拉玛泽呼吸") {
+            ExerciseCompletionView(
+                exerciseName: "拉玛泽呼吸",
+                buttonTitle: cameFromLearn ? "继续了解" : "返回首页"
+            ) {
                 showCompletionView = false
-                dismiss()
+                if cameFromLearn {
+                    cameFromLearn = false
+                } else {
+                    dismiss()
+                }
             }
         }
     }
@@ -78,33 +90,22 @@ struct LamazeExerciseView: View {
         VStack(spacing: 11) {
             // Practice mode
             ModeCard(
-                icon: "wind",
+                icon: "play.fill",
                 title: "跟练模式",
                 description: "跟随动画一起练习呼吸",
                 iconGradient: [Color(hex: "F9B5C4").opacity(0.5), Color(hex: "F9B5C4").opacity(0.8)]
             ) {
                 withAnimation { selectedMode = .practice }
             }
-            
-            // Learning mode
+
+            // Learn mode (了解拉玛泽)
             ModeCard(
                 icon: "book.fill",
-                title: "学习模式",
-                description: "查看 6 阶段呼吸法教程",
+                title: "了解拉玛泽",
+                description: "从原理到方法，轻松看懂",
                 iconGradient: [Color(hex: "C4B5E0").opacity(0.5), Color(hex: "C4B5E0").opacity(0.8)]
             ) {
                 withAnimation { selectedMode = .learn }
-            }
-            
-            // Knowledge mode
-            ModeCard(
-                icon: "info.circle",
-                title: "知识卡片",
-                description: "了解拉玛泽分娩法原理",
-                iconGradient: [Color(hex: "B8DCF5").opacity(0.5), Color(hex: "B8DCF5").opacity(0.8)]
-            ) {
-                // TODO: Navigate to knowledge tab
-                dismiss()
             }
         }
         .padding(.horizontal, AppSpacing.pageHorizontal)
@@ -133,38 +134,88 @@ struct LamazeExerciseView: View {
         }
     }
     
-    // MARK: - Learning Mode
+    // MARK: - Learning Mode (了解拉玛泽)
     private var learningModeView: some View {
         ScrollView {
-            VStack(spacing: AppSpacing.md) {
-                Text("6 阶段呼吸法")
-                    .font(AppFonts.sectionTitle)
-                    .foregroundStyle(Color.n900)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, AppSpacing.lg)
-                
-                ForEach(LamazeStage.allCases, id: \.rawValue) { stage in
-                    LearningCard(stage: stage)
+            VStack(alignment: .leading, spacing: 0) {
+                // Intro paragraph
+                Text("拉玛泽呼吸法是一种帮助你在分娩时保持平静的呼吸技巧。通过不同阶段的呼吸方式，配合宫缩节奏，让你在最需要的时候找到掌控感。")
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color.n500)
+                    .lineSpacing(13 * 0.7)
+                    .padding(.top, 4)
+                    .padding(.bottom, 20)
+
+                // Stage cards
+                VStack(spacing: 10) {
+                    ForEach(LamazeStage.allCases, id: \.rawValue) { stage in
+                        learnStageCard(stage: stage)
+                    }
                 }
-                
+
                 // Disclaimer
-                VStack(alignment: .leading, spacing: 8) {
-                    Divider()
-                    Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.n500)
-                }
-                .padding(.top, AppSpacing.lg)
+                Text("本内容仅供参考，不构成医学建议，请遵医嘱。")
+                    .font(.system(size: 10))
+                    .foregroundStyle(Color.n300)
+                    .opacity(0.6)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 12)
             }
             .padding(.horizontal, AppSpacing.pageHorizontal)
             .padding(.bottom, AppSpacing.xxxl)
         }
+    }
+
+    // MARK: - Learn Stage Card
+    private func learnStageCard(stage: LamazeStage) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Title
+            Text("第 \(stage.rawValue) 阶段：\(stage.displayName)")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(Color(hex: "3A2F50"))
+                .padding(.bottom, 8)
+
+            // When
+            Text("什么时候用：\(stage.whenToUse)")
+                .font(.system(size: 12))
+                .foregroundStyle(Color.n500)
+                .lineSpacing(12 * 0.6)
+                .padding(.bottom, 4)
+
+            // Why
+            Text("为什么：\(stage.why)")
+                .font(.system(size: 12))
+                .foregroundStyle(Color.n500)
+                .lineSpacing(12 * 0.6)
+                .padding(.bottom, 4)
+
+            // How
+            Text("怎么做：\(stage.howToDo)")
+                .font(.system(size: 12))
+                .foregroundStyle(Color.n500)
+                .lineSpacing(12 * 0.6)
+                .padding(.bottom, 10)
+
+            // Try this stage link
+            Button(action: {
+                cameFromLearn = true
+                withAnimation { selectedStage = stage }
+            }) {
+                Text("试试这个阶段 →")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color(hex: "A87CC0"))
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(16)
+        .glassCard()
     }
     
     // MARK: - Actions
     private func handleBack() {
         if selectedStage != nil {
             selectedStage = nil
+            cameFromLearn = false
         } else if selectedMode != nil {
             selectedMode = nil
         } else {
@@ -188,7 +239,7 @@ struct LamazeExerciseView: View {
 
 // MARK: - Lamaze Mode
 enum LamazeMode {
-    case practice, learn, knowledge
+    case practice, learn
 }
 
 // MARK: - Mode Card
@@ -277,59 +328,6 @@ struct StageCard: View {
             .glassCard()
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Learning Card
-struct LearningCard: View {
-    let stage: LamazeStage
-    @State private var isExpanded = false
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            Button(action: { withAnimation { isExpanded.toggle() } }) {
-                HStack {
-                    Text("\(stage.rawValue). \(stage.displayName)")
-                        .font(AppFonts.cardTitle)
-                        .foregroundStyle(Color.n900)
-                    
-                    Spacer()
-                    
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                        .foregroundStyle(Color.n500)
-                }
-            }
-            .buttonStyle(.plain)
-            
-            if isExpanded {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("适用时机")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.primary600)
-                    
-                    Text(stage.description)
-                        .font(AppFonts.bodyText)
-                        .foregroundStyle(Color.n700)
-                    
-                    Divider()
-                    
-                    Text("呼吸节奏")
-                        .font(AppFonts.smallLabel)
-                        .foregroundStyle(Color.primary600)
-                    
-                    Text("吸气 \(Int(stage.breathingRhythm.inhale)) 秒 → 呼气 \(Int(stage.breathingRhythm.exhale)) 秒")
-                        .font(AppFonts.bodyText)
-                        .foregroundStyle(Color.n700)
-                    
-                    Text("重复 \(stage.cycleCount) 次")
-                        .font(AppFonts.caption)
-                        .foregroundStyle(Color.n500)
-                }
-                .padding(.top, 4)
-            }
-        }
-        .padding(AppSpacing.cardPadding)
-        .glassCard()
     }
 }
 
