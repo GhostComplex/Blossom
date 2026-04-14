@@ -191,12 +191,8 @@ struct KegelExerciseView: View {
 
             // Frosted center — inset 12px from 200 = 176
             Circle()
-                .fill(.ultraThinMaterial)
+                .fill(Color.white.opacity(0.4))
                 .frame(width: 176, height: 176)
-                .overlay(
-                    Circle()
-                        .fill(Color.white.opacity(0.4))
-                )
                 .clipShape(Circle())
 
             // Content — number + 秒 label inside ring
@@ -238,7 +234,6 @@ struct KegelExerciseView: View {
                 .foregroundStyle(Color.n500)
                 .padding(.horizontal, 32)
                 .padding(.vertical, 13)
-                .background(.ultraThinMaterial)
                 .background(Color.white.opacity(0.5))
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
                 .overlay(
@@ -311,12 +306,8 @@ struct KegelExerciseView: View {
 
             // Frosted center
             Circle()
-                .fill(.ultraThinMaterial)
+                .fill(Color.white.opacity(0.4))
                 .frame(width: 176, height: 176)
-                .overlay(
-                    Circle()
-                        .fill(Color.white.opacity(0.4))
-                )
                 .clipShape(Circle())
 
             // Center text: total sets

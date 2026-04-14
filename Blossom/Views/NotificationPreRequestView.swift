@@ -38,7 +38,7 @@ struct NotificationPreRequestView: View {
         ZStack {
             // Blur background overlay
             Color.clear
-                .background(.ultraThinMaterial)
+                .background(Color.white.opacity(0.15))
                 .opacity(0.4)
                 .ignoresSafeArea()
                 .onTapGesture {
@@ -110,10 +110,6 @@ struct NotificationPreRequestView: View {
             .background(
                 RoundedRectangle(cornerRadius: 24)
                     .fill(Color.white.opacity(0.7))
-                    .background(
-                        RoundedRectangle(cornerRadius: 24)
-                            .fill(.ultraThinMaterial)
-                    )
                     .shadow(color: Color(hex: "3A2F50").opacity(0.08), radius: 48, x: 0, y: 16)
             )
             .overlay(
