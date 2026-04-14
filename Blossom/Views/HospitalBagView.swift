@@ -322,6 +322,7 @@ struct AddHospitalBagItemView: View {
 
                     TextField("输入物品名称", text: $itemName)
                         .font(.system(size: 14))
+                        .foregroundStyle(Color(hex: "3A2F50"))
                         .padding(.horizontal, 14)
                         .padding(.vertical, 12)
                         .background(Color.white.opacity(0.6))
@@ -414,6 +415,7 @@ struct AddHospitalBagItemView: View {
 
                     TextField("添加备注", text: $note)
                         .font(.system(size: 14))
+                        .foregroundStyle(Color(hex: "3A2F50"))
                         .padding(.horizontal, 14)
                         .padding(.vertical, 12)
                         .background(Color.white.opacity(0.6))
