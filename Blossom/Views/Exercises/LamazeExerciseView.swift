@@ -55,15 +55,13 @@ struct LamazeExerciseView: View {
                         .font(.custom("NotoSerifSC-Regular", size: 20))
                         .foregroundStyle(Color(hex: "3A2F50"))
                 }
-                if selectedStage == nil {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: handleBack) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 17, weight: .medium))
-                                .foregroundStyle(Color.n500)
-                        }
-                        .buttonStyle(.plain)
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: handleBack) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundStyle(Color.n500)
                     }
+                    .buttonStyle(.plain)
                 }
             }
         }
