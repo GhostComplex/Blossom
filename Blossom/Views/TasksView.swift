@@ -113,7 +113,7 @@ struct TasksView: View {
                     
                     if let profile = profile {
                         Text("\(profile.currentKegelLevel.displayName) · \(profile.currentKegelLevel.contractDuration)秒收缩 - \(profile.currentKegelLevel.relaxDuration)秒放松 × 10")
-                            .font(AppFonts.caption)
+                            .font(.system(size: 10.5))
                             .foregroundStyle(Color.n300)
                     }
                     

@@ -220,7 +220,7 @@ struct ModeCard: View {
                         .foregroundStyle(Color.n900)
 
                     Text(description)
-                        .font(.system(size: 11))
+                        .font(.system(size: 10.5))
                         .foregroundStyle(Color.n300)
                 }
                 
