@@ -1,7 +1,7 @@
 # Design Alignment 验收报告 — 拾月 Blossom
 
 **日期：** 2026-04-14
-**版本：** main @ `3ca1584` (tag v0.1.2+)
+**版本：** main @ `3ca1584`
 **验收人：** Manta (PM) + SuperBoss (交叉验证)
 **设计稿：** design-v2/design.html
 
@@ -12,153 +12,171 @@
 | 指标 | 数值 |
 |------|------|
 | 总 issue 数 | 19 |
-| 验收通过 | 19 |
+| 验收通过 | 19（QA 验收通过，等 Juanjuan 确认关闭） |
 | 修复轮次 | 3 轮 |
 | 总 PR 数 | 28+ |
-| 总修改项 | 200+ |
 
 ---
 
-## 覆盖的页面
+## 逐页 Design vs Actual 截图
 
-### Round 1 — 全屏 Design Alignment（9 屏）
+### 1. HOME 首页 (#76)
 
-| Issue | 页面 | 修改项 | PR | 状态 |
-|-------|------|--------|-----|------|
-| #76 | HOME 首页 | 42 项 | #112, #116 | ✅ 通过 |
-| #86 | Kegel 凯格尔运动 | 26 项 | #118, #124 | ✅ 通过 |
-| #87 | Exercise Completion 完成页 | 25 项 | #119 | ✅ 通过 |
-| #88 | Tasks 任务页 | 14 项 | #121 | ✅ 通过 |
-| #89 | Hospital Bag 待产包 | 9 项 | #125 | ✅ 通过 |
-| #90 | Knowledge 知识页 | 16 项 | #126 | ✅ 通过 |
-| #91 | Article Detail 文章详情 | 14 项 | #127 | ✅ 通过 |
-| #92 | Lamaze Detail 拉玛泽详情 | 13 项 | #128 | ✅ 通过 |
-| #94 | Notification 通知弹窗 | 22 项 | #129 | ✅ 通过 |
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/home.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/0bb35a9/qa-screenshots/issue-76/actual-home.png) |
 
-### Round 1 — 补充修复
-
-| Issue | 描述 | PR | 状态 |
-|-------|------|-----|------|
-| #115 | 倒计时卡片光晕装饰 | #116 | ✅ 通过 |
-| #120 | 完成页按钮位置（居中修复） | #122 | ✅ 通过 |
-| #96 | 结束确认弹窗（系统 Alert → 自定义毛玻璃） | #99 | ✅ 通过 |
-
-### Round 1 — 新功能
-
-| Issue | 描述 | PR | 状态 |
-|-------|------|-----|------|
-| #78 | 凯格尔准备开始页 | #131 | ✅ 通过 |
-| #81 | 待产包添加物品弹窗 | #132 | ✅ 通过 |
-| #65 | 拉玛泽 timer 重写（3 屏） | #133 | ✅ 通过 |
-| #105 | App icon 白边修复 | #130 | ✅ 通过 |
-
-### Round 2 — 参数复验 + 修复
-
-| Issue | 描述 | PR | 状态 |
-|-------|------|-----|------|
-| #134 | Lamaze timer/prep 20 项参数修复 | #136 | ✅ 通过 |
-| #135 | Completion/Knowledge/Tasks/Lamaze 4 项小修 | #137 | ✅ 通过 |
-
-### Round 3 — 最终修复
-
-| Issue | 描述 | PR | 状态 |
-|-------|------|-----|------|
-| #139 | Lamaze timer/prep 11 项参数修复 | #140 | ✅ 通过 |
+修复 42 项：问候区字号/颜色/间距、倒计时卡片渐变/padding/光晕、任务格子间距/icon/副标题、进度条圆角。PR #112, #116。
 
 ---
 
-## 主要修改内容
+### 2. Kegel 凯格尔运动 (#86)
 
-### 字体系统
-- Cormorant Garamond → **Noto Serif SC**（中英文统一，5 字重）
-- 正文字体统一为 **Nunito**
-- 所有标题 letter-spacing 对齐设计稿
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/kegel.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/4651a82/qa-screenshots/issue-86-bubble/actual-kegel-no-bubble.png) |
 
-### 配色
-- primary600 从旧琥珀色 `#C4855A` → 薰衣草紫 `#C9A0DC`
-- 全局 subtitle 颜色 n500 → n300 (`#AEA3C4`)
-- 倒计时卡片第三色 warmGold → 天蓝 `#B8DCF5`
-
-### 间距/圆角
-- glassCard border opacity 0.6 → 0.7
-- glassCard shadow radius 8 → 16
-- icon 尺寸 44 → 40，圆角 14 → 13
-- 各页面 padding/margin 逐项对齐设计稿 CSS 值
-
-### 新增组件
-- ExitConfirmationOverlay（毛玻璃退出弹窗）
-- 凯格尔/拉玛泽准备开始页（hasStarted 门控）
-- 待产包添加物品底部弹窗（FlowLayout + SwiftData）
-- 拉玛泽 ring-based countdown timer
-- 自定义 Onboarding 日期选择器（内嵌滚轮）
-
-### 设计稿同步
-- design.html icon 标注 SF Symbols
-- design.html 按钮加 icon（⏸ ✕ ▶）
-- design.html 日期格式改中文
-- design.html 新增 5 屏（Onboarding 选择态、凯格尔准备、拉玛泽准备/跟练/完成、待产包添加、结束确认弹窗）
-- PRD 同步更新（Onboarding 章节、凯格尔/拉玛泽流程、待产包添加、胎动删除）
+修复 26 项：背景渐变、级别标签（去气泡）、ring 内径/glow、"秒"标签、按钮间距。PR #118, #124。
 
 ---
 
-## 验收方法
+### 3. Exercise Completion 完成页 (#87, #120)
 
-### 参数级对比
-每一屏对照 design.html CSS 值 vs Swift 代码值，逐参数列表。检查 CSS class base 和 HTML inline override。
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/completion.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/1029fa6/qa-screenshots/issue-120/actual-completion-fixed.png) |
 
-### 截图对比
-- Design 截图：Chrome headless 3x (`--force-device-scale-factor=3`)，1245×2700 分辨率
-- Actual 截图：XCUITest 自动截图 或 simctl io screenshot，1206×2622
-- 截图 push 到 `qa/round1-screenshots` branch，用 raw URL 在 issue 评论中显示
-
-### 交叉验证
-SuperBoss 独立对比同一屏参数，与 Manta 结果交叉验证。发现 Manta 遗漏的差异后开 issue 修复。
+修复 25 项 + 按钮位置居中修复：背景渐变、check circle、button/hint 顺序修正、padding 40→36。PR #119, #122。
 
 ---
 
-## 验收过程中发现的问题和教训
+### 4. Tasks 任务页 (#88)
 
-### PM 验收问题
-1. **Round 1 偷懒**：部分 issue 用了 SuperCrew PR 里的截图代替自己截图，部分只写参数表不截图
-2. **CSS inline override 遗漏**：只看 CSS class base，没看 HTML inline style，导致误报
-3. **完成页按钮位置遗漏**：截图太小看不清元素位置，标了通过但按钮沉底了
-4. **Lamaze timer 20 项差异完全漏掉**：Round 1 没有仔细对比新写的代码
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/tasks.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-tasks.png) |
 
-### 改进措施
-- 截图必须自己截（XCUITest 或 simctl），不用别人的
-- 设计稿用 3x 分辨率渲染
-- 每个参数同时检查 CSS class 和 HTML inline override
-- 逐元素检查位置和间距，不能"大体像"就标通过
-
-### 流程改进
-- Issue 关闭权限只有 Juanjuan
-- PR 用 `Ref #N` 不用 `Closes #N`
-- 每个 PR merge 前必须有 Manta 的 Design vs Actual 截图验收
-- main branch protection 开启
+修复 14 项：标题间距、副标题 10.5px、icon 渐变 opacity、tracking。PR #121。
 
 ---
 
-## 待 Juanjuan 验收
+### 5. Hospital Bag 待产包 (#89)
 
-所有 19 个 issue 状态为 **In Review**（QA 验收通过），等 Juanjuan 统一验收后关闭。
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/hospital-bag.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-bag.png) |
 
-验收截图链接汇总：
-- #76 HOME: [评论](https://github.com/GhostComplex/Blossom/issues/76#issuecomment-4236641279)
-- #86 Kegel: [评论](https://github.com/GhostComplex/Blossom/issues/86#issuecomment-4237315696)
-- #87 Completion: [评论](https://github.com/GhostComplex/Blossom/issues/87#issuecomment-4237069006)
-- #88 Tasks: [评论](https://github.com/GhostComplex/Blossom/issues/88#issuecomment-4237272087)
-- #89 Hospital Bag: [评论](https://github.com/GhostComplex/Blossom/issues/89#issuecomment-4237451563)
-- #90 Knowledge: [评论](https://github.com/GhostComplex/Blossom/issues/90#issuecomment-4237570595)
-- #91 Article: [评论](https://github.com/GhostComplex/Blossom/issues/91#issuecomment-4237716984)
-- #92 Lamaze Detail: [评论](https://github.com/GhostComplex/Blossom/issues/92#issuecomment-4238083236)
-- #94 Notification: [评论](https://github.com/GhostComplex/Blossom/issues/94#issuecomment-4238270087)
-- #96 Exit Confirmation: [评论](https://github.com/GhostComplex/Blossom/issues/96#issuecomment-4236351734)
-- #65 Lamaze Timer: [评论](https://github.com/GhostComplex/Blossom/issues/65#issuecomment-4240368417)
-- #78 Kegel Prep: [评论](https://github.com/GhostComplex/Blossom/issues/78#issuecomment-4240319213)
-- #81 Hospital Bag Add: [评论](https://github.com/GhostComplex/Blossom/issues/81#issuecomment-4240364500)
-- #105 App Icon: [评论](https://github.com/GhostComplex/Blossom/issues/105#issuecomment-4240541440)
-- #115 倒计时光晕: [评论](https://github.com/GhostComplex/Blossom/issues/115#issuecomment-4240531064)
-- #120 完成页按钮: [评论](https://github.com/GhostComplex/Blossom/issues/120#issuecomment-4240531142)
-- #134 Lamaze R2: [评论](https://github.com/GhostComplex/Blossom/issues/134#issuecomment-4240457740)
-- #135 小修: [评论](https://github.com/GhostComplex/Blossom/issues/135#issuecomment-4240441639)
-- #139 Lamaze R3: [评论](https://github.com/GhostComplex/Blossom/issues/139#issuecomment-4240501131)
+修复 9 项：+ 按钮颜色、分类计数字号、checkbox 颜色、物品名字号。PR #125。
+
+---
+
+### 6. Knowledge 知识页 (#90)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/knowledge.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-knowledge.png) |
+
+修复 16 项：分类格子间距 11px、icon/副标题颜色、文章卡片样式。PR #126。
+
+---
+
+### 7. Article Detail 文章详情 (#91)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/article.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-article.png) |
+
+修复 14 项：自定义导航栏、h2/h3 紫色标题、body 颜色/行高、紫色圆点列表。PR #127。
+
+---
+
+### 8. Lamaze Detail 拉玛泽详情 (#92)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/lamaze-hub.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-lamaze-hub.png) |
+
+修复 13 项：icon 56→44、标题 14px、副标题 10.5px、颜色 n300。PR #128。
+
+---
+
+### 9. Notification 通知弹窗 (#94)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/notification.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-notification.png) |
+
+修复 22 项：卡片宽度 280px、圆角 24px、铃铛 52px outline、shadow、颜色。PR #129。
+
+---
+
+### 10. Exit Confirmation 结束确认弹窗 (#96)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/exit-confirm.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/4651a82/qa-screenshots/issue-86-bubble/actual-kegel-no-bubble.png) |
+
+新增组件：毛玻璃卡片替代系统 Alert。PR #99。
+
+---
+
+### 11. Kegel Prep 凯格尔准备页 (#78)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/kegel-prep.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-kegel-prep.png) |
+
+新功能：hasStarted 门控 + 准备页面（级别 badge + ring + 开始按钮）。PR #131。
+
+---
+
+### 12. Hospital Bag Add 待产包添加物品 (#81)
+
+| Design | Actual |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/bag-add.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-bag.png) |
+
+新功能：底部弹窗（名称输入 + 数量 stepper + 分类 pills + 备注）。PR #132。
+
+---
+
+### 13. Lamaze Timer 拉玛泽跟练 (#65, #134, #139)
+
+| Design Prep | Actual Prep |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/lamaze-prep.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/qa-screenshots/round3-fixes/my-actual-lamaze-prep-r3.png) |
+
+| Design Timer | Actual Timer |
+|--------|--------|
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/lamaze-timer.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/qa-screenshots/round3-fixes/my-actual-lamaze-timer-r3.png) |
+
+3 轮修复：Ring lineWidth 8→2/2.5、呼吸指令 22→26px、阶段标签样式、颜色统一。PR #133, #136, #140。
+
+---
+
+### 14. App Icon (#105)
+
+| Before | After (桌面效果) |
+|--------|--------|
+| ![before](https://raw.githubusercontent.com/GhostComplex/Blossom//.github/screenshots/app-icon-original.png) | ![after](https://raw.githubusercontent.com/GhostComplex/Blossom/ee483ef/qa-screenshots/issue-105/actual-desktop-icon.png) |
+
+修复：去除预烘焙圆角白边，RBF 渐变重建。PR #130。
+
+---
+
+### 15. 倒计时光晕 (#115)
+
+包含在 HOME 截图中，右上角和左下角白色半透明圆形装饰。PR #116。
+
+---
+
+## 验收过程教训
+
+1. **不能偷懒**：用别人截图、只写参数表不截图、"大体像"就标通过——都被 Juanjuan 抓到了
+2. **CSS inline override**：每个参数必须同时看 class base 和 HTML inline style
+3. **设计稿 3x 渲染**：Chrome `--force-device-scale-factor=3` 才够清楚
+4. **自己截图**：XCUITest 跑 user flow，不用别人的截图
+
+---
+
+*验收人：Manta (PM) · 交叉验证：SuperBoss · 2026-04-14*
