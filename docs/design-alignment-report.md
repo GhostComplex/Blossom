@@ -140,7 +140,7 @@ SuperBoss 独立对比同一屏参数，与 Manta 结果交叉验证。发现 Ma
 
 ## 待 Juanjuan 验收
 
-所有 19 个 issue 状态为 **In Review**，等 Juanjuan 统一验收后关闭。
+所有 19 个 issue 状态为 **In Review**（QA 验收通过），等 Juanjuan 统一验收后关闭。
 
 验收截图链接汇总：
 - #76 HOME: [评论](https://github.com/GhostComplex/Blossom/issues/76#issuecomment-4236641279)
@@ -152,7 +152,13 @@ SuperBoss 独立对比同一屏参数，与 Manta 结果交叉验证。发现 Ma
 - #91 Article: [评论](https://github.com/GhostComplex/Blossom/issues/91#issuecomment-4237716984)
 - #92 Lamaze Detail: [评论](https://github.com/GhostComplex/Blossom/issues/92#issuecomment-4238083236)
 - #94 Notification: [评论](https://github.com/GhostComplex/Blossom/issues/94#issuecomment-4238270087)
+- #96 Exit Confirmation: [评论](https://github.com/GhostComplex/Blossom/issues/96#issuecomment-4236351734)
+- #65 Lamaze Timer: [评论](https://github.com/GhostComplex/Blossom/issues/65#issuecomment-4240368417)
+- #78 Kegel Prep: [评论](https://github.com/GhostComplex/Blossom/issues/78#issuecomment-4240319213)
+- #81 Hospital Bag Add: [评论](https://github.com/GhostComplex/Blossom/issues/81#issuecomment-4240364500)
+- #105 App Icon: [评论](https://github.com/GhostComplex/Blossom/issues/105#issuecomment-4240541440)
+- #115 倒计时光晕: [评论](https://github.com/GhostComplex/Blossom/issues/115#issuecomment-4240531064)
+- #120 完成页按钮: [评论](https://github.com/GhostComplex/Blossom/issues/120#issuecomment-4240531142)
 - #134 Lamaze R2: [评论](https://github.com/GhostComplex/Blossom/issues/134#issuecomment-4240457740)
 - #135 小修: [评论](https://github.com/GhostComplex/Blossom/issues/135#issuecomment-4240441639)
 - #139 Lamaze R3: [评论](https://github.com/GhostComplex/Blossom/issues/139#issuecomment-4240501131)
-- #105 App icon: [评论](https://github.com/GhostComplex/Blossom/issues/105#issuecomment-4240541440)
