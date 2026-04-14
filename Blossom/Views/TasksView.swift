@@ -169,7 +169,7 @@ struct TasksView: View {
                     }
                     
                     Text("6 阶段呼吸法，跟练模式")
-                        .font(AppFonts.caption)
+                        .font(.system(size: 10.5))
                         .foregroundStyle(Color.n300)
                     
                     if let completedAt = todayTask?.lamazeCompletedAt {
