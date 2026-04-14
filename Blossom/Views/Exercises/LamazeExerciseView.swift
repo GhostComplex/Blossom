@@ -59,8 +59,10 @@ struct LamazeExerciseView: View {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: handleBack) {
                             Image(systemName: "chevron.left")
+                                .font(.system(size: 17, weight: .medium))
                                 .foregroundStyle(Color.n500)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
             }
