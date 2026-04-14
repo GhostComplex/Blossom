@@ -103,7 +103,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/hospital-bag.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-bag.png) |
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/hospital-bag.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/6f067eb/qa-screenshots/round1-supplement/my-actual-bag-add.png) |
 
 ---
 
@@ -159,7 +159,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/bag-add.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-bag.png) |
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/bag-add.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/6f067eb/qa-screenshots/round1-supplement/my-actual-bag-add.png) |
 
 ---
 
