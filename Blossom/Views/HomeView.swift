@@ -180,8 +180,7 @@ struct HomeView: View {
             ZStack {
                 // Blur layer
                 RoundedRectangle(cornerRadius: AppRadius.xl)
-                    .fill(.ultraThinMaterial)
-                    .opacity(0.6)
+                    .fill(Color.white.opacity(0.3))
                 // Gradient overlay
                 RoundedRectangle(cornerRadius: AppRadius.xl)
                     .fill(LinearGradient.countdownCard)
@@ -302,12 +301,11 @@ struct HomeView: View {
         // Custom glass card: #36 radius 18, #37 border 0.65, #38 shadow radius 12 opacity 0.06
         .background(
             RoundedRectangle(cornerRadius: 18)
-                .fill(.ultraThinMaterial)
-                .opacity(0.7)
+                .fill(Color.white.opacity(0.45))
         )
         .background(
             RoundedRectangle(cornerRadius: 18)
-                .fill(Color.white.opacity(0.3))
+                .fill(Color.clear)
         )
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .overlay(

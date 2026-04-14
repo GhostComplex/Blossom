@@ -219,12 +219,7 @@ struct GlassmorphismCard: ViewModifier {
         content
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(.ultraThinMaterial)
-                    .opacity(0.7)
-            )
-            .background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white.opacity(0.3))
+                    .fill(Color.white.opacity(0.45))
             )
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay(
