@@ -12,6 +12,7 @@ import SwiftUI
 
 struct ExerciseCompletionView: View {
     let exerciseName: String
+    var buttonTitle: String = "返回首页"
     let onDismiss: () -> Void
 
     var body: some View {
@@ -60,7 +61,7 @@ struct ExerciseCompletionView: View {
 
                 // #21-23 — Return button (design order: sub → btn → hint)
                 Button(action: onDismiss) {
-                    Text("返回首页")
+                    Text(buttonTitle)
                         .font(.custom("Nunito-SemiBold", size: 14))
                         .tracking(0.3)
                         .foregroundStyle(.white)
