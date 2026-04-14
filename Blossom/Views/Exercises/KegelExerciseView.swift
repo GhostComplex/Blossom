@@ -280,7 +280,7 @@ struct KegelExerciseView: View {
         VStack(spacing: 0) {
             Text("准备好了吗？")
                 .font(.custom("NotoSerifSC-Regular", size: 22))
-                .foregroundStyle(Color.n500)
+                .foregroundStyle(Color(hex: "3A2F50"))
                 .padding(.bottom, 16)
 
             let totalSeconds = (level.contractDuration + level.relaxDuration) * level.totalSets
