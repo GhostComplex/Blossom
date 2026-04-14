@@ -32,6 +32,8 @@
 		027 /* NotoSerifSC-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 128; };
 		028 /* NotoSerifSC-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 129; };
 		030 /* ExitConfirmationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130; };
+		031 /* DragWheelColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131; };
+		032 /* EditDueDateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132; };
 		712 /* BlossomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		128 /* NotoSerifSC-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifSC-SemiBold.ttf"; sourceTree = "<group>"; };
 		129 /* NotoSerifSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifSC-Bold.ttf"; sourceTree = "<group>"; };
 		130 /* ExitConfirmationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitConfirmationOverlay.swift; sourceTree = "<group>"; };
+		131 /* DragWheelColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragWheelColumn.swift; sourceTree = "<group>"; };
+		132 /* EditDueDateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDueDateSheet.swift; sourceTree = "<group>"; };
 		710 /* BlossomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlossomUITests.swift; sourceTree = "<group>"; };
 		711 /* BlossomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlossomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +143,7 @@
 				117 /* MarkdownView.swift */,
 				121 /* NotificationPreRequestView.swift */,
 				122 /* BlossomFlowerIcon.swift */,
+				132 /* EditDueDateSheet.swift */,
 				208 /* Exercises */,
 				211 /* Components */,
 			);
@@ -159,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				130 /* ExitConfirmationOverlay.swift */,
+				131 /* DragWheelColumn.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -316,6 +322,8 @@
 				021 /* BlossomFlowerIcon.swift in Sources */,
 				022 /* ExerciseCompletionView.swift in Sources */,
 				030 /* ExitConfirmationOverlay.swift in Sources */,
+				031 /* DragWheelColumn.swift in Sources */,
+				032 /* EditDueDateSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
