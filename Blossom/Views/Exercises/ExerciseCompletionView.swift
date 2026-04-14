@@ -55,7 +55,7 @@ struct ExerciseCompletionView: View {
                     .lineSpacing(8.4)
                     .foregroundStyle(Color.n500)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
+                    .padding(.horizontal, 36)
                     .padding(.bottom, 44)
 
                 // #21-23 — Return button (design order: sub → btn → hint)

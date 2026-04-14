@@ -113,7 +113,7 @@ struct TasksView: View {
                     
                     if let profile = profile {
                         Text("\(profile.currentKegelLevel.displayName) · \(profile.currentKegelLevel.contractDuration)秒收缩 - \(profile.currentKegelLevel.relaxDuration)秒放松 × 10")
-                            .font(AppFonts.caption)
+                            .font(.system(size: 10.5))
                             .foregroundStyle(Color.n300)
                     }
                     
@@ -169,7 +169,7 @@ struct TasksView: View {
                     }
                     
                     Text("6 阶段呼吸法，跟练模式")
-                        .font(AppFonts.caption)
+                        .font(.system(size: 10.5))
                         .foregroundStyle(Color.n300)
                     
                     if let completedAt = todayTask?.lamazeCompletedAt {

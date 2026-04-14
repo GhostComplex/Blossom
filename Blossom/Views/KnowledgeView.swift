@@ -59,9 +59,9 @@ struct KnowledgeView: View {
     // MARK: - Category Grid
     private var categoryGrid: some View {
         LazyVGrid(columns: [
-            GridItem(.flexible(), spacing: AppSpacing.cardSpacing),
-            GridItem(.flexible(), spacing: AppSpacing.cardSpacing)
-        ], spacing: AppSpacing.cardSpacing) {
+            GridItem(.flexible(), spacing: 11),
+            GridItem(.flexible(), spacing: 11)
+        ], spacing: 11) {
             ForEach(categories, id: \.self) { category in
                 NavigationLink(destination: CategoryArticlesView(category: category)) {
                     CategoryCard(
