@@ -35,7 +35,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![HOME Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![HOME Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/0bb35a9/.github/screenshots/countdown-glow.png) |
+| ![HOME Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/home.png) | ![HOME Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/0bb35a9/qa-screenshots/issue-76/actual-home.png) |
 
 ### 参数对比
 
@@ -92,7 +92,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Kegel Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Kegel Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/4651a82/.github/screenshots/kegel-alignment.png) |
+| ![Kegel Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/kegel.png) | ![Kegel Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/4651a82/qa-screenshots/issue-86-bubble/actual-kegel-no-bubble.png) |
 
 ### 参数对比
 
@@ -133,7 +133,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Completion Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Completion Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/1029fa6/.github/screenshots/completion-fixed.png) |
+| ![Completion Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/completion.png) | ![Completion Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/1029fa6/qa-screenshots/issue-120/actual-completion-fixed.png) |
 
 ### 参数对比
 
@@ -173,7 +173,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Tasks Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Tasks Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/tasks-fixed.png) |
+| ![Tasks Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/tasks.png) | ![Tasks Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-tasks.png) |
 
 ### 参数对比
 
@@ -202,7 +202,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Bag Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Bag Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/hospital-bag-main.png) |
+| ![Bag Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/hospital-bag.png) | ![Bag Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-bag.png) |
 
 ### 参数对比
 
@@ -226,7 +226,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Knowledge Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Knowledge Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/knowledge-fixed.png) |
+| ![Knowledge Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/knowledge.png) | ![Knowledge Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-knowledge.png) |
 
 ### 参数对比
 
@@ -257,7 +257,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Article Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Article Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/article-detail-alignment.png) |
+| ![Article Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/article.png) | ![Article Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-article.png) |
 
 ### 参数对比
 
@@ -286,7 +286,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Lamaze Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Lamaze Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/lamaze-detail-fixed.png) |
+| ![Lamaze Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/lamaze-hub.png) | ![Lamaze Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-lamaze-hub.png) |
 
 ### 参数对比
 
@@ -314,7 +314,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Notification Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Notification Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/notification-alignment.png) |
+| ![Notification Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/notification.png) | ![Notification Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-notification.png) |
 
 ### 参数对比
 
@@ -351,7 +351,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Exit Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Exit Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/a23265b/.github/screenshots/exit-confirmation-dialog.png) |
+| ![Exit Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/exit-confirm.png) | ![Exit Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/a23265b/qa-screenshots/issue-96/actual-exit-confirm.png) |
 
 设计参数：
 - 遮罩: `rgba(0,0,0,0.3)` ✅
@@ -373,7 +373,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Prep Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Prep Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/.github/screenshots/kegel-preparation.png) |
+| ![Prep Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/kegel-prep.png) | ![Prep Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/qa-screenshots/round1-supplement/actual-kegel-prep.png) |
 
 设计参数：
 - 标题: NotoSerifSC 22px (inline override), margin-bottom 16px ✅
@@ -390,7 +390,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![Add Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Add Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/d8b7028/.github/screenshots/hospital-bag-add-item.png) |
+| ![Add Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/bag-add.png) | ![Add Actual](https://raw.githubusercontent.com/GhostComplex/Blossom/6f067eb/qa-screenshots/round1-supplement/my-actual-bag-add.png) |
 
 设计参数：
 - 弹窗标题: NotoSerifSC 20px ✅
@@ -410,8 +410,8 @@
 
 | Design | Actual (Round 3) |
 |--------|--------|
-| ![Timer Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/design-v2/screenshots/preview-v2.5.png) | ![Timer R3](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/.github/screenshots/lamaze-timer-r3.png) |
-| | ![Prep R3](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/.github/screenshots/lamaze-prep-r3.png) |
+| ![Timer Design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/lamaze-prep.png) | ![Timer R3](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/qa-screenshots/round3-fixes/my-actual-lamaze-timer-r3.png) |
+| | ![Prep R3](https://raw.githubusercontent.com/GhostComplex/Blossom/82fbbda/qa-screenshots/round3-fixes/my-actual-lamaze-prep-r3.png) |
 
 3 轮修复历程：
 - **Round 1** (#65): 初始实现 — 圆环线宽 8→2/2.5, 计时器数字 60→48
@@ -428,7 +428,7 @@
 
 | Before | After |
 |--------|-------|
-| ![Before](https://raw.githubusercontent.com/GhostComplex/Blossom/3ca1584/.github/screenshots/app-icon-original.png) | ![After](https://raw.githubusercontent.com/GhostComplex/Blossom/ee483ef/.github/screenshots/app-icon-fixed.png) |
+| ![Before](https://raw.githubusercontent.com/GhostComplex/Blossom/3ca1584/.github/screenshots/app-icon-original.png) | ![After](https://raw.githubusercontent.com/GhostComplex/Blossom/ee483ef/qa-screenshots/issue-105/actual-desktop-icon.png) |
 
 - 从 design-v2 导出的 1024×1024 icon 正确替换到 Assets.xcassets ✅
 - 桌面显示正确 ✅
