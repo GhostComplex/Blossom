@@ -249,16 +249,14 @@ struct CustomTabBar: View {
             }
         }
         .padding(.top, 8)
-        .padding(.bottom, 28)
+        .padding(.bottom, 8)
         .background(
             ZStack {
-                // Blur
-                Rectangle()
-                    .fill(.ultraThinMaterial)
                 // Semi-transparent white
                 Rectangle()
                     .fill(Color.white.opacity(0.35))
             }
+            .ignoresSafeArea(edges: .bottom)
         )
         .overlay(alignment: .top) {
             Rectangle()

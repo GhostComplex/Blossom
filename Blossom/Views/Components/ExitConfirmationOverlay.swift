@@ -79,10 +79,6 @@ struct ExitConfirmationOverlay: View {
                     RoundedRectangle(cornerRadius: 22)
                         .fill(Color.white.opacity(0.85))
                 )
-                .background(
-                    RoundedRectangle(cornerRadius: 22)
-                        .fill(.ultraThinMaterial)
-                )
                 .clipShape(RoundedRectangle(cornerRadius: 22))
                 .overlay(
                     RoundedRectangle(cornerRadius: 22)
