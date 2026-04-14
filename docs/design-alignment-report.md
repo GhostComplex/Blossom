@@ -114,7 +114,7 @@
 
 | Design | Actual |
 |--------|--------|
-| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/exit-confirm.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/4651a82/qa-screenshots/issue-86-bubble/actual-kegel-no-bubble.png) |
+| ![design](https://raw.githubusercontent.com/GhostComplex/Blossom/12c36be/qa-screenshots/round1-supplement/exit-confirm.png) | ![actual](https://raw.githubusercontent.com/GhostComplex/Blossom/a23265b/qa-screenshots/issue-96/actual-exit-confirm.png) |
 
 新增组件：毛玻璃卡片替代系统 Alert。PR #99。
 
@@ -158,7 +158,7 @@
 
 | Before | After (桌面效果) |
 |--------|--------|
-| ![before](https://raw.githubusercontent.com/GhostComplex/Blossom//.github/screenshots/app-icon-original.png) | ![after](https://raw.githubusercontent.com/GhostComplex/Blossom/ee483ef/qa-screenshots/issue-105/actual-desktop-icon.png) |
+| ![before](https://raw.githubusercontent.com/GhostComplex/Blossom/3ca1584/.github/screenshots/app-icon-original.png) | ![after](https://raw.githubusercontent.com/GhostComplex/Blossom/ee483ef/qa-screenshots/issue-105/actual-desktop-icon.png) |
 
 修复：去除预烘焙圆角白边，RBF 渐变重建。PR #130。
 
