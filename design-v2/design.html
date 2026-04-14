@@ -884,25 +884,27 @@
         <div style="width:36px;height:4px;border-radius:2px;background:rgba(183,168,214,0.3);margin:0 auto 20px;"></div>
         <div style="font-family:'Noto Serif SC',serif;font-size:20px;color:var(--text-dark);font-weight:400;margin-bottom:8px;">修改预产期</div>
         <div style="font-size:12px;color:var(--text-light);margin-bottom:20px;">当前预产期：2026年5月1日</div>
-        <!-- 日期选择器 -->
-        <div style="background:rgba(255,255,255,0.6);border:1px solid rgba(183,168,214,0.2);border-radius:16px;padding:16px;margin-bottom:20px;">
-          <div style="display:flex;justify-content:center;gap:20px;">
-            <div style="text-align:center;">
-              <div style="font-size:14px;color:var(--text-light);padding:8px 16px;">2025</div>
-              <div style="font-size:16px;color:var(--text-dark);font-weight:600;padding:8px 16px;background:rgba(183,168,214,0.12);border-radius:10px;">2026</div>
-              <div style="font-size:14px;color:var(--text-light);padding:8px 16px;">2027</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="font-size:14px;color:var(--text-mid);padding:8px 16px;">4月</div>
-              <div style="font-size:16px;color:var(--text-dark);font-weight:600;padding:8px 16px;background:rgba(183,168,214,0.12);border-radius:10px;">5月</div>
-              <div style="font-size:14px;color:var(--text-mid);padding:8px 16px;">6月</div>
-            </div>
-            <div style="text-align:center;">
-              <div style="font-size:14px;color:var(--text-mid);padding:8px 16px;">30</div>
-              <div style="font-size:16px;color:var(--text-dark);font-weight:600;padding:8px 16px;background:rgba(183,168,214,0.12);border-radius:10px;">1</div>
-              <div style="font-size:14px;color:var(--text-mid);padding:8px 16px;">2</div>
-            </div>
+        <!-- 日期选择器（复用 onboarding wheel picker） -->
+        <div style="display:flex;justify-content:center;gap:8px;align-items:center;height:120px;overflow:hidden;position:relative;margin-bottom:20px;">
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:14px;color:var(--text-light);opacity:0.25;">2025</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">2026</div>
+            <div style="font-size:14px;color:var(--text-light);opacity:0.25;">2027</div>
           </div>
+          <div style="font-size:14px;color:var(--text-light);">年</div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:14px;color:var(--text-light);opacity:0.25;">4</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">5</div>
+            <div style="font-size:14px;color:var(--text-light);opacity:0.25;">6</div>
+          </div>
+          <div style="font-size:14px;color:var(--text-light);">月</div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:14px;color:var(--text-light);opacity:0.25;">5</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:400;color:var(--accent-dark);padding:8px 0;">6</div>
+            <div style="font-size:14px;color:var(--text-light);opacity:0.25;">7</div>
+          </div>
+          <div style="font-size:14px;color:var(--text-light);">日</div>
+          <div style="position:absolute;left:12px;right:12px;height:36px;top:50%;transform:translateY(-50%);border-radius:10px;background:rgba(196,160,220,0.06);border:1px solid rgba(196,160,220,0.12);pointer-events:none;"></div>
         </div>
         <!-- 按钮 -->
         <div style="display:flex;gap:12px;">

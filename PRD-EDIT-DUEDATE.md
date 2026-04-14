@@ -46,9 +46,10 @@
 | 拖拽手柄 | 36x4px，圆角 2px，rgba(183,168,214,0.3)，居中 |
 | 标题 | "修改预产期"，Noto Serif SC 20px，font-weight 400，color text-dark |
 | 当前日期 | "当前预产期：2026年5月1日"，12px，color text-light |
-| 日期选择器 | 年/月/日 三列，容器 rgba(255,255,255,0.6) + 1px border rgba(183,168,214,0.2)，border-radius 16px |
-| 选中项 | 16px，font-weight 600，color text-dark，背景 rgba(183,168,214,0.12)，border-radius 10px |
-| 未选中项 | 14px，color text-mid 或 text-light |
+| 日期选择器 | 复用 onboarding wheel picker：年/月/日 三列 + 单位标签 |
+| 选中项 | Noto Serif SC 22px，font-weight 400，color accent-dark |
+| 未选中项 | 14px，color text-light，opacity 0.25 |
+| 选中行高亮 | 绝对定位横条，rgba(196,160,220,0.06) + 1px border rgba(196,160,220,0.12)，border-radius 10px |
 | 按钮区 | 左"取消" + 右"确认"，flex 等宽，gap 12px |
 
 ### 5.2 按钮样式（与结束确认弹窗一致）
