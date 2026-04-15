@@ -147,7 +147,7 @@ struct LamazeExerciseView: View {
                     .padding(.bottom, 20)
 
                 // Stage cards
-                VStack(spacing: 10) {
+                VStack(alignment: .leading, spacing: 10) {
                     ForEach(LamazeStage.allCases, id: \.rawValue) { stage in
                         learnStageCard(stage: stage)
                     }
@@ -208,6 +208,7 @@ struct LamazeExerciseView: View {
             .buttonStyle(.plain)
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .glassCard()
     }
     
